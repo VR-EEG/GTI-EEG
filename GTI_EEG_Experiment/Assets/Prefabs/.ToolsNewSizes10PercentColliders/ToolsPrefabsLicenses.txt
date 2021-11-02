@@ -1,0 +1,38 @@
+
+
+
+
+
+
+dont know 
+paintbrush - Selfmade by student (?) -> has dae extension 
+Paletteknife - Selfmade by student (?) -> has dae extension
+
+
+
+
+likely ok 
+Spatula - Selfmade by student (?) -> Name has Ashima in it, probably custom made 
+
+
+Most likely ok (Unity uses fbx as default, so Unity assets are shipped as fbx) 
+Flowercutter - Selfmade by student (?) -> Name has Blumenschneider, probably custom made; dae extension 
+Fishscaler - Selfmade by student (?) -> Name has Fischenschupper, probably custom made ; dae extension 
+Spokewrench - Selfmade by student (?) -> Name has Speichenschluessel, probably custom made ; dae extension 
+Daisygrubber - Selfmade by student (?) -> name has Unkrautstecher, probably custom made ; dae extension 
+Zester - Selfmade by student (?) -> Name has Zitronenschaber, probably custom made ; dae extension 
+
+Definitely ok 
+Screwdriver - From Sketchfab 
+Wrench - Sketchfab
+Hammer - Sketchfab 
+Trowel (formerly dustpan) - Sketchfab 
+Fork (formerly from Asset Store) - Sketchfab 
+
+-----
+
+
+
+Looked up but not found on Asset Store:
+Spatula 
+dustpan

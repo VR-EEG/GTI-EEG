@@ -1,0 +1,10 @@
+{
+    "subjectId": 0,
+    "dateTimeSubjectMetaDataCreated": "2020-10-27 18-03",
+    "blockNumber": 1,
+    "eyeTrackingOverallCombinedValidationResults": {
+        "x": NaN,
+        "y": NaN,
+        "z": NaN
+    },
+    "blockTrials": [

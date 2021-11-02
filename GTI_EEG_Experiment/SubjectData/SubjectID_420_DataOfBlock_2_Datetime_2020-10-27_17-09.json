@@ -1,0 +1,586 @@
+{
+    "subjectId": 420,
+    "dateTimeSubjectMetaDataCreated": "2020-10-27 17-09",
+    "blockNumber": 2,
+    "eyeTrackingOverallCombinedValidationResults": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "blockTrials": [
+{
+    "utcon": 111,
+    "toolId": 11,
+    "toolName": "flowercutter",
+    "cueOrientationId": 1,
+    "cueOrientationName": "leftlift",
+    "cueName": "lift",
+    "toolHandleOrientation": "left",
+    "dataPoints": [
+        {
+            "timeStampDataPointStart": 1603814954.158017,
+            "timeStampDataPointEnd": 1603814954.1619848,
+            "timeDataPointBeforeGazeRayCasting": 1603814954.158017,
+            "eyeOpennessLeft": 1.0,
+            "eyeOpennessRight": 1.0,
+            "pupilDiameterMillimetersLeft": -1.0,
+            "pupilDiameterMillimetersRight": -1.0,
+            "eyePositionCombinedWorld": {
+                "x": 2.2253222465515138,
+                "y": 0.4746357500553131,
+                "z": -0.8911387920379639
+            },
+            "eyeDirectionCombinedWorld": {
+                "x": -0.5561352968215942,
+                "y": 0.10758809745311737,
+                "z": -0.8240986466407776
+            },
+            "eyePositionLeftWorld": {
+                "x": 2.2253222465515138,
+                "y": 0.4746357500553131,
+                "z": -0.8911387920379639
+            },
+            "eyeDirectionLeftWorld": {
+                "x": -0.5561352968215942,
+                "y": 0.10758809745311737,
+                "z": -0.8240986466407776
+            },
+            "eyePositionRightWorld": {
+                "x": 2.2253222465515138,
+                "y": 0.4746357500553131,
+                "z": -0.8911387920379639
+            },
+            "eyeDirectionRightWorld": {
+                "x": -0.5561352968215942,
+                "y": 0.10758809745311737,
+                "z": -0.8240986466407776
+            },
+            "hitObjectNameCombinedEyes": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectCombinedEyes": {
+                "x": 2.1234192848205568,
+                "y": 0.4943495988845825,
+                "z": -1.0421416759490967
+            },
+            "hitObjectCenterInWorldCombinedEyes": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameLeftEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectLeftEye": {
+                "x": 2.1234192848205568,
+                "y": 0.4943495988845825,
+                "z": -1.0421416759490967
+            },
+            "hitObjectCenterInWorldLeftEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameRightEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectRightEye": {
+                "x": 2.1234192848205568,
+                "y": 0.4943495988845825,
+                "z": -1.0421416759490967
+            },
+            "hitObjectCenterInWorldRightEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hmdPos": {
+                "x": 2.2253222465515138,
+                "y": 0.4746357500553131,
+                "z": -0.8911387920379639
+            },
+            "hmdDirectionForward": {
+                "x": -0.5561352968215942,
+                "y": 0.10758809745311737,
+                "z": -0.8240986466407776
+            },
+            "hmdDirectionRight": {
+                "x": -0.8310338258743286,
+                "y": -0.06026481091976166,
+                "z": 0.5529477596282959
+            },
+            "hmdRotation": {
+                "x": 353.8236999511719,
+                "y": 214.01307678222657,
+                "z": 356.5247802734375
+            },
+            "hmdDirectionUp": {
+                "x": 0.009826453402638436,
+                "y": 0.9923673272132874,
+                "z": 0.12292471528053284
+            },
+            "controllerTriggerPressed": false,
+            "controllerTransform": {
+                "instanceID": 42208
+            },
+            "controllerPosition": {
+                "x": 2.369550943374634,
+                "y": 0.7953009605407715,
+                "z": -1.5365731716156006
+            },
+            "controllerRotation": {
+                "x": 345.9423828125,
+                "y": 235.78271484375,
+                "z": 346.2862548828125
+            },
+            "controllerScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "leapIsGrasping": false,
+            "leapGrabStrength": 0.0,
+            "leapGrabAngle": 0.0,
+            "leapPinchStrength": 0.0,
+            "leapHandPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandPalmPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "toolIsCurrentlyAttachedToHand": false,
+            "closestAttachmentPointOnToolToHand": "",
+            "toolIsCurrentlyDisplayedOnTable": true
+        },
+        {
+            "timeStampDataPointStart": 1603814954.1619848,
+            "timeStampDataPointEnd": 1603814954.1733914,
+            "timeDataPointBeforeGazeRayCasting": 1603814954.1699208,
+            "eyeOpennessLeft": 1.0,
+            "eyeOpennessRight": 1.0,
+            "pupilDiameterMillimetersLeft": -1.0,
+            "pupilDiameterMillimetersRight": -1.0,
+            "eyePositionCombinedWorld": {
+                "x": 2.225381851196289,
+                "y": 0.47468942403793337,
+                "z": -0.891135573387146
+            },
+            "eyeDirectionCombinedWorld": {
+                "x": -0.5562545657157898,
+                "y": 0.1075238287448883,
+                "z": -0.8240265846252441
+            },
+            "eyePositionLeftWorld": {
+                "x": 2.225381851196289,
+                "y": 0.47468942403793337,
+                "z": -0.891135573387146
+            },
+            "eyeDirectionLeftWorld": {
+                "x": -0.5562545657157898,
+                "y": 0.1075238287448883,
+                "z": -0.8240265846252441
+            },
+            "eyePositionRightWorld": {
+                "x": 2.225381851196289,
+                "y": 0.47468942403793337,
+                "z": -0.891135573387146
+            },
+            "eyeDirectionRightWorld": {
+                "x": -0.5562545657157898,
+                "y": 0.1075238287448883,
+                "z": -0.8240265846252441
+            },
+            "hitObjectNameCombinedEyes": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectCombinedEyes": {
+                "x": 2.123446464538574,
+                "y": 0.49439358711242678,
+                "z": -1.0421409606933594
+            },
+            "hitObjectCenterInWorldCombinedEyes": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameLeftEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectLeftEye": {
+                "x": 2.123446464538574,
+                "y": 0.49439358711242678,
+                "z": -1.0421409606933594
+            },
+            "hitObjectCenterInWorldLeftEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameRightEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectRightEye": {
+                "x": 2.123446464538574,
+                "y": 0.49439358711242678,
+                "z": -1.0421409606933594
+            },
+            "hitObjectCenterInWorldRightEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hmdPos": {
+                "x": 2.2253222465515138,
+                "y": 0.4746357500553131,
+                "z": -0.8911387920379639
+            },
+            "hmdDirectionForward": {
+                "x": -0.5561352968215942,
+                "y": 0.10758809745311737,
+                "z": -0.8240986466407776
+            },
+            "hmdDirectionRight": {
+                "x": -0.8310338258743286,
+                "y": -0.06026481091976166,
+                "z": 0.5529477596282959
+            },
+            "hmdRotation": {
+                "x": 353.8236999511719,
+                "y": 214.01307678222657,
+                "z": 356.5247802734375
+            },
+            "hmdDirectionUp": {
+                "x": 0.009826453402638436,
+                "y": 0.9923673272132874,
+                "z": 0.12292471528053284
+            },
+            "controllerTriggerPressed": false,
+            "controllerTransform": {
+                "instanceID": 42208
+            },
+            "controllerPosition": {
+                "x": 2.369550943374634,
+                "y": 0.7953009605407715,
+                "z": -1.5365731716156006
+            },
+            "controllerRotation": {
+                "x": 345.9423828125,
+                "y": 235.78271484375,
+                "z": 346.2862548828125
+            },
+            "controllerScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "leapIsGrasping": false,
+            "leapGrabStrength": 0.0,
+            "leapGrabAngle": 0.0,
+            "leapPinchStrength": 0.0,
+            "leapHandPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandPalmPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "toolIsCurrentlyAttachedToHand": false,
+            "closestAttachmentPointOnToolToHand": "",
+            "toolIsCurrentlyDisplayedOnTable": true
+        }
+    ]
+},
+{
+    "utcon": 111,
+    "toolId": 11,
+    "toolName": "flowercutter",
+    "cueOrientationId": 1,
+    "cueOrientationName": "leftlift",
+    "cueName": "lift",
+    "toolHandleOrientation": "left",
+    "dataPoints": [
+        {
+            "timeStampDataPointStart": 1603814954.1862889,
+            "timeStampDataPointEnd": 1603814954.1902569,
+            "timeDataPointBeforeGazeRayCasting": 1603814954.1862889,
+            "eyeOpennessLeft": 1.0,
+            "eyeOpennessRight": 1.0,
+            "pupilDiameterMillimetersLeft": -1.0,
+            "pupilDiameterMillimetersRight": -1.0,
+            "eyePositionCombinedWorld": {
+                "x": 2.2254347801208498,
+                "y": 0.474778413772583,
+                "z": -0.891110360622406
+            },
+            "eyeDirectionCombinedWorld": {
+                "x": -0.5561882257461548,
+                "y": 0.10741452872753144,
+                "z": -0.8240855932235718
+            },
+            "eyePositionLeftWorld": {
+                "x": 2.2254347801208498,
+                "y": 0.474778413772583,
+                "z": -0.891110360622406
+            },
+            "eyeDirectionLeftWorld": {
+                "x": -0.5561882257461548,
+                "y": 0.10741452872753144,
+                "z": -0.8240855932235718
+            },
+            "eyePositionRightWorld": {
+                "x": 2.2254347801208498,
+                "y": 0.474778413772583,
+                "z": -0.891110360622406
+            },
+            "eyeDirectionRightWorld": {
+                "x": -0.5561882257461548,
+                "y": 0.10741452872753144,
+                "z": -0.8240855932235718
+            },
+            "hitObjectNameCombinedEyes": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectCombinedEyes": {
+                "x": 2.123502731323242,
+                "y": 0.4944642186164856,
+                "z": -1.0421396493911744
+            },
+            "hitObjectCenterInWorldCombinedEyes": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameLeftEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectLeftEye": {
+                "x": 2.123502731323242,
+                "y": 0.4944642186164856,
+                "z": -1.0421396493911744
+            },
+            "hitObjectCenterInWorldLeftEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameRightEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectRightEye": {
+                "x": 2.123502731323242,
+                "y": 0.4944642186164856,
+                "z": -1.0421396493911744
+            },
+            "hitObjectCenterInWorldRightEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hmdPos": {
+                "x": 2.2254347801208498,
+                "y": 0.474778413772583,
+                "z": -0.891110360622406
+            },
+            "hmdDirectionForward": {
+                "x": -0.5561882257461548,
+                "y": 0.10741452872753144,
+                "z": -0.8240855932235718
+            },
+            "hmdDirectionRight": {
+                "x": -0.8309984803199768,
+                "y": -0.06016187742352486,
+                "z": 0.5530121326446533
+            },
+            "hmdRotation": {
+                "x": 353.8337097167969,
+                "y": 214.01602172851563,
+                "z": 356.5307922363281
+            },
+            "hmdDirectionUp": {
+                "x": 0.009823005646467209,
+                "y": 0.9923924207687378,
+                "z": 0.12272261083126068
+            },
+            "controllerTriggerPressed": false,
+            "controllerTransform": {
+                "instanceID": 42208
+            },
+            "controllerPosition": {
+                "x": 2.369706630706787,
+                "y": 0.7954822778701782,
+                "z": -1.5364489555358887
+            },
+            "controllerRotation": {
+                "x": 345.93707275390627,
+                "y": 235.77813720703126,
+                "z": 346.3000793457031
+            },
+            "controllerScale": {
+                "x": 1.000000238418579,
+                "y": 1.0,
+                "z": 1.0000003576278687
+            },
+            "leapIsGrasping": false,
+            "leapGrabStrength": 0.0,
+            "leapGrabAngle": 0.0,
+            "leapPinchStrength": 0.0,
+            "leapHandPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandPalmPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "toolIsCurrentlyAttachedToHand": false,
+            "closestAttachmentPointOnToolToHand": "",
+            "toolIsCurrentlyDisplayedOnTable": true
+        },
+        {
+            "timeStampDataPointStart": 1603814954.1902569,
+            "timeStampDataPointEnd": 1603814954.2006756,
+            "timeDataPointBeforeGazeRayCasting": 1603814954.1967097,
+            "eyeOpennessLeft": 1.0,
+            "eyeOpennessRight": 1.0,
+            "pupilDiameterMillimetersLeft": -1.0,
+            "pupilDiameterMillimetersRight": -1.0,
+            "eyePositionCombinedWorld": {
+                "x": 2.2254693508148195,
+                "y": 0.47488370537757876,
+                "z": -0.8910890817642212
+            },
+            "eyeDirectionCombinedWorld": {
+                "x": -0.5562841892242432,
+                "y": 0.10734961181879044,
+                "z": -0.8240293264389038
+            },
+            "eyePositionLeftWorld": {
+                "x": 2.2254693508148195,
+                "y": 0.47488370537757876,
+                "z": -0.8910890817642212
+            },
+            "eyeDirectionLeftWorld": {
+                "x": -0.5562841892242432,
+                "y": 0.10734961181879044,
+                "z": -0.8240293264389038
+            },
+            "eyePositionRightWorld": {
+                "x": 2.2254693508148195,
+                "y": 0.47488370537757876,
+                "z": -0.8910890817642212
+            },
+            "eyeDirectionRightWorld": {
+                "x": -0.5562841892242432,
+                "y": 0.10734961181879044,
+                "z": -0.8240293264389038
+            },
+            "hitObjectNameCombinedEyes": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectCombinedEyes": {
+                "x": 2.1234984397888185,
+                "y": 0.49456173181533816,
+                "z": -1.0421397686004639
+            },
+            "hitObjectCenterInWorldCombinedEyes": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameLeftEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectLeftEye": {
+                "x": 2.1234984397888185,
+                "y": 0.49456173181533816,
+                "z": -1.0421397686004639
+            },
+            "hitObjectCenterInWorldLeftEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hitObjectNameRightEye": "WorkbenchMultipleSmallOnes",
+            "hitPointOnObjectRightEye": {
+                "x": 2.1234984397888185,
+                "y": 0.49456173181533816,
+                "z": -1.0421397686004639
+            },
+            "hitObjectCenterInWorldRightEye": {
+                "x": 2.316479444503784,
+                "y": 0.2798868417739868,
+                "z": -1.1417083740234376
+            },
+            "hmdPos": {
+                "x": 2.2254347801208498,
+                "y": 0.474778413772583,
+                "z": -0.891110360622406
+            },
+            "hmdDirectionForward": {
+                "x": -0.5561882257461548,
+                "y": 0.10741452872753144,
+                "z": -0.8240855932235718
+            },
+            "hmdDirectionRight": {
+                "x": -0.8309984803199768,
+                "y": -0.06016187742352486,
+                "z": 0.5530121326446533
+            },
+            "hmdRotation": {
+                "x": 353.8337097167969,
+                "y": 214.01602172851563,
+                "z": 356.5307922363281
+            },
+            "hmdDirectionUp": {
+                "x": 0.009823005646467209,
+                "y": 0.9923924207687378,
+                "z": 0.12272261083126068
+            },
+            "controllerTriggerPressed": false,
+            "controllerTransform": {
+                "instanceID": 42208
+            },
+            "controllerPosition": {
+                "x": 2.369706630706787,
+                "y": 0.7954822778701782,
+                "z": -1.5364489555358887
+            },
+            "controllerRotation": {
+                "x": 345.93707275390627,
+                "y": 235.77813720703126,
+                "z": 346.3000793457031
+            },
+            "controllerScale": {
+                "x": 1.000000238418579,
+                "y": 1.0,
+                "z": 1.0000003576278687
+            },
+            "leapIsGrasping": false,
+            "leapGrabStrength": 0.0,
+            "leapGrabAngle": 0.0,
+            "leapPinchStrength": 0.0,
+            "leapHandPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandPalmPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leapHandRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "toolIsCurrentlyAttachedToHand": false,
+            "closestAttachmentPointOnToolToHand": "",
+            "toolIsCurrentlyDisplayedOnTable": true
+        }
+    ]
+}
+]
+}

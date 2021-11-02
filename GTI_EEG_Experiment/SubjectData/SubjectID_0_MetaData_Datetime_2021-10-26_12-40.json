@@ -1,0 +1,2804 @@
+{
+    "subjectId": 0,
+    "subjectAge": 0,
+    "subjectGender": "diverse",
+    "subjectHandedness": "ambidextrous",
+    "dateTimeCreated": "2021-10-26 12-40",
+    "isUsingLeapMotion": true,
+    "tableSurfaceCenterPosition": {
+        "x": 0.016363531351089479,
+        "y": 1.098179817199707,
+        "z": -1.1046496629714966
+    },
+    "headVolumeCenterPosition": {
+        "x": 0.5154861807823181,
+        "y": 1.4981797933578492,
+        "z": -1.1342577934265137
+    },
+    "headVolumeAxisAlignedBoundingBoxSize": {
+        "x": 0.21149230003356934,
+        "y": 0.20000004768371583,
+        "z": 0.21149230003356934
+    },
+    "configManagerSettings": {
+        "filenameConfigManagerConfiguration": "ToolLeapConfig.ini",
+        "filenameToolNameIdCsv": "ToolNamesIds.csv",
+        "filenameToolOrientationCueNamesIdsCsv": "OrientationCueNamesIds.csv",
+        "filenameExperimentFlowUtconsCsv": "ExperimentUtcons.csv",
+        "filenamePracticeFlowUtconsCsv": "PracticeUtcons.csv",
+        "configFolderName": "Configuration",
+        "calibrationDataFolderName": "Calibration",
+        "subjectDataFolderName": "SubjectData",
+        "configFolderPath": "D:/GTI_EEG_Nora/GTIL_LSL/GTI_leap_LSL/Assets/../Configuration",
+        "calibrationDataFolderPath": "D:/GTI_EEG_Nora/GTIL_LSL/GTI_leap_LSL/Assets/../Calibration",
+        "subjectDataFolderPath": "D:/GTI_EEG_Nora/GTIL_LSL/GTI_leap_LSL/Assets/../SubjectData",
+        "tableFloorCalibrationTimeWindow": 2.0,
+        "tableFloorCalibrationHeightOffset": -0.009999999776482582,
+        "tableFloorCalibrationTableDepth": 0.800000011920929,
+        "tableFloorPlayerRotationDegrees": -90.0,
+        "tablePosition": {
+            "x": 0.05045965313911438,
+            "y": -0.02709794044494629,
+            "z": -1.1063562631607056
+        },
+        "tableRotation": {
+            "x": 0.0,
+            "y": 3.394827365875244,
+            "z": 0.0
+        },
+        "tableScale": {
+            "x": 1.2787373065948487,
+            "y": 1.2271292209625245,
+            "z": 0.39919373393058779
+        },
+        "floorHeight": -0.024000009521842004,
+        "cuePositionOffsetTowardsSubject": -2.0,
+        "cuePositionOffsetUpwards": 0.10000000149011612,
+        "cueColliderPercentageOversize": 20.0,
+        "headPositionVolumeOffsetFromTableEdgeTowardsSubject": 0.10000000149011612,
+        "headPositionVolumeOffsetFromTableSurfaceUpwards": 0.4000000059604645,
+        "headPositionVolumeSizeLookingDirection": 0.20000000298023225,
+        "headPositionVolumeSizeEarOutDirection": 0.20000000298023225,
+        "headPositionVolumeSizeUpwardsDirection": 0.20000000298023225,
+        "secondViewCameraViewportHeightPercentage": 60.0,
+        "secondViewCameraOffsetFromTableEdgeTowardsSubject": 1.0,
+        "secondViewCameraOffsetFromTableSurfaceUpwards": 2.0,
+        "secondViewCameraOffsetFromTableCenterToRight": -1.0,
+        "triggerActivationLeapSquaredDistanceFromTopThreshold": 0.004000000189989805,
+        "triggerPositionTableFrontPercentage": 80.0,
+        "triggerPositionTableSidePercentage": 80.0,
+        "fingerJointHoverRadiusSteamVr": 0.15000000596046449,
+        "samplingRate": 90.0,
+        "delayBetweenTriggerInteractionAndCuePresentation": 1.0,
+        "cuePresentationDuration": 2.0,
+        "delayBetweenCueAndToolPresentation": 0.5,
+        "informationalCuePresentationDuration": 6.0,
+        "toolPresentationDurationBeforeBeep": 5.0,
+        "toolAttachmentPointsSteamVrParentName": "AttachmentPointsSteamVR",
+        "toolAttachmentPointsLeapMotionParentName": "AttachmentPointsLeapMotion",
+        "excludeToolIdsForUtconFlowCreation": [
+            99
+        ],
+        "blockPauseIndicator": "pause",
+        "manualColliderIncludedStringIndication": "manual",
+        "calibrationSceneTableFloorName": "CalibrateTableAndFloor",
+        "calibrationSceneEyeTrackerName": "CalibrateEyeTracking",
+        "experimentSceneName": "Experiment",
+        "paddingForTextOverlayWidth": 30.0,
+        "paddingForTextOverlayHeight": 30.0,
+        "textOverlayWidthWindowPercentage": 25.0,
+        "timeLeapDisableHandContactAfterGraspRelease": 0.800000011920929,
+        "measureLeftAndRightEyesAdditionallyToCombinedGazeRay": true,
+        "fpsCounterRefreshRateInSeconds": 0.5,
+        "triggerIsOnSide": "right",
+        "isUsingLeap": true,
+        "genders": [
+            "female",
+            "male",
+            "diverse"
+        ],
+        "handednessOptions": [
+            "right",
+            "left",
+            "ambidextrous"
+        ]
+    },
+    "cueOrientationNamesIds": [
+        {
+            "cueOrientationName": "leftlift",
+            "cueOrientationId": 1
+        },
+        {
+            "cueOrientationName": "rightlift",
+            "cueOrientationId": 2
+        },
+        {
+            "cueOrientationName": "leftuse",
+            "cueOrientationId": 3
+        },
+        {
+            "cueOrientationName": "rightuse",
+            "cueOrientationId": 4
+        }
+    ],
+    "allToolDetails": [
+        {
+            "toolId": 10,
+            "toolNameFromConfig": "spatula",
+            "toolNameFromGameObject": "Spatula",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0,
+                "y": 0.008054802194237709,
+                "z": -0.058947086334228519
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": 0.0,
+                    "y": 0.012974286451935768,
+                    "z": 0.058947086334228519
+                },
+                "m_Extent": {
+                    "x": 0.047053489834070209,
+                    "y": 0.021029088646173478,
+                    "z": 0.18566596508026124
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "SpatulaHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.036000002175569537,
+                        "z": 0.15119999647140504
+                    },
+                    "transform": {
+                        "instanceID": 29238
+                    }
+                },
+                {
+                    "transformName": "SpatulaHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.021215999498963357,
+                        "z": 0.15086399018764497
+                    },
+                    "transform": {
+                        "instanceID": 30064
+                    }
+                },
+                {
+                    "transformName": "SpatulaEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -0.00038399998447857797,
+                        "y": -0.00048000001697801054,
+                        "z": -0.07631999254226685
+                    },
+                    "transform": {
+                        "instanceID": 28546
+                    }
+                },
+                {
+                    "transformName": "SpatulaEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.013055999763309956,
+                        "z": -0.08640000224113465
+                    },
+                    "transform": {
+                        "instanceID": 27972
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "SpatulaHandleAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.03129599988460541,
+                        "z": 0.1467359960079193
+                    },
+                    "transform": {
+                        "instanceID": 28362
+                    }
+                },
+                {
+                    "transformName": "SpatulaEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.00038399998447857797,
+                        "y": -0.007296000141650438,
+                        "z": -0.11231999844312668
+                    },
+                    "transform": {
+                        "instanceID": 31328
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 28698
+            },
+            "toolEffectorCollider": {
+                "instanceID": 28898
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "SpatulaEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.012974299490451813,
+                            "z": -0.05491505190730095
+                        },
+                        "m_Extent": {
+                            "x": 0.08911171555519104,
+                            "y": 0.0630873367190361,
+                            "z": 0.11386214196681977
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28898
+                    }
+                },
+                {
+                    "colliderName": "SpatulaHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.01297423243522644,
+                            "z": 0.17280921339988709
+                        },
+                        "m_Extent": {
+                            "x": 0.08911171555519104,
+                            "y": 0.0630873367190361,
+                            "z": 0.11386213451623917
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28698
+                    }
+                },
+                {
+                    "colliderName": "SpatulaManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": -0.006025867536664009,
+                            "z": -0.06187957897782326
+                        },
+                        "m_Extent": {
+                            "x": 0.05125933513045311,
+                            "y": 0.006234768778085709,
+                            "z": 0.06904518604278565
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27766
+                    }
+                },
+                {
+                    "colliderName": "SpatulaManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00001554097980260849,
+                            "y": 0.02962915599346161,
+                            "z": 0.15388302505016328
+                        },
+                        "m_Extent": {
+                            "x": 0.01341773197054863,
+                            "y": 0.008580029010772705,
+                            "z": 0.09493590891361237
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31784
+                    }
+                },
+                {
+                    "colliderName": "SpatulaManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00001554097980260849,
+                            "y": 0.015035469084978104,
+                            "z": 0.052117981016635898
+                        },
+                        "m_Extent": {
+                            "x": 0.01341773010790348,
+                            "y": 0.025086283683776857,
+                            "z": 0.05661105364561081
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29676
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 11,
+            "toolNameFromConfig": "flowercutter",
+            "toolNameFromGameObject": "Flowercutter",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0,
+                "y": 0.021709896624088289,
+                "z": 0.0
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": 0.0,
+                    "y": -0.008760484866797924,
+                    "z": 0.0
+                },
+                "m_Extent": {
+                    "x": 0.02969999983906746,
+                    "y": 0.012949411757290364,
+                    "z": 0.19799989461898805
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "FlowercutterHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.006335999350994825,
+                        "z": 0.13859999179840089
+                    },
+                    "transform": {
+                        "instanceID": 29204
+                    }
+                },
+                {
+                    "transformName": "FlowercutterHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.009811999276280404,
+                        "z": 0.13829198479652406
+                    },
+                    "transform": {
+                        "instanceID": 31414
+                    }
+                },
+                {
+                    "transformName": "FlowercutterEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -0.0003519999445416033,
+                        "y": 0.009679999202489853,
+                        "z": -0.16935598850250245
+                    },
+                    "transform": {
+                        "instanceID": 30080
+                    }
+                },
+                {
+                    "transformName": "FlowercutterEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.02969999797642231,
+                        "z": -0.17071999609470368
+                    },
+                    "transform": {
+                        "instanceID": 31528
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "FlowercutterHandleAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.002199999988079071,
+                        "z": 0.09184999763965607
+                    },
+                    "transform": {
+                        "instanceID": 31012
+                    }
+                },
+                {
+                    "transformName": "FlowercutterEffectorTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.00033000000985339284,
+                        "y": -0.0008800000068731606,
+                        "z": -0.15971998870372773
+                    },
+                    "transform": {
+                        "instanceID": 27254
+                    }
+                },
+                {
+                    "transformName": "FlowercutterEffectorBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.00033000000985339284,
+                        "y": -0.02167000062763691,
+                        "z": -0.15971998870372773
+                    },
+                    "transform": {
+                        "instanceID": 31184
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 27494
+            },
+            "toolEffectorCollider": {
+                "instanceID": 30520
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "FlowercutterEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": -0.008760485798120499,
+                            "z": -0.1119493693113327
+                        },
+                        "m_Extent": {
+                            "x": 0.05559883266687393,
+                            "y": 0.03884823992848396,
+                            "z": 0.1119493693113327
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30520
+                    }
+                },
+                {
+                    "colliderName": "FlowercutterHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": -0.008760485798120499,
+                            "z": 0.1119493693113327
+                        },
+                        "m_Extent": {
+                            "x": 0.05559883266687393,
+                            "y": 0.03884823992848396,
+                            "z": 0.1119493693113327
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27494
+                    }
+                },
+                {
+                    "colliderName": "FlowercutterManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00013610441237688065,
+                            "y": -0.008513322100043297,
+                            "z": -0.12857642769813538
+                        },
+                        "m_Extent": {
+                            "x": 0.031181201338768007,
+                            "y": 0.014149004593491555,
+                            "z": 0.07201337814331055
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 26958
+                    }
+                },
+                {
+                    "colliderName": "FlowercutterManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00013610441237688065,
+                            "y": -0.0017149567138403655,
+                            "z": 0.06396491825580597
+                        },
+                        "m_Extent": {
+                            "x": 0.031181201338768007,
+                            "y": 0.0073506394401192669,
+                            "z": 0.13794271647930146
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28066
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 12,
+            "toolNameFromConfig": "fishscaler",
+            "toolNameFromGameObject": "Fishscaler",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0,
+                "y": 0.019199999049305917,
+                "z": 0.09876322746276856
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": 0.0,
+                    "y": 0.020303556695580484,
+                    "z": -0.09876322746276856
+                },
+                "m_Extent": {
+                    "x": 0.019199999049305917,
+                    "y": 0.0395035557448864,
+                    "z": 0.20340323448181153
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "FishscalerHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.02159999869763851,
+                        "z": 0.016896000131964685
+                    },
+                    "transform": {
+                        "instanceID": 29502
+                    }
+                },
+                {
+                    "transformName": "FishscalerHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.02630399912595749,
+                        "z": 0.017376000061631204
+                    },
+                    "transform": {
+                        "instanceID": 30444
+                    }
+                },
+                {
+                    "transformName": "FishscalerEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 7.679999498577672e-7,
+                        "y": 0.042047999799251559,
+                        "z": -0.259583979845047
+                    },
+                    "transform": {
+                        "instanceID": 30322
+                    }
+                },
+                {
+                    "transformName": "FishscalerEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.010559999383985997,
+                        "z": -0.2573759853839874
+                    },
+                    "transform": {
+                        "instanceID": 29270
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "FishscalerHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.014879999682307244,
+                        "z": 0.0022079998161643745
+                    },
+                    "transform": {
+                        "instanceID": 31912
+                    }
+                },
+                {
+                    "transformName": "FishscalerHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.017663998529314996,
+                        "z": 0.0022079998161643745
+                    },
+                    "transform": {
+                        "instanceID": 27082
+                    }
+                },
+                {
+                    "transformName": "FishscalerEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.040031999349594119,
+                        "z": -0.26159998774528506
+                    },
+                    "transform": {
+                        "instanceID": 29594
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 31216
+            },
+            "toolEffectorCollider": {
+                "instanceID": 31878
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "FishscalerEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.020303554832935334,
+                            "z": -0.21966484189033509
+                        },
+                        "m_Extent": {
+                            "x": 0.0575999952852726,
+                            "y": 0.07790354639291763,
+                            "z": 0.12090161442756653
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31878
+                    }
+                },
+                {
+                    "colliderName": "FishscalerHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.020303554832935334,
+                            "z": 0.02213839441537857
+                        },
+                        "m_Extent": {
+                            "x": 0.0575999952852726,
+                            "y": 0.07790354639291763,
+                            "z": 0.12090160697698593
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31216
+                    }
+                },
+                {
+                    "colliderName": "FishscalerManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00011284928768873215,
+                            "y": -0.0002617174759507179,
+                            "z": -0.1667434573173523
+                        },
+                        "m_Extent": {
+                            "x": 0.013683941215276719,
+                            "y": 0.002191056264564395,
+                            "z": 0.07315808534622193
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27176
+                    }
+                },
+                {
+                    "colliderName": "FishscalerManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.000022025778889656067,
+                            "y": 0.00003943219780921936,
+                            "z": 0.00343148410320282
+                        },
+                        "m_Extent": {
+                            "x": 0.020052751526236535,
+                            "y": 0.0203305222094059,
+                            "z": 0.10219469666481018
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31274
+                    }
+                },
+                {
+                    "colliderName": "FishscalerManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0001127021387219429,
+                            "y": 0.03381902351975441,
+                            "z": -0.26166778802871706
+                        },
+                        "m_Extent": {
+                            "x": 0.013683970086276532,
+                            "y": 0.0349864698946476,
+                            "z": 0.040378838777542117
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28128
+                    }
+                },
+                {
+                    "colliderName": "FishscalerManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00011268351227045059,
+                            "y": 0.02999826893210411,
+                            "z": -0.2955915629863739
+                        },
+                        "m_Extent": {
+                            "x": 0.013683948665857315,
+                            "y": 0.03290797397494316,
+                            "z": 0.014693528413772583
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29456
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 13,
+            "toolNameFromConfig": "paintbrush",
+            "toolNameFromGameObject": "Paintbrush",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.00005891174077987671,
+                "y": 0.001422494649887085,
+                "z": 0.0023945271968841554
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -0.00005891174077987671,
+                    "y": 0.014028316363692284,
+                    "z": -0.0023945271968841554
+                },
+                "m_Extent": {
+                    "x": 0.07182417809963227,
+                    "y": 0.015450811013579369,
+                    "z": 0.1739945411682129
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "PaintbrushHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.022436698898673059,
+                        "z": 0.1312739998102188
+                    },
+                    "transform": {
+                        "instanceID": 31854
+                    }
+                },
+                {
+                    "transformName": "PaintbrushHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.005004999693483114,
+                        "z": 0.13141699135303498
+                    },
+                    "transform": {
+                        "instanceID": 30196
+                    }
+                },
+                {
+                    "transformName": "PaintbrushEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -0.0000011439999525464373,
+                        "y": 0.02702699787914753,
+                        "z": -0.14886298775672913
+                    },
+                    "transform": {
+                        "instanceID": 28104
+                    }
+                },
+                {
+                    "transformName": "PaintbrushEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.0014299999456852675,
+                        "z": -0.14986400306224824
+                    },
+                    "transform": {
+                        "instanceID": 30526
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "PaintbrushHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.00004861783963860944,
+                        "y": 0.01781276799738407,
+                        "z": 0.09200073778629303
+                    },
+                    "transform": {
+                        "instanceID": 30202
+                    }
+                },
+                {
+                    "transformName": "PaintbrushHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.00004861783963860944,
+                        "y": 0.007802771404385567,
+                        "z": 0.09200073778629303
+                    },
+                    "transform": {
+                        "instanceID": 29210
+                    }
+                },
+                {
+                    "transformName": "PaintbrushEffectorTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.00004861783963860944,
+                        "y": 0.02243276871740818,
+                        "z": -0.15428921580314637
+                    },
+                    "transform": {
+                        "instanceID": 30540
+                    }
+                },
+                {
+                    "transformName": "PaintbrushEffectorBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.00004861783963860944,
+                        "y": -0.001327227451838553,
+                        "z": -0.15428921580314637
+                    },
+                    "transform": {
+                        "instanceID": 31202
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 29380
+            },
+            "toolEffectorCollider": {
+                "instanceID": 28954
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "PaintbrushEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00005891174077987671,
+                            "y": 0.014028310775756836,
+                            "z": -0.10484258830547333
+                        },
+                        "m_Extent": {
+                            "x": 0.10272581875324249,
+                            "y": 0.046352434903383258,
+                            "z": 0.10244809091091156
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28954
+                    }
+                },
+                {
+                    "colliderName": "PaintbrushHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00005891174077987671,
+                            "y": 0.014028310775756836,
+                            "z": 0.10005360096693039
+                        },
+                        "m_Extent": {
+                            "x": 0.10272581875324249,
+                            "y": 0.046352434903383258,
+                            "z": 0.10244809836149216
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29380
+                    }
+                },
+                {
+                    "colliderName": "PaintbrushManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00012837350368499756,
+                            "y": 0.014526274055242539,
+                            "z": -0.08295498788356781
+                        },
+                        "m_Extent": {
+                            "x": 0.07442733645439148,
+                            "y": 0.017179444432258607,
+                            "z": 0.0965244323015213
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31056
+                    }
+                },
+                {
+                    "colliderName": "PaintbrushManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0005650855600833893,
+                            "y": 0.014768078923225403,
+                            "z": 0.08530799299478531
+                        },
+                        "m_Extent": {
+                            "x": 0.023202627897262574,
+                            "y": 0.00925203412771225,
+                            "z": 0.08770253509283066
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31140
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 14,
+            "toolNameFromConfig": "paletteknife",
+            "toolNameFromGameObject": "Paletteknife",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 3.725290298461914e-9,
+                "y": 0.014222640544176102,
+                "z": 0.005425766110420227
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -3.725290298461914e-9,
+                    "y": 0.0,
+                    "z": -0.005425766110420227
+                },
+                "m_Extent": {
+                    "x": 0.028445281088352205,
+                    "y": 0.014222640544176102,
+                    "z": 0.15412375330924989
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "PaletteknifeHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.017999999225139619,
+                        "z": 0.08088000118732453
+                    },
+                    "transform": {
+                        "instanceID": 27290
+                    }
+                },
+                {
+                    "transformName": "PaletteknifeHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.019679998978972436,
+                        "z": 0.08088000118732453
+                    },
+                    "transform": {
+                        "instanceID": 29368
+                    }
+                },
+                {
+                    "transformName": "PaletteknifeEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 1.919999874644418e-7,
+                        "y": 0.01607999950647354,
+                        "z": -0.13247999548912049
+                    },
+                    "transform": {
+                        "instanceID": 28578
+                    }
+                },
+                {
+                    "transformName": "PaletteknifeEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.02279999852180481,
+                        "z": -0.13223999738693238
+                    },
+                    "transform": {
+                        "instanceID": 29914
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "PaletteknifeHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.012240000069141388,
+                        "z": 0.05423999950289726
+                    },
+                    "transform": {
+                        "instanceID": 30776
+                    }
+                },
+                {
+                    "transformName": "PaletteknifeHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.012167999520897866,
+                        "z": 0.05423999950289726
+                    },
+                    "transform": {
+                        "instanceID": 31582
+                    }
+                },
+                {
+                    "transformName": "PaletteknifeEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 1.919999874644418e-7,
+                        "y": -0.013679999858140946,
+                        "z": -0.1351199895143509
+                    },
+                    "transform": {
+                        "instanceID": 27100
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 30622
+            },
+            "toolEffectorCollider": {
+                "instanceID": 31042
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "PaletteknifeEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -3.725290298461914e-9,
+                            "y": 0.0,
+                            "z": -0.09671024978160858
+                        },
+                        "m_Extent": {
+                            "x": 0.056890543550252917,
+                            "y": 0.04266790673136711,
+                            "z": 0.09128448367118836
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31042
+                    }
+                },
+                {
+                    "colliderName": "PaletteknifeHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -3.725290298461914e-9,
+                            "y": 0.0,
+                            "z": 0.08585873246192932
+                        },
+                        "m_Extent": {
+                            "x": 0.056890543550252917,
+                            "y": 0.04266790673136711,
+                            "z": 0.09128448367118836
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30622
+                    }
+                },
+                {
+                    "colliderName": "PaletteknifeManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00023218989372253418,
+                            "y": -0.012877603992819786,
+                            "z": -0.13507771492004395
+                        },
+                        "m_Extent": {
+                            "x": 0.0280405692756176,
+                            "y": 0.0022100191563367845,
+                            "z": 0.02731628715991974
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31884
+                    }
+                },
+                {
+                    "colliderName": "PaletteknifeManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -3.725290298461914e-9,
+                            "y": 0.0,
+                            "z": 0.04901037737727165
+                        },
+                        "m_Extent": {
+                            "x": 0.03128979727625847,
+                            "y": 0.017067164182662965,
+                            "z": 0.10253213346004486
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31578
+                    }
+                },
+                {
+                    "colliderName": "PaletteknifeManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.000124393031001091,
+                            "y": 0.0005017872899770737,
+                            "z": -0.07251150906085968
+                        },
+                        "m_Extent": {
+                            "x": 0.010421841405332089,
+                            "y": 0.0024184086360037328,
+                            "z": 0.028902702033519746
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27416
+                    }
+                },
+                {
+                    "colliderName": "PaletteknifeManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00012445170432329178,
+                            "y": -0.00632955227047205,
+                            "z": -0.10476358979940415
+                        },
+                        "m_Extent": {
+                            "x": 0.010421848855912686,
+                            "y": 0.008695866912603379,
+                            "z": 0.009379863739013672
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28308
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 15,
+            "toolNameFromConfig": "screwdriver",
+            "toolNameFromGameObject": "Screwdriver",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0011286791414022446,
+                "y": 0.0211667250841856,
+                "z": -0.16741721332073213
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -0.0011286791414022446,
+                    "y": 0.0044272467494010929,
+                    "z": 0.16741721332073213
+                },
+                "m_Extent": {
+                    "x": 0.025993136689066888,
+                    "y": 0.025593971833586694,
+                    "z": 0.16708949208259583
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "ScrewdriverHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.043560001999139789,
+                        "z": 0.2884199917316437
+                    },
+                    "transform": {
+                        "instanceID": 29992
+                    }
+                },
+                {
+                    "transformName": "ScrewdriverHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.03432000055909157,
+                        "z": 0.29061999917030337
+                    },
+                    "transform": {
+                        "instanceID": 29944
+                    }
+                },
+                {
+                    "transformName": "ScrewdriverEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.03959999978542328,
+                        "z": 0.04399999976158142
+                    },
+                    "transform": {
+                        "instanceID": 30412
+                    }
+                },
+                {
+                    "transformName": "ScrewdriverEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.027939999476075174,
+                        "z": 0.04399999976158142
+                    },
+                    "transform": {
+                        "instanceID": 27952
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "ScrewdriverHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.026839999482035638,
+                        "z": 0.2668600082397461
+                    },
+                    "transform": {
+                        "instanceID": 28944
+                    }
+                },
+                {
+                    "transformName": "ScrewdriverHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.018040001392364503,
+                        "z": 0.2668600082397461
+                    },
+                    "transform": {
+                        "instanceID": 28656
+                    }
+                },
+                {
+                    "transformName": "ScrewdriverEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.0006600000197067857,
+                        "y": 0.004619999788701534,
+                        "z": 0.0655599981546402
+                    },
+                    "transform": {
+                        "instanceID": 31030
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 30856
+            },
+            "toolEffectorCollider": {
+                "instanceID": 30782
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "ScrewdriverEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0011286735534667969,
+                            "y": 0.004427239298820496,
+                            "z": 0.05827808380126953
+                        },
+                        "m_Extent": {
+                            "x": 0.07718111574649811,
+                            "y": 0.07678195089101792,
+                            "z": 0.10913877189159394
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30782
+                    }
+                },
+                {
+                    "colliderName": "ScrewdriverHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0011286735534667969,
+                            "y": 0.004427239298820496,
+                            "z": 0.276555597782135
+                        },
+                        "m_Extent": {
+                            "x": 0.07718111574649811,
+                            "y": 0.07678195089101792,
+                            "z": 0.10913877934217453
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30856
+                    }
+                },
+                {
+                    "colliderName": "ScrewdriverManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0010305289179086686,
+                            "y": 0.00487753190100193,
+                            "z": 0.08378072082996369
+                        },
+                        "m_Extent": {
+                            "x": 0.0060951001942157749,
+                            "y": 0.006522774696350098,
+                            "z": 0.08441220223903656
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27916
+                    }
+                },
+                {
+                    "colliderName": "ScrewdriverManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0016319714486598969,
+                            "y": 0.004693567752838135,
+                            "z": 0.2504311203956604
+                        },
+                        "m_Extent": {
+                            "x": 0.02638840116560459,
+                            "y": 0.025870535522699357,
+                            "z": 0.08601650595664978
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27968
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 16,
+            "toolNameFromConfig": "trowel",
+            "toolNameFromGameObject": "Trowel",
+            "toolDefaultHandleOrientation": "Left",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0,
+                "y": 0.022105759009718896,
+                "z": 0.0005973875522613525
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.0005973875522613525
+                },
+                "m_Extent": {
+                    "x": 0.048932142555713657,
+                    "y": 0.022105759009718896,
+                    "z": 0.21750658750534059
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "TrowelHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.035639986395835879,
+                        "z": -0.12793001532554627
+                    },
+                    "transform": {
+                        "instanceID": 30506
+                    }
+                },
+                {
+                    "transformName": "TrowelHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.040040016174316409,
+                        "z": -0.12793001532554627
+                    },
+                    "transform": {
+                        "instanceID": 29348
+                    }
+                },
+                {
+                    "transformName": "TrowelEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.017710015177726747,
+                        "z": 0.13057000935077668
+                    },
+                    "transform": {
+                        "instanceID": 27568
+                    }
+                },
+                {
+                    "transformName": "TrowelEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.022989988327026368,
+                        "z": 0.13057000935077668
+                    },
+                    "transform": {
+                        "instanceID": 27452
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "TrowelHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.01869998872280121,
+                        "z": -0.12331001460552216
+                    },
+                    "transform": {
+                        "instanceID": 29128
+                    }
+                },
+                {
+                    "transformName": "TrowelHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.02013002336025238,
+                        "z": -0.12331001460552216
+                    },
+                    "transform": {
+                        "instanceID": 29724
+                    }
+                },
+                {
+                    "transformName": "TrowelEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.0019799917936325075,
+                        "z": 0.1871100217103958
+                    },
+                    "transform": {
+                        "instanceID": 30144
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 27074
+            },
+            "toolEffectorCollider": {
+                "instanceID": 29184
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "TrowelHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": -0.13145652413368226
+                        },
+                        "m_Extent": {
+                            "x": 0.09314365684986115,
+                            "y": 0.06631731986999512,
+                            "z": 0.1308591365814209
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27074
+                    }
+                },
+                {
+                    "colliderName": "TrowelEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.13026174902915955
+                        },
+                        "m_Extent": {
+                            "x": 0.09314365684986115,
+                            "y": 0.06631731986999512,
+                            "z": 0.1308591365814209
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29184
+                    }
+                },
+                {
+                    "colliderName": "TrowelManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0000241696834564209,
+                            "y": 0.0009270757436752319,
+                            "z": -0.11614147573709488
+                        },
+                        "m_Extent": {
+                            "x": 0.02342901937663555,
+                            "y": 0.023984842002391816,
+                            "z": 0.10372341424226761
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31502
+                    }
+                },
+                {
+                    "colliderName": "TrowelManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00037273229099810123,
+                            "y": -0.0012042832095175982,
+                            "z": 0.005555514246225357
+                        },
+                        "m_Extent": {
+                            "x": 0.007958339527249337,
+                            "y": 0.007317043840885162,
+                            "z": 0.02095114067196846
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31222
+                    }
+                },
+                {
+                    "colliderName": "TrowelManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0004346705973148346,
+                            "y": -0.002319789957255125,
+                            "z": 0.11875519156455994
+                        },
+                        "m_Extent": {
+                            "x": 0.050248779356479648,
+                            "y": 0.006022837478667498,
+                            "z": 0.09979811310768128
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27882
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 17,
+            "toolNameFromConfig": "spokewrench",
+            "toolNameFromGameObject": "Spokewrench",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.006780784577131271,
+                "y": 0.04658164829015732,
+                "z": -0.09929871559143067
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -0.006780784577131271,
+                    "y": -0.0015816502273082734,
+                    "z": 0.09929871559143067
+                },
+                "m_Extent": {
+                    "x": 0.054000042378902438,
+                    "y": 0.044999998062849048,
+                    "z": 0.14015355706214906
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "SpokewrenchHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 5.7268145781108618e-8,
+                        "y": 0.06245999410748482,
+                        "z": 0.19926010072231294
+                    },
+                    "transform": {
+                        "instanceID": 27850
+                    }
+                },
+                {
+                    "transformName": "SpokewrenchHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 5.7268145781108618e-8,
+                        "y": -0.06173999607563019,
+                        "z": 0.1945801079273224
+                    },
+                    "transform": {
+                        "instanceID": 30742
+                    }
+                },
+                {
+                    "transformName": "SpokewrenchEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -4.4740738891491107e-10,
+                        "y": 0.04895999655127525,
+                        "z": -0.00198000087402761
+                    },
+                    "transform": {
+                        "instanceID": 28808
+                    }
+                },
+                {
+                    "transformName": "SpokewrenchEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -4.4740738891491107e-10,
+                        "y": -0.0464399978518486,
+                        "z": -0.00198000087402761
+                    },
+                    "transform": {
+                        "instanceID": 28796
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "SpokewrenchHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.00683997105807066,
+                        "y": 0.0398699976503849,
+                        "z": 0.19260002672672273
+                    },
+                    "transform": {
+                        "instanceID": 26924
+                    }
+                },
+                {
+                    "transformName": "SpokewrenchHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.00683997105807066,
+                        "y": -0.04526999965310097,
+                        "z": 0.19260002672672273
+                    },
+                    "transform": {
+                        "instanceID": 29044
+                    }
+                },
+                {
+                    "transformName": "SpokewrenchEffectorTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.0024300040677189829,
+                        "y": 0.01448999997228384,
+                        "z": -0.03420000150799751
+                    },
+                    "transform": {
+                        "instanceID": 30964
+                    }
+                },
+                {
+                    "transformName": "SpokewrenchEffectorBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -0.0024300040677189829,
+                        "y": -0.003599999938160181,
+                        "z": -0.03420000150799751
+                    },
+                    "transform": {
+                        "instanceID": 29266
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 29756
+            },
+            "toolEffectorCollider": {
+                "instanceID": 28976
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "SpokewrenchEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.006780803203582764,
+                            "y": -0.0015816688537597657,
+                            "z": -0.01577816903591156
+                        },
+                        "m_Extent": {
+                            "x": 0.14400020241737367,
+                            "y": 0.135000079870224,
+                            "z": 0.11507691442966461
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28976
+                    }
+                },
+                {
+                    "colliderName": "SpokewrenchHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.006780773401260376,
+                            "y": -0.001581639051437378,
+                            "z": 0.21437563002109528
+                        },
+                        "m_Extent": {
+                            "x": 0.14400020241737367,
+                            "y": 0.135000079870224,
+                            "z": 0.11507691442966461
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29756
+                    }
+                },
+                {
+                    "colliderName": "SpokewrenchManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00034972280263900757,
+                            "y": 0.006757594179362059,
+                            "z": -0.000142708420753479
+                        },
+                        "m_Extent": {
+                            "x": 0.04187151417136192,
+                            "y": 0.010566409677267075,
+                            "z": 0.04198227450251579
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31324
+                    }
+                },
+                {
+                    "colliderName": "SpokewrenchManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.007063593715429306,
+                            "y": -0.0013958871131762863,
+                            "z": 0.088407002389431
+                        },
+                        "m_Extent": {
+                            "x": 0.05555105581879616,
+                            "y": 0.00411698454990983,
+                            "z": 0.05494218319654465
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27298
+                    }
+                },
+                {
+                    "colliderName": "SpokewrenchManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0069071631878614429,
+                            "y": -0.0016949211712926627,
+                            "z": 0.14564302563667298
+                        },
+                        "m_Extent": {
+                            "x": 0.0025844089686870577,
+                            "y": 0.003817938966676593,
+                            "z": 0.00575767457485199
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30970
+                    }
+                },
+                {
+                    "colliderName": "SpokewrenchManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.006699679419398308,
+                            "y": -0.001101657748222351,
+                            "z": 0.19482636451721192
+                        },
+                        "m_Extent": {
+                            "x": 0.0032424191012978555,
+                            "y": 0.046174272894859317,
+                            "z": 0.04580704867839813
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28468
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 18,
+            "toolNameFromConfig": "daisygrubber",
+            "toolNameFromGameObject": "Daisygrubber",
+            "toolDefaultHandleOrientation": "Left",
+            "toolPivotBottomCenterOffset": {
+                "x": -4.0978193283081057e-8,
+                "y": 0.017072394490242006,
+                "z": -0.05786976218223572
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": 4.0978193283081057e-8,
+                    "y": -4.0978193283081057e-8,
+                    "z": 0.05786976218223572
+                },
+                "m_Extent": {
+                    "x": 0.01707235351204872,
+                    "y": 0.01707235351204872,
+                    "z": 0.19384875893592835
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "DaisygrubberHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.02474999986588955,
+                        "z": -0.07524000108242035
+                    },
+                    "transform": {
+                        "instanceID": 27802
+                    }
+                },
+                {
+                    "transformName": "DaisygrubberHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.027060000225901605,
+                        "z": -0.07590000331401825
+                    },
+                    "transform": {
+                        "instanceID": 28456
+                    }
+                },
+                {
+                    "transformName": "DaisygrubberEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -2.639999934217485e-7,
+                        "y": 0.032670002430677417,
+                        "z": 0.18216000497341157
+                    },
+                    "transform": {
+                        "instanceID": 31024
+                    }
+                },
+                {
+                    "transformName": "DaisygrubberEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.03498000279068947,
+                        "z": 0.1818300038576126
+                    },
+                    "transform": {
+                        "instanceID": 30638
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "DaisygrubberHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.014387999661266804,
+                        "z": -0.0488400012254715
+                    },
+                    "transform": {
+                        "instanceID": 30148
+                    }
+                },
+                {
+                    "transformName": "DaisygrubberHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.015180000104010105,
+                        "z": -0.0488400012254715
+                    },
+                    "transform": {
+                        "instanceID": 27784
+                    }
+                },
+                {
+                    "transformName": "DaisygrubberEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.0006600000197067857,
+                        "z": 0.1531200110912323
+                    },
+                    "transform": {
+                        "instanceID": 27926
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 30022
+            },
+            "toolEffectorCollider": {
+                "instanceID": 30440
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "DaisygrubberHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 4.0978193283081057e-8,
+                            "y": -4.0978193283081057e-8,
+                            "z": -0.05612697824835777
+                        },
+                        "m_Extent": {
+                            "x": 0.05121706798672676,
+                            "y": 0.05121706798672676,
+                            "z": 0.11399674415588379
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30022
+                    }
+                },
+                {
+                    "colliderName": "DaisygrubberEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 4.0978193283081057e-8,
+                            "y": -4.0978193283081057e-8,
+                            "z": 0.17186647653579713
+                        },
+                        "m_Extent": {
+                            "x": 0.05121706798672676,
+                            "y": 0.05121706798672676,
+                            "z": 0.11399673670530319
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30440
+                    }
+                },
+                {
+                    "colliderName": "DaisygrubberManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.000020032748579978943,
+                            "y": 0.00009575113654136658,
+                            "z": -0.04119252786040306
+                        },
+                        "m_Extent": {
+                            "x": 0.019098760560154916,
+                            "y": 0.018714923411607744,
+                            "z": 0.09593477845191956
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29344
+                    }
+                },
+                {
+                    "colliderName": "DaisygrubberManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00007208902388811111,
+                            "y": 0.0002131869550794363,
+                            "z": 0.15179984271526338
+                        },
+                        "m_Extent": {
+                            "x": 0.012234259396791458,
+                            "y": 0.007829600013792515,
+                            "z": 0.10145090520381928
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27244
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 19,
+            "toolNameFromConfig": "wrench",
+            "toolNameFromGameObject": "Wrench",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0002824440598487854,
+                "y": 0.008685503154993058,
+                "z": -0.0016751587390899659
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -0.0002824440598487854,
+                    "y": 0.000004672445356845856,
+                    "z": 0.0016751587390899659
+                },
+                "m_Extent": {
+                    "x": 0.03183327987790108,
+                    "y": 0.008690175600349903,
+                    "z": 0.13144372403621674
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "WrenchHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 3.725290298461914e-9,
+                        "y": 0.02112000063061714,
+                        "z": 0.04400000348687172
+                    },
+                    "transform": {
+                        "instanceID": 27004
+                    }
+                },
+                {
+                    "transformName": "WrenchHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 3.725290298461914e-9,
+                        "y": -0.03432000055909157,
+                        "z": 0.04400000348687172
+                    },
+                    "transform": {
+                        "instanceID": 29550
+                    }
+                },
+                {
+                    "transformName": "WrenchEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -1.4901161193847657e-8,
+                        "y": 0.022175999358296396,
+                        "z": -0.1003200113773346
+                    },
+                    "transform": {
+                        "instanceID": 27814
+                    }
+                },
+                {
+                    "transformName": "WrenchEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -1.4901161193847657e-8,
+                        "y": -0.027103999629616739,
+                        "z": -0.1003200113773346
+                    },
+                    "transform": {
+                        "instanceID": 27792
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "WrenchHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 3.725290298461914e-9,
+                        "y": 0.0036959999706596138,
+                        "z": 0.04100800305604935
+                    },
+                    "transform": {
+                        "instanceID": 30226
+                    }
+                },
+                {
+                    "transformName": "WrenchHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 3.725290298461914e-9,
+                        "y": -0.00395999988541007,
+                        "z": 0.04100800305604935
+                    },
+                    "transform": {
+                        "instanceID": 31358
+                    }
+                },
+                {
+                    "transformName": "WrenchEffectorTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -7.450580596923828e-9,
+                        "y": 0.007391999941319227,
+                        "z": -0.0872960090637207
+                    },
+                    "transform": {
+                        "instanceID": 27394
+                    }
+                },
+                {
+                    "transformName": "WrenchEffectorBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -7.450580596923828e-9,
+                        "y": -0.008008000440895558,
+                        "z": -0.0872960090637207
+                    },
+                    "transform": {
+                        "instanceID": 31908
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 31524
+            },
+            "toolEffectorCollider": {
+                "instanceID": 27514
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "WrenchEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0002824440598487854,
+                            "y": 0.000004673376679420471,
+                            "z": -0.07273688912391663
+                        },
+                        "m_Extent": {
+                            "x": 0.049213651567697528,
+                            "y": 0.026070531457662584,
+                            "z": 0.07441207766532898
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27514
+                    }
+                },
+                {
+                    "colliderName": "WrenchHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0002824440598487854,
+                            "y": 0.000004673376679420471,
+                            "z": 0.07608723640441895
+                        },
+                        "m_Extent": {
+                            "x": 0.049213651567697528,
+                            "y": 0.026070531457662584,
+                            "z": 0.07441207766532898
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31524
+                    }
+                },
+                {
+                    "colliderName": "WrenchManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00026985257863998413,
+                            "y": -0.00009488780051469803,
+                            "z": -0.09513206779956818
+                        },
+                        "m_Extent": {
+                            "x": 0.03264167159795761,
+                            "y": 0.009497874416410923,
+                            "z": 0.03508910536766052
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 26974
+                    }
+                },
+                {
+                    "colliderName": "WrenchManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0002210605889558792,
+                            "y": -0.000050131697207689285,
+                            "z": 0.02720252424478531
+                        },
+                        "m_Extent": {
+                            "x": 0.01692698895931244,
+                            "y": 0.005480593536049128,
+                            "z": 0.10710901767015457
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31194
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 20,
+            "toolNameFromConfig": "zester",
+            "toolNameFromGameObject": "Zester",
+            "toolDefaultHandleOrientation": "Left",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0,
+                "y": 0.015905678272247316,
+                "z": 0.059457600116729739
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": 0.0,
+                    "y": 0.0036128591746091844,
+                    "z": -0.059457600116729739
+                },
+                "m_Extent": {
+                    "x": 0.02945496141910553,
+                    "y": 0.0195185374468565,
+                    "z": 0.1736452728509903
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "ZesterHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.026256000623106958,
+                        "z": -0.15911999344825746
+                    },
+                    "transform": {
+                        "instanceID": 30126
+                    }
+                },
+                {
+                    "transformName": "ZesterHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.03167999908328056,
+                        "z": -0.15911999344825746
+                    },
+                    "transform": {
+                        "instanceID": 30992
+                    }
+                },
+                {
+                    "transformName": "ZesterEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.03215999901294708,
+                        "z": 0.1029599979519844
+                    },
+                    "transform": {
+                        "instanceID": 29090
+                    }
+                },
+                {
+                    "transformName": "ZesterEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.0293279979377985,
+                        "z": 0.1029599979519844
+                    },
+                    "transform": {
+                        "instanceID": 29052
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "ZesterHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.009599999524652958,
+                        "z": -0.12624000012874604
+                    },
+                    "transform": {
+                        "instanceID": 31072
+                    }
+                },
+                {
+                    "transformName": "ZesterHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.011423999443650246,
+                        "z": -0.12624000012874604
+                    },
+                    "transform": {
+                        "instanceID": 29988
+                    }
+                },
+                {
+                    "transformName": "ZesterEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.00014400000509340316,
+                        "z": 0.07391999661922455
+                    },
+                    "transform": {
+                        "instanceID": 29388
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 30072
+            },
+            "toolEffectorCollider": {
+                "instanceID": 29984
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "ZesterHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.003612857311964035,
+                            "z": -0.16579875349998475
+                        },
+                        "m_Extent": {
+                            "x": 0.06849203258752823,
+                            "y": 0.05855560675263405,
+                            "z": 0.1063411608338356
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30072
+                    }
+                },
+                {
+                    "colliderName": "ZesterEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0,
+                            "y": 0.003612857311964035,
+                            "z": 0.04688357189297676
+                        },
+                        "m_Extent": {
+                            "x": 0.06849203258752823,
+                            "y": 0.05855560675263405,
+                            "z": 0.1063411682844162
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29984
+                    }
+                },
+                {
+                    "colliderName": "ZesterManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00015751272439956665,
+                            "y": 0.0002738460898399353,
+                            "z": -0.11252950131893158
+                        },
+                        "m_Extent": {
+                            "x": 0.03018333576619625,
+                            "y": 0.017172357067465783,
+                            "z": 0.12172436714172363
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30166
+                    }
+                },
+                {
+                    "colliderName": "ZesterManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0007948148995637894,
+                            "y": 0.01664380542933941,
+                            "z": -0.2243233323097229
+                        },
+                        "m_Extent": {
+                            "x": 0.025117622688412668,
+                            "y": 0.007270982954651117,
+                            "z": 0.009930148720741272
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 26952
+                    }
+                },
+                {
+                    "colliderName": "ZesterManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.00051918625831604,
+                            "y": 0.0015959986485540867,
+                            "z": 0.0604095496237278
+                        },
+                        "m_Extent": {
+                            "x": 0.019825823605060579,
+                            "y": 0.004433655180037022,
+                            "z": 0.055776048451662067
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31778
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 21,
+            "toolNameFromConfig": "fork",
+            "toolNameFromGameObject": "Fork",
+            "toolDefaultHandleOrientation": "Right",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.0015481933951377869,
+                "y": 0.004558543674647808,
+                "z": 0.02822454273700714
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -0.0015481933951377869,
+                    "y": 0.0056145889684557919,
+                    "z": -0.02822454273700714
+                },
+                "m_Extent": {
+                    "x": 0.02145799621939659,
+                    "y": 0.0101731326431036,
+                    "z": 0.14098168909549714
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "ForkHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.02934800460934639,
+                        "z": 0.017709998413920404
+                    },
+                    "transform": {
+                        "instanceID": 31936
+                    }
+                },
+                {
+                    "transformName": "ForkHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.0161920003592968,
+                        "z": 0.01771000400185585
+                    },
+                    "transform": {
+                        "instanceID": 31534
+                    }
+                },
+                {
+                    "transformName": "ForkEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": 0.03213098645210266,
+                        "z": -0.12447601556777954
+                    },
+                    "transform": {
+                        "instanceID": 27320
+                    }
+                },
+                {
+                    "transformName": "ForkEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.028083011507987977,
+                        "z": -0.12447601556777954
+                    },
+                    "transform": {
+                        "instanceID": 29578
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "ForkHandleAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -6.008167325200625e-14,
+                        "y": 0.008855003863573075,
+                        "z": 0.042504001408815387
+                    },
+                    "transform": {
+                        "instanceID": 26978
+                    }
+                },
+                {
+                    "transformName": "ForkEffectorAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 0.0,
+                        "y": -0.002530016005039215,
+                        "z": -0.10120001435279846
+                    },
+                    "transform": {
+                        "instanceID": 28660
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 29154
+            },
+            "toolEffectorCollider": {
+                "instanceID": 28088
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "ForkEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0015481933951377869,
+                            "y": 0.005614584311842918,
+                            "z": -0.10888856649398804
+                        },
+                        "m_Extent": {
+                            "x": 0.04180426523089409,
+                            "y": 0.030519412830471994,
+                            "z": 0.0806640088558197
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28088
+                    }
+                },
+                {
+                    "colliderName": "ForkHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0015481933951377869,
+                            "y": 0.005614591762423515,
+                            "z": 0.05243948847055435
+                        },
+                        "m_Extent": {
+                            "x": 0.04180426523089409,
+                            "y": 0.030519412830471994,
+                            "z": 0.0806640163064003
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29154
+                    }
+                },
+                {
+                    "colliderName": "ForkManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0013978444039821625,
+                            "y": 0.006446539424359798,
+                            "z": -0.1385619342327118
+                        },
+                        "m_Extent": {
+                            "x": 0.022243250161409379,
+                            "y": 0.01084167417138815,
+                            "z": 0.03296633064746857
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 28772
+                    }
+                },
+                {
+                    "colliderName": "ForkManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0013978444039821625,
+                            "y": -0.0008457088842988014,
+                            "z": -0.09402239322662354
+                        },
+                        "m_Extent": {
+                            "x": 0.02224324829876423,
+                            "y": 0.004894398618489504,
+                            "z": 0.019313007593154908
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30546
+                    }
+                },
+                {
+                    "colliderName": "ForkManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0018071590457111598,
+                            "y": 0.003661404363811016,
+                            "z": -0.05965037643909454
+                        },
+                        "m_Extent": {
+                            "x": 0.006246243603527546,
+                            "y": 0.008881567977368832,
+                            "z": 0.022695081308484079
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31126
+                    }
+                },
+                {
+                    "colliderName": "ForkManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.001662344904616475,
+                            "y": 0.009921071119606495,
+                            "z": -0.015138179063796997
+                        },
+                        "m_Extent": {
+                            "x": 0.0065381163731217388,
+                            "y": 0.0032185278832912447,
+                            "z": 0.025496404618024827
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31350
+                    }
+                },
+                {
+                    "colliderName": "ForkManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.0014835037291049958,
+                            "y": 0.010521375574171543,
+                            "z": 0.022570744156837465
+                        },
+                        "m_Extent": {
+                            "x": 0.009816373698413372,
+                            "y": 0.003071499289944768,
+                            "z": 0.015960216522216798
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27946
+                    }
+                },
+                {
+                    "colliderName": "ForkManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.00153370201587677,
+                            "y": 0.0037845587357878687,
+                            "z": 0.07227975130081177
+                        },
+                        "m_Extent": {
+                            "x": 0.015877634286880494,
+                            "y": 0.008611548691987992,
+                            "z": 0.04146531969308853
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 31146
+                    }
+                }
+            ]
+        },
+        {
+            "toolId": 99,
+            "toolNameFromConfig": "practicehammer",
+            "toolNameFromGameObject": "PracticeHammer",
+            "toolDefaultHandleOrientation": "Left",
+            "toolPivotBottomCenterOffset": {
+                "x": 0.003330513834953308,
+                "y": 0.019764717668294908,
+                "z": -0.12897832691669465
+            },
+            "toolMeshBoundingBox": {
+                "m_Center": {
+                    "x": -0.003330513834953308,
+                    "y": 0.0006045661866664887,
+                    "z": 0.12897832691669465
+                },
+                "m_Extent": {
+                    "x": 0.06965820491313935,
+                    "y": 0.020369283854961396,
+                    "z": 0.13289517164230348
+                }
+            },
+            "toolAttachmentPointsSteamVr": [
+                {
+                    "transformName": "HammerHandleTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -3.725290298461914e-9,
+                        "y": 0.030940014868974687,
+                        "z": 0.05199999734759331
+                    },
+                    "transform": {
+                        "instanceID": 31646
+                    }
+                },
+                {
+                    "transformName": "HammerHandleBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 3.725290298461914e-9,
+                        "y": -0.029770012944936754,
+                        "z": 0.05199999734759331
+                    },
+                    "transform": {
+                        "instanceID": 30890
+                    }
+                },
+                {
+                    "transformName": "HammerEffectorTopAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": -3.725290298461914e-9,
+                        "y": 0.03757001459598541,
+                        "z": 0.24699999392032624
+                    },
+                    "transform": {
+                        "instanceID": 29538
+                    }
+                },
+                {
+                    "transformName": "HammerEffectorBottomAttachmentPointSteamVR",
+                    "transformPosition": {
+                        "x": 3.725290298461914e-9,
+                        "y": -0.025480013340711595,
+                        "z": 0.24699999392032624
+                    },
+                    "transform": {
+                        "instanceID": 26908
+                    }
+                }
+            ],
+            "toolAttachmentPointsLeapMotion": [
+                {
+                    "transformName": "HammerHandleTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -1.862645149230957e-9,
+                        "y": 0.018590006977319719,
+                        "z": 0.0699400007724762
+                    },
+                    "transform": {
+                        "instanceID": 30920
+                    }
+                },
+                {
+                    "transformName": "HammerHandleBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 1.862645149230957e-9,
+                        "y": -0.017680007964372636,
+                        "z": 0.0699400007724762
+                    },
+                    "transform": {
+                        "instanceID": 31678
+                    }
+                },
+                {
+                    "transformName": "HammerEffectorTopAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": -1.862645149230957e-9,
+                        "y": 0.018590006977319719,
+                        "z": 0.24699999392032624
+                    },
+                    "transform": {
+                        "instanceID": 29638
+                    }
+                },
+                {
+                    "transformName": "HammerEffectorBottomAttachmentPointLeapMotion",
+                    "transformPosition": {
+                        "x": 1.862645149230957e-9,
+                        "y": -0.01755000837147236,
+                        "z": 0.24699999392032624
+                    },
+                    "transform": {
+                        "instanceID": 29880
+                    }
+                }
+            ],
+            "toolHandleCollider": {
+                "instanceID": 27556
+            },
+            "toolEffectorCollider": {
+                "instanceID": 30274
+            },
+            "toolColliders": [
+                {
+                    "colliderName": "HammerHandleCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.003330521285533905,
+                            "y": 0.0006045661866664887,
+                            "z": 0.05234580114483833
+                        },
+                        "m_Extent": {
+                            "x": 0.0900275856256485,
+                            "y": 0.04073861241340637,
+                            "z": 0.07663227617740631
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27556
+                    }
+                },
+                {
+                    "colliderName": "HammerEffectorCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.003330521285533905,
+                            "y": 0.0006045661866664887,
+                            "z": 0.20561036467552186
+                        },
+                        "m_Extent": {
+                            "x": 0.0900275856256485,
+                            "y": 0.04073861241340637,
+                            "z": 0.07663228362798691
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 30274
+                    }
+                },
+                {
+                    "colliderName": "HammerManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": 0.0020586978644132616,
+                            "y": 0.00041564740240573883,
+                            "z": 0.10998818278312683
+                        },
+                        "m_Extent": {
+                            "x": 0.02212141640484333,
+                            "y": 0.021097421646118165,
+                            "z": 0.11564940214157105
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 29702
+                    }
+                },
+                {
+                    "colliderName": "HammerManualCollider",
+                    "colliderBounds": {
+                        "m_Center": {
+                            "x": -0.003287382423877716,
+                            "y": 0.0012622140347957612,
+                            "z": 0.2424144446849823
+                        },
+                        "m_Extent": {
+                            "x": 0.07093174755573273,
+                            "y": 0.02120763063430786,
+                            "z": 0.0204637348651886
+                        }
+                    },
+                    "collider": {
+                        "instanceID": 27542
+                    }
+                }
+            ]
+        }
+    ],
+    "experimentUtconInfo": {
+        "utconsDuringMeasuringSection": [
+            141,
+            142,
+            143,
+            144,
+            101,
+            102,
+            103,
+            104,
+            112,
+            122,
+            132,
+            152,
+            162,
+            172,
+            182,
+            192,
+            201,
+            202,
+            203,
+            204,
+            212
+        ],
+        "utconsDuringPracticeSection": [
+            991
+        ],
+        "utconIdxBeforeWhichPauseHappensDuringMeasuring": [],
+        "utconIdxBeforeWhichPauseHappensDuringPractice": []
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "subjectId": 0,
+    "dateTimeSubjectMetaDataCreated": "2020-10-27 17-29",
+    "blockNumber": 1,
+    "eyeTrackingOverallCombinedValidationResults": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "blockTrials": [

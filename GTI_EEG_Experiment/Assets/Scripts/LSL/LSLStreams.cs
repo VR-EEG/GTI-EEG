@@ -4,7 +4,7 @@ using LSL;
 public class LSLStreams : MonoBehaviour
 {
     public static LSLStreams Instance { get; private set; } // used to allow easy access of this script in other scripts
-    private string participantUID;
+    private string subjectID;
 
     private const double NominalRate = liblsl.IRREGULAR_RATE; // irregular sampling rate
 
@@ -74,9 +74,10 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_int32,
-            participantUID);
+            subjectID);
         lslIFrameTracking.desc().append_child("CurrentFrame");
         lslOFrameTracking = new liblsl.StreamOutlet(lslIFrameTracking);
+        
         // World Coordinates
         // saved: Tobii timestamps (1); origin coordinates (3); direction coordinates (3), Left & right eye blinks (2), Check if ray is valid (1)
         lslIEyeTrackingWorld = new liblsl.StreamInfo(
@@ -85,7 +86,7 @@ public class LSLStreams : MonoBehaviour
             10,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIEyeTrackingWorld.desc().append_child("ETWTime");
         lslIEyeTrackingWorld.desc().append_child("ETWoriginX");
         lslIEyeTrackingWorld.desc().append_child("ETWoriginY");
@@ -105,7 +106,7 @@ public class LSLStreams : MonoBehaviour
             30,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            participantUID);
+            subjectID);
         lslIHitObjectNames.desc().append_child("HON");
         lslOHitObjectNames = new liblsl.StreamOutlet(lslIHitObjectNames);
         // Hit Object Groups 
@@ -116,7 +117,7 @@ public class LSLStreams : MonoBehaviour
             30,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            participantUID);
+            subjectID);
         lslIHitObjectGroups.desc().append_child("HOG");
         lslOHitObjectGroups = new liblsl.StreamOutlet(lslIHitObjectGroups);
         // Hit Object Coordinates (in World Coordinates)
@@ -127,7 +128,7 @@ public class LSLStreams : MonoBehaviour
             90,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIHitObjectPositions.desc().append_child("HOPX");
         lslIHitObjectPositions.desc().append_child("HOPY");
         lslIHitObjectPositions.desc().append_child("HOPZ");
@@ -140,7 +141,7 @@ public class LSLStreams : MonoBehaviour
             90,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIHitPositionOnObjects.desc().append_child("HPOOX");
         lslIHitPositionOnObjects.desc().append_child("HPOOY");
         lslIHitPositionOnObjects.desc().append_child("HPOOZ");
@@ -153,7 +154,7 @@ public class LSLStreams : MonoBehaviour
             6,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIEyeTrackingLocal.desc().append_child("ETLoriginX");
         lslIEyeTrackingLocal.desc().append_child("ETLoriginY");
         lslIEyeTrackingLocal.desc().append_child("ETLoriginZ");
@@ -170,7 +171,7 @@ public class LSLStreams : MonoBehaviour
             6,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIHeadTracking.desc().append_child("HToriginX");
         lslIHeadTracking.desc().append_child("HToriginY");
         lslIHeadTracking.desc().append_child("HToriginZ");
@@ -186,7 +187,7 @@ public class LSLStreams : MonoBehaviour
             30,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            participantUID);
+            subjectID);
         lslIHeadTrackingObjectNames.desc().append_child("HTON");
         lslOHeadTrackingObjectNames = new liblsl.StreamOutlet(lslIHeadTrackingObjectNames);
         // Hit Object Groups (Head Tracking, nose vector)
@@ -197,7 +198,7 @@ public class LSLStreams : MonoBehaviour
             30,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            participantUID);
+            subjectID);
         lslIHeadTrackingObjectGroups.desc().append_child("HTOG");
         lslOHeadTrackingObjectGroups = new liblsl.StreamOutlet(lslIHeadTrackingObjectGroups);
         // Hit Object Coordinates (in World Coordinates) (Head Tracking, nose vector)
@@ -208,7 +209,7 @@ public class LSLStreams : MonoBehaviour
             90,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIHeadTrackingObjectPositions.desc().append_child("HTOPX");
         lslIHeadTrackingObjectPositions.desc().append_child("HTOPY");
         lslIHeadTrackingObjectPositions.desc().append_child("HTOPZ");
@@ -221,7 +222,7 @@ public class LSLStreams : MonoBehaviour
             90,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            participantUID);
+            subjectID);
         lslIHeadTrackingPositionOnObjects.desc().append_child("HTPOOX");
         lslIHeadTrackingPositionOnObjects.desc().append_child("HTPOOY");
         lslIHeadTrackingPositionOnObjects.desc().append_child("HTPOOZ");

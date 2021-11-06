@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
@@ -973,7 +973,8 @@ public class UiManager : MonoBehaviour
             // Running & practicing
             text += "Running: " + configManager.experimentIsRunning.ToString() + "\n";
             text += "Practice: " + configManager.isInPractice.ToString() + "\n";
-            
+            text+= "\n" + "Using LSL: " + configManager.isUsingLSLRecorder.ToString() +  "\n";
+
             // Infos on block, trial, utcon 
             if (!configManager.experimentIsRunning)
             {

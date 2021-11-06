@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -55,6 +55,9 @@ public class MeasurementManager : MonoBehaviour
     // Handedness in SteamVR format 
     private SteamVR_Input_Sources handednessOfPlayerSteamVrFormat;
     
+    // LSL recorder state
+    private bool _recordLsl;
+
     // SteamVR 
     public SteamVR_Action_Boolean steamVrAction;
     public Hand steamVrLeftHand;
@@ -68,11 +71,8 @@ public class MeasurementManager : MonoBehaviour
     
     
     // *** Debug 
-    public LineRenderer debugLineRenderer; 
-    
-    
-    
-    
+    public LineRenderer debugLineRenderer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -215,9 +215,11 @@ public class MeasurementManager : MonoBehaviour
         configManager.currentSubjectData.experimentUtconInfo = experimentManager.GetExperimentUtconInfo();
         
         // Set filenames 
-        configManager.subjectMetaDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_MetaData_Datetime_" + configManager.currentSubjectData.dateTimeCreated + ".json";
+        configManager.subjectMetaDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_MetaData_Datetime_" + 
+                                                configManager.currentSubjectData.dateTimeCreated + ".json";
         configManager.subjectMetaDataFileName = configManager.subjectMetaDataFileName.Replace(" ", "_");
-        configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" + configManager.currentSubjectData.dateTimeCreated + ".json";
+        configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_DataOfBlock_" + 
+                                                        configManager.currentBlock.ToString() + "_Datetime_" + configManager.currentSubjectData.dateTimeCreated + ".json";
         configManager.subjectCurrentBlockDataFileName = configManager.subjectCurrentBlockDataFileName.Replace(" ", "_");
         
         // Write meta data to disk 
@@ -356,7 +358,8 @@ public class MeasurementManager : MonoBehaviour
         string blockFinishSyntax = Environment.NewLine + "]" + Environment.NewLine + "}" + Environment.NewLine;
         
         // Write data 
-        Debug.Log("[MeasurementManager] Append finishing syntax of block " + configManager.blockNumberLastWrittenToOnDisk.ToString()  + " at " + filePath + " to block data on disk.");
+        Debug.Log("[MeasurementManager] Append finishing syntax of block " + configManager.blockNumberLastWrittenToOnDisk.ToString()  + 
+                  " at " + filePath + " to block data on disk.");
         File.AppendAllText(filePath,blockFinishSyntax);
         Debug.Log("[MeasurementManager] Finished finishing block.");
     }
@@ -397,83 +400,102 @@ public class MeasurementManager : MonoBehaviour
     // Start measurement
     public void StartMeasurement()
     {
-        Debug.Log("[MeasurementManager] Starting measuring trial in block " + configManager.currentBlock.ToString());
+        if (!configManager.isUsingLSLRecorder)
+        {
+            Debug.Log("[MeasurementManager] Starting measuring trial in block " + configManager.currentBlock.ToString());
 
-        // Init new trial data 
-        ExperimentTrialData currentTrialData = new ExperimentTrialData();
+            // Init new trial data 
+            ExperimentTrialData currentTrialData = new ExperimentTrialData();
         
-        // Set data from utcon 
-        currentTrialData.utcon = configManager.currentUtcon;
-        toolManager.ExtractVerifiedIdsFromUtcon(currentTrialData.utcon, out currentTrialData.toolId, out currentTrialData.cueOrientationId );
-        toolManager.NamesFromUtcon(currentTrialData.utcon, out currentTrialData.toolName, out currentTrialData.cueOrientationName);
-        if (currentTrialData.cueOrientationName.ToLower().Contains("left"))
-        {
-            currentTrialData.toolHandleOrientation = "left";
-            currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("left", "");
-        }
-        else
-        {
-            currentTrialData.toolHandleOrientation = "right";
-            currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("right", "");
-        }
-        
-        
-        // Check if current block exists, create it otherwise  
-        if (configManager.currentBlock != configManager.blockNumberLastWrittenToOnDisk)
-        {
-            // Finish previous block's file if previous block existed 
-            if (configManager.currentBlock >= 1)
+            // Set data from utcon 
+            currentTrialData.utcon = configManager.currentUtcon;
+            toolManager.ExtractVerifiedIdsFromUtcon(currentTrialData.utcon, out currentTrialData.toolId, out currentTrialData.cueOrientationId );
+            toolManager.NamesFromUtcon(currentTrialData.utcon, out currentTrialData.toolName, out currentTrialData.cueOrientationName);
+            if (currentTrialData.cueOrientationName.ToLower().Contains("left"))
             {
-                FinishBlockDataOnDisk();
+                currentTrialData.toolHandleOrientation = "left";
+                currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("left", "");
             }
+            else
+            {
+                currentTrialData.toolHandleOrientation = "right";
+                currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("right", "");
+            }
+        
+        
+            // Check if current block exists, create it otherwise  
+            if (configManager.currentBlock != configManager.blockNumberLastWrittenToOnDisk)
+            {
+                // Finish previous block's file if previous block existed 
+                if (configManager.currentBlock >= 1)
+                {
+                    FinishBlockDataOnDisk();
+                }
             
-            // Update Block file name
-            configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" + configManager.currentSubjectData.dateTimeCreated.Replace(" ","_") + ".json";
+                // Update Block file name
+                configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + 
+                                                                "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" 
+                                                                + configManager.currentSubjectData.dateTimeCreated.Replace(" ","_") + ".json";
             
-            // Init block data and file
-            InitBlockData();
+                // Init block data and file
+                InitBlockData();
             
-            // Update last written to 
-            configManager.blockNumberLastWrittenToOnDisk = configManager.currentBlock;
-        }
+                // Update last written to 
+                configManager.blockNumberLastWrittenToOnDisk = configManager.currentBlock;
+            }
         
-        // Append current trial to current block
-        configManager.currentBlockData.blockTrials.Add(currentTrialData);
+            // Append current trial to current block
+            configManager.currentBlockData.blockTrials.Add(currentTrialData);
         
-        // Update current trial number, is reset to in case of new block data 
-        configManager.currentTrial = configManager.currentBlockData.blockTrials.Count;
+            // Update current trial number, is reset to in case of new block data 
+            configManager.currentTrial = configManager.currentBlockData.blockTrials.Count;
         
         
-        // Set handedness in SteamVR format for faster access, avoiding string compare 
-        if (configManager.subjectHandedness.ToLower().Contains("left"))
-        {
-            handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.LeftHand;
+            // Set handedness in SteamVR format for faster access, avoiding string compare 
+            if (configManager.subjectHandedness.ToLower().Contains("left"))
+            {
+                handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.LeftHand;
+            }
+            else
+            {
+                handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.RightHand;
+            }
+        
+        
+            // Reset gaze ray timestamp 
+            lastGazeRayTimeStamp = 0;
+        
+            // Start the actual measuring 
+            StartCoroutine("RecordData");
         }
         else
         {
-            handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.RightHand;
+            _recordLsl = true;  // todo correct the execution order
+            
+            // todo implement recording for lsl
         }
         
-        
-        // Reset gaze ray timestamp 
-        lastGazeRayTimeStamp = 0;
-        
-        // Start the actual measuring 
-        StartCoroutine("RecordData");
-
-
     }
     
     // Stop measurement
     public void StopMeasurement()
     {
-        Debug.Log("[MeasurementManager] Stopping Measuring.");
+        if (!configManager.isUsingLSLRecorder)
+        {
+            Debug.Log("[MeasurementManager] Stopping Measuring.");
         
-        // Stop the measurement coroutine
-        StopCoroutine("RecordData");
+            // Stop the measurement coroutine
+            StopCoroutine("RecordData");
         
-        // Write the trial's data to disk, depending on trial index 
-        AppendTrialDataToSubjectDataOnDisk(configManager.currentTrial - 1);
+            // Write the trial's data to disk, depending on trial index 
+            AppendTrialDataToSubjectDataOnDisk(configManager.currentTrial - 1);
+        }
+        else
+        {
+            _recordLsl = false;  // todo correct the execution order
+
+            // todo implement stop behavior for lsl recorder
+        }
     }
     
     // Add data point to measurement data 

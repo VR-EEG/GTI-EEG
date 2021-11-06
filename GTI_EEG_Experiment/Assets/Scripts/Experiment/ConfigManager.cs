@@ -304,6 +304,9 @@ public class ConfigManager : MonoBehaviour
     
     // Is LeapMotion enabled or not 
     public bool isUsingLeap;
+
+    // Is LSL Recorder enabled or not 
+    public bool isUsingLSLRecorder;
     
     // Is tool displaied on table 
     public bool isToolDisplayedOnTable;
@@ -384,8 +387,8 @@ public class ConfigManager : MonoBehaviour
     
     // Error message of setup 
     private string errorMessage;
-    
-    
+
+
     // Called once at the very start
     void Awake()
     {
@@ -508,6 +511,8 @@ public class ConfigManager : MonoBehaviour
         public float fpsCounterRefreshRateInSeconds;
         public string triggerIsOnSide;
         public bool isUsingLeap;
+        public bool isUsingLSLRecorder;
+
         
         // Subject settings
         public List<string> genders;
@@ -592,6 +597,7 @@ public class ConfigManager : MonoBehaviour
             fpsCounterRefreshRateInSeconds = fpsCounterRefreshRateInSeconds,
             triggerIsOnSide = triggerIsOnSide,
             isUsingLeap = isUsingLeap,
+            isUsingLSLRecorder = isUsingLSLRecorder,
             
             // Subject settings
             genders = genders,
@@ -614,6 +620,7 @@ public class ConfigManager : MonoBehaviour
         // Initial values 
         configurationSucceededGracefully = false;
         isUsingLeap = false;
+        isUsingLSLRecorder = false;
         tableIsCalibrated = false;
         floorIsCalibrated = false;
         experimentIsRunning = false;

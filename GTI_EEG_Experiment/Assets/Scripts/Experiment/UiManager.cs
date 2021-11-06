@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
@@ -152,6 +152,9 @@ public class UiManager : MonoBehaviour
     // Switch to SteamVR button 
     public Button buttonSwitchToSteamInput;
 
+    // Switch to LSL Recorder
+    public Button buttonSwitchToLSLRecorder;
+    
     // Toggle HeadVolume Visibility
     public Button buttonToggleHeadVolumeVisibility;
     
@@ -271,6 +274,7 @@ public class UiManager : MonoBehaviour
         buttonCalibrateEyeTracking.onClick.AddListener(ClickedButtonCalibrateEyeTracker);
         buttonSwitchToLeapInput.onClick.AddListener(ClickedButtonSwitchToLeapInput);
         buttonSwitchToSteamInput.onClick.AddListener(ClickedButtonSwitchToSteamInput);
+        buttonSwitchToLSLRecorder.onClick.AddListener(ClickedButtonSwitchToLSLRecorder);
         buttonToggleHeadVolumeVisibility.onClick.AddListener(ClickedButtonToggleHeadVolumeVisibility);
         buttonDisplayAllToolsSequentially.onClick.AddListener(ClickedButtonDisplayAllToolsSequentially);
         buttonAbout.onClick.AddListener(ClickedButtonAbout);
@@ -573,6 +577,16 @@ public class UiManager : MonoBehaviour
     }
     
     // ** Helpers Menu
+    // Listener for button switch to LSL Recorser
+    void ClickedButtonSwitchToLSLRecorder()
+    {
+        Debug.Log("[UiManager] Got button click: Switch to LSL Recorder.");
+
+        //  Switch to SteamVR Input  
+        playerManager.SwitchToLSLRecorder();
+    }
+    
+    // ** Helpers Menu
     // Listener for button Toggle Head Volume Visibility
     void ClickedButtonToggleHeadVolumeVisibility()
     {
@@ -812,12 +826,14 @@ public class UiManager : MonoBehaviour
         // Init button availability 
         bool switchToLeapAvailable;
         bool switchToSteamVrAvailable;
+        bool switchToLSLRecorder;
         
         while (true)
         {
             // Init 
             switchToLeapAvailable = true;
             switchToSteamVrAvailable = true;
+            switchToLSLRecorder = true;
 
             //print(playerManager.IsLeapAvailable());
             
@@ -833,9 +849,16 @@ public class UiManager : MonoBehaviour
                 switchToSteamVrAvailable = false;
             }
             
+            // LSL recorder button not available if already active 
+            if (configManager.isUsingLSLRecorder)
+            {
+                switchToLSLRecorder = false;
+            }
+            
             // Update button availability
             buttonSwitchToLeapInput.interactable = switchToLeapAvailable;
             buttonSwitchToSteamInput.interactable = switchToSteamVrAvailable; 
+            buttonSwitchToLSLRecorder.interactable = switchToLSLRecorder; 
             
             // Update menu every 0.5 seconds 
             yield return new WaitForSeconds(0.5f);

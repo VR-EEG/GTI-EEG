@@ -4,55 +4,38 @@ using LSL;
 public class LSLStreams : MonoBehaviour
 {
     public static LSLStreams Instance { get; private set; } // used to allow easy access of this script in other scripts
+
+    [SerializeField] private ConfigManager configManager;
+    
     private string subjectID;
 
     private const double NominalRate = liblsl.IRREGULAR_RATE; // irregular sampling rate
 
     // variables to save date to LSL
-    public liblsl.StreamInfo lslICondition;
-    public liblsl.StreamOutlet lslOCondition; // empty Stream, saved here
     public liblsl.StreamInfo lslIFrameTracking;
-    public liblsl.StreamOutlet lslOFrameTracking; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIEyeTrackingWorld;
-    public liblsl.StreamOutlet lslOEyeTrackingWorld; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIEyeTrackingLocal;
-    public liblsl.StreamOutlet lslOEyeTrackingLocal; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHeadTracking;
-    public liblsl.StreamOutlet lslOHeadTracking; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHeadTrackingObjectNames;
-    public liblsl.StreamOutlet lslOHeadTrackingObjectNames; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHeadTrackingObjectGroups;
-    public liblsl.StreamOutlet lslOHeadTrackingObjectGroups; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHeadTrackingObjectPositions;
-    public liblsl.StreamOutlet lslOHeadTrackingObjectPositions; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHeadTrackingPositionOnObjects;
-    public liblsl.StreamOutlet lslOHeadTrackingPositionOnObjects; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHitObjectNames;
-    public liblsl.StreamOutlet lslOHitObjectNames; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHitObjectGroups;
-    public liblsl.StreamOutlet lslOHitObjectGroups; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHitObjectPositions;
-    public liblsl.StreamOutlet lslOHitObjectPositions; // saved in ETRecorder.cs
-    public liblsl.StreamInfo lslIHitPositionOnObjects;
-    public liblsl.StreamOutlet lslOHitPositionOnObjects; // saved in ETRecorder.cs
-    
-    // GTI-EEG
-    
+    public liblsl.StreamOutlet lslOFrameTracking; // saved in LSLRecorder.cs
+
     public liblsl.StreamInfo lslITimeStamps;
-    public liblsl.StreamOutlet lslOTimeStamps; // saved in MeasurementManager.cs
+    public liblsl.StreamOutlet lslOTimeStamps; // saved in LSLRecorder.cs
     
-    public liblsl.StreamInfo lslIEyeTrackingHMDGaze;
-    public liblsl.StreamOutlet lslOEyeTrackingHMDGaze; // saved in MeasurementManager.cs
+    public liblsl.StreamInfo lslIToolCueOrientationInt;
+    public liblsl.StreamOutlet lslOToolCueOrientationInt; // saved in LSLRecorder.cs
+
+    public liblsl.StreamInfo lslIToolCueOrientationString;
+    public liblsl.StreamOutlet lslOToolCueOrientationString; // saved in LSLRecorder.cs
     
-    public liblsl.StreamInfo lslIHandTool;
-    public liblsl.StreamOutlet lslOHandTool; // saved in MeasurementManager.cs
+    public liblsl.StreamInfo lslIEyeTrackingGazeHMDFloat;
+    public liblsl.StreamOutlet lslOEyeTrackingGazeHMDFloat; // saved in LSLRecorder.cs
     
-    public liblsl.StreamInfo lslISubjectData;
-    public liblsl.StreamOutlet lslOSubjectData; // saved in MeasurementManager.cs
+    public liblsl.StreamInfo lslIEyeTrackingGazeHMDString;
+    public liblsl.StreamOutlet lslOEyeTrackingGazeHMDString; // saved in LSLRecorder.cs
+
+    public liblsl.StreamInfo lslIInput;
+    public liblsl.StreamOutlet lslOInput; // saved in LSLRecorder.cs
+    
 
     private void Awake()
     {
-        // TODO -------------
         if (Instance == null)
         {
             Instance = this;
@@ -64,10 +47,11 @@ public class LSLStreams : MonoBehaviour
         }
     }
 
-    void Start()
+    // todo call this function after subject id is generated
+    public void InitLSL()   
     {
-        // todo is participant id necessary here for us?
-        // todo do we need such a stream?
+        subjectID = configManager.subjectId.ToString();
+        
         lslIFrameTracking = new liblsl.StreamInfo(
             "FrameTracking",
             "Markers",
@@ -77,155 +61,170 @@ public class LSLStreams : MonoBehaviour
             subjectID);
         lslIFrameTracking.desc().append_child("CurrentFrame");
         lslOFrameTracking = new liblsl.StreamOutlet(lslIFrameTracking);
-        
-        // World Coordinates
-        // saved: Tobii timestamps (1); origin coordinates (3); direction coordinates (3), Left & right eye blinks (2), Check if ray is valid (1)
-        lslIEyeTrackingWorld = new liblsl.StreamInfo(
-            "EyeTrackingWorld",
-            "Markers",
-            10,
-            NominalRate,
-            liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIEyeTrackingWorld.desc().append_child("ETWTime");
-        lslIEyeTrackingWorld.desc().append_child("ETWoriginX");
-        lslIEyeTrackingWorld.desc().append_child("ETWoriginY");
-        lslIEyeTrackingWorld.desc().append_child("ETWoriginZ");
-        lslIEyeTrackingWorld.desc().append_child("ETWdirectionX");
-        lslIEyeTrackingWorld.desc().append_child("ETWdirectionY");
-        lslIEyeTrackingWorld.desc().append_child("ETWdirectionZ");
-        lslIEyeTrackingWorld.desc().append_child("leftBlink");
-        lslIEyeTrackingWorld.desc().append_child("rightBlink");
-        lslIEyeTrackingWorld.desc().append_child("valid");
-        lslOEyeTrackingWorld = new liblsl.StreamOutlet(lslIEyeTrackingWorld);
-        // Hit Object Names
-        // saved: max 10 objects that the participant could potentially have looked up 
-        lslIHitObjectNames = new liblsl.StreamInfo(
-            "HitObjectNames",
-            "Markers",
-            30,
-            NominalRate,
-            liblsl.channel_format_t.cf_string,
-            subjectID);
-        lslIHitObjectNames.desc().append_child("HON");
-        lslOHitObjectNames = new liblsl.StreamOutlet(lslIHitObjectNames);
-        // Hit Object Groups 
-        // saved: max 10 object groups that the participant could potentially have looked up 
-        lslIHitObjectGroups = new liblsl.StreamInfo(
-            "HitObjectGroups",
-            "Markers",
-            30,
-            NominalRate,
-            liblsl.channel_format_t.cf_string,
-            subjectID);
-        lslIHitObjectGroups.desc().append_child("HOG");
-        lslOHitObjectGroups = new liblsl.StreamOutlet(lslIHitObjectGroups);
-        // Hit Object Coordinates (in World Coordinates)
-        // saved: 3 coordinates for each object that was potentially looked up (obj1_x, obj1_y, obj1_z, obj2_x, ...)
-        lslIHitObjectPositions = new liblsl.StreamInfo(
-            "HitObjectPositions",
-            "Markers",
-            90,
-            NominalRate,
-            liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIHitObjectPositions.desc().append_child("HOPX");
-        lslIHitObjectPositions.desc().append_child("HOPY");
-        lslIHitObjectPositions.desc().append_child("HOPZ");
-        lslOHitObjectPositions = new liblsl.StreamOutlet(lslIHitObjectPositions);
-        // Hit Positions on Objects (in World Coordinates)
-        // saved: 3 coordinates on each object that was potentially looked up (obj1_x, obj1_y, obj1_z, obj2_x, ...)
-        lslIHitPositionOnObjects = new liblsl.StreamInfo(
-            "HitPositionOnObjects",
-            "Markers",
-            90,
-            NominalRate,
-            liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIHitPositionOnObjects.desc().append_child("HPOOX");
-        lslIHitPositionOnObjects.desc().append_child("HPOOY");
-        lslIHitPositionOnObjects.desc().append_child("HPOOZ");
-        lslOHitPositionOnObjects = new liblsl.StreamOutlet(lslIHitPositionOnObjects);
-        // Local Coordinates
-        // saved: origin coordinates (3); direction coordinates (3)
-        lslIEyeTrackingLocal = new liblsl.StreamInfo(
-            "EyeTrackingLocal",
-            "Markers",
-            6,
-            NominalRate,
-            liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIEyeTrackingLocal.desc().append_child("ETLoriginX");
-        lslIEyeTrackingLocal.desc().append_child("ETLoriginY");
-        lslIEyeTrackingLocal.desc().append_child("ETLoriginZ");
-        lslIEyeTrackingLocal.desc().append_child("ETLdirectionX");
-        lslIEyeTrackingLocal.desc().append_child("ETLdirectionY");
-        lslIEyeTrackingLocal.desc().append_child("ETLdirectionZ");
-        lslOEyeTrackingLocal = new liblsl.StreamOutlet(lslIEyeTrackingLocal);
 
-        // Head Tracking
-        // saved: Head (camera) position (3); nose vector (3)
-        lslIHeadTracking = new liblsl.StreamInfo(
-            "HeadTracking",
+        
+        lslITimeStamps = new liblsl.StreamInfo(
+            "TimeStamps",
             "Markers",
-            6,
+            3,
             NominalRate,
-            liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIHeadTracking.desc().append_child("HToriginX");
-        lslIHeadTracking.desc().append_child("HToriginY");
-        lslIHeadTracking.desc().append_child("HToriginZ");
-        lslIHeadTracking.desc().append_child("HTdirectionX");
-        lslIHeadTracking.desc().append_child("HTdirectionY");
-        lslIHeadTracking.desc().append_child("HTdirectionZ");
-        lslOHeadTracking = new liblsl.StreamOutlet(lslIHeadTracking);
-        // Hit Object Names (Head Tracking, nose vector)
-        // saved: max 10 objects that the participant could potentially have looked up 
-        lslIHeadTrackingObjectNames = new liblsl.StreamInfo(
-            "HeadTrackingObjectNames",
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+        );
+        lslITimeStamps.desc().append_child("CurrentTimeStamp");
+        lslITimeStamps.desc().append_child("timeStampDataPointStart");
+        lslITimeStamps.desc().append_child("timeStampDataPointEnd");
+        lslOTimeStamps = new liblsl.StreamOutlet(lslITimeStamps);
+        
+        
+        lslIToolCueOrientationInt = new liblsl.StreamInfo(
+            "ToolCueOrientationInt",
             "Markers",
-            30,
+            7,
+            NominalRate,
+            liblsl.channel_format_t.cf_int32,
+            subjectID
+        );
+        lslIToolCueOrientationInt.desc().append_child("trialID");
+        lslIToolCueOrientationInt.desc().append_child("blockNumber");
+        lslIToolCueOrientationInt.desc().append_child("utcon");
+        lslIToolCueOrientationInt.desc().append_child("toolId");
+        lslIToolCueOrientationInt.desc().append_child("cueOrientationId");
+        lslIToolCueOrientationInt.desc().append_child("toolIsCurrentlyAttachedToHand");
+        lslIToolCueOrientationInt.desc().append_child("toolIsCurrentlyDisplayedOnTable");
+        lslOToolCueOrientationInt = new liblsl.StreamOutlet(lslIToolCueOrientationInt);
+        
+        
+        lslIToolCueOrientationString = new liblsl.StreamInfo(
+            "ToolCueOrientationString",
+            "Markers",
+            5,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            subjectID);
-        lslIHeadTrackingObjectNames.desc().append_child("HTON");
-        lslOHeadTrackingObjectNames = new liblsl.StreamOutlet(lslIHeadTrackingObjectNames);
-        // Hit Object Groups (Head Tracking, nose vector)
-        // saved: max 10 object groups that the participant could potentially have looked up 
-        lslIHeadTrackingObjectGroups = new liblsl.StreamInfo(
-            "HeadTrackingObjectGroups",
+            subjectID
+        );
+        lslIToolCueOrientationString.desc().append_child("toolName");
+        lslIToolCueOrientationString.desc().append_child("cueOrientationName");
+        lslIToolCueOrientationString.desc().append_child("cueName");
+        lslIToolCueOrientationString.desc().append_child("toolHandleOrientation");
+        lslIToolCueOrientationString.desc().append_child("closestAttachmentPointOnToolToHand");
+        lslOToolCueOrientationString = new liblsl.StreamOutlet(lslIToolCueOrientationString);
+        
+
+        lslIEyeTrackingGazeHMDFloat = new liblsl.StreamInfo(
+            "EyeTrackingGazeHMDFloat",
             "Markers",
-            30,
+            5,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            subjectID);
-        lslIHeadTrackingObjectGroups.desc().append_child("HTOG");
-        lslOHeadTrackingObjectGroups = new liblsl.StreamOutlet(lslIHeadTrackingObjectGroups);
-        // Hit Object Coordinates (in World Coordinates) (Head Tracking, nose vector)
-        // saved: 3 coordinates for each object that was potentially looked up (obj1_x, obj1_y, obj1_z, obj2_x, ...)
-        lslIHeadTrackingObjectPositions = new liblsl.StreamInfo(
-            "HeadTrackingObjectPositions",
+            subjectID
+        );
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeOpennessLeft");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeOpennessRight");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("pupilDiameterMillimetersLeft");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("pupilDiameterMillimetersRight");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionCombinedWorld.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionCombinedWorld.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionCombinedWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionCombinedWorld.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionCombinedWorld.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionCombinedWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionLeftWorld.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionLeftWorld.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionLeftWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionLeftWorld.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionLeftWorld.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionLeftWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionRightWorld.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionRightWorld.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyePositionRightWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionRightWorld.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionRightWorld.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionRightWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyes.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyes.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyes.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldCombinedEyes.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldCombinedEyes.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldCombinedEyes.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEye.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEye.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEye.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldLeftEye.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldLeftEye.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldLeftEye.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEye.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEye.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEye.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldRightEye.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldRightEye.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldRightEye.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdPos.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdPos.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdPos.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionForward.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionForward.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionForward.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionRight.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionRight.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionRight.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdRotation.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdRotation.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdRotation.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionUp.x");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionUp.y");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionUp.z");
+        lslOEyeTrackingGazeHMDFloat = new liblsl.StreamOutlet(lslIEyeTrackingGazeHMDFloat);
+        
+
+        lslIEyeTrackingGazeHMDString = new liblsl.StreamInfo(
+            "EyeTrackingGazeHMDString",
             "Markers",
-            90,
+            3,
+            NominalRate,
+            liblsl.channel_format_t.cf_string,
+            subjectID
+        );
+        lslIEyeTrackingGazeHMDString.desc().append_child("hitObjectNameCombinedEyes");
+        lslIEyeTrackingGazeHMDString.desc().append_child("hitObjectNameLeftEye");
+        lslIEyeTrackingGazeHMDString.desc().append_child("hitObjectNameRightEye");
+        lslOEyeTrackingGazeHMDString = new liblsl.StreamOutlet(lslIEyeTrackingGazeHMDString);
+
+        
+        lslIInput = new liblsl.StreamInfo(
+            "Input",
+            "Markers",
+            26,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIHeadTrackingObjectPositions.desc().append_child("HTOPX");
-        lslIHeadTrackingObjectPositions.desc().append_child("HTOPY");
-        lslIHeadTrackingObjectPositions.desc().append_child("HTOPZ");
-        lslOHeadTrackingObjectPositions = new liblsl.StreamOutlet(lslIHeadTrackingObjectPositions);
-        // Hit Positions on Objects (in World Coordinates) (Head Tracking, nose vector)
-        // saved: 3 coordinates on each object that was potentially looked up (obj1_x, obj1_y, obj1_z, obj2_x, ...)
-        lslIHeadTrackingPositionOnObjects = new liblsl.StreamInfo(
-            "HeadTrackingPositionOnObjects",
-            "Markers",
-            90,
-            NominalRate,
-            liblsl.channel_format_t.cf_float32,
-            subjectID);
-        lslIHeadTrackingPositionOnObjects.desc().append_child("HTPOOX");
-        lslIHeadTrackingPositionOnObjects.desc().append_child("HTPOOY");
-        lslIHeadTrackingPositionOnObjects.desc().append_child("HTPOOZ");
-        lslOHeadTrackingPositionOnObjects = new liblsl.StreamOutlet(lslIHeadTrackingPositionOnObjects);
+            subjectID
+            );
+        lslIInput.desc().append_child("controllerTriggerPressed");
+        lslIInput.desc().append_child("controllerTransform.x");
+        lslIInput.desc().append_child("controllerTransform.y");
+        lslIInput.desc().append_child("controllerTransform.z");
+        lslIInput.desc().append_child("controllerPosition.x");
+        lslIInput.desc().append_child("controllerPosition.y");
+        lslIInput.desc().append_child("controllerPosition.z");
+        lslIInput.desc().append_child("controllerRotation.x");
+        lslIInput.desc().append_child("controllerRotation.y");
+        lslIInput.desc().append_child("controllerRotation.z");
+        lslIInput.desc().append_child("controllerScale.x");
+        lslIInput.desc().append_child("controllerScale.y");
+        lslIInput.desc().append_child("controllerScale.z");
+        lslIInput.desc().append_child("leapIsGrasping");
+        lslIInput.desc().append_child("leapGrabStrength");
+        lslIInput.desc().append_child("leapGrabAngle");
+        lslIInput.desc().append_child("leapPinchStrength");
+        lslIInput.desc().append_child("leapHandPosition.x");
+        lslIInput.desc().append_child("leapHandPosition.y");
+        lslIInput.desc().append_child("leapHandPosition.z");
+        lslIInput.desc().append_child("leapHandPalmPosition.x");
+        lslIInput.desc().append_child("leapHandPalmPosition.y");
+        lslIInput.desc().append_child("leapHandPalmPosition.z");
+        lslIInput.desc().append_child("leapHandRotation.x");
+        lslIInput.desc().append_child("leapHandRotation.y");
+        lslIInput.desc().append_child("leapHandRotation.y");
+        lslOInput = new liblsl.StreamOutlet(lslIInput);
     }
 }

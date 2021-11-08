@@ -293,8 +293,6 @@ public class LSLRecorder : MonoBehaviour
         SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
         SaveEyeTrackingData(eyeTrackingGazeHMDFloat, eyeTrackingGazeHMDString);
         
-        // todo push lslIEyeTrackingGazeHMDFloat 55 float
-        // todo push lslIEyeTrackingGazeHMDString 3 string
 
         // todo push lslIInput 26 float
     }

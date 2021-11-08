@@ -5086,7 +5086,7 @@ MonoBehaviour:
   buttonCalibrateTableFloor: {fileID: 1763207521}
   buttonSetSubjectData: {fileID: 36405547}
   buttonStartExperiment: {fileID: 2057723190}
-  buttonHelpers: {fileID: 452287875}
+  buttonSettings: {fileID: 452287875}
   buttonQuit: {fileID: 1119544314}
   experimentIsRunningMenu: {fileID: 823091818}
   experimentIsRunningText: {fileID: 1438815864}
@@ -5098,8 +5098,8 @@ MonoBehaviour:
   buttonSaveSubjectData: {fileID: 74275401}
   buttonBackFromSubjectDataToMainMenu: {fileID: 641666769}
   subjectDataMenuText: {fileID: 700192336}
-  helpersMenu: {fileID: 714239783}
-  helpersMenuText: {fileID: 958250592}
+  settingsMenu: {fileID: 714239783}
+  settingsMenuText: {fileID: 958250592}
   buttonGenerateUtcons: {fileID: 504874772}
   buttonGenerateToolInfos: {fileID: 1484731157}
   buttonCalibrateEyeTracking: {fileID: 634220236}
@@ -5109,20 +5109,20 @@ MonoBehaviour:
   buttonToggleHeadVolumeVisibility: {fileID: 1691352313}
   buttonDisplayAllToolsSequentially: {fileID: 1452005879}
   buttonAbout: {fileID: 2020449516}
-  buttonBackFromHelpersMenuToMainMenu: {fileID: 39829423}
+  buttonBackFromSettingsMenuToMainMenu: {fileID: 39829423}
   generateUtconFlowMenu: {fileID: 1906957631}
   utconFlowSeedInput: {fileID: 1008159730}
   utconFlowBlocksInput: {fileID: 1367360521}
   buttonSaveUtconFlowToDisk: {fileID: 26564359}
-  buttonBackFromUtconFlowToHelpersMenu: {fileID: 1583162549}
+  buttonBackFromUtconFlowToSettingsMenu: {fileID: 1583162549}
   utconFlowMenuText: {fileID: 1315852413}
   utconFlowMenuDefaultText: UTCON Flow Menu
   displayAllToolsMenu: {fileID: 67773011}
   buttonDisplayPreviousTool: {fileID: 248946036}
   buttonDisplayNextTool: {fileID: 1587136083}
-  buttonBackDisplayAllToolsToHelpersMenu: {fileID: 744774702}
+  buttonBackDisplayAllToolsToSettingsMenu: {fileID: 744774702}
   aboutMenu: {fileID: 321378943}
-  buttonBackAboutToHelpersMenu: {fileID: 1232335344}
+  buttonBackAboutToSettingsMenu: {fileID: 1232335344}
   errorMessageMenu: {fileID: 1814462791}
   errorMessageMenuText: {fileID: 1030771604}
   buttonErrorMessageQuit: {fileID: 45293728}
@@ -8383,6 +8383,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 997688536}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &802757261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 802757263}
+  - component: {fileID: 802757262}
+  m_Layer: 0
+  m_Name: LSL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &802757262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802757261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c03adb945c74c4439e99abfc9e9dda6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configManager: {fileID: 578634342}
+--- !u!4 &802757263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802757261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &808919287 stripped
 Transform:

@@ -400,29 +400,35 @@ public class MeasurementManager : MonoBehaviour
     // Start measurement
     public void StartMeasurement()
     {
+        Debug.Log("[MeasurementManager] Starting measuring trial in block " + configManager.currentBlock.ToString());
+
+        // Init new trial data 
+        var currentTrialData = new ExperimentTrialData
+        {
+            // Set data from utcon 
+            utcon = configManager.currentUtcon
+        };
+
+        toolManager.ExtractVerifiedIdsFromUtcon(currentTrialData.utcon, out currentTrialData.toolId, out currentTrialData.cueOrientationId );
+        toolManager.NamesFromUtcon(currentTrialData.utcon, out currentTrialData.toolName, out currentTrialData.cueOrientationName);
+        if (currentTrialData.cueOrientationName.ToLower().Contains("left"))
+        {
+            currentTrialData.toolHandleOrientation = "left";
+            currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("left", "");
+        }
+        else
+        {
+            currentTrialData.toolHandleOrientation = "right";
+            currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("right", "");
+        }
+        
+        // Set handedness in SteamVR format for faster access, avoiding string compare 
+        handednessOfPlayerSteamVrFormat = configManager.subjectHandedness.ToLower().Contains("left") 
+            ? SteamVR_Input_Sources.LeftHand 
+            : SteamVR_Input_Sources.RightHand;
+        
         if (!configManager.isUsingLSLRecorder)
         {
-            Debug.Log("[MeasurementManager] Starting measuring trial in block " + configManager.currentBlock.ToString());
-
-            // Init new trial data 
-            ExperimentTrialData currentTrialData = new ExperimentTrialData();
-        
-            // Set data from utcon 
-            currentTrialData.utcon = configManager.currentUtcon;
-            toolManager.ExtractVerifiedIdsFromUtcon(currentTrialData.utcon, out currentTrialData.toolId, out currentTrialData.cueOrientationId );
-            toolManager.NamesFromUtcon(currentTrialData.utcon, out currentTrialData.toolName, out currentTrialData.cueOrientationName);
-            if (currentTrialData.cueOrientationName.ToLower().Contains("left"))
-            {
-                currentTrialData.toolHandleOrientation = "left";
-                currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("left", "");
-            }
-            else
-            {
-                currentTrialData.toolHandleOrientation = "right";
-                currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("right", "");
-            }
-        
-        
             // Check if current block exists, create it otherwise  
             if (configManager.currentBlock != configManager.blockNumberLastWrittenToOnDisk)
             {
@@ -449,19 +455,8 @@ public class MeasurementManager : MonoBehaviour
         
             // Update current trial number, is reset to in case of new block data 
             configManager.currentTrial = configManager.currentBlockData.blockTrials.Count;
-        
-        
-            // Set handedness in SteamVR format for faster access, avoiding string compare 
-            if (configManager.subjectHandedness.ToLower().Contains("left"))
-            {
-                handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.LeftHand;
-            }
-            else
-            {
-                handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.RightHand;
-            }
-        
-        
+
+
             // Reset gaze ray timestamp 
             lastGazeRayTimeStamp = 0;
         
@@ -470,13 +465,24 @@ public class MeasurementManager : MonoBehaviour
         }
         else
         {
-            LSLRecorder.Instance.SetUtcon(configManager.currentUtcon);
+
+            LSLRecorder.Instance.SetUtcon(configManager.currentUtcon,
+                currentTrialData.cueOrientationId,
+                currentTrialData.cueOrientationName,
+                currentTrialData.cueName
+                );
             LSLRecorder.Instance.SetBlockID(configManager.currentBlock);
             LSLRecorder.Instance.SetTrialID(configManager.currentBlockData.blockTrials.Count);
+            LSLRecorder.Instance.SetToolInfo(Convert.ToInt32(configManager.isToolCurrentlyAttachedToHand),
+                Convert.ToInt32(configManager.isToolDisplayedOnTable),
+                currentTrialData.toolId,
+                currentTrialData.toolName,
+                currentTrialData.toolHandleOrientation,
+                configManager.currentClosestToolAttachmentPointTransform.name
+                );
             LSLRecorder.Instance.SetTimestampBegin(TimeManager.Instance.GetCurrentUnixTimeStamp());
             LSLRecorder.Instance.SetLSLRecordingStatus(true);
         }
-        
     }
     
     // Stop measurement

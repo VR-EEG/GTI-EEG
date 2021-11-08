@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -914,100 +914,9 @@ public class MeasurementManager : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        if (!_recordLsl) return;
-        
-        // todo record data for lsl
-    }
+    
 }
 
-
-/*Contains all LSL recorded data per subject (concatenation of ExperimentBlockData,
-ExperimentTrialData, ExperimentDataPoint)*/
-
-[Serializable]
-public class LSLRecordedData
-{
-    // todo refine and assign the variables in fixed update 
-    
-    // Subject ID to make sure no blocks get lost if filename is changed 
-    public int subjectId;
-
-    // Date Time Subject Meta Data was created
-    public string dateTimeSubjectMetaDataCreated;
-    
-    // Current block 
-    public int blockNumber; 
-    
-    // Eye tracking validation result immediately before current block 
-    public Vector3 eyeTrackingOverallCombinedValidationResults;
-    
-    // Tool, cue, orientation info 
-    public int utcon; 
-    public int toolId; 
-    public string toolName;
-    public int cueOrientationId; 
-    public string cueOrientationName; 
-    public string cueName;
-    public string toolHandleOrientation;
-    
-    // TimeStamps 
-    public double timeStampDataPointStart;
-    public double timeStampDataPointEnd;
-    public double timeDataPointBeforeGazeRayCasting;
-
-    // EyeTracking 
-    public float eyeOpennessLeft;
-    public float eyeOpennessRight;
-    public float pupilDiameterMillimetersLeft;
-    public float pupilDiameterMillimetersRight;
-    public Vector3 eyePositionCombinedWorld;
-    public Vector3 eyeDirectionCombinedWorld;
-    public Vector3 eyePositionLeftWorld;
-    public Vector3 eyeDirectionLeftWorld;
-    public Vector3 eyePositionRightWorld;
-    public Vector3 eyeDirectionRightWorld;
-    
-    // GazeRay hit object 
-    public string hitObjectNameCombinedEyes;
-    public Vector3 hitPointOnObjectCombinedEyes;
-    public Vector3 hitObjectCenterInWorldCombinedEyes;
-    public string hitObjectNameLeftEye;
-    public Vector3 hitPointOnObjectLeftEye;
-    public Vector3 hitObjectCenterInWorldLeftEye;
-    public string hitObjectNameRightEye;
-    public Vector3 hitPointOnObjectRightEye;
-    public Vector3 hitObjectCenterInWorldRightEye;
-    
-    // HMD 
-    public Vector3 hmdPos;
-    public Vector3 hmdDirectionForward;
-    public Vector3 hmdDirectionRight;
-    public Vector3 hmdRotation;
-    public Vector3 hmdDirectionUp;
-    
-    // SteamVR input 
-    public bool controllerTriggerPressed;
-    public Transform controllerTransform;
-    public Vector3 controllerPosition;
-    public Vector3 controllerRotation;
-    public Vector3 controllerScale;
-
-    // LeapMotion Input 
-    public bool leapIsGrasping;
-    public float leapGrabStrength;
-    public float leapGrabAngle; 
-    public float leapPinchStrength;
-    public Vector3 leapHandPosition;
-    public Vector3 leapHandPalmPosition;
-    public Vector3 leapHandRotation;
-    
-    // Tool 
-    public bool toolIsCurrentlyAttachedToHand;
-    public string closestAttachmentPointOnToolToHand;
-    public bool toolIsCurrentlyDisplayedOnTable;
-}
 
 
 // Holds all measured data per subject 

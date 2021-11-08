@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -470,9 +470,11 @@ public class MeasurementManager : MonoBehaviour
         }
         else
         {
-            _recordLsl = true;  // todo correct the execution order
-            
-            // todo implement recording for lsl
+            LSLRecorder.Instance.SetUtcon(configManager.currentUtcon);
+            LSLRecorder.Instance.SetBlockID(configManager.currentBlock);
+            LSLRecorder.Instance.SetTrialID(configManager.currentBlockData.blockTrials.Count);
+            LSLRecorder.Instance.SetTimestampBegin(TimeManager.Instance.GetCurrentUnixTimeStamp());
+            LSLRecorder.Instance.SetLSLRecordingStatus(true);
         }
         
     }
@@ -492,9 +494,8 @@ public class MeasurementManager : MonoBehaviour
         }
         else
         {
-            _recordLsl = false;  // todo correct the execution order
-
-            // todo implement stop behavior for lsl recorder
+            LSLRecorder.Instance.SetTimestampEnd(TimeManager.Instance.GetCurrentUnixTimeStamp());
+            LSLRecorder.Instance.SetLSLRecordingStatus(false);
         }
     }
     

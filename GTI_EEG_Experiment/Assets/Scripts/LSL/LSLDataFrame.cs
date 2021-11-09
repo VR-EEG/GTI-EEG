@@ -96,11 +96,10 @@ public class LSLDataFrame
     
     /// <summary>
     /// Input stream
-    /// channel_count: 26
+    /// channel_count: 23
     /// </summary>
     // SteamVR input 
     public float controllerTriggerPressed; // boolean; 1 for true, 0 for false
-    public Transform controllerTransform;
     public Vector3 controllerPosition;
     public Vector3 controllerRotation;
     public Vector3 controllerScale;

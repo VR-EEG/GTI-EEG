@@ -8420,7 +8420,7 @@ MonoBehaviour:
   steamVrLeftHand: {fileID: 2048949387}
   steamVrRightHand: {fileID: 889224433}
   steamVrAction:
-    actionPath: 
+    actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
 --- !u!4 &802757263
 Transform:

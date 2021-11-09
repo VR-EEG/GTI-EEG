@@ -976,18 +976,19 @@ public class UiManager : MonoBehaviour
             }
             else 
             {
-                text += "Input Mode: Controllers (SteamVR)\n\n";
+                text += "Input Mode: Controllers (SteamVR)\n";
             }
 
-            // Running & practicing
-            text += "Running: " + configManager.experimentIsRunning.ToString() + "\n";
-            text += "Practice: " + configManager.isInPractice.ToString() + "\n";
-            text+= "Using LSL: " + configManager.isUsingLSLRecorder.ToString();
+            // LSL state, Running & practicing
+            text+= "Using LSL: " + configManager.isUsingLSLRecorder + "\n\n";
+            text += "Running: " + configManager.experimentIsRunning + "\n";
+            text += "Practice: " + configManager.isInPractice + "\n";
+            
 
             // Infos on block, trial, utcon 
             if (!configManager.experimentIsRunning)
             {
-                text += "\n\n\n\n\n\n"; // if not running, just empty lines
+                text += "\n\n\n\n"; // if not running, just empty lines
             }
             else if (configManager.isInPractice) // is running but in practice
             {
@@ -1012,7 +1013,7 @@ public class UiManager : MonoBehaviour
                 text += "Block: " + configManager.currentBlock.ToString() + "\n";
                 text += "UTCON: " + configManager.currentUtcon.ToString() + "\n";
                 text += "Tool: " + toolName + "\n";
-                text += "Cue & Orientation: " + cueOrientationName + "\n\n\n";
+                text += "Cue & Orientation: " + cueOrientationName + "\n";
             }
             else // is running and measuring 
             {
@@ -1038,7 +1039,7 @@ public class UiManager : MonoBehaviour
                     + "Trial (within block): " +  configManager.currentTrial.ToString() + "\n"
                     + "UTCON: " + configManager.currentUtcon.ToString() + "\n";
                 text += "Tool: " + toolName + "\n";
-                text += "Cue & Orientation: " + cueOrientationName + "\n\n";
+                text += "Cue & Orientation: " + cueOrientationName + "\n";
             }
             
             // Table and floor calibration 
@@ -1061,7 +1062,7 @@ public class UiManager : MonoBehaviour
             }
             
             // FPS Counter
-            text += "\nFPS: " + ((int)(1.0f / Time.deltaTime)).ToString() + "\n";
+            text += "FPS: " + ((int)(1.0f / Time.deltaTime)).ToString() + "\n";
 
             
             // Update experiment status text

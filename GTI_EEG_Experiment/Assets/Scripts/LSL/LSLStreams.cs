@@ -194,15 +194,12 @@ public class LSLStreams : MonoBehaviour
         lslIInput = new liblsl.StreamInfo(
             "Input",
             "Markers",
-            26,
+            23,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
             subjectID
             );
         lslIInput.desc().append_child("controllerTriggerPressed");
-        lslIInput.desc().append_child("controllerTransform.x");
-        lslIInput.desc().append_child("controllerTransform.y");
-        lslIInput.desc().append_child("controllerTransform.z");
         lslIInput.desc().append_child("controllerPosition.x");
         lslIInput.desc().append_child("controllerPosition.y");
         lslIInput.desc().append_child("controllerPosition.z");

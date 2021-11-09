@@ -8395,7 +8395,7 @@ GameObject:
   - component: {fileID: 802757263}
   - component: {fileID: 802757262}
   m_Layer: 0
-  m_Name: LSL
+  m_Name: LSLRecorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

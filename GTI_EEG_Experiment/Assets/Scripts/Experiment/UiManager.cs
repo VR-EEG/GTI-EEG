@@ -582,7 +582,7 @@ public class UiManager : MonoBehaviour
     }
     
     // ** Settings Menu
-    // Listener for button switch to LSL Recorser
+    // Listener for button switch to LSL Recorder
     void ClickedButtonSwitchToLSLRecorder()
     {
         Debug.Log("[UiManager] Got button click: Switch to LSL Recorder.");
@@ -982,7 +982,7 @@ public class UiManager : MonoBehaviour
             // Running & practicing
             text += "Running: " + configManager.experimentIsRunning.ToString() + "\n";
             text += "Practice: " + configManager.isInPractice.ToString() + "\n";
-            text+= "\n" + "Using LSL: " + configManager.isUsingLSLRecorder.ToString() +  "\n";
+            text+= "Using LSL: " + configManager.isUsingLSLRecorder.ToString();
 
             // Infos on block, trial, utcon 
             if (!configManager.experimentIsRunning)

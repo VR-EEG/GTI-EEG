@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Leap.Unity;
 using Leap.Unity.Interaction;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Valve.VR;
 using Valve.VR.InteractionSystem;
 using ViveSR.anipal.Eye;
 
@@ -15,8 +17,15 @@ public class LSLRecorder : MonoBehaviour
     [SerializeField] private GameObject leapMainCamera;
     [SerializeField] private InteractionHand leapLeftInteractionHand;
     [SerializeField] private InteractionHand leapRightInteractionHand;
+    [SerializeField] private Hand steamVrLeftHand;
+    [SerializeField] private Hand steamVrRightHand;
     
+    // SteamVR 
+    public SteamVR_Action_Boolean steamVrAction;
     
+    // Handedness in SteamVR format 
+    private SteamVR_Input_Sources _handednessOfPlayerSteamVrFormat;
+
     private LSLDataFrame _lslDataFrame;
 
     private double _timestampBegin;
@@ -52,6 +61,23 @@ public class LSLRecorder : MonoBehaviour
     private Vector3 _eyePositionRightWorld;
     private Vector3 _eyeDirectionRightWorld;
   
+    
+    // input Stream values
+    private float _controllerTriggerPressed;
+    // private Transform _controllerTransform;
+    private Vector3 _controllerPosition;
+    private Vector3 _controllerRotation;
+    private Vector3 _controllerScale;
+    
+    // LeapMotion Input 
+    private float _leapIsGrasping;
+    private float _leapGrabStrength;
+    private float _leapGrabAngle; 
+    private float _leapPinchStrength;
+    private Vector3 _leapHandPosition;
+    private Vector3 _leapHandPalmPosition;
+    private Vector3 _leapHandRotation;
+    
     
     #region Private Methods
 
@@ -122,66 +148,63 @@ public class LSLRecorder : MonoBehaviour
             hmdTransform = leapMainCamera.transform;
             
             // Hand transform 
-            /*if (handednessOfPlayerSteamVrFormat == SteamVR_Input_Sources.LeftHand)
-            {
-                leapUsedInteractionHand = leapLeftInteractionHand; // left hand
-            }
-            else
-            {
-                leapUsedInteractionHand = leapRightInteractionHand; // right hand (right or ambidextrous) 
-            }
+            leapUsedInteractionHand = 
+                _handednessOfPlayerSteamVrFormat == SteamVR_Input_Sources.LeftHand 
+                ? leapLeftInteractionHand 
+                : leapRightInteractionHand;
+            
             leapHand = leapUsedInteractionHand.leapHand;
             handTransform = leapUsedInteractionHand.transform;
 
             // In case of leap, set SteamVR values to default 
-            dataPoint.controllerTriggerPressed = false;
-            dataPoint.controllerTransform = null;
-            dataPoint.controllerPosition = Vector3.zero;
-            dataPoint.controllerRotation = Vector3.zero;
-            dataPoint.controllerScale = Vector3.zero;
+            _controllerTriggerPressed = 0;
+            // _controllerTransform = null;
+            _controllerPosition = Vector3.zero;
+            _controllerRotation = Vector3.zero;
+            _controllerScale = Vector3.zero;
             
             // Set leap specific values 
-            dataPoint.leapIsGrasping = leapUsedInteractionHand.isGraspingObject;
-            dataPoint.leapGrabStrength = leapHand.GrabStrength;
-            dataPoint.leapGrabAngle = leapHand.GrabAngle;
-            dataPoint.leapPinchStrength = leapHand.PinchStrength;
-            dataPoint.leapHandPosition = handTransform.position;
-            dataPoint.leapHandPalmPosition = leapHand.PalmPosition.ToVector3();
-            dataPoint.leapHandRotation = leapHand.Rotation.ToQuaternion().eulerAngles;*/
+            _leapIsGrasping = leapUsedInteractionHand.isGraspingObject
+                ? 1
+                : 0;
+            _leapGrabStrength = leapHand.GrabStrength;
+            _leapGrabAngle = leapHand.GrabAngle;
+            _leapPinchStrength = leapHand.PinchStrength;
+            _leapHandPosition = handTransform.position;
+            _leapHandPalmPosition = leapHand.PalmPosition.ToVector3();
+            _leapHandRotation = leapHand.Rotation.ToQuaternion().eulerAngles;
         }
         
         // Using SteamVR
         else
         {
             // Hand Transform depending on handedness
-            /*Transform handTransform;
-            if (handednessOfPlayerSteamVrFormat == SteamVR_Input_Sources.LeftHand)
-            {
-               handTransform = steamVrLeftHand.transform; // left hand
-            }
-            else
-            {
-                handTransform = steamVrRightHand.transform; // right hand
-            }*/
+            Transform handTransform;
+            handTransform = 
+                _handednessOfPlayerSteamVrFormat == SteamVR_Input_Sources.LeftHand 
+                    ? steamVrLeftHand.transform 
+                    : steamVrRightHand.transform;
 
             // VR Glasses Transform 
             hmdTransform = Player.instance.hmdTransform;
             
-            /*// Set SteamVR specific values 
-            dataPoint.controllerTriggerPressed = steamVrAction.state;
-            dataPoint.controllerTransform = handTransform; 
-            dataPoint.controllerPosition = handTransform.position; 
-            dataPoint.controllerRotation = handTransform.rotation.eulerAngles; 
-            dataPoint.controllerScale = handTransform.lossyScale;
+            // Set SteamVR specific values 
+            _controllerTriggerPressed = 
+                steamVrAction.state
+                ? 1
+                : 0;
+            _controllerPosition = handTransform.position; 
+            _controllerRotation = handTransform.rotation.eulerAngles; 
+            _controllerScale = handTransform.lossyScale;
             
             // In case of SteamVR set Leap values to default
-            dataPoint.leapIsGrasping = false;
-            dataPoint.leapGrabStrength = 0;
-            dataPoint.leapGrabAngle = 0;
-            dataPoint.leapPinchStrength = 0 ;
-            dataPoint.leapHandPosition = Vector3.zero;
-            dataPoint.leapHandPalmPosition = Vector3.zero;
-            dataPoint.leapHandRotation = Vector3.zero;*/
+            _leapIsGrasping = 0;
+            _leapGrabStrength = 0;
+            _leapGrabAngle = 0;
+            _leapPinchStrength = 0 ;
+            _leapHandPosition = Vector3.zero;
+            _leapHandPalmPosition = Vector3.zero;
+            _leapHandRotation = Vector3.zero;
         }
         
 
@@ -286,15 +309,37 @@ public class LSLRecorder : MonoBehaviour
             hitPointOnObjectRightEye.collider.name
         };
 
-        // todo gather lslIInput 26 float
-
+        float[] input =
+        {
+            _controllerTriggerPressed,
+            _controllerPosition.x,
+            _controllerPosition.y,
+            _controllerPosition.z,
+            _controllerRotation.x,
+            _controllerRotation.y,
+            _controllerRotation.z,
+            _controllerScale.x,
+            _controllerScale.y,
+            _controllerScale.z,
+            _leapIsGrasping,
+            _leapGrabStrength,
+            _leapGrabAngle,
+            _leapPinchStrength,
+            _leapHandPosition.x,
+            _leapHandPosition.y,
+            _leapHandPosition.z,
+            _leapHandPalmPosition.x,
+            _leapHandPalmPosition.y,
+            _leapHandPalmPosition.z,
+            _leapHandRotation.x,
+            _leapHandRotation.y,
+            _leapHandRotation.z
+        };
 
         SaveTimeStamps(timestamps);
         SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
         SaveEyeTrackingData(eyeTrackingGazeHMDFloat, eyeTrackingGazeHMDString);
-        
-
-        // todo push lslIInput 26 float
+        SaveInputs(input);
     }
 
     
@@ -315,6 +360,11 @@ public class LSLRecorder : MonoBehaviour
         LSLStreams.Instance.lslOEyeTrackingGazeHMDString.push_sample(stringValues);
     }
 
+    private void SaveInputs(float[] inputData)
+    {
+        LSLStreams.Instance.lslOInput.push_sample(inputData);
+    }
+    
     #endregion
 
     #region Setter Methods

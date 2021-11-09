@@ -8419,6 +8419,9 @@ MonoBehaviour:
   leapRightInteractionHand: {fileID: 1137531653}
   steamVrLeftHand: {fileID: 2048949387}
   steamVrRightHand: {fileID: 889224433}
+  steamVrAction:
+    actionPath: 
+    needsReinit: 0
 --- !u!4 &802757263
 Transform:
   m_ObjectHideFlags: 0

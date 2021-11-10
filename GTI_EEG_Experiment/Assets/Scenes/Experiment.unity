@@ -6194,8 +6194,8 @@ MonoBehaviour:
   - male
   - diverse
   handednessOptions:
-  - right
-  - left
+  - right handed
+  - left handed
   - ambidextrous
   subjectDataIsSet: 0
   subjectId: 0

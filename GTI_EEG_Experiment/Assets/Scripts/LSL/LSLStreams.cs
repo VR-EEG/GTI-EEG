@@ -238,7 +238,7 @@ public class LSLStreams : MonoBehaviour
         lslIInput.desc().append_child("leapHandPalmPosition.z");
         lslIInput.desc().append_child("leapHandRotation.x");
         lslIInput.desc().append_child("leapHandRotation.y");
-        lslIInput.desc().append_child("leapHandRotation.y");
+        lslIInput.desc().append_child("leapHandRotation.z");
         lslOInput = new liblsl.StreamOutlet(lslIInput);
     }
 

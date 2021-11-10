@@ -13,12 +13,12 @@ public class LSLRecorder : MonoBehaviour
 {
     public static LSLRecorder Instance { get; private set; }
 
-    [SerializeField] private ConfigManager configManager;
     [SerializeField] private InteractionHand leapLeftInteractionHand;
     [SerializeField] private InteractionHand leapRightInteractionHand;
     [SerializeField] private Hand steamVrLeftHand;
     [SerializeField] private Hand steamVrRightHand;
-    
+    [SerializeField] private GameObject leapMainCamera;
+
 
     // SteamVR 
     public SteamVR_Action_Boolean steamVrAction;
@@ -26,8 +26,11 @@ public class LSLRecorder : MonoBehaviour
     // Handedness in SteamVR format 
     private SteamVR_Input_Sources _handednessOfPlayerSteamVrFormat;
 
-    private GameObject _leapMainCamera;
     private LSLDataFrame _lslDataFrame;
+    private ConfigManager _configManager;
+    
+    // VR Glasses Transform 
+    Transform _hmdTransform;
 
     private double _timestampBegin;
     private double _timestampEnd;
@@ -84,15 +87,14 @@ public class LSLRecorder : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+
+        _hmdTransform = Player.instance.hmdTransform;
+    }
+    
+    private void Start()
+    {
+        _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
     }
 
     private void FixedUpdate()
@@ -135,10 +137,9 @@ public class LSLRecorder : MonoBehaviour
         _pupilDiameterMillimetersLeft = verboseData.left.pupil_diameter_mm;
         _pupilDiameterMillimetersRight = verboseData.right.pupil_diameter_mm;
         
-        Transform hmdTransform;
-                
+        
         // Using Leap Motion    
-        if (configManager.isUsingLeap)
+        if (_configManager.isUsingLeap)
         {
             // Hands, dependent on handedness 
             Transform handTransform;
@@ -146,7 +147,7 @@ public class LSLRecorder : MonoBehaviour
             InteractionHand leapUsedInteractionHand;
             
             // VR Glasses Transform
-            hmdTransform = _leapMainCamera.transform;
+            _hmdTransform = leapMainCamera.transform;
             
             // Hand transform 
             leapUsedInteractionHand = 
@@ -186,9 +187,6 @@ public class LSLRecorder : MonoBehaviour
                     ? steamVrLeftHand.transform 
                     : steamVrRightHand.transform;
 
-            // VR Glasses Transform 
-            hmdTransform = Player.instance.hmdTransform;
-            
             // Set SteamVR specific values 
             _controllerTriggerPressed = 
                 steamVrAction.state
@@ -211,8 +209,9 @@ public class LSLRecorder : MonoBehaviour
 
         // origin has same value (in m) as verboseData.combined.eye_data.gaze_origin_mm (in mm)
         SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out var rayCombineEye); 
-        _eyePositionCombinedWorld = hmdTransform.position + rayCombineEye.origin; // ray origin is at transform of hmd + offset 
-        _eyeDirectionCombinedWorld = hmdTransform.rotation * rayCombineEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
+        
+        _eyePositionCombinedWorld = _hmdTransform.position + rayCombineEye.origin; // ray origin is at transform of hmd + offset 
+        _eyeDirectionCombinedWorld = _hmdTransform.rotation * rayCombineEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
         RaycastHit hitPointOnObjectCombinedEyes;
         Physics.Raycast(_eyePositionCombinedWorld, _eyeDirectionCombinedWorld, out hitPointOnObjectCombinedEyes, 10f);
@@ -220,8 +219,8 @@ public class LSLRecorder : MonoBehaviour
 
         // Get Left Eye Position and Gaze Direction 
         SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out var rayLeftEye);
-        _eyePositionLeftWorld = hmdTransform.position + rayLeftEye.origin; // ray origin is at transform of hmd + offset 
-        _eyeDirectionLeftWorld = hmdTransform.rotation * rayLeftEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
+        _eyePositionLeftWorld = _hmdTransform.position + rayLeftEye.origin; // ray origin is at transform of hmd + offset 
+        _eyeDirectionLeftWorld = _hmdTransform.rotation * rayLeftEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
         RaycastHit hitPointOnObjectLeftEye;
         Physics.Raycast(_eyePositionLeftWorld, _eyeDirectionLeftWorld, out hitPointOnObjectLeftEye, 10f);
@@ -230,19 +229,19 @@ public class LSLRecorder : MonoBehaviour
         
         // Get Right Eye Position and Gaze Direction
         SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out var rayRightEye);
-        _eyePositionRightWorld = hmdTransform.position + rayRightEye.origin; // ray origin is at transform of hmd + offset 
-        _eyeDirectionRightWorld = hmdTransform.rotation * rayRightEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
+        _eyePositionRightWorld = _hmdTransform.position + rayRightEye.origin; // ray origin is at transform of hmd + offset 
+        _eyeDirectionRightWorld = _hmdTransform.rotation * rayRightEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
         RaycastHit hitPointOnObjectRightEye;
         Physics.Raycast(_eyePositionRightWorld, _eyeDirectionRightWorld, out hitPointOnObjectRightEye, 10f);
         var boundsRightEye = hitPointOnObjectRightEye.collider.bounds;
 
 
-        var hmdPos = hmdTransform.position;
-        var hmdForward = hmdTransform.forward;
-        var hmdRight = hmdTransform.right;
-        var hmdRot = hmdTransform.rotation.eulerAngles;
-        var hmdUp = hmdTransform.up;
+        var hmdPos = _hmdTransform.position;
+        var hmdForward = _hmdTransform.forward;
+        var hmdRight = _hmdTransform.right;
+        var hmdRot = _hmdTransform.rotation.eulerAngles;
+        var hmdUp = _hmdTransform.up;
 
         float[] eyeTrackingGazeHMDFloat =
         {
@@ -346,6 +345,8 @@ public class LSLRecorder : MonoBehaviour
     
     private void SaveTimeStamps(double[] timestamps)
     {
+        Debug.Log("<color=magenta>lslOTimeStamps is null: </color>" +
+                  (LSLStreams.Instance.lslOTimeStamps == null));
         LSLStreams.Instance.lslOTimeStamps.push_sample(timestamps);
     }
 
@@ -373,7 +374,7 @@ public class LSLRecorder : MonoBehaviour
     public void SetLSLRecordingStatus(bool state)
     {
         _recordLsl = state;
-        _leapMainCamera = MeasurementManager.Instance.leapMainCamera;
+        leapMainCamera = MeasurementManager.Instance.leapMainCamera;
     }
 
     public void SetTimestampBegin(double timestamp)
@@ -416,6 +417,11 @@ public class LSLRecorder : MonoBehaviour
         _toolHandleOrientation = toolHandleOrientation;
         _closestAttachmentPointOnToolToHand = closestAttachmentPointOnToolToHand;
     }
+
+    /*public void SetConfigManager(ConfigManager cm)
+    {
+        _configManager = cm;
+    }*/
 
     #endregion
 }

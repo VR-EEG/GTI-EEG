@@ -340,6 +340,10 @@ public class LSLRecorder : MonoBehaviour
         SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
         SaveEyeTrackingData(eyeTrackingGazeHMDFloat, eyeTrackingGazeHMDString);
         SaveInputs(input);
+        
+        // save current frame via LSL
+        int[] currentFrame = {Time.frameCount};
+        LSLStreams.Instance.lslOFrameTracking.push_sample(currentFrame);
     }
 
     
@@ -417,11 +421,6 @@ public class LSLRecorder : MonoBehaviour
         _toolHandleOrientation = toolHandleOrientation;
         _closestAttachmentPointOnToolToHand = closestAttachmentPointOnToolToHand;
     }
-
-    /*public void SetConfigManager(ConfigManager cm)
-    {
-        _configManager = cm;
-    }*/
 
     #endregion
 }

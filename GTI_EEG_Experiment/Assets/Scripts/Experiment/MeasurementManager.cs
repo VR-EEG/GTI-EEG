@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -27,6 +27,8 @@ using Hand = Valve.VR.InteractionSystem.Hand;
 
 public class MeasurementManager : MonoBehaviour
 {
+    public static MeasurementManager Instance { get; private set; }
+
     
     // Tool Manager 
     public ToolManager toolManager;
@@ -74,6 +76,11 @@ public class MeasurementManager : MonoBehaviour
     public LineRenderer debugLineRenderer;
 
 
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

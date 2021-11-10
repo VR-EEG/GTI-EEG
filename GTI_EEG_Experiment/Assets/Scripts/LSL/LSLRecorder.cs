@@ -14,18 +14,19 @@ public class LSLRecorder : MonoBehaviour
     public static LSLRecorder Instance { get; private set; }
 
     [SerializeField] private ConfigManager configManager;
-    [SerializeField] private GameObject leapMainCamera;
     [SerializeField] private InteractionHand leapLeftInteractionHand;
     [SerializeField] private InteractionHand leapRightInteractionHand;
     [SerializeField] private Hand steamVrLeftHand;
     [SerializeField] private Hand steamVrRightHand;
     
+
     // SteamVR 
     public SteamVR_Action_Boolean steamVrAction;
     
     // Handedness in SteamVR format 
     private SteamVR_Input_Sources _handednessOfPlayerSteamVrFormat;
 
+    private GameObject _leapMainCamera;
     private LSLDataFrame _lslDataFrame;
 
     private double _timestampBegin;
@@ -145,7 +146,7 @@ public class LSLRecorder : MonoBehaviour
             InteractionHand leapUsedInteractionHand;
             
             // VR Glasses Transform
-            hmdTransform = leapMainCamera.transform;
+            hmdTransform = _leapMainCamera.transform;
             
             // Hand transform 
             leapUsedInteractionHand = 
@@ -372,6 +373,7 @@ public class LSLRecorder : MonoBehaviour
     public void SetLSLRecordingStatus(bool state)
     {
         _recordLsl = state;
+        _leapMainCamera = MeasurementManager.Instance.leapMainCamera;
     }
 
     public void SetTimestampBegin(double timestamp)
@@ -414,7 +416,6 @@ public class LSLRecorder : MonoBehaviour
         _toolHandleOrientation = toolHandleOrientation;
         _closestAttachmentPointOnToolToHand = closestAttachmentPointOnToolToHand;
     }
-    
-    
+
     #endregion
 }

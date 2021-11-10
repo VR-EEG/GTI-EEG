@@ -130,6 +130,12 @@ public class PlayerManager : MonoBehaviour
         configManager.isUsingLSLRecorder = true;
     }
     
+    // Switch to Eye Tracking Recorder
+    public void SwitchToETRecorder()
+    {
+        configManager.isUsingLSLRecorder = false;
+    }
+    
     // Is Leap Motion available ?
     public bool IsLeapAvailable()
     {

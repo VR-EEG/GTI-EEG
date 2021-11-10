@@ -423,7 +423,8 @@ public class MeasurementManager : MonoBehaviour
         }
         
         // Set handedness in SteamVR format for faster access, avoiding string compare 
-        handednessOfPlayerSteamVrFormat = configManager.subjectHandedness.ToLower().Contains("left") 
+        handednessOfPlayerSteamVrFormat = 
+            configManager.subjectHandedness.ToLower().Contains("left") 
             ? SteamVR_Input_Sources.LeftHand 
             : SteamVR_Input_Sources.RightHand;
         

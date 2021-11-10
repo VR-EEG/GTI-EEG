@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 39829424}
   - component: {fileID: 39829423}
   m_Layer: 5
-  m_Name: ButtonHelpersBackMainMenu
+  m_Name: ButtonSettingsBackMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5748,7 +5748,7 @@ GameObject:
   - component: {fileID: 452287876}
   - component: {fileID: 452287875}
   m_Layer: 5
-  m_Name: ButtonHelpers
+  m_Name: ButtonSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17564,7 +17564,7 @@ GameObject:
   - component: {fileID: 1583162547}
   - component: {fileID: 1583162549}
   m_Layer: 5
-  m_Name: ButtonUtconFlowBackHelpersMenu
+  m_Name: ButtonUtconFlowBackSettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19606,7 +19606,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back to Helpers Menu...
+  m_Text: Back to Settings ...
 --- !u!222 &1748610815
 CanvasRenderer:
   m_ObjectHideFlags: 0

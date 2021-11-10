@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using LSL;
+using UnityEngine.SceneManagement;
 
 public class LSLStreams : MonoBehaviour
 {
     public static LSLStreams Instance { get; private set; } // used to allow easy access of this script in other scripts
 
-    [SerializeField] private ConfigManager configManager;
+    private ConfigManager _configManager;
     
     private string subjectID;
 
@@ -36,21 +38,25 @@ public class LSLStreams : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+    }
+
+    /*public void SetConfigManager(ConfigManager cm)
+    {
+        _configManager = cm;
+    }*/
+
+    private void Start()
+    {
+        _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
     }
 
     // todo call this function after subject id is generated
     public void InitLSL()   
     {
-        subjectID = configManager.subjectId.ToString();
+        subjectID = _configManager.subjectId.ToString();
+     
+        Debug.Log("<color=magenta>Initialized LSL for subject ID: </color>" + subjectID);
         
         lslIFrameTracking = new liblsl.StreamInfo(
             "FrameTracking",

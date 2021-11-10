@@ -5106,6 +5106,7 @@ MonoBehaviour:
   buttonSwitchToLeapInput: {fileID: 216742309}
   buttonSwitchToSteamInput: {fileID: 199964135}
   buttonSwitchToLSLRecorder: {fileID: 1765001661}
+  buttonSwitchToETRecorder: {fileID: 512005594}
   buttonToggleHeadVolumeVisibility: {fileID: 1691352313}
   buttonDisplayAllToolsSequentially: {fileID: 1452005879}
   buttonAbout: {fileID: 2020449516}
@@ -7496,7 +7497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714239784}
   m_Layer: 5
-  m_Name: HelpersMenu
+  m_Name: SettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9618,7 +9619,7 @@ GameObject:
   - component: {fileID: 958250593}
   - component: {fileID: 958250592}
   m_Layer: 5
-  m_Name: HelpersMenuText
+  m_Name: SettingsMenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

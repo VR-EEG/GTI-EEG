@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using UnityEngine;
 using LSL;
-using UnityEngine.SceneManagement;
 
 public class LSLStreams : MonoBehaviour
 {
+    #region Fields
+
     public static LSLStreams Instance { get; private set; } // used to allow easy access of this script in other scripts
 
     private ConfigManager _configManager;
@@ -34,24 +35,34 @@ public class LSLStreams : MonoBehaviour
 
     public liblsl.StreamInfo lslIInput;
     public liblsl.StreamOutlet lslOInput; // saved in LSLRecorder.cs
-    
+
+    #endregion
+
+
+    #region Private methods
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
-
-    /*public void SetConfigManager(ConfigManager cm)
-    {
-        _configManager = cm;
-    }*/
 
     private void Start()
     {
         _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
     }
 
-    // todo call this function after subject id is generated
+    #endregion
+
+    #region Streams initialization
+
     public void InitLSL()   
     {
         subjectID = _configManager.subjectId.ToString();
@@ -204,7 +215,7 @@ public class LSLStreams : MonoBehaviour
             NominalRate,
             liblsl.channel_format_t.cf_float32,
             subjectID
-            );
+        );
         lslIInput.desc().append_child("controllerTriggerPressed");
         lslIInput.desc().append_child("controllerPosition.x");
         lslIInput.desc().append_child("controllerPosition.y");
@@ -230,4 +241,6 @@ public class LSLStreams : MonoBehaviour
         lslIInput.desc().append_child("leapHandRotation.y");
         lslOInput = new liblsl.StreamOutlet(lslIInput);
     }
+
+    #endregion
 }

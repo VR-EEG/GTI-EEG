@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -481,12 +481,18 @@ public class MeasurementManager : MonoBehaviour
                 );
             LSLRecorder.Instance.SetBlockID(configManager.currentBlock);
             LSLRecorder.Instance.SetTrialID(configManager.currentBlockData.blockTrials.Count);
+            
+            var closestAttachmentPointOnToolToHand = 
+                configManager.currentClosestToolAttachmentPointTransform != null 
+                    ? configManager.currentClosestToolAttachmentPointTransform.name 
+                    : "";
+            
             LSLRecorder.Instance.SetToolInfo(Convert.ToInt32(configManager.isToolCurrentlyAttachedToHand),
                 Convert.ToInt32(configManager.isToolDisplayedOnTable),
                 currentTrialData.toolId,
                 currentTrialData.toolName,
                 currentTrialData.toolHandleOrientation,
-                configManager.currentClosestToolAttachmentPointTransform.name
+                closestAttachmentPointOnToolToHand
                 );
             LSLRecorder.Instance.SetTimestampBegin(TimeManager.Instance.GetCurrentUnixTimeStamp());
             LSLRecorder.Instance.SetLSLRecordingStatus(true);

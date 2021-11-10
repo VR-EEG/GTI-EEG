@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
@@ -690,6 +690,8 @@ public class ExperimentManager : MonoBehaviour
     // Start Experiment 
     public void StartPracticeAndExperiment()
     {
+        LSLStreams.Instance.InitLSL();
+
         // Set experiment state to init 
         experimentState = ExperimentStates.Init;
     }

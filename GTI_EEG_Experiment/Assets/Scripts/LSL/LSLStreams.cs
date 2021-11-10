@@ -131,7 +131,7 @@ public class LSLStreams : MonoBehaviour
         lslIEyeTrackingGazeHMDFloat = new liblsl.StreamInfo(
             "EyeTrackingGazeHMDFloat",
             "Markers",
-            5,
+            55,
             NominalRate,
             liblsl.channel_format_t.cf_string,
             subjectID

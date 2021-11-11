@@ -704,8 +704,6 @@ public class ExperimentManager : MonoBehaviour
         
         Debug.Log("[ExperimentManager] Loading experiment flow UTCONs from CSV.");
         
-        // todo randomize the experiment here
-        
         // Get path
         string csvPath = GetExperimentFlowUtconsCsvPath();
         
@@ -720,7 +718,7 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("[UiManager] Saving UTCON flow to disk.");
         
         // Get utcon flow seed from subject id
-        int seed = Mathf.Abs(configManager.subjectId.GetHashCode());
+        int seed = Mathf.Abs(configManager.subjIdHashCode);
 
         List<string> fullExperimentalFlow;
 

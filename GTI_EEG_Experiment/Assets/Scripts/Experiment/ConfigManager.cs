@@ -350,6 +350,9 @@ public class ConfigManager : MonoBehaviour
     
     // Subject ID 
     public string subjectId;
+
+    // Subject ID hash code
+    public int subjIdHashCode;
     
     // Subject Gender
     public string subjectGender;
@@ -393,6 +396,7 @@ public class ConfigManager : MonoBehaviour
     void Awake()
     {
         subjectId = GenerateID();
+        subjIdHashCode = subjectId.GetHashCode();
         
         // Find UiManager at every scene load
         uiManager = GameObject.FindGameObjectWithTag(uiManagerTag).GetComponent<UiManager>();

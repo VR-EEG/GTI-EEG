@@ -15,26 +15,32 @@ public class LSLStreams : MonoBehaviour
     private const double NominalRate = liblsl.IRREGULAR_RATE; // irregular sampling rate
 
     // variables to save date to LSL
-    public liblsl.StreamInfo lslIFrameTracking;
+    private liblsl.StreamInfo lslIFrameTracking;
     public liblsl.StreamOutlet lslOFrameTracking; // saved in LSLRecorder.cs
 
-    public liblsl.StreamInfo lslITimeStamps;
+    private liblsl.StreamInfo lslITimeStamps;
     public liblsl.StreamOutlet lslOTimeStamps; // saved in LSLRecorder.cs
     
-    public liblsl.StreamInfo lslIToolCueOrientationInt;
+    private liblsl.StreamInfo lslIToolCueOrientationInt;
     public liblsl.StreamOutlet lslOToolCueOrientationInt; // saved in LSLRecorder.cs
 
-    public liblsl.StreamInfo lslIToolCueOrientationString;
+    private liblsl.StreamInfo lslIToolCueOrientationString;
     public liblsl.StreamOutlet lslOToolCueOrientationString; // saved in LSLRecorder.cs
     
-    public liblsl.StreamInfo lslIEyeTrackingGazeHMDFloat;
+    private liblsl.StreamInfo lslIEyeTrackingGazeHMDFloat;
     public liblsl.StreamOutlet lslOEyeTrackingGazeHMDFloat; // saved in LSLRecorder.cs
     
-    public liblsl.StreamInfo lslIEyeTrackingGazeHMDString;
+    private liblsl.StreamInfo lslIEyeTrackingGazeHMDString;
     public liblsl.StreamOutlet lslOEyeTrackingGazeHMDString; // saved in LSLRecorder.cs
 
-    public liblsl.StreamInfo lslIInput;
+    private liblsl.StreamInfo lslIInput;
     public liblsl.StreamOutlet lslOInput; // saved in LSLRecorder.cs
+
+    private liblsl.StreamInfo lslIMetaData;
+    public liblsl.StreamOutlet lslOMetaData; // saved in MeasurementManagement.cs
+    
+    private liblsl.StreamInfo lslIEyeValidation;
+    public liblsl.StreamOutlet lslOEyeValidation; // saved in EyeTrackingValidation.cs
 
     #endregion
 
@@ -234,7 +240,39 @@ public class LSLStreams : MonoBehaviour
         lslIInput.desc().append_child("leapHandRotation.y");
         lslIInput.desc().append_child("leapHandRotation.z");
         lslOInput = new liblsl.StreamOutlet(lslIInput);
-    }
 
+        lslIMetaData = new liblsl.StreamInfo(
+            "MetaData",
+            "Marker",
+            6,
+            NominalRate,
+            liblsl.channel_format_t.cf_string,
+            subjectID
+            );
+        lslIMetaData.desc().append_child("dateTimeCreated");
+        lslIMetaData.desc().append_child("subjectAge");
+        lslIMetaData.desc().append_child("UIDHashCod");
+        lslIMetaData.desc().append_child("subjectGender");
+        lslIMetaData.desc().append_child("subjectHandedness");
+        lslIMetaData.desc().append_child("isUsingLeap");
+        lslOMetaData = new liblsl.StreamOutlet(lslIMetaData);
+
+        lslIEyeValidation = new liblsl.StreamInfo(
+            "EyeValidation",
+            "Marker",
+            6,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+            );
+        lslIEyeValidation.desc().append_child("timestamp");
+        lslIEyeValidation.desc().append_child("validationAttemptNumber");
+        lslIEyeValidation.desc().append_child("blockNumber");
+        lslIEyeValidation.desc().append_child("combinedEyeAngleOffsetValidationResult.x");
+        lslIEyeValidation.desc().append_child("combinedEyeAngleOffsetValidationResult.y");
+        lslIEyeValidation.desc().append_child("combinedEyeAngleOffsetValidationResult.z");
+        lslOEyeValidation = new liblsl.StreamOutlet(lslIEyeValidation);
+    }
+    
     #endregion
 }

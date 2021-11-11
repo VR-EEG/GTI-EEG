@@ -54,18 +54,14 @@ public class LSLStreams : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
-    }
-
     #endregion
 
     #region Streams initialization
 
-    public void InitLSL()   
+    public void Start()   
     {
-        subjectID = _configManager.subjectId.ToString();
+        _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
+        subjectID = _configManager.subjectId;
      
         Debug.Log("<color=magenta>Initialized LSL for subject ID: </color>" + subjectID);
         

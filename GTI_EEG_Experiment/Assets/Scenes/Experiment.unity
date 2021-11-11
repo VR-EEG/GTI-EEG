@@ -6309,7 +6309,7 @@ MonoBehaviour:
   practiceUtconIdx: 0
   experimentIsRunning: 0
   currentSubjectData:
-    subjectId: 0
+    subjectId: 
     subjectAge: 0
     subjectGender: 
     subjectHandedness: 
@@ -6397,7 +6397,7 @@ MonoBehaviour:
   subjectMetaDataFileName: 
   subjectCurrentBlockDataFileName: 
   currentBlockData:
-    subjectId: 0
+    subjectId: 
     dateTimeSubjectMetaDataCreated: 
     blockNumber: 0
     eyeTrackingOverallCombinedValidationResults: {x: 0, y: 0, z: 0}
@@ -6411,7 +6411,8 @@ MonoBehaviour:
   - left handed
   - ambidextrous
   subjectDataIsSet: 0
-  subjectId: 0
+  subjectId: 
+  subjIdHashCode: 0
   subjectGender: 
   subjectAge: 0
   subjectHandedness: 

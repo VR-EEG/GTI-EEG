@@ -7,6 +7,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -132,7 +133,7 @@ public class ExperimentManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         switch (experimentState)
         {
@@ -683,9 +684,10 @@ public class ExperimentManager : MonoBehaviour
         // Load practice flow utcons 
         LoadPracticeFlowUtcons();
         
-        // Load experiment flow utcons 
-        LoadExperimentFlowUtcons();
+        // LoadExperimentFlowUtcons();
         
+        // Generate experiment flow utcons 
+        GenearateUtconFlow(out experimentFlowUtcons, out experimentBlockPausesIdx);
     }
     
     
@@ -695,14 +697,14 @@ public class ExperimentManager : MonoBehaviour
         // Set experiment state to init 
         experimentState = ExperimentStates.Init;
     }
-    
-    
-  
+
     // Load the Experiment Utcons for experiment flow  
     private void LoadExperimentFlowUtcons()
     {
         
         Debug.Log("[ExperimentManager] Loading experiment flow UTCONs from CSV.");
+        
+        // todo randomize the experiment here
         
         // Get path
         string csvPath = GetExperimentFlowUtconsCsvPath();
@@ -712,7 +714,28 @@ public class ExperimentManager : MonoBehaviour
         
         Debug.Log("[ExperimentManager] Loaded experiment flow UTCONs from CSV.");
     }
-    
+
+    private void GenearateUtconFlow(out int[] utcons, out int[] blockPauseIdx, int blocks=6)
+    {
+        Debug.Log("[UiManager] Saving UTCON flow to disk.");
+        
+        // Get utcon flow seed from subject id
+        int seed = Mathf.Abs(configManager.subjectId.GetHashCode());
+
+        List<string> fullExperimentalFlow;
+
+        // Create path where to save utcon flow 
+        string csvPath = configManager.configFolderPath;
+        csvPath += "\\" + Path.GetFileNameWithoutExtension(configManager.filenameExperimentFlowUtconsCsv)
+                        + "_" + configManager.subjectId + "_" + 
+                   System.DateTime.Now.ToString("yyyy-MM-dd HH-mm").Replace(" ","_") + ".csv";
+        
+        // Generate UTCON flow and save to csv
+        GetComponent<ExperimentUtconFlowGenerator>().GenerateUtconFlowAndWriteToDisk(blocks,seed,csvPath, out fullExperimentalFlow);
+        
+        // Load experiment flow utcons and experiment block pauses indexes
+        LoadFlowUtcons(fullExperimentalFlow, out utcons, out blockPauseIdx);
+    }
     
     // Load the Practice Utcons for practice utcon flow  
     private void LoadPracticeFlowUtcons()
@@ -778,7 +801,7 @@ public class ExperimentManager : MonoBehaviour
                     }
                 }
                 
-            // Handle misformed lines     
+                // Handle misformed lines     
             } catch (Exception e)
             {
                 Debug.Log("[ExperimentManager] Malformed line " + line + ". Skipping.\n" + e.ToString());
@@ -792,7 +815,39 @@ public class ExperimentManager : MonoBehaviour
         blockPausesIdx = pauseIdx.ToArray();
     }
     
-    
+    private void LoadFlowUtcons(List<string> fullFlow, out int[] flowUtcons, out int[] blockPausesIdx)
+    {
+        // Store utcons from csv in list first and transform to array later  
+        List<int> utcons = new List<int>();
+        
+        // Store block pause indicator idx in list and transform to array later 
+        List<int> pauseIdx = new List<int>();
+        
+        // Split lines at comma and save name and ids into dictionary
+        utconCount = 0;
+        foreach (var item in fullFlow)
+        {
+            // Found pause indicator 
+            if (item.ToLower() == configManager.blockPauseIndicator)
+            {
+                // Add Pause idx to list, holds idx of utcon BEFORE which block pause happens 
+                pauseIdx.Add(utconCount);
+            }
+
+            // Found utcon
+            else
+            {
+                utcons.Add(int.Parse(item));
+                utconCount += 1; // Save total number of utcons in csv file 
+            }
+        }
+        
+        // Transform utcon list to array 
+        flowUtcons = utcons.ToArray();
+        
+        // Transform pause indicator list to array
+        blockPausesIdx = pauseIdx.ToArray();
+    }
     
     
     

@@ -231,7 +231,18 @@ public class MeasurementManager : MonoBehaviour
         
         // Write meta data to disk 
         WriteSubjectMetaDataToDisk();
+
+        string[] metaData =
+        {
+            configManager.currentSubjectData.dateTimeCreated,
+            configManager.subjectAge.ToString(),
+            configManager.subjIdHashCode.ToString(),
+            configManager.subjectGender,
+            configManager.subjectHandedness,
+            configManager.isUsingLeap.ToString()
+        };
         
+        LSLStreams.Instance.lslOMetaData.push_sample(metaData);
     }
     
     

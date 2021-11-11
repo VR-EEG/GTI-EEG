@@ -62,8 +62,6 @@ public class LSLStreams : MonoBehaviour
     {
         _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
         subjectID = _configManager.subjectId;
-     
-        Debug.Log("<color=magenta>Initialized LSL for subject ID: </color>" + subjectID);
         
         lslIFrameTracking = new liblsl.StreamInfo(
             "FrameTracking",

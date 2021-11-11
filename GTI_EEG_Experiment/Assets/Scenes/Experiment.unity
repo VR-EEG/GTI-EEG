@@ -2368,7 +2368,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186612635}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -4423,7 +4423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &321378944
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8463,7 +8463,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Back to Helpers Menu...
+  m_Text: Back to Settings Menu...
 --- !u!222 &762582718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12180,7 +12180,7 @@ GameObject:
   - component: {fileID: 1232335342}
   - component: {fileID: 1232335344}
   m_Layer: 5
-  m_Name: ButtonAboutBackHelpersMenu
+  m_Name: ButtonAboutBackSettingsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19233,10 +19233,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<color=white>\n\n<size=14>Project by:</size>\nStefan Balle\n\n<size=14>Initial
-    work:</size>\nNina Gottschewsky\n\n<size=14>Supervision:</size>\nAshima Keshava\nProf.
-    Dr. Peter K\xF6nig\n\n<size=14>Neurobiopsychology Lab\nInstitute of Cognitive
-    Science\nat the University of Osnabr\xFCck\n\nOsnabr\xFCck 2020</size>\n</color>"
+  m_Text: "<color=white>\n\n<size=14>Main developer (Toolleap 2020):</size>\nStefan
+    Balle\n\n<size=14>Initial work (GTI 2019):</size>\nNina Gottschewsky\n\n<size=14>LSL
+    integration & refinement \n(GTI-EEG 2021):</size>\nNora Maleki\n\n<size=14>Supervision:</size>\nAshima
+    Keshava\nProf. Dr. Peter K\xF6nig\n\n<size=14>Neurobiopsychology Lab\nInstitute
+    of Cognitive Science\nat the University of Osnabr\xFCck</size>\n</color>"
 --- !u!222 &1727862378
 CanvasRenderer:
   m_ObjectHideFlags: 0

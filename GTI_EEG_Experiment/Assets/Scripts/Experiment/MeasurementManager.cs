@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -435,39 +435,38 @@ public class MeasurementManager : MonoBehaviour
             ? SteamVR_Input_Sources.LeftHand 
             : SteamVR_Input_Sources.RightHand;
         
+        // Check if current block exists, create it otherwise  
+        if (configManager.currentBlock != configManager.blockNumberLastWrittenToOnDisk)
+        {
+            // Finish previous block's file if previous block existed 
+            if (configManager.currentBlock >= 1)
+            {
+                FinishBlockDataOnDisk();
+            }
+            
+            // Update Block file name
+            configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + 
+                                                            "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" 
+                                                            + configManager.currentSubjectData.dateTimeCreated.Replace(" ","_") + ".json";
+            
+            // Init block data and file
+            InitBlockData();
+            
+            // Update last written to 
+            configManager.blockNumberLastWrittenToOnDisk = configManager.currentBlock;
+        }
+        
+        // Append current trial to current block
+        configManager.currentBlockData.blockTrials.Add(currentTrialData);
+        
+        // Update current trial number, is reset to in case of new block data 
+        configManager.currentTrial = configManager.currentBlockData.blockTrials.Count;
+
+        // Reset gaze ray timestamp 
+        lastGazeRayTimeStamp = 0;
+        
         if (!configManager.isUsingLSLRecorder)
         {
-            // Check if current block exists, create it otherwise  
-            if (configManager.currentBlock != configManager.blockNumberLastWrittenToOnDisk)
-            {
-                // Finish previous block's file if previous block existed 
-                if (configManager.currentBlock >= 1)
-                {
-                    FinishBlockDataOnDisk();
-                }
-            
-                // Update Block file name
-                configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + 
-                                                                "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" 
-                                                                + configManager.currentSubjectData.dateTimeCreated.Replace(" ","_") + ".json";
-            
-                // Init block data and file
-                InitBlockData();
-            
-                // Update last written to 
-                configManager.blockNumberLastWrittenToOnDisk = configManager.currentBlock;
-            }
-        
-            // Append current trial to current block
-            configManager.currentBlockData.blockTrials.Add(currentTrialData);
-        
-            // Update current trial number, is reset to in case of new block data 
-            configManager.currentTrial = configManager.currentBlockData.blockTrials.Count;
-
-
-            // Reset gaze ray timestamp 
-            lastGazeRayTimeStamp = 0;
-        
             // Start the actual measuring 
             StartCoroutine("RecordData");
         }

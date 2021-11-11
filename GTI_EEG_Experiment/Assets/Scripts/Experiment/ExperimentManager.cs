@@ -134,97 +134,99 @@ public class ExperimentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Init new subject  
-        if (experimentState == ExperimentStates.Init)
+        switch (experimentState)
         {
-            ExperimentStateInit();
-        }
-        
-        // PracticeStart state coroutine 
-        else if (experimentState == ExperimentStates.PracticeStart)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            // Init new subject  
+            case ExperimentStates.Init:
+                ExperimentStateInit();
+                break;
+            // PracticeStart state coroutine 
+            case ExperimentStates.PracticeStart:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStatePracticeStart");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStatePracticeStart");
+                }
+
+                break;
+            }
+            // Practice state coroutine 
+            case ExperimentStates.Practice:
+            {
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStatePractice");
                 
+                }
+
+                break;
             }
-        }
-        
-        // Practice state coroutine 
-        else if (experimentState == ExperimentStates.Practice)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            // PracticeEnd state coroutine 
+            case ExperimentStates.PracticeEnd:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStatePractice");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStatePracticeEnd");
+                }
+
+                break;
+            }
+            // Start state coroutine 
+            case ExperimentStates.Start:
+            {
+                // Is coroutine started already? 
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true; // activate lock 
+                    StartCoroutine("ExperimentStateStart"); // start coroutine 
+                }
+
+                break;
+            }
+            // Measuring state coroutine 
+            case ExperimentStates.Measuring:
+            {
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStateMeasuring");
                 
+                }
+
+                break;
             }
-        }
-        
-        // PracticeEnd state coroutine 
-        else if (experimentState == ExperimentStates.PracticeEnd)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            // BlockPause state coroutine 
+            case ExperimentStates.BlockPause:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStatePracticeEnd");
-            }
-        }
-        
-        // Start state coroutine 
-        else if (experimentState == ExperimentStates.Start)
-        {
-            // Is coroutine started already? 
-            if (!experimentStateCoroutineIsStarted)
-            {
-                experimentStateCoroutineIsStarted = true; // activate lock 
-                StartCoroutine("ExperimentStateStart"); // start coroutine 
-            }
-        }
-        
-        // Measuring state coroutine 
-        else if (experimentState == ExperimentStates.Measuring)
-        {
-            if (!experimentStateCoroutineIsStarted)
-            {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStateMeasuring");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStateBlockPause");
                 
+                }
+
+                break;
             }
-        }
-        
-        // BlockPause state coroutine 
-        else if (experimentState == ExperimentStates.BlockPause)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            case ExperimentStates.End:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStateBlockPause");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStateEnd");
                 
+                }
+
+                break;
             }
+            case ExperimentStates.Idle:
+                break;
+            default:
+                Debug.Log("[ExperimentManager] Specified invalid Experiment State, ignoring!");
+                break;
         }
-        else if (experimentState == ExperimentStates.End)
-        {
-            if (!experimentStateCoroutineIsStarted)
-            {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStateEnd");
-                
-            }
-        }
-        
-        else if (experimentState == ExperimentStates.Idle)
-        {
-           
-        }
-        
-        
-        else
-        {
-            Debug.Log("[ExperimentManager] Specified invalid Experiment State, ignoring!");
-        }
-        
     }
     
     // Init state 
@@ -690,8 +692,6 @@ public class ExperimentManager : MonoBehaviour
     // Start Experiment 
     public void StartPracticeAndExperiment()
     {
-        LSLStreams.Instance.InitLSL();
-
         // Set experiment state to init 
         experimentState = ExperimentStates.Init;
     }

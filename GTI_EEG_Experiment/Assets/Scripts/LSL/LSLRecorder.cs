@@ -349,8 +349,6 @@ public class LSLRecorder : MonoBehaviour
     
     private void SaveTimeStamps(double[] timestamps)
     {
-        Debug.Log("<color=magenta>lslOTimeStamps is null: </color>" +
-                  (LSLStreams.Instance.lslOTimeStamps == null));
         LSLStreams.Instance.lslOTimeStamps.push_sample(timestamps);
     }
 

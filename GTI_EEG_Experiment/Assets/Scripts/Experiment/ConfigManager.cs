@@ -349,7 +349,7 @@ public class ConfigManager : MonoBehaviour
     public bool subjectDataIsSet;
     
     // Subject ID 
-    public int subjectId;
+    public string subjectId;
     
     // Subject Gender
     public string subjectGender;
@@ -392,6 +392,8 @@ public class ConfigManager : MonoBehaviour
     // Called once at the very start
     void Awake()
     {
+        subjectId = GenerateID();
+        
         // Find UiManager at every scene load
         uiManager = GameObject.FindGameObjectWithTag(uiManagerTag).GetComponent<UiManager>();
         
@@ -411,12 +413,6 @@ public class ConfigManager : MonoBehaviour
             SetupConfigManager();
             
         }
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         
     }
 
@@ -520,6 +516,10 @@ public class ConfigManager : MonoBehaviour
       
     }
 
+    private string GenerateID()
+    { 
+        return Guid.NewGuid().ToString();
+    }
 
     // Get Config Manager Settings that concern the setup of the experiment 
     public ConfigManagerSettings GetConfigManagerSettings()

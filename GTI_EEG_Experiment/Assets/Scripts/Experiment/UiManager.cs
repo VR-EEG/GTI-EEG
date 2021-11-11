@@ -469,10 +469,8 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("[UiManager] Updating subject data.");
         
-        // Get subject id and age
-        int id = 0;
+        // Get subject age
         int age = 0;
-        int.TryParse(subjectIdInput.text, out id);
         int.TryParse(subjectAgeInput.text, out age);
         
         // Get subject gender
@@ -483,7 +481,6 @@ public class UiManager : MonoBehaviour
         
         // Update values in config manager 
         configManager.subjectAge = age;
-        configManager.subjectId = id;
         configManager.subjectGender = gender;
         configManager.subjectHandedness = handedness;
         
@@ -807,25 +804,18 @@ public class UiManager : MonoBehaviour
     // Check whether input fields have values that are valid or not and disable save button accordingly 
     IEnumerator InputCheckSetSubjectData()
     {
-        int id = 0;
-        int age = 0;
+        var age = 0;
         
         while (true)
         {
-            // Check whether value in input field for id is valid 
-            if (!int.TryParse(subjectIdInput.text, out id))
-            {
-                //Debug.Log("Input value for Subject ID is not an integer.");
-                buttonSaveSubjectData.interactable = false;
-            }
             // Check whether value in input field for age is valid 
-            else if (!int.TryParse(subjectAgeInput.text, out age))
+            if (!int.TryParse(subjectAgeInput.text, out age))
             {
                 //Debug.Log("Input value for Subject age is not an integer.");
                 buttonSaveSubjectData.interactable = false;
             }
             // Check whether id and age are non-negative
-            else if (id < 0 | age < 0)
+            else if (age < 0)
             {
                 //Debug.Log("Input values for Subject ID and Subject age must be non-negative.");
                 buttonSaveSubjectData.interactable = false;

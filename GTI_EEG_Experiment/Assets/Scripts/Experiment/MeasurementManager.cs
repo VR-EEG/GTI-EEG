@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Authors: Nina Gottschewsky, Stefan Balle
  * E-mail: ngottschewsk@uni-osnabrueck.de, sballe@uni-osnabrueck.de
  * Year: 2020
@@ -151,7 +151,7 @@ public class MeasurementManager : MonoBehaviour
     // Debug 
     IEnumerator DebugFileStructure()
     {
-        configManager.subjectId = 420;
+        configManager.subjectId = "-";
         configManager.currentUtcon = 111;
         InitSubjectData();
         WriteSubjectMetaDataToDisk();
@@ -945,7 +945,7 @@ public class MeasurementManager : MonoBehaviour
 public class SubjectMetaData 
 {
     // Subject 
-    public int subjectId;
+    public string subjectId;
     public int subjectAge; 
     public string subjectGender; 
     public string subjectHandedness;
@@ -982,7 +982,7 @@ public class SubjectMetaData
 public class ExperimentBlockData
 {
     // Subject ID to make sure no blocks get lost if filename is changed 
-    public int subjectId;
+    public string subjectId;
 
     // Date Time Subject Meta Data was created
     public string dateTimeSubjectMetaDataCreated;

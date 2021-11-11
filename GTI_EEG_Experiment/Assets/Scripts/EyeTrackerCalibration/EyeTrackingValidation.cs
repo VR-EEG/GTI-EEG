@@ -301,7 +301,7 @@ public class EyeTrackingValidation : MonoBehaviour
     [Serializable] 
     public struct EyeTrackingValidationData
     {
-        public int subjectId;
+        public string subjectId;
         public int validationAttemptNumber;
         public int blockNumber;
         public string dateTime;

@@ -82,7 +82,14 @@ public class LSLRecorder : MonoBehaviour
     private Vector3 _leapHandPalmPosition;
     private Vector3 _leapHandRotation;
     
-    
+    private float _hitPointOnObjectCombinedEyesValidity;
+    private float _hitPointOnObjectLeftEyeValidity;
+    private float _hitPointOnObjectRightEyeValidity;
+    private string _hitObjectNameCombinedEyes;
+    private string _hitObjectNameLeftEye;
+    private string _hitObjectNameRightEye;
+
+
     #region Private Methods
 
     private void Awake()
@@ -214,8 +221,21 @@ public class LSLRecorder : MonoBehaviour
         _eyeDirectionCombinedWorld = _hmdTransform.rotation * rayCombineEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
         RaycastHit hitPointOnObjectCombinedEyes;
-        Physics.Raycast(_eyePositionCombinedWorld, _eyeDirectionCombinedWorld, out hitPointOnObjectCombinedEyes, 10f);
-        var boundsCombinedEyes = hitPointOnObjectCombinedEyes.collider.bounds;
+        Bounds boundsCombinedEyes;
+        if (Physics.Raycast(_eyePositionCombinedWorld, _eyeDirectionCombinedWorld, 
+            out hitPointOnObjectCombinedEyes, 10f))
+        {
+            _hitPointOnObjectCombinedEyesValidity = 1;
+            boundsCombinedEyes = hitPointOnObjectCombinedEyes.collider.bounds;
+            _hitObjectNameCombinedEyes = hitPointOnObjectCombinedEyes.collider.name;
+        }
+        else
+        {
+            _hitPointOnObjectCombinedEyesValidity = 0;
+            boundsCombinedEyes = new Bounds(Vector3.zero, Vector3.zero);
+            _hitObjectNameCombinedEyes = "";
+        }
+
 
         // Get Left Eye Position and Gaze Direction 
         SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out var rayLeftEye);
@@ -223,19 +243,43 @@ public class LSLRecorder : MonoBehaviour
         _eyeDirectionLeftWorld = _hmdTransform.rotation * rayLeftEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
         RaycastHit hitPointOnObjectLeftEye;
-        Physics.Raycast(_eyePositionLeftWorld, _eyeDirectionLeftWorld, out hitPointOnObjectLeftEye, 10f);
-        var boundsLeftEye = hitPointOnObjectLeftEye.collider.bounds;
+        Bounds boundsLeftEye;
+        if (Physics.Raycast(_eyePositionLeftWorld, _eyeDirectionLeftWorld, 
+            out hitPointOnObjectLeftEye, 10f))
+        {
+            _hitPointOnObjectLeftEyeValidity = 1;
+            boundsLeftEye = hitPointOnObjectLeftEye.collider.bounds;
+            _hitObjectNameLeftEye = hitPointOnObjectLeftEye.collider.name;
+        }
+        else
+        {
+            _hitPointOnObjectLeftEyeValidity = 0;
+            boundsLeftEye = new Bounds(Vector3.zero, Vector3.zero);
+            _hitObjectNameLeftEye = "";
+        }
 
-        
+
         // Get Right Eye Position and Gaze Direction
         SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out var rayRightEye);
         _eyePositionRightWorld = _hmdTransform.position + rayRightEye.origin; // ray origin is at transform of hmd + offset 
         _eyeDirectionRightWorld = _hmdTransform.rotation * rayRightEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
         RaycastHit hitPointOnObjectRightEye;
-        Physics.Raycast(_eyePositionRightWorld, _eyeDirectionRightWorld, out hitPointOnObjectRightEye, 10f);
-        var boundsRightEye = hitPointOnObjectRightEye.collider.bounds;
-
+        Bounds boundsRightEye;
+        if (Physics.Raycast(_eyePositionRightWorld, _eyeDirectionRightWorld, 
+            out hitPointOnObjectRightEye, 10f))
+        {
+            _hitPointOnObjectRightEyeValidity = 1;
+            boundsRightEye = hitPointOnObjectRightEye.collider.bounds;
+            _hitObjectNameRightEye = hitPointOnObjectRightEye.collider.name;
+        }
+        else
+        {
+            _hitPointOnObjectRightEyeValidity = 0;
+            boundsRightEye = new Bounds(Vector3.zero, Vector3.zero);
+            _hitObjectNameRightEye = "";
+        }
+        
 
         var hmdPos = _hmdTransform.position;
         var hmdForward = _hmdTransform.forward;
@@ -267,18 +311,21 @@ public class LSLRecorder : MonoBehaviour
             _eyeDirectionRightWorld.x,
             _eyeDirectionRightWorld.y,
             _eyeDirectionRightWorld.z,
+            _hitPointOnObjectCombinedEyesValidity,
             hitPointOnObjectCombinedEyes.point.x,
             hitPointOnObjectCombinedEyes.point.y,
             hitPointOnObjectCombinedEyes.point.z,
             boundsCombinedEyes.center.x,
             boundsCombinedEyes.center.y,
             boundsCombinedEyes.center.z,
+            _hitPointOnObjectLeftEyeValidity,
             hitPointOnObjectLeftEye.point.x,
             hitPointOnObjectLeftEye.point.y,
             hitPointOnObjectLeftEye.point.z,
             boundsLeftEye.center.x,
             boundsLeftEye.center.y,
             boundsLeftEye.center.z,
+            _hitPointOnObjectRightEyeValidity,
             hitPointOnObjectRightEye.point.x,
             hitPointOnObjectRightEye.point.y,
             hitPointOnObjectRightEye.point.z,
@@ -304,9 +351,9 @@ public class LSLRecorder : MonoBehaviour
 
         string[] eyeTrackingGazeHMDString =
         {
-            hitPointOnObjectCombinedEyes.collider.name,
-            hitPointOnObjectLeftEye.collider.name,
-            hitPointOnObjectRightEye.collider.name
+            _hitObjectNameCombinedEyes,
+            _hitObjectNameLeftEye,
+            _hitObjectNameRightEye
         };
 
         float[] input =

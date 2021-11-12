@@ -183,19 +183,7 @@ public class EyeTrackingValidation : MonoBehaviour
         
         // Write resulting data to disk 
         WriteValidationDataToJson();
-        
-        double[] validationData =
-        {
-            TimeManager.Instance.GetCurrentUnixTimeStamp(),
-            eyeTrackingValidationData.validationAttemptNumber,
-            configManager.currentBlock,
-            eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultX,
-            eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultY,
-            eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultZ
-        };
-        
-        LSLStreams.Instance.lslOEyeValidation.push_sample(validationData);
-        
+
         // Update latest Validation Result in Config manager
         configManager.latestEyeTrackingValidationResults = new Vector3(
             eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultX, 

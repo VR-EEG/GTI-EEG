@@ -39,12 +39,6 @@ public class LSLStreams : MonoBehaviour
     private liblsl.StreamInfo lslIInput;
     public liblsl.StreamOutlet lslOInput; // saved in LSLRecorder.cs
 
-    private liblsl.StreamInfo lslIMetaData;
-    public liblsl.StreamOutlet lslOMetaData; // saved in MeasurementManagement.cs
-    
-    private liblsl.StreamInfo lslIEyeValidation;
-    public liblsl.StreamOutlet lslOEyeValidation; // saved in EyeTrackingValidation.cs
-
     #endregion
 
 
@@ -256,38 +250,6 @@ public class LSLStreams : MonoBehaviour
         lslIInput.desc().append_child("leapHandRotation.y");
         lslIInput.desc().append_child("leapHandRotation.z");
         lslOInput = new liblsl.StreamOutlet(lslIInput);
-
-        lslIMetaData = new liblsl.StreamInfo(
-            "MetaData",
-            "Marker",
-            6,
-            NominalRate,
-            liblsl.channel_format_t.cf_string,
-            subjectID
-            );
-        lslIMetaData.desc().append_child("dateTimeCreated");
-        lslIMetaData.desc().append_child("subjectAge");
-        lslIMetaData.desc().append_child("UIDHashCod");
-        lslIMetaData.desc().append_child("subjectGender");
-        lslIMetaData.desc().append_child("subjectHandedness");
-        lslIMetaData.desc().append_child("isUsingLeap");
-        lslOMetaData = new liblsl.StreamOutlet(lslIMetaData);
-
-        lslIEyeValidation = new liblsl.StreamInfo(
-            "EyeValidation",
-            "Marker",
-            6,
-            NominalRate,
-            liblsl.channel_format_t.cf_double64,
-            subjectID
-            );
-        lslIEyeValidation.desc().append_child("timestamp");
-        lslIEyeValidation.desc().append_child("validationAttemptNumber");
-        lslIEyeValidation.desc().append_child("blockNumber");
-        lslIEyeValidation.desc().append_child("combinedEyeAngleOffsetValidationResult.x");
-        lslIEyeValidation.desc().append_child("combinedEyeAngleOffsetValidationResult.y");
-        lslIEyeValidation.desc().append_child("combinedEyeAngleOffsetValidationResult.z");
-        lslOEyeValidation = new liblsl.StreamOutlet(lslIEyeValidation);
     }
     
     #endregion

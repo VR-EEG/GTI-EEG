@@ -195,6 +195,7 @@ public class MeasurementManager : MonoBehaviour
         configManager.currentSubjectData.subjectGender = configManager.subjectGender;
         configManager.currentSubjectData.subjectHandedness = configManager.subjectHandedness;
         configManager.currentSubjectData.subjectId = configManager.subjectId;
+        configManager.currentSubjectData.subjectIdHashCode = configManager.subjIdHashCode;
         
         // Set subject data time  
         configManager.currentSubjectData.dateTimeCreated = System.DateTime.Now.ToString("yyyy-MM-dd HH-mm");
@@ -944,6 +945,7 @@ public class SubjectMetaData
 {
     // Subject 
     public string subjectId;
+    public int subjectIdHashCode; 
     public int subjectAge; 
     public string subjectGender; 
     public string subjectHandedness;

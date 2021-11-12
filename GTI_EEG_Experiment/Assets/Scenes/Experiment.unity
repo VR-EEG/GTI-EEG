@@ -6310,6 +6310,7 @@ MonoBehaviour:
   experimentIsRunning: 0
   currentSubjectData:
     subjectId: 
+    subjectIdHashCode: 0
     subjectAge: 0
     subjectGender: 
     subjectHandedness: 
@@ -19233,8 +19234,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<color=white>\n<size=14> 2021 <i>GTI-EEG</i>\nLSL integration:</size>\nNora
-    Maleki\n\n<size=14>2020 <i>Toolleap</i>\nMain developer:</size>\nStefan Balle\n\n<size=14>2019
+  m_Text: "<color=white>\n<size=14> 2021 <i>GTI-EEG</i>\nLSL integration into Toolleap:</size>\nNora
+    Maleki\n\n<size=14>2020 <i>Toolleap</i>\nSoftware developer:</size>\nStefan Balle\n\n<size=14>2019
     <i>GTI</i>\nInitial work:</size>\nNina Gottschewsky\n\n<size=14>Supervision:</size>\nAshima
     Keshava\nProf. Dr. Peter K\xF6nig\n\n<size=14>Neurobiopsychology Lab\nInstitute
     of Cognitive Science\nat the University of Osnabr\xFCck</size>\n</color>"

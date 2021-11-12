@@ -409,6 +409,10 @@ public class MeasurementManager : MonoBehaviour
     {
         Debug.Log("[MeasurementManager] Starting measuring trial in block " + configManager.currentBlock.ToString());
 
+        double[] trialStartMeasurementTimeStamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOTrialStartMeasurementTimeStamp.push_sample(trialStartMeasurementTimeStamp);
+
+        
         // Init new trial data 
         var currentTrialData = new ExperimentTrialData
         {

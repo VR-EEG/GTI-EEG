@@ -39,6 +39,9 @@ public class LSLStreams : MonoBehaviour
     private liblsl.StreamInfo lslIButtonPressedTimeStamp;
     public liblsl.StreamOutlet lslOButtonPressedTimeStamp; // saved in ExperimentManager.cs
     
+    private liblsl.StreamInfo lslITrialStopMeasurementTimeStamp;
+    public liblsl.StreamOutlet lslOTrialStopMeasurementTimeStamp; // saved in MeasurementManager.cs
+    
     private liblsl.StreamInfo lslIToolCueOrientationInt;
     public liblsl.StreamOutlet lslOToolCueOrientationInt; // saved in LSLRecorder.cs
 
@@ -168,6 +171,18 @@ public class LSLStreams : MonoBehaviour
             );
         lslIButtonPressedTimeStamp.desc().append_child("ButtonPressedTimeStamp");
         lslOButtonPressedTimeStamp = new liblsl.StreamOutlet(lslIButtonPressedTimeStamp);
+        
+        
+        lslITrialStopMeasurementTimeStamp = new liblsl.StreamInfo(
+            "TrialStopMeasurementTimeStamp",
+            "Marker",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+        );
+        lslITrialStopMeasurementTimeStamp.desc().append_child("TrialStopMeasurementTimeStamp");
+        lslOTrialStopMeasurementTimeStamp = new liblsl.StreamOutlet(lslITrialStopMeasurementTimeStamp);
         
         
         lslIToolCueOrientationInt = new liblsl.StreamInfo(

@@ -416,16 +416,6 @@ public class LSLRecorder : MonoBehaviour
         leapMainCamera = MeasurementManager.Instance.leapMainCamera;
     }
 
-    public void SetTimestampBegin(double timestamp)
-    {
-        _timestampBegin = timestamp;
-    }
-
-    public void SetTimestampEnd(double timestamp)
-    {
-        _timestampEnd = timestamp;
-    }
-
     public void SetTrialID(int id)
     {
         _trialId = id;

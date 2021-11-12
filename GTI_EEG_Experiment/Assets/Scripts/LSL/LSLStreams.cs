@@ -21,8 +21,23 @@ public class LSLStreams : MonoBehaviour
     private liblsl.StreamInfo lslIFrameTimeStamp;
     public liblsl.StreamOutlet lslOFrameTimeStamp; // saved in LSLRecorder.cs
     
-    private liblsl.StreamInfo lslITimeStampTrialBegin;
-    public liblsl.StreamOutlet lslOTimeStampTrialBegin; // saved in LSLRecorder.cs
+    private liblsl.StreamInfo lslITrialStartMeasurementTimeStamp;
+    public liblsl.StreamOutlet lslOTrialStartMeasurementTimeStamp; // saved in MeasurementManager.cs
+    
+    private liblsl.StreamInfo lslICueTimeStamp;
+    public liblsl.StreamOutlet lslOCueTimeStamp; // saved in ExperimentManager.cs
+    
+    private liblsl.StreamInfo lslICueDisappearedTimeStamp;
+    public liblsl.StreamOutlet lslOCueDisappearedTimeStamp; // saved in ExperimentManager.cs
+    
+    private liblsl.StreamInfo lslIObjectShownTimeStamp;
+    public liblsl.StreamOutlet lslOObjectShownTimeStamp; // saved in ExperimentManager.cs
+    
+    private liblsl.StreamInfo lslIBeepPlayedTimeStamp;
+    public liblsl.StreamOutlet lslOBeepPlayedTimeStamp; // saved in ExperimentManager.cs
+    
+    private liblsl.StreamInfo lslIButtonPressedTimeStamp;
+    public liblsl.StreamOutlet lslOButtonPressedTimeStamp; // saved in ExperimentManager.cs
     
     private liblsl.StreamInfo lslIToolCueOrientationInt;
     public liblsl.StreamOutlet lslOToolCueOrientationInt; // saved in LSLRecorder.cs
@@ -88,16 +103,72 @@ public class LSLStreams : MonoBehaviour
         lslIFrameTimeStamp.desc().append_child("CurrentFrameTimeStamp");
         lslOFrameTimeStamp = new liblsl.StreamOutlet(lslIFrameTimeStamp);
         
-        lslITimeStampTrialBegin = new liblsl.StreamInfo(
-            "TimeStampTrialBegin",
+        lslITrialStartMeasurementTimeStamp = new liblsl.StreamInfo(
+            "TrialStartMeasurementTimeStamp",
             "Markers",
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
             subjectID
         );
-        lslITimeStampTrialBegin.desc().append_child("TimeStampTrialBegin");
-        lslOTimeStampTrialBegin = new liblsl.StreamOutlet(lslITimeStampTrialBegin);
+        lslITrialStartMeasurementTimeStamp.desc().append_child("TrialStartMeasurementTimeStamp");
+        lslOTrialStartMeasurementTimeStamp = new liblsl.StreamOutlet(lslITrialStartMeasurementTimeStamp);
+        
+        lslICueTimeStamp = new liblsl.StreamInfo(
+            "CueTimeStamp",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+        );
+        lslICueTimeStamp.desc().append_child("CueTimeStamp");
+        lslOCueTimeStamp = new liblsl.StreamOutlet(lslICueTimeStamp);
+
+        lslICueDisappearedTimeStamp = new liblsl.StreamInfo(
+            "CueDisappearedTimeStamp",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+        );
+        lslICueDisappearedTimeStamp.desc().append_child("CueDisappearedTimeStamp");
+        lslOCueDisappearedTimeStamp = new liblsl.StreamOutlet(lslICueDisappearedTimeStamp);
+        
+        lslIObjectShownTimeStamp = new liblsl.StreamInfo(
+            "ObjectShownTimeStamp",
+            "Marker",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+            );
+        lslIObjectShownTimeStamp.desc().append_child("ObjectShownTimeStamp");
+        lslOObjectShownTimeStamp = new liblsl.StreamOutlet(lslIObjectShownTimeStamp);
+        
+        lslIBeepPlayedTimeStamp = new liblsl.StreamInfo(
+            "BeepPlayedTimeStamp",
+            "Marker",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+        );
+        lslIBeepPlayedTimeStamp.desc().append_child("BeepPlayedTimeStamp");
+        lslOBeepPlayedTimeStamp = new liblsl.StreamOutlet(lslIBeepPlayedTimeStamp);
+
+        lslIButtonPressedTimeStamp = new liblsl.StreamInfo(
+            "ButtonPressedTimeStamp",
+            "Marker",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+            );
+        lslIButtonPressedTimeStamp.desc().append_child("ButtonPressedTimeStamp");
+        lslOButtonPressedTimeStamp = new liblsl.StreamOutlet(lslIButtonPressedTimeStamp);
+        
         
         lslIToolCueOrientationInt = new liblsl.StreamInfo(
             "ToolCueOrientationInt",

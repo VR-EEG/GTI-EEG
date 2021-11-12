@@ -497,7 +497,6 @@ public class MeasurementManager : MonoBehaviour
                 currentTrialData.toolHandleOrientation,
                 closestAttachmentPointOnToolToHand
                 );
-            LSLRecorder.Instance.SetTimestampBegin(TimeManager.Instance.GetCurrentUnixTimeStamp());
             LSLRecorder.Instance.SetLSLRecordingStatus(true);
         }
     }
@@ -517,9 +516,11 @@ public class MeasurementManager : MonoBehaviour
         }
         else
         {
-            LSLRecorder.Instance.SetTimestampEnd(TimeManager.Instance.GetCurrentUnixTimeStamp());
             LSLRecorder.Instance.SetLSLRecordingStatus(false);
         }
+        
+        double[] trialStopMeasurementTimeStamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOTrialStopMeasurementTimeStamp.push_sample(trialStopMeasurementTimeStamp);
     }
     
     // Add data point to measurement data 

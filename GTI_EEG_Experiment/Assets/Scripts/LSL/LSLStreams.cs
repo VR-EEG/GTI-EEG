@@ -21,6 +21,9 @@ public class LSLStreams : MonoBehaviour
     private liblsl.StreamInfo lslITimeStamps;
     public liblsl.StreamOutlet lslOTimeStamps; // saved in LSLRecorder.cs
     
+    private liblsl.StreamInfo lslITimeStampTrialBegin;
+    public liblsl.StreamOutlet lslOTimeStampTrialBegin; // saved in LSLRecorder.cs
+    
     private liblsl.StreamInfo lslIToolCueOrientationInt;
     public liblsl.StreamOutlet lslOToolCueOrientationInt; // saved in LSLRecorder.cs
 
@@ -93,6 +96,16 @@ public class LSLStreams : MonoBehaviour
         lslITimeStamps.desc().append_child("timeStampDataPointEnd");
         lslOTimeStamps = new liblsl.StreamOutlet(lslITimeStamps);
         
+        lslITimeStampTrialBegin = new liblsl.StreamInfo(
+            "TimeStampTrialBegin",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            subjectID
+        );
+        lslITimeStampTrialBegin.desc().append_child("TimeStampTrialBegin");
+        lslOTimeStampTrialBegin = new liblsl.StreamOutlet(lslITimeStampTrialBegin);
         
         lslIToolCueOrientationInt = new liblsl.StreamInfo(
             "ToolCueOrientationInt",
@@ -133,7 +146,7 @@ public class LSLStreams : MonoBehaviour
             "Markers",
             58,
             NominalRate,
-            liblsl.channel_format_t.cf_string,
+            liblsl.channel_format_t.cf_float32,
             subjectID
         );
         lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeOpennessLeft");

@@ -131,7 +131,7 @@ public class LSLStreams : MonoBehaviour
         lslIEyeTrackingGazeHMDFloat = new liblsl.StreamInfo(
             "EyeTrackingGazeHMDFloat",
             "Markers",
-            55,
+            58,
             NominalRate,
             liblsl.channel_format_t.cf_string,
             subjectID
@@ -158,18 +158,21 @@ public class LSLStreams : MonoBehaviour
         lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionRightWorld.x");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionRightWorld.y");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeDirectionRightWorld.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyesValidity");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyes.x");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyes.y");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectCombinedEyes.z");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldCombinedEyes.x");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldCombinedEyes.y");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldCombinedEyes.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEyeValidity");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEye.x");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEye.y");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectLeftEye.z");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldLeftEye.x");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldLeftEye.y");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitObjectCenterInWorldLeftEye.z");
+        lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEyeValidity");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEye.x");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEye.y");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hitPointOnObjectRightEye.z");

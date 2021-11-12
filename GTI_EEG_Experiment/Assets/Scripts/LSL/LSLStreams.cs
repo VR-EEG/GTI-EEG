@@ -18,8 +18,8 @@ public class LSLStreams : MonoBehaviour
     private liblsl.StreamInfo lslIFrameTracking;
     public liblsl.StreamOutlet lslOFrameTracking; // saved in LSLRecorder.cs
 
-    private liblsl.StreamInfo lslITimeStamps;
-    public liblsl.StreamOutlet lslOTimeStamps; // saved in LSLRecorder.cs
+    private liblsl.StreamInfo lslIFrameTimeStamp;
+    public liblsl.StreamOutlet lslOFrameTimeStamp; // saved in LSLRecorder.cs
     
     private liblsl.StreamInfo lslITimeStampTrialBegin;
     public liblsl.StreamOutlet lslOTimeStampTrialBegin; // saved in LSLRecorder.cs
@@ -77,18 +77,16 @@ public class LSLStreams : MonoBehaviour
         lslOFrameTracking = new liblsl.StreamOutlet(lslIFrameTracking);
 
         
-        lslITimeStamps = new liblsl.StreamInfo(
+        lslIFrameTimeStamp = new liblsl.StreamInfo(
             "TimeStamps",
             "Markers",
-            3,
+            1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
             subjectID
         );
-        lslITimeStamps.desc().append_child("CurrentTimeStamp");
-        lslITimeStamps.desc().append_child("timeStampDataPointStart");
-        lslITimeStamps.desc().append_child("timeStampDataPointEnd");
-        lslOTimeStamps = new liblsl.StreamOutlet(lslITimeStamps);
+        lslIFrameTimeStamp.desc().append_child("CurrentFrameTimeStamp");
+        lslOFrameTimeStamp = new liblsl.StreamOutlet(lslIFrameTimeStamp);
         
         lslITimeStampTrialBegin = new liblsl.StreamInfo(
             "TimeStampTrialBegin",

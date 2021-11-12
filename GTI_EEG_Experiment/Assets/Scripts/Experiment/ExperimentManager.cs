@@ -527,21 +527,33 @@ public class ExperimentManager : MonoBehaviour
         // Update cue text dependent on utcon 
         cueManager.UpdateCueTextFromUtcon(currentUtcon);
         
+        double[] cueTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOCueTimeStamp.push_sample(cueTimestamp);
+        
         // Wait cue displaying time before deactivating cue again 
         yield return new WaitForSeconds(configManager.cuePresentationDuration);
         cueManager.UpdateCueText(CueStates.Empty);
         
+        double[] cueDisappearedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOCueDisappearedTimeStamp.push_sample(cueDisappearedTimestamp);
+
         // Wait before displaying tool 
         yield return new WaitForSeconds(configManager.delayBetweenCueAndToolPresentation);
         
         // Display tool on table dependent on utcon 
         toolManager.DisplayToolOnTable(currentUtcon);
         
+        double[] objectShownTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOObjectShownTimeStamp.push_sample(objectShownTimestamp);
+        
         // Wait before playing beep sound 
         yield return new WaitForSeconds(configManager.toolPresentationDurationBeforeBeep);
         
         // Play beep 
         audioManager.PlayBeepSoundImmediately();
+
+        double[] beepPlayedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOBeepPlayedTimeStamp.push_sample(beepPlayedTimestamp);
         
         // Reset input to none to make sure spam input is ignored 
         triggerManager.ResetInteractionHappened(); 
@@ -552,6 +564,9 @@ public class ExperimentManager : MonoBehaviour
             // Trigger interaction appeared
             if (triggerManager.GetInteractionHappened())
             {
+                double[] buttonPressedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+                LSLStreams.Instance.lslOButtonPressedTimeStamp.push_sample(buttonPressedTimestamp);
+                
                 // Stop measuring right after trigger interaction happened
                 measurementManager.StopMeasurement();
                 

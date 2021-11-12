@@ -108,12 +108,9 @@ public class LSLRecorder : MonoBehaviour
     {
         if (!_recordLsl) return;
 
-        double[] timestamps =
-        {
-            TimeManager.Instance.GetCurrentUnixTimeStamp(),
-            _timestampBegin,
-            _timestampEnd
-        };
+        double[] currentTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp()};
+        
+        LSLStreams.Instance.lslOFrameTimeStamp.push_sample(currentTimestamp);
 
         int[] toolCueOrientationInt =
         {
@@ -383,7 +380,6 @@ public class LSLRecorder : MonoBehaviour
             _leapHandRotation.z
         };
 
-        SaveTimeStamps(timestamps);
         SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
         SaveEyeTrackingData(eyeTrackingGazeHMDFloat, eyeTrackingGazeHMDString);
         SaveInputs(input);
@@ -392,13 +388,7 @@ public class LSLRecorder : MonoBehaviour
         int[] currentFrame = {Time.frameCount};
         LSLStreams.Instance.lslOFrameTracking.push_sample(currentFrame);
     }
-
     
-    private void SaveTimeStamps(double[] timestamps)
-    {
-        LSLStreams.Instance.lslOTimeStamps.push_sample(timestamps);
-    }
-
     private void SaveToolCueOrientation(int[] toolCueOrientationInt, string[] toolCueOrientationString)
     {
         LSLStreams.Instance.lslOToolCueOrientationInt.push_sample(toolCueOrientationInt);

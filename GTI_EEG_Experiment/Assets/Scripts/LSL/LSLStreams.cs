@@ -51,6 +51,9 @@ public class LSLStreams : MonoBehaviour
     private liblsl.StreamInfo lslIEyeTrackingGazeHMDFloat;
     public liblsl.StreamOutlet lslOEyeTrackingGazeHMDFloat; // saved in LSLRecorder.cs
     
+    private liblsl.StreamInfo lslIGazeValidity;
+    public liblsl.StreamOutlet lslOGazeValidity; // saved in LSLRecorder.cs
+    
     private liblsl.StreamInfo lslIEyeTrackingGazeHMDString;
     public liblsl.StreamOutlet lslOEyeTrackingGazeHMDString; // saved in LSLRecorder.cs
 
@@ -287,6 +290,29 @@ public class LSLStreams : MonoBehaviour
         lslIEyeTrackingGazeHMDFloat.desc().append_child("hmdDirectionUp.z");
         lslOEyeTrackingGazeHMDFloat = new liblsl.StreamOutlet(lslIEyeTrackingGazeHMDFloat);
         
+        lslIGazeValidity = new liblsl.StreamInfo(
+            "GazeValidity",
+            "Markers",
+            14,
+            NominalRate,
+            liblsl.channel_format_t.cf_int8,
+            subjectID
+        );
+        lslIGazeValidity.desc().append_child("LeftDataGazeOriginValidity");
+        lslIGazeValidity.desc().append_child("LeftDataGazeDirectionValidity");
+        lslIGazeValidity.desc().append_child("LeftDataPupilDiameterValidity");
+        lslIGazeValidity.desc().append_child("LeftDataEyeOpennessValidity");
+        lslIGazeValidity.desc().append_child("LeftDataPupilPositionInSensorAreaValidity");
+        lslIGazeValidity.desc().append_child("LeftAllValidity");
+        lslIGazeValidity.desc().append_child("LeftOriginAndDirectionValidity");
+        lslIGazeValidity.desc().append_child("RightDataGazeOriginValidity");
+        lslIGazeValidity.desc().append_child("RightDataGazeDirectionValidity");
+        lslIGazeValidity.desc().append_child("RightDataPupilDiameterValidity");
+        lslIGazeValidity.desc().append_child("RightDataEyeOpennessValidity");
+        lslIGazeValidity.desc().append_child("RightDataPupilPositionInSensorAreaValidity");
+        lslIGazeValidity.desc().append_child("RightAllValidity");
+        lslIGazeValidity.desc().append_child("RightOriginAndDirectionValidity");
+        lslOGazeValidity = new liblsl.StreamOutlet(lslIGazeValidity);
 
         lslIEyeTrackingGazeHMDString = new liblsl.StreamInfo(
             "EyeTrackingGazeHMDString",

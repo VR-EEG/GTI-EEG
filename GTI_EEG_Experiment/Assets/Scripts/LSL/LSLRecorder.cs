@@ -132,12 +132,86 @@ public class LSLRecorder : MonoBehaviour
             _closestAttachmentPointOnToolToHand
         };
 
+        SRanipal_Eye_v2.GetVerboseData(out var verboseData); 
+
+        var leftEyeData= verboseData.left;
+        var rightEyeData = verboseData.right;
+        
+        var leftDataGazeOriginValidity = 
+            leftEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_ORIGIN_VALIDITY) ? 1 : 0;
+        
+        var leftDataGazeDirectionValidity = 
+            leftEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY) ? 1 : 0;
+        
+        var leftDataPupilDiameterValidity = 
+            leftEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_PUPIL_DIAMETER_VALIDITY) ? 1 : 0;
+        
+        var leftDataEyeOpennessValidity = 
+            leftEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_EYE_OPENNESS_VALIDITY) ? 1 : 0;
+        
+        var leftDataPupilPositionInSensorAreaValidity = 
+            leftEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_PUPIL_POSITION_IN_SENSOR_AREA_VALIDITY) ? 1 : 0;
+
+        var leftAllValid = 
+            leftDataGazeOriginValidity + 
+            leftDataGazeDirectionValidity +
+            leftDataPupilDiameterValidity +
+            leftDataEyeOpennessValidity +
+            leftDataPupilPositionInSensorAreaValidity == 5 ? 1 : 0;
+        
+        var leftOriginAndDirectionValid =
+            leftDataGazeOriginValidity + 
+            leftDataGazeDirectionValidity == 2 ? 1 : 0;
+        
+        var rightDataGazeOriginValidity = 
+            rightEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_ORIGIN_VALIDITY) ? 1 : 0;
+        
+        var rightDataGazeDirectionValidity = 
+            rightEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_DIRECTION_VALIDITY) ? 1 : 0;
+        
+        var rightDataPupilDiameterValidity = 
+            rightEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_PUPIL_DIAMETER_VALIDITY) ? 1 : 0;
+        
+        var rightDataEyeOpennessValidity = 
+            rightEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_EYE_OPENNESS_VALIDITY) ? 1 : 0;
+        
+        var rightDataPupilPositionInSensorAreaValidity = 
+            rightEyeData.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_PUPIL_POSITION_IN_SENSOR_AREA_VALIDITY) ? 1 : 0;
+
+        var rightAllValid = 
+            rightDataGazeOriginValidity + 
+            rightDataGazeDirectionValidity +
+            rightDataPupilDiameterValidity +
+            rightDataEyeOpennessValidity +
+            rightDataPupilPositionInSensorAreaValidity == 5 ? 1 : 0;
+        
+        var rightOriginAndDirectionValid =
+            rightDataGazeOriginValidity + 
+            rightDataGazeDirectionValidity == 2 ? 1 : 0;
+        
+        int[] gazeDataValidity =
+        {
+            leftDataGazeOriginValidity,
+            leftDataGazeDirectionValidity,
+            leftDataPupilDiameterValidity,
+            leftDataEyeOpennessValidity,
+            leftDataPupilPositionInSensorAreaValidity,
+            leftAllValid,
+            leftOriginAndDirectionValid,
+            rightDataGazeOriginValidity,
+            rightDataGazeDirectionValidity,
+            rightDataPupilDiameterValidity,
+            rightDataEyeOpennessValidity,
+            rightDataPupilPositionInSensorAreaValidity,
+            rightAllValid,
+            rightOriginAndDirectionValid
+        };
+        
         // Eye openness
         SRanipal_Eye_v2.GetEyeOpenness(EyeIndex.LEFT, out _eyeOpennessLeft);
         SRanipal_Eye_v2.GetEyeOpenness(EyeIndex.RIGHT, out _eyeOpennessRight);
 
         // Pupil Diameter
-        SRanipal_Eye_v2.GetVerboseData(out var verboseData); 
         _pupilDiameterMillimetersLeft = verboseData.left.pupil_diameter_mm;
         _pupilDiameterMillimetersRight = verboseData.right.pupil_diameter_mm;
         
@@ -170,9 +244,7 @@ public class LSLRecorder : MonoBehaviour
             _controllerScale = Vector3.zero;
             
             // Set leap specific values 
-            _leapIsGrasping = leapUsedInteractionHand.isGraspingObject
-                ? 1
-                : 0;
+            _leapIsGrasping = leapUsedInteractionHand.isGraspingObject ? 1 : 0;
             _leapGrabStrength = leapHand.GrabStrength;
             _leapGrabAngle = leapHand.GrabAngle;
             _leapPinchStrength = leapHand.PinchStrength;
@@ -217,10 +289,9 @@ public class LSLRecorder : MonoBehaviour
         _eyePositionCombinedWorld = _hmdTransform.position + rayCombineEye.origin; // ray origin is at transform of hmd + offset 
         _eyeDirectionCombinedWorld = _hmdTransform.rotation * rayCombineEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
-        RaycastHit hitPointOnObjectCombinedEyes;
         Bounds boundsCombinedEyes;
         if (Physics.Raycast(_eyePositionCombinedWorld, _eyeDirectionCombinedWorld, 
-            out hitPointOnObjectCombinedEyes, 10f))
+            out var hitPointOnObjectCombinedEyes, 10f))
         {
             _hitPointOnObjectCombinedEyesValidity = 1;
             boundsCombinedEyes = hitPointOnObjectCombinedEyes.collider.bounds;
@@ -239,10 +310,9 @@ public class LSLRecorder : MonoBehaviour
         _eyePositionLeftWorld = _hmdTransform.position + rayLeftEye.origin; // ray origin is at transform of hmd + offset 
         _eyeDirectionLeftWorld = _hmdTransform.rotation * rayLeftEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
-        RaycastHit hitPointOnObjectLeftEye;
         Bounds boundsLeftEye;
         if (Physics.Raycast(_eyePositionLeftWorld, _eyeDirectionLeftWorld, 
-            out hitPointOnObjectLeftEye, 10f))
+            out var hitPointOnObjectLeftEye, 10f))
         {
             _hitPointOnObjectLeftEyeValidity = 1;
             boundsLeftEye = hitPointOnObjectLeftEye.collider.bounds;
@@ -261,10 +331,9 @@ public class LSLRecorder : MonoBehaviour
         _eyePositionRightWorld = _hmdTransform.position + rayRightEye.origin; // ray origin is at transform of hmd + offset 
         _eyeDirectionRightWorld = _hmdTransform.rotation * rayRightEye.direction; // ray direction is local, so multiply with hmd transform to get world direction 
 
-        RaycastHit hitPointOnObjectRightEye;
         Bounds boundsRightEye;
         if (Physics.Raycast(_eyePositionRightWorld, _eyeDirectionRightWorld, 
-            out hitPointOnObjectRightEye, 10f))
+            out var hitPointOnObjectRightEye, 10f))
         {
             _hitPointOnObjectRightEyeValidity = 1;
             boundsRightEye = hitPointOnObjectRightEye.collider.bounds;
@@ -284,7 +353,7 @@ public class LSLRecorder : MonoBehaviour
         var hmdRot = _hmdTransform.rotation.eulerAngles;
         var hmdUp = _hmdTransform.up;
 
-        float[] eyeTrackingGazeHMDFloat =
+        float[] eyeTrackingGazeHmdFloat =
         {
             _eyeOpennessLeft,
             _eyeOpennessRight,
@@ -346,7 +415,7 @@ public class LSLRecorder : MonoBehaviour
             hmdUp.z
         };
 
-        string[] eyeTrackingGazeHMDString =
+        string[] eyeTrackingGazeHmdString =
         {
             _hitObjectNameCombinedEyes,
             _hitObjectNameLeftEye,
@@ -381,7 +450,7 @@ public class LSLRecorder : MonoBehaviour
         };
 
         SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
-        SaveEyeTrackingData(eyeTrackingGazeHMDFloat, eyeTrackingGazeHMDString);
+        SaveEyeTrackingData(eyeTrackingGazeHmdFloat, eyeTrackingGazeHmdString, gazeDataValidity);
         SaveInputs(input);
         
         // save current frame via LSL
@@ -395,10 +464,11 @@ public class LSLRecorder : MonoBehaviour
         LSLStreams.Instance.lslOToolCueOrientationString.push_sample(toolCueOrientationString);
     }
     
-    private void SaveEyeTrackingData(float[] floatValues, string[] stringValues)
+    private void SaveEyeTrackingData(float[] floatValues, string[] stringValues, int[] gazeValidity)
     {
         LSLStreams.Instance.lslOEyeTrackingGazeHMDFloat.push_sample(floatValues);
         LSLStreams.Instance.lslOEyeTrackingGazeHMDString.push_sample(stringValues);
+        LSLStreams.Instance.lslOGazeValidity.push_sample(gazeValidity);
     }
 
     private void SaveInputs(float[] inputData)

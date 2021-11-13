@@ -78,6 +78,30 @@ public class LSLDataFrame
     public Vector3 hitPointOnObjectRightEye;
     public Vector3 hitObjectCenterInWorldRightEye;
     
+    /// <summary>
+    /// GazeValidity stream
+    /// channel_count: 55
+    /// </summary>
+    //validity left
+    
+    public bool LeftDataGazeOriginValidity; /** The validity of the origin of gaze of the eye data */
+    public bool LeftDataGazeDirectionValidity; /** The validity of the direction of gaze of the eye data */
+    public bool LeftDataPupilDiameterValidity; /** The validity of the diameter of gaze of the eye data */
+    public bool LeftDataEyeOpennessValidity; /** The validity of the openness of the eye data */
+    public bool LeftDataPupilPositionInSensorAreaValidity;  /** The validity of normalized position of pupil */
+    public bool LeftAllValid; 
+    public bool LeftOriginAndDirectionValid; // combined gaze seems to only have origin and direction set to valid 
+    
+    //validity right
+    
+    public bool RightDataGazeOriginValidity; /** The validity of the origin of gaze of the eye data */
+    public bool RightDataGazeDirectionValidity; /** The validity of the direction of gaze of the eye data */
+    public bool RightDataPupilDiameterValidity; /** The validity of the diameter of gaze of the eye data */
+    public bool RightDataEyeOpennessValidity; /** The validity of the openness of the eye data */
+    public bool RightDataPupilPositionInSensorAreaValidity;  /** The validity of normalized position of pupil */
+    public bool RightAllValid; 
+    public bool RightOriginAndDirectionValid; 
+    
     // HMD 
     public Vector3 hmdPos;
     public Vector3 hmdDirectionForward;

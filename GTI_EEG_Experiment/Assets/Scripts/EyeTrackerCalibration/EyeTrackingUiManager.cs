@@ -174,14 +174,14 @@ public class EyeTrackingUiManager : MonoBehaviour
                 buttonStartEyeCalibration.interactable = true;
                 
                 // Deactivate validation button 
-                if (!configManager.eyeTrackingIsCalibrated)
+                /*if (!configManager.eyeTrackingIsCalibrated)
                 {
                     buttonStartEyeValidation.interactable = false;
                 }
                 else
                 {
                     buttonStartEyeValidation.interactable = true;
-                }
+                }*/
                 
                 
                 // Deactivate back to experiment button 

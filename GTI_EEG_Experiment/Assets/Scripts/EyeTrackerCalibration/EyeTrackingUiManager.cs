@@ -158,9 +158,11 @@ public class EyeTrackingUiManager : MonoBehaviour
     {
         while (true)
         {
+            buttonStartEyeCalibration.interactable = true;
+            buttonStartEyeValidation.interactable = true;
+            buttonBackToExperiment.interactable = true;
             
-            
-            // Deactivate all buttons, if calibration/ validation are running 
+            /*// Deactivate all buttons, if calibration/ validation are running 
             if (eyeTrackingManager.calibrationIsRunning || eyeTrackingManager.validationIsRunning)
             {
                 buttonStartEyeCalibration.interactable = false;
@@ -185,7 +187,9 @@ public class EyeTrackingUiManager : MonoBehaviour
                 
                 
                 // Deactivate back to experiment button 
-                if (!configManager.eyeTrackingIsCalibrated || !configManager.eyeTrackingIsValidated || !eyeTrackingManager.ValidationErrorWithinMargin()) 
+                if (!configManager.eyeTrackingIsCalibrated || 
+                    !configManager.eyeTrackingIsValidated || 
+                    !eyeTrackingManager.ValidationErrorWithinMargin()) 
                 {
                     buttonBackToExperiment.interactable = false;
                 }
@@ -194,7 +198,7 @@ public class EyeTrackingUiManager : MonoBehaviour
                     buttonBackToExperiment.interactable = true;
                 }
                 
-            }
+            }*/
 
             // Update menu every 0.8 seconds 
             yield return new WaitForSeconds(0.8f);

@@ -96,17 +96,21 @@ public class EyeTrackingValidation : MonoBehaviour
         
         // Store all validation samples before writing to disk 
         eyeTrackingValidationData = new EyeTrackingValidationData();
-        List<EyeTrackingValidationDataSample> validationDataPoints = new List<EyeTrackingValidationDataSample>();
+        List<EyeTrackingValidationDataSample> validationDataPoints = 
+            new List<EyeTrackingValidationDataSample>();
         eyeTrackingValidationData.eyeTrackingValidationDataSamples = validationDataPoints;
         
         // Set meta data 
         eyeTrackingValidationData.subjectId = configManager.subjectId;
         eyeTrackingValidationData.blockNumber = configManager.currentBlock;
-        eyeTrackingValidationData.validationAttemptNumber = eyeTrackingManager.numberOfValidationAttempts;
+        eyeTrackingValidationData.validationAttemptNumber = 
+            eyeTrackingManager.numberOfValidationAttempts;
         eyeTrackingValidationData.dateTime = System.DateTime.Now.ToString("yyyy-MM-dd HH-mm");
         
         // Move validation ball to first position, to make sure ball moves properly within loop 
-        transform.position = Player.instance.hmdTransform.position + Player.instance.hmdTransform.rotation * keyPositions[0];
+        transform.position = Player.instance.hmdTransform.position + 
+                             Player.instance.hmdTransform.rotation * 
+            keyPositions[0];
         transform.LookAt(Player.instance.hmdTransform);
         
         // Go through all validation ball positions and measure
@@ -118,7 +122,10 @@ public class EyeTrackingValidation : MonoBehaviour
             float timeDiff = 0;
             while (timeDiff < 1f)
             {
-                transform.position = Player.instance.hmdTransform.position + Player.instance.hmdTransform.rotation * Vector3.Lerp(keyPositions[i-1], keyPositions[i], timeDiff / 1f); // move smoothly depending on time since start from previous to next position
+                transform.position = Player.instance.hmdTransform.position + 
+                                     Player.instance.hmdTransform.rotation * 
+                    Vector3.Lerp(keyPositions[i-1], keyPositions[i], 
+                        timeDiff / 1f); // move smoothly depending on time since start from previous to next position
                 transform.LookAt(Player.instance.hmdTransform);
                 yield return new WaitForEndOfFrame();
                 timeDiff = Time.time - startTime;
@@ -132,7 +139,9 @@ public class EyeTrackingValidation : MonoBehaviour
             while (timeDiff < 3f)
             {
                 // Move validation ball to designated position 
-                transform.position = Player.instance.hmdTransform.position + Player.instance.hmdTransform.rotation * keyPositions[i] ;
+                transform.position = Player.instance.hmdTransform.position + 
+                                     Player.instance.hmdTransform.rotation * 
+                    keyPositions[i] ;
                 transform.LookAt(Player.instance.hmdTransform);
                 
                 // Get measurements and save to ValidationSample
@@ -174,14 +183,15 @@ public class EyeTrackingValidation : MonoBehaviour
         
         // Write resulting data to disk 
         WriteValidationDataToJson();
-        
+
         // Update latest Validation Result in Config manager
-        configManager.latestEyeTrackingValidationResults = new Vector3(eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultX, eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultY, eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultZ);
+        configManager.latestEyeTrackingValidationResults = new Vector3(
+            eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultX, 
+            eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultY, 
+            eyeTrackingValidationData.combinedEyeAngleOffsetValidationResultZ);
         
         // Update config values after validation 
         UpdateValuesAfterValidationFinished();
-
-
     }
 
 
@@ -210,7 +220,8 @@ public class EyeTrackingValidation : MonoBehaviour
 
         if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out ray))
         {
-            var angles = Quaternion.FromToRotation((transform.position - hmdTransform.position).normalized, hmdTransform.rotation * ray.direction)
+            var angles = Quaternion.FromToRotation((transform.position - hmdTransform.position).normalized, 
+                    hmdTransform.rotation * ray.direction)
                 .eulerAngles;
 
             debText += "\nLeft Eye: " + angles + "\n";
@@ -219,7 +230,8 @@ public class EyeTrackingValidation : MonoBehaviour
 
         if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out ray))
         {
-            var angles = Quaternion.FromToRotation((transform.position - hmdTransform.position).normalized, hmdTransform.rotation * ray.direction)
+            var angles = Quaternion.FromToRotation((transform.position - hmdTransform.position).normalized, 
+                    hmdTransform.rotation * ray.direction)
                 .eulerAngles;
             debText += "Right Eye: " + angles + "\n";
             sample.rightEyeAngleOffset = angles;
@@ -227,7 +239,8 @@ public class EyeTrackingValidation : MonoBehaviour
 
         if (SRanipal_Eye_v2.GetGazeRay(GazeIndex.COMBINE, out ray))
         {
-            var angles = Quaternion.FromToRotation((transform.position - hmdTransform.position).normalized, hmdTransform.rotation * ray.direction)
+            var angles = Quaternion.FromToRotation((transform.position - hmdTransform.position).normalized, 
+                    hmdTransform.rotation * ray.direction)
                 .eulerAngles;
             debText += "Combined Eye: " + angles + "\n";
             sample.combinedEyeAngleOffset = angles;
@@ -248,7 +261,8 @@ public class EyeTrackingValidation : MonoBehaviour
     // Get current Timestamp 
     public double GetCurrentTimestamp()
     {
-        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, 
+            System.DateTimeKind.Utc);
         return (System.DateTime.UtcNow - epochStart).TotalSeconds;
     }
 
@@ -261,7 +275,10 @@ public class EyeTrackingValidation : MonoBehaviour
         
         // Construct an individual filename for the eye tracking calibration data with subject id and block number 
         // Replace any empty spaces with underscores
-        string fileName = "/EyeTrackingValidation/SubjectID_" + eyeTrackingValidationData.subjectId + "_BlockNumber_" + eyeTrackingValidationData.blockNumber + "_ValidationAttemptNumber_" + eyeTrackingValidationData.validationAttemptNumber + "_DateTime_" + eyeTrackingValidationData.dateTime + ".json";
+        string fileName = "/EyeTrackingValidation/SubjectID_" + eyeTrackingValidationData.subjectId + "_BlockNumber_" + 
+                          eyeTrackingValidationData.blockNumber + "_ValidationAttemptNumber_" + 
+                          eyeTrackingValidationData.validationAttemptNumber + "_DateTime_" + 
+                          eyeTrackingValidationData.dateTime + ".json";
         fileName = fileName.Replace(" ", "_");
         
         // Full filepath 
@@ -301,7 +318,7 @@ public class EyeTrackingValidation : MonoBehaviour
     [Serializable] 
     public struct EyeTrackingValidationData
     {
-        public int subjectId;
+        public string subjectId;
         public int validationAttemptNumber;
         public int blockNumber;
         public string dateTime;

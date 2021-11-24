@@ -27,6 +27,8 @@ using Hand = Valve.VR.InteractionSystem.Hand;
 
 public class MeasurementManager : MonoBehaviour
 {
+    public static MeasurementManager Instance { get; private set; }
+
     
     // Tool Manager 
     public ToolManager toolManager;
@@ -55,6 +57,9 @@ public class MeasurementManager : MonoBehaviour
     // Handedness in SteamVR format 
     private SteamVR_Input_Sources handednessOfPlayerSteamVrFormat;
     
+    // LSL recorder state
+    private bool _recordLsl;
+
     // SteamVR 
     public SteamVR_Action_Boolean steamVrAction;
     public Hand steamVrLeftHand;
@@ -68,12 +73,14 @@ public class MeasurementManager : MonoBehaviour
     
     
     // *** Debug 
-    public LineRenderer debugLineRenderer; 
-    
-    
-    
-    
+    public LineRenderer debugLineRenderer;
 
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -144,7 +151,7 @@ public class MeasurementManager : MonoBehaviour
     // Debug 
     IEnumerator DebugFileStructure()
     {
-        configManager.subjectId = 420;
+        configManager.subjectId = "-";
         configManager.currentUtcon = 111;
         InitSubjectData();
         WriteSubjectMetaDataToDisk();
@@ -188,6 +195,7 @@ public class MeasurementManager : MonoBehaviour
         configManager.currentSubjectData.subjectGender = configManager.subjectGender;
         configManager.currentSubjectData.subjectHandedness = configManager.subjectHandedness;
         configManager.currentSubjectData.subjectId = configManager.subjectId;
+        configManager.currentSubjectData.subjectIdHashCode = configManager.subjIdHashCode;
         
         // Set subject data time  
         configManager.currentSubjectData.dateTimeCreated = System.DateTime.Now.ToString("yyyy-MM-dd HH-mm");
@@ -215,14 +223,15 @@ public class MeasurementManager : MonoBehaviour
         configManager.currentSubjectData.experimentUtconInfo = experimentManager.GetExperimentUtconInfo();
         
         // Set filenames 
-        configManager.subjectMetaDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_MetaData_Datetime_" + configManager.currentSubjectData.dateTimeCreated + ".json";
+        configManager.subjectMetaDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_MetaData_Datetime_" + 
+                                                configManager.currentSubjectData.dateTimeCreated + ".json";
         configManager.subjectMetaDataFileName = configManager.subjectMetaDataFileName.Replace(" ", "_");
-        configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" + configManager.currentSubjectData.dateTimeCreated + ".json";
+        configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_DataOfBlock_" + 
+                                                        configManager.currentBlock.ToString() + "_Datetime_" + configManager.currentSubjectData.dateTimeCreated + ".json";
         configManager.subjectCurrentBlockDataFileName = configManager.subjectCurrentBlockDataFileName.Replace(" ", "_");
         
         // Write meta data to disk 
         WriteSubjectMetaDataToDisk();
-        
     }
     
     
@@ -356,7 +365,8 @@ public class MeasurementManager : MonoBehaviour
         string blockFinishSyntax = Environment.NewLine + "]" + Environment.NewLine + "}" + Environment.NewLine;
         
         // Write data 
-        Debug.Log("[MeasurementManager] Append finishing syntax of block " + configManager.blockNumberLastWrittenToOnDisk.ToString()  + " at " + filePath + " to block data on disk.");
+        Debug.Log("[MeasurementManager] Append finishing syntax of block " + configManager.blockNumberLastWrittenToOnDisk.ToString()  + 
+                  " at " + filePath + " to block data on disk.");
         File.AppendAllText(filePath,blockFinishSyntax);
         Debug.Log("[MeasurementManager] Finished finishing block.");
     }
@@ -399,11 +409,17 @@ public class MeasurementManager : MonoBehaviour
     {
         Debug.Log("[MeasurementManager] Starting measuring trial in block " + configManager.currentBlock.ToString());
 
-        // Init new trial data 
-        ExperimentTrialData currentTrialData = new ExperimentTrialData();
+        double[] trialStartMeasurementTimeStamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOTrialStartMeasurementTimeStamp.push_sample(trialStartMeasurementTimeStamp);
+
         
-        // Set data from utcon 
-        currentTrialData.utcon = configManager.currentUtcon;
+        // Init new trial data 
+        var currentTrialData = new ExperimentTrialData
+        {
+            // Set data from utcon 
+            utcon = configManager.currentUtcon
+        };
+
         toolManager.ExtractVerifiedIdsFromUtcon(currentTrialData.utcon, out currentTrialData.toolId, out currentTrialData.cueOrientationId );
         toolManager.NamesFromUtcon(currentTrialData.utcon, out currentTrialData.toolName, out currentTrialData.cueOrientationName);
         if (currentTrialData.cueOrientationName.ToLower().Contains("left"))
@@ -417,6 +433,11 @@ public class MeasurementManager : MonoBehaviour
             currentTrialData.cueName = currentTrialData.cueOrientationName.ToLower().Replace("right", "");
         }
         
+        // Set handedness in SteamVR format for faster access, avoiding string compare 
+        handednessOfPlayerSteamVrFormat = 
+            configManager.subjectHandedness.ToLower().Contains("left") 
+            ? SteamVR_Input_Sources.LeftHand 
+            : SteamVR_Input_Sources.RightHand;
         
         // Check if current block exists, create it otherwise  
         if (configManager.currentBlock != configManager.blockNumberLastWrittenToOnDisk)
@@ -428,7 +449,9 @@ public class MeasurementManager : MonoBehaviour
             }
             
             // Update Block file name
-            configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" + configManager.currentSubjectData.dateTimeCreated.Replace(" ","_") + ".json";
+            configManager.subjectCurrentBlockDataFileName = "\\SubjectID_" + configManager.currentSubjectData.subjectId + 
+                                                            "_DataOfBlock_" + configManager.currentBlock.ToString() + "_Datetime_" 
+                                                            + configManager.currentSubjectData.dateTimeCreated.Replace(" ","_") + ".json";
             
             // Init block data and file
             InitBlockData();
@@ -442,38 +465,62 @@ public class MeasurementManager : MonoBehaviour
         
         // Update current trial number, is reset to in case of new block data 
         configManager.currentTrial = configManager.currentBlockData.blockTrials.Count;
-        
-        
-        // Set handedness in SteamVR format for faster access, avoiding string compare 
-        if (configManager.subjectHandedness.ToLower().Contains("left"))
-        {
-            handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.LeftHand;
-        }
-        else
-        {
-            handednessOfPlayerSteamVrFormat = SteamVR_Input_Sources.RightHand;
-        }
-        
-        
+
         // Reset gaze ray timestamp 
         lastGazeRayTimeStamp = 0;
         
-        // Start the actual measuring 
-        StartCoroutine("RecordData");
+        if (!configManager.isUsingLSLRecorder)
+        {
+            // Start the actual measuring 
+            StartCoroutine("RecordData");
+        }
+        else
+        {
 
-
+            LSLRecorder.Instance.SetUtcon(configManager.currentUtcon,
+                currentTrialData.cueOrientationId,
+                currentTrialData.cueOrientationName,
+                currentTrialData.cueName
+                );
+            LSLRecorder.Instance.SetBlockID(configManager.currentBlock);
+            LSLRecorder.Instance.SetTrialID(configManager.currentBlockData.blockTrials.Count);
+            
+            var closestAttachmentPointOnToolToHand = 
+                configManager.currentClosestToolAttachmentPointTransform != null 
+                    ? configManager.currentClosestToolAttachmentPointTransform.name 
+                    : "";
+            
+            LSLRecorder.Instance.SetToolInfo(Convert.ToInt32(configManager.isToolCurrentlyAttachedToHand),
+                Convert.ToInt32(configManager.isToolDisplayedOnTable),
+                currentTrialData.toolId,
+                currentTrialData.toolName,
+                currentTrialData.toolHandleOrientation,
+                closestAttachmentPointOnToolToHand
+                );
+            LSLRecorder.Instance.SetLSLRecordingStatus(true);
+        }
     }
     
     // Stop measurement
     public void StopMeasurement()
     {
-        Debug.Log("[MeasurementManager] Stopping Measuring.");
+        if (!configManager.isUsingLSLRecorder)
+        {
+            Debug.Log("[MeasurementManager] Stopping Measuring.");
         
-        // Stop the measurement coroutine
-        StopCoroutine("RecordData");
+            // Stop the measurement coroutine
+            StopCoroutine("RecordData");
         
-        // Write the trial's data to disk, depending on trial index 
-        AppendTrialDataToSubjectDataOnDisk(configManager.currentTrial - 1);
+            // Write the trial's data to disk, depending on trial index 
+            AppendTrialDataToSubjectDataOnDisk(configManager.currentTrial - 1);
+        }
+        else
+        {
+            LSLRecorder.Instance.SetLSLRecordingStatus(false);
+        }
+        
+        double[] trialStopMeasurementTimeStamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOTrialStopMeasurementTimeStamp.push_sample(trialStopMeasurementTimeStamp);
     }
     
     // Add data point to measurement data 
@@ -891,12 +938,9 @@ public class MeasurementManager : MonoBehaviour
 
 
     }
-    
-    
-    
+
     
 }
-
 
 
 
@@ -905,7 +949,8 @@ public class MeasurementManager : MonoBehaviour
 public class SubjectMetaData 
 {
     // Subject 
-    public int subjectId;
+    public string subjectId;
+    public int subjectIdHashCode; 
     public int subjectAge; 
     public string subjectGender; 
     public string subjectHandedness;
@@ -942,7 +987,7 @@ public class SubjectMetaData
 public class ExperimentBlockData
 {
     // Subject ID to make sure no blocks get lost if filename is changed 
-    public int subjectId;
+    public string subjectId;
 
     // Date Time Subject Meta Data was created
     public string dateTimeSubjectMetaDataCreated;

@@ -304,6 +304,9 @@ public class ConfigManager : MonoBehaviour
     
     // Is LeapMotion enabled or not 
     public bool isUsingLeap;
+
+    // Is LSL Recorder enabled or not 
+    public bool isUsingLSLRecorder;
     
     // Is tool displaied on table 
     public bool isToolDisplayedOnTable;
@@ -346,7 +349,10 @@ public class ConfigManager : MonoBehaviour
     public bool subjectDataIsSet;
     
     // Subject ID 
-    public int subjectId;
+    public string subjectId;
+
+    // Subject ID hash code
+    public int subjIdHashCode;
     
     // Subject Gender
     public string subjectGender;
@@ -384,11 +390,14 @@ public class ConfigManager : MonoBehaviour
     
     // Error message of setup 
     private string errorMessage;
-    
-    
+
+
     // Called once at the very start
     void Awake()
     {
+        subjectId = GenerateID();
+        subjIdHashCode = subjectId.GetHashCode();
+        
         // Find UiManager at every scene load
         uiManager = GameObject.FindGameObjectWithTag(uiManagerTag).GetComponent<UiManager>();
         
@@ -408,12 +417,6 @@ public class ConfigManager : MonoBehaviour
             SetupConfigManager();
             
         }
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         
     }
 
@@ -508,6 +511,8 @@ public class ConfigManager : MonoBehaviour
         public float fpsCounterRefreshRateInSeconds;
         public string triggerIsOnSide;
         public bool isUsingLeap;
+        public bool isUsingLSLRecorder;
+
         
         // Subject settings
         public List<string> genders;
@@ -515,6 +520,10 @@ public class ConfigManager : MonoBehaviour
       
     }
 
+    private string GenerateID()
+    { 
+        return Guid.NewGuid().ToString();
+    }
 
     // Get Config Manager Settings that concern the setup of the experiment 
     public ConfigManagerSettings GetConfigManagerSettings()
@@ -592,6 +601,7 @@ public class ConfigManager : MonoBehaviour
             fpsCounterRefreshRateInSeconds = fpsCounterRefreshRateInSeconds,
             triggerIsOnSide = triggerIsOnSide,
             isUsingLeap = isUsingLeap,
+            isUsingLSLRecorder = isUsingLSLRecorder,
             
             // Subject settings
             genders = genders,
@@ -614,6 +624,7 @@ public class ConfigManager : MonoBehaviour
         // Initial values 
         configurationSucceededGracefully = false;
         isUsingLeap = false;
+        isUsingLSLRecorder = false;
         tableIsCalibrated = false;
         floorIsCalibrated = false;
         experimentIsRunning = false;

@@ -124,6 +124,18 @@ public class PlayerManager : MonoBehaviour
         steamVrPlayer.SetActive(true);
     }
 
+    // Switch to LSL Recorder
+    public void SwitchToLSLRecorder()
+    {
+        configManager.isUsingLSLRecorder = true;
+    }
+    
+    // Switch to Eye Tracking Recorder
+    public void SwitchToETRecorder()
+    {
+        configManager.isUsingLSLRecorder = false;
+    }
+    
     // Is Leap Motion available ?
     public bool IsLeapAvailable()
     {

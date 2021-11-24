@@ -40,14 +40,13 @@ public class ExperimentUtconFlowGenerator : MonoBehaviour
    private bool locked = false;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        // Get Tool Manager from Experiment Manager 
-        toolManager = GetComponent<ExperimentManager>().toolManager;
-        
         // Find config manager
         configManager = GameObject.FindWithTag(GetComponent<ExperimentManager>().configManagerTag).GetComponent<ConfigManager>();
         
+        // Get Tool Manager from Experiment Manager 
+        toolManager = GetComponent<ExperimentManager>().toolManager;
     }
 
     // Update is called once per frame
@@ -131,6 +130,17 @@ public class ExperimentUtconFlowGenerator : MonoBehaviour
         WriteExperimentFlowToDisk(csvPath);
     }
 
+    public void GenerateUtconFlowAndWriteToDisk(int numberOfBlocks, int seed, string csvPath, out List<string> experimentalFlow)
+    {
+        // Init 
+        InitUtconFlowGenerator();
+        
+        // Generate 
+        GenerateExperimentFlow(numberOfBlocks, seed, out experimentalFlow);
+        
+        // Write To Disk 
+        WriteExperimentFlowToDisk(csvPath);
+    }
 
     // Generate all possible UTCONs
     private void GeneratePossibleUtcons()
@@ -198,10 +208,58 @@ public class ExperimentUtconFlowGenerator : MonoBehaviour
             // Increment block counter 
             blockCnt += 1;
         }
-        
+
         Debug.Log("[UtconFlowGenerator] Finished generating experiment UTCON flow.");
     }
 
+    // Generate experiment utcon flow with specified number of blocks and a seed 
+    private void GenerateExperimentFlow(int numberOfBlocks, int seed, out List<string> experimentalFlow)
+    {
+        Debug.Log("[UtconFlowGenerator] Generating experiment UTCON flow with " + numberOfBlocks.ToString() + " blocks and seed: " + seed.ToString());
+
+        // Make sure numberOfBlocks is > 0 
+        if (numberOfBlocks <= 0)
+        {
+            Debug.Log("[UtconFlowGenerator] Provided number of blocks " + numberOfBlocks.ToString() + " is not a positive integer, not generating experiment flow file!");
+        }
+
+        // Init experiment flow list 
+        fullExperimentUtconsFlow = new List<string>();
+
+        // Update last used seed 
+        lastRandomSeed = seed;
+
+        // Generate new random object 
+        System.Random rnd = new System.Random(lastRandomSeed);
+
+        // Generate shuffled trials for each block, init temporary shuffled utcons list and create full experiment flow list 
+        int blockCnt = 1;
+        List<int> shuffledUtcons;
+        while (blockCnt <= numberOfBlocks)
+        {
+            // Shuffle utcons
+            shuffledUtcons = new List<int>(possibleUtcons);
+            Shuffle<int>(shuffledUtcons, rnd);
+
+            // Add shuffled utcons to experiment flow list 
+            foreach(int utcon in shuffledUtcons)
+            {
+                fullExperimentUtconsFlow.Add(utcon.ToString());
+            }
+
+            // Add pause indicator, except for after last block
+            if (blockCnt < numberOfBlocks)
+            {
+                fullExperimentUtconsFlow.Add(configManager.blockPauseIndicator);
+            }
+
+            // Increment block counter 
+            blockCnt += 1;
+        }
+
+        experimentalFlow = fullExperimentUtconsFlow;
+        Debug.Log("[UtconFlowGenerator] Finished generating experiment UTCON flow.");
+    }
     
     // Fisher-Yates Shuffle 
     // Shuffle list using instantiated random object 

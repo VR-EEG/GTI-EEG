@@ -12,6 +12,7 @@ using Leap.Unity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Valve.VR;
 
@@ -83,7 +84,7 @@ public class UiManager : MonoBehaviour
     public Button buttonCalibrateTableFloor;
     public Button buttonSetSubjectData;
     public Button buttonStartExperiment;
-    public Button buttonHelpers;
+    [FormerlySerializedAs("buttonHelpers")] public Button buttonSettings;
     public Button buttonQuit;
     
     
@@ -128,14 +129,14 @@ public class UiManager : MonoBehaviour
     
 
      // ****
-    // Variables belonging to Helpers Menu  
-    [Header("Helpers Menu")]
+    // Variables belonging to Settings Menu  
+    [FormerlySerializedAs("helpersMenu")] [Header("Settings Menu")]
     
-    // Helpers Menu 
-    public GameObject helpersMenu;
+    // Settings Menu 
+    public GameObject settingsMenu;
 
-    // Helpers menu main text
-    public Text helpersMenuText;
+    // Settings menu main text
+    [FormerlySerializedAs("helpersMenuText")] public Text settingsMenuText;
 
     // Generate UTCONs button 
     public Button buttonGenerateUtcons;
@@ -152,6 +153,12 @@ public class UiManager : MonoBehaviour
     // Switch to SteamVR button 
     public Button buttonSwitchToSteamInput;
 
+    // Switch to LSL Recorder
+    public Button buttonSwitchToLSLRecorder;
+    
+    // Switch to LSL Recorder
+    public Button buttonSwitchToETRecorder;
+    
     // Toggle HeadVolume Visibility
     public Button buttonToggleHeadVolumeVisibility;
     
@@ -162,7 +169,8 @@ public class UiManager : MonoBehaviour
     public Button buttonAbout;
     
     // Back to main menu button 
-    public Button buttonBackFromHelpersMenuToMainMenu;
+    [FormerlySerializedAs("buttonBackFromHelpersMenuToMainMenu")] 
+    public Button buttonBackFromSettingsMenuToMainMenu;
 
     
     // ****
@@ -181,8 +189,9 @@ public class UiManager : MonoBehaviour
     // Save subject data button 
     public Button buttonSaveUtconFlowToDisk;
     
-    // Go back from subject data to helpers menu button 
-    public Button buttonBackFromUtconFlowToHelpersMenu;
+    // Go back from subject data to Settings menu button 
+    [FormerlySerializedAs("buttonBackFromUtconFlowToHelpersMenu")] 
+    public Button buttonBackFromUtconFlowToSettingsMenu;
     
     // Set subject data menu text 
     public Text utconFlowMenuText;
@@ -204,8 +213,9 @@ public class UiManager : MonoBehaviour
     // Display next tool
     public Button buttonDisplayNextTool;
     
-    // Go back from display all tools menu to helpers menu 
-    public Button buttonBackDisplayAllToolsToHelpersMenu;
+    // Go back from display all tools menu to Settings menu 
+    [FormerlySerializedAs("buttonBackDisplayAllToolsToHelpersMenu")] 
+    public Button buttonBackDisplayAllToolsToSettingsMenu;
     
     // ****
     // Variables belonging to About Menu 
@@ -214,8 +224,9 @@ public class UiManager : MonoBehaviour
     // About menu 
     public GameObject aboutMenu;
     
-    // Go back from about menu to helpers menu 
-    public Button buttonBackAboutToHelpersMenu;
+    // Go back from about menu to Settings menu 
+    [FormerlySerializedAs("buttonBackAboutToHelpersMenu")] 
+    public Button buttonBackAboutToSettingsMenu;
     
     
     // **** 
@@ -247,7 +258,7 @@ public class UiManager : MonoBehaviour
         listOfMenus = new List<GameObject>();
         listOfMenus.Add(mainMenu);
         listOfMenus.Add(experimentIsRunningMenu);
-        listOfMenus.Add(helpersMenu);
+        listOfMenus.Add(settingsMenu);
         listOfMenus.Add(generateUtconFlowMenu);
         listOfMenus.Add(subjectDataMenu);
         listOfMenus.Add(displayAllToolsMenu);
@@ -258,35 +269,37 @@ public class UiManager : MonoBehaviour
         buttonCalibrateTableFloor.onClick.AddListener(ClickedButtonCalibrateTableFloor);
         buttonSetSubjectData.onClick.AddListener(ClickedButtonSetSubjectData);
         buttonStartExperiment.onClick.AddListener(ClickedButtonStartExperiment);
-        buttonHelpers.onClick.AddListener(ClickedButtonHelpers);
+        buttonSettings.onClick.AddListener(ClickedButtonSettings);
         buttonQuit.onClick.AddListener(ClickedButtonQuit);
 
         // Setup listeners for set subject data buttons
         buttonSaveSubjectData.onClick.AddListener(ClickedButtonSaveSubjectData);
         buttonBackFromSubjectDataToMainMenu.onClick.AddListener(ClickedButtonBackFromSubjectDataToMainMenu);
         
-        // Setup listeners for helpers menu 
+        // Setup listeners for Settings menu 
         buttonGenerateUtcons.onClick.AddListener(ClickedButtonGenerateUtcons);
         buttonGenerateToolInfos.onClick.AddListener(ClickedButtonGenerateToolInfos);
         buttonCalibrateEyeTracking.onClick.AddListener(ClickedButtonCalibrateEyeTracker);
         buttonSwitchToLeapInput.onClick.AddListener(ClickedButtonSwitchToLeapInput);
         buttonSwitchToSteamInput.onClick.AddListener(ClickedButtonSwitchToSteamInput);
+        buttonSwitchToLSLRecorder.onClick.AddListener(ClickedButtonSwitchToLSLRecorder);
+        buttonSwitchToETRecorder.onClick.AddListener(ClickedButtonSwitchToETRecorder);
         buttonToggleHeadVolumeVisibility.onClick.AddListener(ClickedButtonToggleHeadVolumeVisibility);
         buttonDisplayAllToolsSequentially.onClick.AddListener(ClickedButtonDisplayAllToolsSequentially);
         buttonAbout.onClick.AddListener(ClickedButtonAbout);
-        buttonBackFromHelpersMenuToMainMenu.onClick.AddListener(ClickedButtonBackFromHelpersMenuToMainMenu);
+        buttonBackFromSettingsMenuToMainMenu.onClick.AddListener(ClickedButtonBackFromSettingsMenuToMainMenu);
 
         // Setup listeners for generate utcon flow buttons
         buttonSaveUtconFlowToDisk.onClick.AddListener(ClickedButtonSaveUtconFlowToDisk);
-        buttonBackFromUtconFlowToHelpersMenu.onClick.AddListener(ClickedButtonBackFromGenerateUtconsToHelpersMenu);
+        buttonBackFromUtconFlowToSettingsMenu.onClick.AddListener(ClickedButtonBackFromGenerateUtconsToSettingsMenu);
         
         // Setup listeners for display all tools menu buttons 
         buttonDisplayPreviousTool.onClick.AddListener(ClickedButtonPreviousTool);
         buttonDisplayNextTool.onClick.AddListener(ClickedButtonNextTool);
-        buttonBackDisplayAllToolsToHelpersMenu.onClick.AddListener(ClickedButtonBackFromDisplayAllToolsToHelpersMenu);
+        buttonBackDisplayAllToolsToSettingsMenu.onClick.AddListener(ClickedButtonBackFromDisplayAllToolsToSettingsMenu);
         
         // Setup listener for about menu 
-        buttonBackAboutToHelpersMenu.onClick.AddListener(ClickedButtonBackAboutToHelpersMenu);
+        buttonBackAboutToSettingsMenu.onClick.AddListener(ClickedButtonBackAboutToSettingsMenu);
         
         // Setup listener for error message menu button 
         buttonErrorMessageQuit.onClick.AddListener(ClickedButtonQuit);
@@ -363,16 +376,16 @@ public class UiManager : MonoBehaviour
     }
 
     // ** Main Menu 
-    // Listener for button go to helpers
-    void ClickedButtonHelpers()
+    // Listener for button go to Settings
+    void ClickedButtonSettings()
     {
-        Debug.Log("[UiManager] Got button click: Go to Helpers Menu.");
+        Debug.Log("[UiManager] Got button click: Go to Settings Menu.");
         
         // Start Coroutine to check which input options are available 
-        StartCoroutine("InputCheckStatesForHelpersMenu");
+        StartCoroutine("InputCheckStatesForSettingsMenu");
                
         // Change menu 
-        ActivateMenu(helpersMenu);
+        ActivateMenu(settingsMenu);
     }
 
     
@@ -456,10 +469,8 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("[UiManager] Updating subject data.");
         
-        // Get subject id and age
-        int id = 0;
+        // Get subject age
         int age = 0;
-        int.TryParse(subjectIdInput.text, out id);
         int.TryParse(subjectAgeInput.text, out age);
         
         // Get subject gender
@@ -470,7 +481,6 @@ public class UiManager : MonoBehaviour
         
         // Update values in config manager 
         configManager.subjectAge = age;
-        configManager.subjectId = id;
         configManager.subjectGender = gender;
         configManager.subjectHandedness = handedness;
         
@@ -510,7 +520,7 @@ public class UiManager : MonoBehaviour
 
 
     
-    // ** Helpers Menu
+    // ** Settings Menu
     // Listener for button generate utcons
     void ClickedButtonGenerateUtcons()
     {
@@ -526,7 +536,7 @@ public class UiManager : MonoBehaviour
         ActivateMenu(generateUtconFlowMenu);
     }
 
-    // ** Helpers Menu
+    // ** Settings Menu
     // Listener for button generate tool infos 
     void ClickedButtonGenerateToolInfos()
     {
@@ -537,7 +547,7 @@ public class UiManager : MonoBehaviour
     }
 
     
-    // ** Helpers Menu 
+    // ** Settings Menu 
     // Listener for button calibrate eye tracker
     void ClickedButtonCalibrateEyeTracker()
     {
@@ -545,14 +555,14 @@ public class UiManager : MonoBehaviour
         
         // Stop Experiment Status Overlay and check of input state 
         StopCoroutine("RefreshExperimentStatus");
-        StopCoroutine("InputCheckStatesForHelpersMenu");
+        StopCoroutine("InputCheckStatesForSettingsMenu");
         
         // Change Scene; destroying player prefab is done by toggle in SteamVR_Behaviour Script in PlayerPrefab > SteamVRObjects > [SteamVR]  
         Debug.Log("[UiManager] Switching to Eye Tracking Calibration Scene.");
         SceneManager.LoadScene(configManager.calibrationSceneEyeTrackerName);
     }
 
-    // ** Helpers Menu
+    // ** Settings Menu
     // Listener for button switch to leap motion input 
     void ClickedButtonSwitchToLeapInput()
     {
@@ -562,7 +572,7 @@ public class UiManager : MonoBehaviour
         playerManager.SwitchToLeapMotionInput();
     }
 
-    // ** Helpers Menu
+    // ** Settings Menu
     // Listener for button switch to SteamVR input 
     void ClickedButtonSwitchToSteamInput()
     {
@@ -572,7 +582,27 @@ public class UiManager : MonoBehaviour
         playerManager.SwitchToSteamVrInput();
     }
     
-    // ** Helpers Menu
+    // ** Settings Menu
+    // Listener for button switch to LSL Recorder
+    void ClickedButtonSwitchToLSLRecorder()
+    {
+        Debug.Log("[UiManager] Got button click: Switch to LSL Recorder.");
+
+        //  Switch to SteamVR Input  
+        playerManager.SwitchToLSLRecorder();
+    }
+
+    // ** Settings Menu
+    // Listener for button switch to Eye Tracking Recorder
+    void ClickedButtonSwitchToETRecorder()
+    {
+        Debug.Log("[UiManager] Got button click: Switch to Eye Tracking Recorder.");
+
+        //  Switch to SteamVR Input  
+        playerManager.SwitchToETRecorder();
+    }
+    
+    // ** Settings Menu
     // Listener for button Toggle Head Volume Visibility
     void ClickedButtonToggleHeadVolumeVisibility()
     {
@@ -582,7 +612,7 @@ public class UiManager : MonoBehaviour
         headVolumeManager.ToggleHeadVolumeVisibility();
     }
 
-    // ** Helpers Menu
+    // ** Settings Menu
     // Listener for button Display All Tools Sequentially 
     void ClickedButtonDisplayAllToolsSequentially()
     {
@@ -599,7 +629,7 @@ public class UiManager : MonoBehaviour
     }
     
     
-    // ** Helpers Menu 
+    // ** Settings Menu 
     // Listener for button About 
     void ClickedButtonAbout()
     {
@@ -610,14 +640,14 @@ public class UiManager : MonoBehaviour
     }
     
 
-    // ** Helpers Menu
+    // ** Settings Menu
     // Listener for button back to main menu  
-    void ClickedButtonBackFromHelpersMenuToMainMenu()
+    void ClickedButtonBackFromSettingsMenuToMainMenu()
     {
         Debug.Log("[UiManager] Got button click: Back to main menu.");
 
         // Stop coroutine that checks input fields
-        StopCoroutine("InputCheckStatesForHelpersMenu");
+        StopCoroutine("InputCheckStatesForSettingsMenu");
         
         // Make sure head volume is not visible 
         headVolumeManager.SetHeadVolumeVisibility(false);
@@ -641,29 +671,31 @@ public class UiManager : MonoBehaviour
         
         // Create path where to save utcon flow 
         string csvPath = configManager.configFolderPath;
-        csvPath += "\\" + Path.GetFileNameWithoutExtension(configManager.filenameExperimentFlowUtconsCsv) + "_" + System.DateTime.Now.ToString("yyyy-MM-dd HH-mm").Replace(" ","_") + ".csv";
+        csvPath += "\\" + Path.GetFileNameWithoutExtension(configManager.filenameExperimentFlowUtconsCsv) + "_" + 
+                   System.DateTime.Now.ToString("yyyy-MM-dd HH-mm").Replace(" ","_") + ".csv";
         
         // Generate UTCON flow and save to csv
         experimentManager.GetComponent<ExperimentUtconFlowGenerator>().GenerateUtconFlowAndWriteToDisk(blocks,seed,csvPath);
 
         // Update menu text 
         FileInfo csvFileInfo = new FileInfo(csvPath);
-        utconFlowMenuText.text = "\n\n\n\n" + utconFlowMenuDefaultText + "\n\n\n\n\n\n\n\n\n\nSaved UTCON flow at " + csvFileInfo.Name 
+        utconFlowMenuText.text = "\n\n\n\n" + utconFlowMenuDefaultText + "\n\n\n\n\n\n\n\n\n\nSaved UTCON flow at " + 
+                                 csvFileInfo.Name 
             + "\nTo use the new UTCON flow rename the files accordingly and restart the application.";
     }
     
     
     // ** Generate utcon flow menu 
-    // Listener for button back to helpers menu 
-    void ClickedButtonBackFromGenerateUtconsToHelpersMenu()
+    // Listener for button back to Settings menu 
+    void ClickedButtonBackFromGenerateUtconsToSettingsMenu()
     {
-        Debug.Log("[UiManager] Got button click: Back to Helpers menu.");
+        Debug.Log("[UiManager] Got button click: Back to Settings menu.");
 
         // Stop coroutine that checks input fields
         StopCoroutine("InputCheckGenerateUtcons");
         
-        // Go back to helpers menu 
-        ActivateMenu(helpersMenu);
+        // Go back to Settings menu 
+        ActivateMenu(settingsMenu);
     }
     
     // ** Display all tools menu 
@@ -687,10 +719,10 @@ public class UiManager : MonoBehaviour
     }
     
     // ** Display all tools menu 
-    // Listener for button back to helpers menu from display all tools menu 
-    void ClickedButtonBackFromDisplayAllToolsToHelpersMenu()
+    // Listener for button back to Settings menu from display all tools menu 
+    void ClickedButtonBackFromDisplayAllToolsToSettingsMenu()
     {
-        Debug.Log("[UiManager] Got button click: Back to Helpers menu.");
+        Debug.Log("[UiManager] Got button click: Back to Settings menu.");
 
         // Stop coroutine that checks available buttons
         StopCoroutine("ButtonAvailabilityCheckDisplayAllTools");
@@ -698,18 +730,18 @@ public class UiManager : MonoBehaviour
         // Stop Displaying
         toolManager.StopDisplayingAllTools();
         
-        // Go back to helpers menu 
-        ActivateMenu(helpersMenu);
+        // Go back to Settings menu 
+        ActivateMenu(settingsMenu);
     }
     
     // ** About Menu 
-    // Listener for button back to helpers menu from about menu 
-    void ClickedButtonBackAboutToHelpersMenu()
+    // Listener for button back to Settings menu from about menu 
+    void ClickedButtonBackAboutToSettingsMenu()
     {
-        Debug.Log("[UiManager] Got button click: Back to Helpers menu.");
+        Debug.Log("[UiManager] Got button click: Back to Settings menu.");
 
-        // Go back to helpers menu 
-        ActivateMenu(helpersMenu);
+        // Go back to Settings menu 
+        ActivateMenu(settingsMenu);
     }
     
     
@@ -745,7 +777,8 @@ public class UiManager : MonoBehaviour
         float totalWidth = Screen.width * configManager.textOverlayWidthWindowPercentage / 100.0f;
 
         // Change size of background (+ padding/2 on each side) , text rect and whole overlay
-        statusOverlayBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(totalWidth + Math.Abs(widthPadding), totalHeight + Math.Abs(heightPadding));
+        statusOverlayBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(totalWidth + Math.Abs(widthPadding), 
+            totalHeight + Math.Abs(heightPadding));
         experimentStatusText.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(totalWidth, totalHeight);
         statusOverlay.GetComponent<RectTransform>().sizeDelta = new Vector2(totalWidth,totalHeight);
         
@@ -757,7 +790,8 @@ public class UiManager : MonoBehaviour
         // Set the info text position
         // Width is total width of overlay, height height of video + padding  
         secondViewCameraInfoText.GetComponent<RectTransform>().sizeDelta =
-           new Vector2(totalWidth, totalWidth * configManager.secondViewCameraViewportHeightPercentage / 100.0f + Math.Abs(heightPadding));
+           new Vector2(totalWidth, totalWidth * configManager.secondViewCameraViewportHeightPercentage / 100.0f + 
+                                   Math.Abs(heightPadding));
        
         
         // Update current window size
@@ -770,25 +804,18 @@ public class UiManager : MonoBehaviour
     // Check whether input fields have values that are valid or not and disable save button accordingly 
     IEnumerator InputCheckSetSubjectData()
     {
-        int id = 0;
-        int age = 0;
+        var age = 0;
         
         while (true)
         {
-            // Check whether value in input field for id is valid 
-            if (!int.TryParse(subjectIdInput.text, out id))
-            {
-                //Debug.Log("Input value for Subject ID is not an integer.");
-                buttonSaveSubjectData.interactable = false;
-            }
             // Check whether value in input field for age is valid 
-            else if (!int.TryParse(subjectAgeInput.text, out age))
+            if (!int.TryParse(subjectAgeInput.text, out age))
             {
                 //Debug.Log("Input value for Subject age is not an integer.");
                 buttonSaveSubjectData.interactable = false;
             }
             // Check whether id and age are non-negative
-            else if (id < 0 | age < 0)
+            else if (age < 0)
             {
                 //Debug.Log("Input values for Subject ID and Subject age must be non-negative.");
                 buttonSaveSubjectData.interactable = false;
@@ -805,19 +832,23 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    // ** Helpers Menu 
+    // ** Settings Menu 
     // Check whether SteamVR or Leap Motion are available/ activated and enable buttons accordingly
-    IEnumerator InputCheckStatesForHelpersMenu()
+    IEnumerator InputCheckStatesForSettingsMenu()
     {
         // Init button availability 
         bool switchToLeapAvailable;
         bool switchToSteamVrAvailable;
+        bool switchToLSLRecorder;
+        bool switchToETRecorder;
         
         while (true)
         {
             // Init 
             switchToLeapAvailable = true;
             switchToSteamVrAvailable = true;
+            switchToLSLRecorder = true;
+            switchToETRecorder = true;
 
             //print(playerManager.IsLeapAvailable());
             
@@ -832,10 +863,23 @@ public class UiManager : MonoBehaviour
             {
                 switchToSteamVrAvailable = false;
             }
-            
+
+            switch (configManager.isUsingLSLRecorder)
+            {
+                // LSL recorder button not available if already active 
+                case true:
+                    switchToLSLRecorder = false;
+                    break;
+                case false:
+                    switchToETRecorder = false;
+                    break;
+            }
+
             // Update button availability
             buttonSwitchToLeapInput.interactable = switchToLeapAvailable;
             buttonSwitchToSteamInput.interactable = switchToSteamVrAvailable; 
+            buttonSwitchToLSLRecorder.interactable = switchToLSLRecorder;
+            buttonSwitchToETRecorder.interactable = switchToETRecorder;
             
             // Update menu every 0.5 seconds 
             yield return new WaitForSeconds(0.5f);
@@ -944,17 +988,19 @@ public class UiManager : MonoBehaviour
             }
             else 
             {
-                text += "Input Mode: Controllers (SteamVR)\n\n";
+                text += "Input Mode: Controllers (SteamVR)\n";
             }
 
-            // Running & practicing
-            text += "Running: " + configManager.experimentIsRunning.ToString() + "\n";
-            text += "Practice: " + configManager.isInPractice.ToString() + "\n";
+            // LSL state, Running & practicing
+            text+= "Using LSL: " + configManager.isUsingLSLRecorder + "\n\n";
+            text += "Running: " + configManager.experimentIsRunning + "\n";
+            text += "Practice: " + configManager.isInPractice + "\n";
             
+
             // Infos on block, trial, utcon 
             if (!configManager.experimentIsRunning)
             {
-                text += "\n\n\n\n\n\n"; // if not running, just empty lines
+                text += "\n\n\n\n"; // if not running, just empty lines
             }
             else if (configManager.isInPractice) // is running but in practice
             {
@@ -979,7 +1025,7 @@ public class UiManager : MonoBehaviour
                 text += "Block: " + configManager.currentBlock.ToString() + "\n";
                 text += "UTCON: " + configManager.currentUtcon.ToString() + "\n";
                 text += "Tool: " + toolName + "\n";
-                text += "Cue & Orientation: " + cueOrientationName + "\n\n\n";
+                text += "Cue & Orientation: " + cueOrientationName + "\n";
             }
             else // is running and measuring 
             {
@@ -1005,7 +1051,7 @@ public class UiManager : MonoBehaviour
                     + "Trial (within block): " +  configManager.currentTrial.ToString() + "\n"
                     + "UTCON: " + configManager.currentUtcon.ToString() + "\n";
                 text += "Tool: " + toolName + "\n";
-                text += "Cue & Orientation: " + cueOrientationName + "\n\n";
+                text += "Cue & Orientation: " + cueOrientationName + "\n";
             }
             
             // Table and floor calibration 
@@ -1028,7 +1074,7 @@ public class UiManager : MonoBehaviour
             }
             
             // FPS Counter
-            text += "\nFPS: " + ((int)(1.0f / Time.deltaTime)).ToString() + "\n";
+            text += "FPS: " + ((int)(1.0f / Time.deltaTime)).ToString() + "\n";
 
             
             // Update experiment status text

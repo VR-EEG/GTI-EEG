@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +27,7 @@ public class OfflineRaycaster : MonoBehaviour
     public bool indicateEyes;
     public int yieldAfterHowManyDataPoints = 100; // prevent freezing of Editor with low number, but computation takes longer
 
-    private Dictionary<int,SubjectMetaData> metaDataDictionary;
+    private Dictionary<long, SubjectMetaData> metaDataDictionary;
     private GameObject eyePositionSphere;
     private GameObject eyeDirectionCube;
     
@@ -34,7 +35,7 @@ public class OfflineRaycaster : MonoBehaviour
     void Start()
     {
         csvIo = GetComponent<CsvIO>();
-        metaDataDictionary = new Dictionary<int, SubjectMetaData>();
+        metaDataDictionary = new Dictionary<long, SubjectMetaData>();
         isRunning = false;
         
         // Create Sphere and cube to indicate eye position and direction
@@ -207,7 +208,7 @@ public class OfflineRaycaster : MonoBehaviour
         
         // Extract scene config
         SubjectMetaData metaData;
-        metaDataDictionary.TryGetValue(subjectId,out metaData);
+        metaDataDictionary.TryGetValue(Convert.ToInt64(subjectId),out metaData);
         Vector3 tablePosition = metaData.configManagerSettings.tablePosition;
         Vector3 tableRotation = metaData.configManagerSettings.tableRotation;
         Vector3 tableScale = metaData.configManagerSettings.tableScale;
@@ -271,3 +272,4 @@ public class OfflineRaycaster : MonoBehaviour
     }
     
 }
+*/

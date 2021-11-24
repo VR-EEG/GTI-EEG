@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
@@ -7,6 +7,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -132,99 +133,101 @@ public class ExperimentManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        // Init new subject  
-        if (experimentState == ExperimentStates.Init)
+        switch (experimentState)
         {
-            ExperimentStateInit();
-        }
-        
-        // PracticeStart state coroutine 
-        else if (experimentState == ExperimentStates.PracticeStart)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            // Init new subject  
+            case ExperimentStates.Init:
+                ExperimentStateInit();
+                break;
+            // PracticeStart state coroutine 
+            case ExperimentStates.PracticeStart:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStatePracticeStart");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStatePracticeStart");
+                }
+
+                break;
+            }
+            // Practice state coroutine 
+            case ExperimentStates.Practice:
+            {
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStatePractice");
                 
+                }
+
+                break;
             }
-        }
-        
-        // Practice state coroutine 
-        else if (experimentState == ExperimentStates.Practice)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            // PracticeEnd state coroutine 
+            case ExperimentStates.PracticeEnd:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStatePractice");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStatePracticeEnd");
+                }
+
+                break;
+            }
+            // Start state coroutine 
+            case ExperimentStates.Start:
+            {
+                // Is coroutine started already? 
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true; // activate lock 
+                    StartCoroutine("ExperimentStateStart"); // start coroutine 
+                }
+
+                break;
+            }
+            // Measuring state coroutine 
+            case ExperimentStates.Measuring:
+            {
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStateMeasuring");
                 
+                }
+
+                break;
             }
-        }
-        
-        // PracticeEnd state coroutine 
-        else if (experimentState == ExperimentStates.PracticeEnd)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            // BlockPause state coroutine 
+            case ExperimentStates.BlockPause:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStatePracticeEnd");
-            }
-        }
-        
-        // Start state coroutine 
-        else if (experimentState == ExperimentStates.Start)
-        {
-            // Is coroutine started already? 
-            if (!experimentStateCoroutineIsStarted)
-            {
-                experimentStateCoroutineIsStarted = true; // activate lock 
-                StartCoroutine("ExperimentStateStart"); // start coroutine 
-            }
-        }
-        
-        // Measuring state coroutine 
-        else if (experimentState == ExperimentStates.Measuring)
-        {
-            if (!experimentStateCoroutineIsStarted)
-            {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStateMeasuring");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStateBlockPause");
                 
+                }
+
+                break;
             }
-        }
-        
-        // BlockPause state coroutine 
-        else if (experimentState == ExperimentStates.BlockPause)
-        {
-            if (!experimentStateCoroutineIsStarted)
+            case ExperimentStates.End:
             {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStateBlockPause");
+                if (!experimentStateCoroutineIsStarted)
+                {
+                    experimentStateCoroutineIsStarted = true;
+                    StartCoroutine("ExperimentStateEnd");
                 
+                }
+
+                break;
             }
+            case ExperimentStates.Idle:
+                break;
+            default:
+                Debug.Log("[ExperimentManager] Specified invalid Experiment State, ignoring!");
+                break;
         }
-        else if (experimentState == ExperimentStates.End)
-        {
-            if (!experimentStateCoroutineIsStarted)
-            {
-                experimentStateCoroutineIsStarted = true;
-                StartCoroutine("ExperimentStateEnd");
-                
-            }
-        }
-        
-        else if (experimentState == ExperimentStates.Idle)
-        {
-           
-        }
-        
-        
-        else
-        {
-            Debug.Log("[ExperimentManager] Specified invalid Experiment State, ignoring!");
-        }
-        
     }
     
     // Init state 
@@ -524,21 +527,33 @@ public class ExperimentManager : MonoBehaviour
         // Update cue text dependent on utcon 
         cueManager.UpdateCueTextFromUtcon(currentUtcon);
         
+        double[] cueTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOCueTimeStamp.push_sample(cueTimestamp);
+        
         // Wait cue displaying time before deactivating cue again 
         yield return new WaitForSeconds(configManager.cuePresentationDuration);
         cueManager.UpdateCueText(CueStates.Empty);
         
+        double[] cueDisappearedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOCueDisappearedTimeStamp.push_sample(cueDisappearedTimestamp);
+
         // Wait before displaying tool 
         yield return new WaitForSeconds(configManager.delayBetweenCueAndToolPresentation);
         
         // Display tool on table dependent on utcon 
         toolManager.DisplayToolOnTable(currentUtcon);
         
+        double[] objectShownTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOObjectShownTimeStamp.push_sample(objectShownTimestamp);
+        
         // Wait before playing beep sound 
         yield return new WaitForSeconds(configManager.toolPresentationDurationBeforeBeep);
         
         // Play beep 
         audioManager.PlayBeepSoundImmediately();
+
+        double[] beepPlayedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+        LSLStreams.Instance.lslOBeepPlayedTimeStamp.push_sample(beepPlayedTimestamp);
         
         // Reset input to none to make sure spam input is ignored 
         triggerManager.ResetInteractionHappened(); 
@@ -549,6 +564,9 @@ public class ExperimentManager : MonoBehaviour
             // Trigger interaction appeared
             if (triggerManager.GetInteractionHappened())
             {
+                double[] buttonPressedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
+                LSLStreams.Instance.lslOButtonPressedTimeStamp.push_sample(buttonPressedTimestamp);
+                
                 // Stop measuring right after trigger interaction happened
                 measurementManager.StopMeasurement();
                 
@@ -681,9 +699,10 @@ public class ExperimentManager : MonoBehaviour
         // Load practice flow utcons 
         LoadPracticeFlowUtcons();
         
-        // Load experiment flow utcons 
-        LoadExperimentFlowUtcons();
+        // LoadExperimentFlowUtcons();
         
+        // Generate experiment flow utcons 
+        GenearateUtconFlow(out experimentFlowUtcons, out experimentBlockPausesIdx);
     }
     
     
@@ -693,9 +712,7 @@ public class ExperimentManager : MonoBehaviour
         // Set experiment state to init 
         experimentState = ExperimentStates.Init;
     }
-    
-    
-  
+
     // Load the Experiment Utcons for experiment flow  
     private void LoadExperimentFlowUtcons()
     {
@@ -710,7 +727,28 @@ public class ExperimentManager : MonoBehaviour
         
         Debug.Log("[ExperimentManager] Loaded experiment flow UTCONs from CSV.");
     }
-    
+
+    private void GenearateUtconFlow(out int[] utcons, out int[] blockPauseIdx, int blocks=6)
+    {
+        Debug.Log("[UiManager] Saving UTCON flow to disk.");
+        
+        // Get utcon flow seed from subject id
+        int seed = Mathf.Abs(configManager.subjIdHashCode);
+
+        List<string> fullExperimentalFlow;
+
+        // Create path where to save utcon flow 
+        string csvPath = configManager.configFolderPath;
+        csvPath += "\\" + Path.GetFileNameWithoutExtension(configManager.filenameExperimentFlowUtconsCsv)
+                        + "_" + configManager.subjectId + "_" + 
+                   System.DateTime.Now.ToString("yyyy-MM-dd HH-mm").Replace(" ","_") + ".csv";
+        
+        // Generate UTCON flow and save to csv
+        GetComponent<ExperimentUtconFlowGenerator>().GenerateUtconFlowAndWriteToDisk(blocks,seed,csvPath, out fullExperimentalFlow);
+        
+        // Load experiment flow utcons and experiment block pauses indexes
+        LoadFlowUtcons(fullExperimentalFlow, out utcons, out blockPauseIdx);
+    }
     
     // Load the Practice Utcons for practice utcon flow  
     private void LoadPracticeFlowUtcons()
@@ -776,7 +814,7 @@ public class ExperimentManager : MonoBehaviour
                     }
                 }
                 
-            // Handle misformed lines     
+                // Handle misformed lines     
             } catch (Exception e)
             {
                 Debug.Log("[ExperimentManager] Malformed line " + line + ". Skipping.\n" + e.ToString());
@@ -790,7 +828,39 @@ public class ExperimentManager : MonoBehaviour
         blockPausesIdx = pauseIdx.ToArray();
     }
     
-    
+    private void LoadFlowUtcons(List<string> fullFlow, out int[] flowUtcons, out int[] blockPausesIdx)
+    {
+        // Store utcons from csv in list first and transform to array later  
+        List<int> utcons = new List<int>();
+        
+        // Store block pause indicator idx in list and transform to array later 
+        List<int> pauseIdx = new List<int>();
+        
+        // Split lines at comma and save name and ids into dictionary
+        utconCount = 0;
+        foreach (var item in fullFlow)
+        {
+            // Found pause indicator 
+            if (item.ToLower() == configManager.blockPauseIndicator)
+            {
+                // Add Pause idx to list, holds idx of utcon BEFORE which block pause happens 
+                pauseIdx.Add(utconCount);
+            }
+
+            // Found utcon
+            else
+            {
+                utcons.Add(int.Parse(item));
+                utconCount += 1; // Save total number of utcons in csv file 
+            }
+        }
+        
+        // Transform utcon list to array 
+        flowUtcons = utcons.ToArray();
+        
+        // Transform pause indicator list to array
+        blockPausesIdx = pauseIdx.ToArray();
+    }
     
     
     

@@ -75,6 +75,25 @@ public class MeasurementManager : MonoBehaviour
     // *** Debug 
     public LineRenderer debugLineRenderer;
 
+    #region LSL Fields
+
+    // toolCueOrientationInt Stream variables
+    private int _trialId;
+    private int _blockId;
+    private int _utcon;
+    private int _toolId;
+    private int _cueOrientationId;
+    private int _toolIsCurrentlyAttachedToHand;
+    private int _toolIsCurrentlyDisplayedOnTable;
+
+    // toolCueOrientationString Stream values
+    private string _toolName;
+    private string _cueOrientationName; 
+    private string _cueName;
+    private string _toolHandleOrientation;
+    private string _closestAttachmentPointOnToolToHand;
+
+    #endregion
 
     private void Awake()
     {
@@ -477,30 +496,93 @@ public class MeasurementManager : MonoBehaviour
         else
         {
 
-            LSLRecorder.Instance.SetUtcon(configManager.currentUtcon,
+            SetUtcon(configManager.currentUtcon,
                 currentTrialData.cueOrientationId,
                 currentTrialData.cueOrientationName,
                 currentTrialData.cueName
                 );
-            LSLRecorder.Instance.SetBlockID(configManager.currentBlock);
-            LSLRecorder.Instance.SetTrialID(configManager.currentBlockData.blockTrials.Count);
+            Instance.SetBlockID(configManager.currentBlock);
+            SetTrialID(configManager.currentBlockData.blockTrials.Count);
             
             var closestAttachmentPointOnToolToHand = 
                 configManager.currentClosestToolAttachmentPointTransform != null 
                     ? configManager.currentClosestToolAttachmentPointTransform.name 
                     : "";
             
-            LSLRecorder.Instance.SetToolInfo(Convert.ToInt32(configManager.isToolCurrentlyAttachedToHand),
+            SetToolInfo(Convert.ToInt32(configManager.isToolCurrentlyAttachedToHand),
                 Convert.ToInt32(configManager.isToolDisplayedOnTable),
                 currentTrialData.toolId,
                 currentTrialData.toolName,
                 currentTrialData.toolHandleOrientation,
                 closestAttachmentPointOnToolToHand
                 );
+            
+            int[] toolCueOrientationInt =
+            {
+                _trialId,
+                _blockId,
+                _utcon,
+                _toolId,
+                _cueOrientationId,
+                _toolIsCurrentlyAttachedToHand,
+                _toolIsCurrentlyDisplayedOnTable
+            };
+
+            string[] toolCueOrientationString =
+            {
+                _toolName,
+                _cueOrientationName,
+                _cueName,
+                _toolHandleOrientation,
+                _closestAttachmentPointOnToolToHand
+            };
+            
+            SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
+
             LSLRecorder.Instance.SetLSLRecordingStatus(true);
         }
     }
+
+    #region LSL setters
+
+    private void SetTrialID(int id)
+    {
+        _trialId = id;
+    }
+
+    private void SetBlockID(int id)
+    {
+        _blockId = id;
+    }
+
+    private void SetUtcon(int utcon, int cueOrientationId,
+        string cueOrientationName, string cueName)
+    {
+        _utcon = utcon;
+        _cueOrientationId = cueOrientationId;
+        _cueOrientationName = cueOrientationName;
+        _cueName = cueName;
+    }
+
+    private void SetToolInfo(int attachedToHand, int onTable, int toolId,
+        string toolName, string toolHandleOrientation,
+        string closestAttachmentPointOnToolToHand)
+    {
+        _toolIsCurrentlyAttachedToHand = attachedToHand;
+        _toolIsCurrentlyDisplayedOnTable = onTable;
+        _toolId = toolId;
+        _toolName = toolName;
+        _toolHandleOrientation = toolHandleOrientation;
+        _closestAttachmentPointOnToolToHand = closestAttachmentPointOnToolToHand;
+    }
+
+    private void SaveToolCueOrientation(int[] toolCueOrientationInt, string[] toolCueOrientationString)
+    {
+        LSLStreams.Instance.lslOToolCueOrientationInt.push_sample(toolCueOrientationInt);
+        LSLStreams.Instance.lslOToolCueOrientationString.push_sample(toolCueOrientationString);
+    }
     
+    #endregion
     // Stop measurement
     public void StopMeasurement()
     {

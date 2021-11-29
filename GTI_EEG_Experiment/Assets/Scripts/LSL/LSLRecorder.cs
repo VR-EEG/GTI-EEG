@@ -36,23 +36,7 @@ public class LSLRecorder : MonoBehaviour
     private double _timestampEnd;
 
     private bool _recordLsl;
-    
-    // toolCueOrientationInt Stream variables
-    private int _trialId;
-    private int _blockId;
-    private int _utcon;
-    private int _toolId;
-    private int _cueOrientationId;
-    private int _toolIsCurrentlyAttachedToHand;
-    private int _toolIsCurrentlyDisplayedOnTable;
 
-    // toolCueOrientationString Stream values
-    private string _toolName;
-    private string _cueOrientationName; 
-    private string _cueName;
-    private string _toolHandleOrientation;
-    private string _closestAttachmentPointOnToolToHand;
-    
     // eyeTrackingGazeHMDFloat Stream values
     private float _eyeOpennessLeft;
     private float _eyeOpennessRight;
@@ -111,26 +95,6 @@ public class LSLRecorder : MonoBehaviour
         double[] currentTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp()};
         
         LSLStreams.Instance.lslOFrameTimeStamp.push_sample(currentTimestamp);
-
-        int[] toolCueOrientationInt =
-        {
-            _trialId,
-            _blockId,
-            _utcon,
-            _toolId,
-            _cueOrientationId,
-            _toolIsCurrentlyAttachedToHand,
-            _toolIsCurrentlyDisplayedOnTable
-        };
-
-        string[] toolCueOrientationString =
-        {
-            _toolName,
-            _cueOrientationName,
-            _cueName,
-            _toolHandleOrientation,
-            _closestAttachmentPointOnToolToHand
-        };
 
         SRanipal_Eye_v2.GetVerboseData(out var verboseData); 
 
@@ -449,19 +413,12 @@ public class LSLRecorder : MonoBehaviour
             _leapHandRotation.z
         };
 
-        SaveToolCueOrientation(toolCueOrientationInt, toolCueOrientationString);
         SaveEyeTrackingData(eyeTrackingGazeHmdFloat, eyeTrackingGazeHmdString, gazeDataValidity);
         SaveInputs(input);
         
         // save current frame via LSL
         int[] currentFrame = {Time.frameCount};
         LSLStreams.Instance.lslOFrameTracking.push_sample(currentFrame);
-    }
-    
-    private void SaveToolCueOrientation(int[] toolCueOrientationInt, string[] toolCueOrientationString)
-    {
-        LSLStreams.Instance.lslOToolCueOrientationInt.push_sample(toolCueOrientationInt);
-        LSLStreams.Instance.lslOToolCueOrientationString.push_sample(toolCueOrientationString);
     }
     
     private void SaveEyeTrackingData(float[] floatValues, string[] stringValues, int[] gazeValidity)
@@ -484,37 +441,6 @@ public class LSLRecorder : MonoBehaviour
     {
         _recordLsl = state;
         leapMainCamera = MeasurementManager.Instance.leapMainCamera;
-    }
-
-    public void SetTrialID(int id)
-    {
-        _trialId = id;
-    }
-
-    public void SetBlockID(int id)
-    {
-        _blockId = id;
-    }
-    
-    public void SetUtcon(int utcon, int cueOrientationId,
-        string cueOrientationName, string cueName)
-    {
-        _utcon = utcon;
-        _cueOrientationId = cueOrientationId;
-        _cueOrientationName = cueOrientationName;
-        _cueName = cueName;
-    }
-
-    public void SetToolInfo(int attachedToHand, int onTable, int toolId,
-        string toolName, string toolHandleOrientation,
-        string closestAttachmentPointOnToolToHand)
-    {
-        _toolIsCurrentlyAttachedToHand = attachedToHand;
-        _toolIsCurrentlyDisplayedOnTable = onTable;
-        _toolId = toolId;
-        _toolName = toolName;
-        _toolHandleOrientation = toolHandleOrientation;
-        _closestAttachmentPointOnToolToHand = closestAttachmentPointOnToolToHand;
     }
 
     #endregion

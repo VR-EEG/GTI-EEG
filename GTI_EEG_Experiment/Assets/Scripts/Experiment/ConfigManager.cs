@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
@@ -880,6 +880,13 @@ public class ConfigManager : MonoBehaviour
             string configValue =
                 linesWithWantedVariable[0][1].Trim(); // from first element of list with elements that have desired variable name in it, select second element which holds the value  
             
+            //if culture is not using "." decimal, it is changed to current culture, so german comma numbers are correctly shown.
+            //NOTE you should always use "." for decimal seperation in the config file!
+            char seperatordecimal = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            if (seperatordecimal.ToString()!= ".")
+                configValue = configValue.Replace(".", seperatordecimal.ToString());
+
+
             // Try to parse the string 
             if (!float.TryParse(configValue, out configVariable))
             {

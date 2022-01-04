@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
@@ -153,6 +153,7 @@ public class TriggerManager : MonoBehaviour
     // Check if grab type signalling trigger interaction is performed 
     // And signal to Experiment Manager that interaction happened 
     // Requires colliders on object 
+    /*
     private void HandHoverUpdate(Hand hand)
     {
         //Debug.Log("[TriggerManager] SteamVR HandHoverUpdate");
@@ -167,6 +168,13 @@ public class TriggerManager : MonoBehaviour
             // Play trigger animation 
             triggerAnimator.Play(triggerAnimationName);
         }
+    }
+    */
+
+    //simple Interaction button elicit by SteamVR Interaction Event
+    public void ButtonPressed()
+    {
+        triggerInteractionHappened = true;
     }
     
     

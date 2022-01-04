@@ -55,6 +55,11 @@ public class ExperimentManager : MonoBehaviour
     
     // Config Manager
     private ConfigManager configManager;
+
+
+    [SerializeField] private GameObject CalibrationSphere;
+
+    private Vector3 roomPositionPlayer;
     
     // Config Manager Tag
     public string configManagerTag;
@@ -130,6 +135,8 @@ public class ExperimentManager : MonoBehaviour
             // Change to idle mode 
             experimentState = ExperimentStates.Idle;
         }
+        
+        EyetrackingManagerNew.Instance.StartSetup();
     }
 
     // Update is called once per frame
@@ -389,8 +396,7 @@ public class ExperimentManager : MonoBehaviour
                 
         // Start eye tracker validation and calibration 
         Debug.Log("[Experiment Manager] Starting Eye Tracker calibration and validation.");
-        configManager.resumeExperimentAfterEyeTrackerCalibrationValidation = true;
-        SceneManager.LoadScene(configManager.calibrationSceneEyeTrackerName);
+        StartEyetrackingSetup();
                 
         yield break; // break coroutine 
         
@@ -593,6 +599,19 @@ public class ExperimentManager : MonoBehaviour
         }
     }
     
+    //new Eyetracking System
+    private void StartEyetrackingSetup()
+    {
+        /*configManager.resumeExperimentAfterEyeTrackerCalibrationValidation = true;
+        SceneManager.LoadScene(configManager.calibrationSceneEyeTrackerName);*/
+
+        roomPositionPlayer = playerManager.steamVrPlayer.transform.position;
+        playerManager.steamVrPlayer.transform.position =
+            EyetrackingManagerNew.Instance.GrayRoomSphere.transform.position;
+        
+        EyetrackingManagerNew.Instance.StartSetup();
+
+    }
     
     // Coroutine for the start state 
     IEnumerator ExperimentStateBlockPause()
@@ -620,9 +639,9 @@ public class ExperimentManager : MonoBehaviour
                 
                 // Start eye tracker validation and calibration 
                 Debug.Log("[Experiment Manager] Starting Eye Tracker calibration and validation.");
-                configManager.resumeExperimentAfterEyeTrackerCalibrationValidation = true;
-                SceneManager.LoadScene(configManager.calibrationSceneEyeTrackerName);
-                
+                StartEyetrackingSetup();
+
+                yield return new WaitUntil(() => EyetrackingManagerNew.Instance.IsSetupClosed());
                 // Break coroutine 
                 yield break;  
             }

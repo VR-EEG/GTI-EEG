@@ -1,15 +1,16 @@
-﻿/*
+/*
  * Author: Stefan Balle
  * E-mail: sballe@uni-osnabrueck.de
  * Year: 2020
  */
 
+using System;
 using System.Collections;
 using UnityEngine;
 using ViveSR.anipal.Eye;
 
 
-public class EyeTrackingManager : MonoBehaviour
+public class EyeTrackingController : MonoBehaviour
 {
 
     // Tag of the ConfigManager 
@@ -148,6 +149,7 @@ public class EyeTrackingManager : MonoBehaviour
         // Validation finished 
         validationIsRunning = false;
         configManager.eyeTrackingIsValidated = true;
+        EyetrackingManagerNew.Instance.ValidationCompleted();
         Debug.Log("[EyeTrackingManager] Finished Eye Tracker Validation.");
 
         yield break;

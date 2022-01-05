@@ -135,8 +135,6 @@ public class ExperimentManager : MonoBehaviour
             // Change to idle mode 
             experimentState = ExperimentStates.Idle;
         }
-        
-        EyetrackingManagerNew.Instance.StartSetup();
     }
 
     // Update is called once per frame
@@ -397,6 +395,9 @@ public class ExperimentManager : MonoBehaviour
         // Start eye tracker validation and calibration 
         Debug.Log("[Experiment Manager] Starting Eye Tracker calibration and validation.");
         StartEyetrackingSetup();
+        
+        yield return new WaitUntil(() => EyetrackingManagerNew.Instance.IsSetupClosed());
+        ReturnToRoom();
                 
         yield break; // break coroutine 
         
@@ -612,6 +613,11 @@ public class ExperimentManager : MonoBehaviour
         EyetrackingManagerNew.Instance.StartSetup();
 
     }
+
+    private void ReturnToRoom()
+    {
+        playerManager.steamVrPlayer.transform.position = roomPositionPlayer;
+    }
     
     // Coroutine for the start state 
     IEnumerator ExperimentStateBlockPause()
@@ -642,6 +648,7 @@ public class ExperimentManager : MonoBehaviour
                 StartEyetrackingSetup();
 
                 yield return new WaitUntil(() => EyetrackingManagerNew.Instance.IsSetupClosed());
+                ReturnToRoom();
                 // Break coroutine 
                 yield break;  
             }

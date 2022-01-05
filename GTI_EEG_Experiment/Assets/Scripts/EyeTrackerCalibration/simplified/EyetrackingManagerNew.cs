@@ -8,9 +8,12 @@ public class EyetrackingManagerNew : MonoBehaviour
 {
     public static EyetrackingManagerNew Instance { get; private set; }
 
-
+    [SerializeField] private float ValidationThreshold;
     private EyetrackingUINew EyetrackingUI;
-    public ConfigManager configManager;
+    private ConfigManager configManager;
+    [SerializeField] private EyeTrackingController eyeTrackingController;
+
+    [SerializeField] private bool StartValidationAutomaticallyAfterCalibration;
 
     public GameObject GrayRoomSphere;
     public EyeTrackingValidation _eyetrackingValidation;
@@ -19,13 +22,13 @@ public class EyetrackingManagerNew : MonoBehaviour
     private bool _eyeValidationSucessful;
     private bool _calibrationSuccess;
     private bool _calibrationInProgress;
-    private bool _isCalibrated;
     private bool _calibrationInitialized;
     private bool _setupColosed;
-    
-    
-    private bool _validationCompleted;
-    
+
+    private bool _validationInProgress;
+    private bool _validationSucessful;
+    private bool _validationInitialized;
+
 
 
     private float eyeValidationDelay;
@@ -35,9 +38,6 @@ public class EyetrackingManagerNew : MonoBehaviour
     private Vector3 _rightEyeValidationErrorAngles;
 
     private EyeTrackingValidation.EyeTrackingValidationData _validationData;
-    
-    public delegate void OnCompletedEyeValidation(bool wasSuccessful);
-    public event OnCompletedEyeValidation NotifyEyeValidationCompletnessObservers;
     
     
     private Vector3 CombinedEyeAngleOffset;
@@ -120,6 +120,8 @@ public class EyetrackingManagerNew : MonoBehaviour
         StartCoroutine(CalibrateDevice());
     }
 
+   
+
     private IEnumerator CalibrateDevice()
     {
         bool success;
@@ -133,24 +135,52 @@ public class EyetrackingManagerNew : MonoBehaviour
         _calibrationSuccess = success;
         _calibrationInProgress = false;
 
+        if (StartValidationAutomaticallyAfterCalibration)
+        {
+            StartValidation();
+        }
+
+    }
+    
+    public bool IsValidationIntialized()
+    {
+        return _validationInitialized;
+    }
+    
+    public bool IsValidationInProgress()
+    {
+        return _validationInProgress;
     }
 
-    /*public void StartValidation()
+    public void ValidationCompleted()
     {
-        _eyetrackingValidation.SetHMDTransform(ExperimentManager.Instance.GetActiveCamera());
-        _eyetrackingValidation.StartValidateEyetracker();
+        Vector3 results = configManager.latestEyeTrackingValidationResults;
+
+        if (results.x < ValidationThreshold || results.y < ValidationThreshold || results.z < ValidationThreshold)
+        {
+            _validationSucessful = true;
+        }
+
+        _validationInProgress = false;
+    }
+    
+    public bool IsValidationSucessful()
+    {
+        return _validationSucessful;
+    }
+
+    public void StartValidation()
+    {
+        _validationInitialized = true;
+        _validationInProgress=true;
+        eyeTrackingController.LaunchEyeValidation();
     }
 
     public void StartRecording()
     {
         Debug.Log("<color=green>Recording eye-tracking Data!</color>");
-        device.StartRecording();
     }
 
-    public void SaveEyetrackingData(string fileName="Test")
-    {
-        device.SaveRecordedData(Path.Combine(DataSavingManager.Instance.GetSavePath(), fileName + ".json"));
-    }*/
 
     
     

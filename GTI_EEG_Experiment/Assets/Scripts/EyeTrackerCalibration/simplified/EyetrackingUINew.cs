@@ -6,7 +6,15 @@ using UnityEngine;
 public class EyetrackingUINew : MonoBehaviour
 {
     private bool _isActivated;
-    
+
+    private ConfigManager _configManager;
+
+    private void Start()
+    {
+        _isActivated = false;
+        _configManager = GameObject.FindGameObjectWithTag("ConfigManager").GetComponent<ConfigManager>();
+    }
+
     public void Activate(bool state)
     {
         _isActivated = state;
@@ -51,7 +59,7 @@ public class EyetrackingUINew : MonoBehaviour
                 
                 if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "Validation", buttonStyle))
                 {
-                    //EyetrackingManagerNew.Instance.StartValidation();
+                    EyetrackingManagerNew.Instance.StartValidation();
                 }
                 
                 valY = Screen.height / 2 + 100;
@@ -67,9 +75,9 @@ public class EyetrackingUINew : MonoBehaviour
                 
                 valX = x;
 
-                if (!EyetrackingManagerNew.Instance.IsCalibrationInProgress())
+                if (EyetrackingManagerNew.Instance.IsCalibrationInitialized())
                 {
-                    if (EyetrackingManagerNew.Instance.IsCalibrationInitialized())
+                    if (!EyetrackingManagerNew.Instance.IsCalibrationInProgress())
                     {
                         if (EyetrackingManagerNew.Instance.CalibrationSucessful())
                         {
@@ -85,23 +93,43 @@ public class EyetrackingUINew : MonoBehaviour
                     else
                     {
                         GUI.color = Color.grey;
-                        GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("-"), boxStyle);
+                        GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("IN PROGRESS..."), boxStyle);
                     }
                 }
                 else
                 {
-                   
-                    if (EyetrackingManagerNew.Instance.IsCalibrationInitialized())
+                    GUI.color = Color.grey;
+                    GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("-"), boxStyle);
+                }
+                
+                valX +=  Mathf.RoundToInt(w*1.5f) + 2;
+                
+                if (EyetrackingManagerNew.Instance.IsValidationIntialized())
+                {
+                    if (!EyetrackingManagerNew.Instance.IsValidationInProgress())
                     {
-                        GUI.color = Color.grey;
-                        GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("IN PROGRESS..."), boxStyle);
+                        if (EyetrackingManagerNew.Instance.IsValidationSucessful())
+                        {
+                            GUI.color = Color.green;
+                            GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent(_configManager.latestEyeTrackingValidationResults.ToString()), boxStyle);
+                        }
+                        else
+                        {
+                            GUI.color = Color.red;
+                            GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent(_configManager.latestEyeTrackingValidationResults.ToString()), boxStyle);
+                        }
                     }
                     else
                     {
                         GUI.color = Color.grey;
-                        GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("-"), boxStyle);
+                        GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("IN PROGRESS..."), boxStyle);
                     }
                     
+                }
+                else
+                {
+                    GUI.color = Color.grey;
+                    GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent("-"), boxStyle);
                 }
         }
          

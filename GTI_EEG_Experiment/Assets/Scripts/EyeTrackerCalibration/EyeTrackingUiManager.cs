@@ -21,7 +21,7 @@ public class EyeTrackingUiManager : MonoBehaviour
     public string configManagerTag;
     
     // Eye Tracking Manager
-    public EyeTrackingManager eyeTrackingManager;
+    public EyeTrackingController eyeTrackingController;
     
     // Status Overlay
     public GameObject statusOverlay;
@@ -39,7 +39,6 @@ public class EyeTrackingUiManager : MonoBehaviour
     // Menus
     public GameObject eyeTrackingMenu;
     public GameObject eyeTrackingOverrideMenu;
-    
     
     // Start is called before the first frame update
     void Start()
@@ -78,7 +77,7 @@ public class EyeTrackingUiManager : MonoBehaviour
         Debug.Log("[EyeTrackingUiManager] Got button click: Start Eye Tracking Calibration.");
         
         // Start Eye Calibration 
-        eyeTrackingManager.LaunchEyeCalibration();
+        eyeTrackingController.LaunchEyeCalibration();
     }
     
     // Button start Eye Tracking Validation 
@@ -87,7 +86,7 @@ public class EyeTrackingUiManager : MonoBehaviour
         Debug.Log("[EyeTrackingUiManager] Got button click: Start Eye Tracking Validation.");
         
         // Start Eye Tracking Validation 
-        eyeTrackingManager.LaunchEyeValidation();
+        eyeTrackingController.LaunchEyeValidation();
     }
     
     // Button go back to Experiment Menu 
@@ -218,10 +217,10 @@ public class EyeTrackingUiManager : MonoBehaviour
             string content = "<size=18><b>Eye-Tracking Calibration Status</b></size>\n\n\n";
             content += "Eye Tracking is calibrated: " + configManager.eyeTrackingIsCalibrated + "\n";
             content += "Eye Tracking is validated: " + configManager.eyeTrackingIsValidated + "\n\n";
-            content += "Eye Tracking Calibration is running: " + eyeTrackingManager.calibrationIsRunning + "\n";
-            content += "Eye Tracking Validation is running: " + eyeTrackingManager.validationIsRunning + "\n\n";
-            content += "Number of calibration attempts: " + eyeTrackingManager.numberOfCalibrationAttempts.ToString() + "\n";
-            content += "Number of validation attempts: " + eyeTrackingManager.numberOfValidationAttempts.ToString() + "\n\n";
+            content += "Eye Tracking Calibration is running: " + eyeTrackingController.calibrationIsRunning + "\n";
+            content += "Eye Tracking Validation is running: " + eyeTrackingController.validationIsRunning + "\n\n";
+            content += "Number of calibration attempts: " + eyeTrackingController.numberOfCalibrationAttempts.ToString() + "\n";
+            content += "Number of validation attempts: " + eyeTrackingController.numberOfValidationAttempts.ToString() + "\n\n";
             
             // Add validation results 
             if (float.IsNaN(configManager.latestEyeTrackingValidationResults.x)) // not yet set

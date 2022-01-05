@@ -24,7 +24,7 @@ public class EyeTrackingValidation : MonoBehaviour
     private ConfigManager configManager;
     
     // Eye Tracking Manager
-    public EyeTrackingManager eyeTrackingManager; 
+    public EyeTrackingController eyeTrackingController; 
     
     
     // Positions of the validation balls
@@ -104,7 +104,7 @@ public class EyeTrackingValidation : MonoBehaviour
         eyeTrackingValidationData.subjectId = configManager.subjectId;
         eyeTrackingValidationData.blockNumber = configManager.currentBlock;
         eyeTrackingValidationData.validationAttemptNumber = 
-            eyeTrackingManager.numberOfValidationAttempts;
+            eyeTrackingController.numberOfValidationAttempts;
         eyeTrackingValidationData.dateTime = System.DateTime.Now.ToString("yyyy-MM-dd HH-mm");
         
         // Move validation ball to first position, to make sure ball moves properly within loop 

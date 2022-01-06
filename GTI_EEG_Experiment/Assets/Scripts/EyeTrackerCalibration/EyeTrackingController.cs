@@ -23,12 +23,9 @@ public class EyeTrackingController : MonoBehaviour
     public EyeTrackingValidation eyeTrackingValidation;
 
     // Keep track of number of calibrations and validations per scene call
-    public int numberOfCalibrationAttempts;
     public int numberOfValidationAttempts;
     
     // Keep track of whether calibration/ validation is running 
-    public bool calibrationIsRunning;
-    public bool validationIsRunning;
 
     // Validation max error for validation to be accepted
     public float validationErrorMarginDegrees;
@@ -40,8 +37,7 @@ public class EyeTrackingController : MonoBehaviour
         configManager = GameObject.FindGameObjectWithTag(configManagerTag).GetComponent<ConfigManager>();
         
         // Reset number of calibration/ validation attempts, count anew for each scene load  
-        numberOfCalibrationAttempts = numberOfValidationAttempts = 0; 
-        
+
         // Reset is calibrated/ validated
         configManager.eyeTrackingIsCalibrated = configManager.eyeTrackingIsValidated = false;
         
@@ -50,70 +46,10 @@ public class EyeTrackingController : MonoBehaviour
     }
     
     
-    // Is validation error small enough?
-    public bool ValidationErrorWithinMargin()
-    {
-        // Check whether calculated validation values are within error margin 
-        if (configManager.latestEyeTrackingValidationResults.x > validationErrorMarginDegrees || configManager.latestEyeTrackingValidationResults.y > validationErrorMarginDegrees ||
-            configManager.latestEyeTrackingValidationResults.z > validationErrorMarginDegrees)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
 
-    
-    // Launch eye tracker calibration
-    public void LaunchEyeCalibration()
-    {
-        Debug.Log("[EyeTrackingManager] Starting Eye Tracker Calibration.");
-        
-        // Increment number of calibration attempts 
-        numberOfCalibrationAttempts += 1;
-        
-        // Keep track of calibration is running 
-        calibrationIsRunning = true;
-        
-        // When running calibration, validation becomes necessary
-        configManager.eyeTrackingIsValidated = false;
-        
-        // Launch 
-        StartCoroutine("LaunchSRanipalCalibration");
-    }
-    
-    
     // Coroutine of Launching Eye Calibration to prevent busy waiting
-    IEnumerator LaunchSRanipalCalibration()
-    {
-        
-        // Calibration successful 
-        if (SRanipal_Eye_v2.LaunchEyeCalibration())
-        {
-            Debug.Log("[EyeTrackingManager] Eye Tracker Calibration was successful.");
-            
-            // Update config manager and calibration is running 
-            configManager.eyeTrackingIsCalibrated = true;
-        }
-        
-        // Calibration did not succeed
-        else
-        {
-            Debug.Log("[EyeTrackingManager] Eye Tracker Calibration did not succeed.");
-            
-            // Update config manager and calibration is running 
-            configManager.eyeTrackingIsCalibrated = false;
-        }
-        
-        // Keep track of calibration is running 
-        calibrationIsRunning = false;
 
-        yield break;
-    }
-    
-    
+
     // Launch eye tracker validation 
     public void LaunchEyeValidation()
     {
@@ -123,8 +59,7 @@ public class EyeTrackingController : MonoBehaviour
         numberOfValidationAttempts += 1;
         
         // Keep track of running state
-        validationIsRunning = true;
-        
+
         // Reset latest validation results
         configManager.latestEyeTrackingValidationResults = new Vector3(float.NaN, float.NaN, float.NaN);
         
@@ -147,7 +82,6 @@ public class EyeTrackingController : MonoBehaviour
         }
         
         // Validation finished 
-        validationIsRunning = false;
         configManager.eyeTrackingIsValidated = true;
         EyetrackingManagerNew.Instance.ValidationCompleted();
         Debug.Log("[EyeTrackingManager] Finished Eye Tracker Validation.");

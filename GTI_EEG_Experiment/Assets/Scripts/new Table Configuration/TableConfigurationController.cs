@@ -18,7 +18,7 @@ public class TableConfigurationController : MonoBehaviour
 
     private void Awake()
     {
-        transformHelper = GetComponent<ObjectTransformHelper>();    ;
+        transformHelper = GetComponent<ObjectTransformHelper>();
     }
 
     void Start()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
@@ -13,9 +14,16 @@ public class TableConfigurationController : MonoBehaviour
     private Bounds _bounds;
     
     // Start is called before the first frame update
+
+
+    private void Awake()
+    {
+        transformHelper = GetComponent<ObjectTransformHelper>();    ;
+    }
+
     void Start()
     {
-        transformHelper = GetComponent<ObjectTransformHelper>();    
+        
     }
 
     // Update is called once per frame
@@ -57,9 +65,9 @@ public class TableConfigurationController : MonoBehaviour
         
 
               
-        float scaleY = height / _bounds.size.y;
-        float scaleX = length / _bounds.size.x;
-        float scaleZ = depth / _bounds.size.z;
+        float scaleY = (height / _bounds.size.y)/100;
+        float scaleX = (length / _bounds.size.x)/100;
+        float scaleZ = (depth / _bounds.size.z)/100;
 
 
         _table.transform.localScale = new Vector3(scaleX, scaleY, scaleZ);

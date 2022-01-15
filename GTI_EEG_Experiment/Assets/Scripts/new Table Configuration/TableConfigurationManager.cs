@@ -24,7 +24,6 @@ public class TableConfigurationManager : MonoBehaviour
 
     private void Awake()
     {
-           
         //singleton pattern a la Unity
         if (Instance == null)
         {
@@ -37,8 +36,6 @@ public class TableConfigurationManager : MonoBehaviour
         }
 
     }
-    
-    
     
     // Start is called before the first frame update
     void Start()
@@ -53,16 +50,6 @@ public class TableConfigurationManager : MonoBehaviour
         _tableConfigurationController.Init(Table, Room);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    
-   
-
-
     public void AutoCalibrateTablePosition()
     {
         
@@ -76,16 +63,6 @@ public class TableConfigurationManager : MonoBehaviour
 
         _tableConfigurationController.SetPosition(tablePosition);
         
-        
-        
-        // set the table centered based on X and Z of the player.
-        //positionGuess x and Z
-        
-        
-        //guess the height based on position guess Y and table height. potentially reset the pivot to the floor of the table 
-
-        Vector3 sizes= new Vector3(length,height, depth);
-       // _tableConfigurationController.SetScale(sizes);
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
@@ -11,6 +12,8 @@ public class TableConfigurationManager : MonoBehaviour
 
 
     public GameObject Table;
+
+    public GameObject Room;
     
     private TableConfigurationController _tableConfigurationController;
     private TableCalibrationUI _tableCalibrationUI;
@@ -44,7 +47,10 @@ public class TableConfigurationManager : MonoBehaviour
         _tableConfigurationController = GetComponent<TableConfigurationController>();
         
         _tableCalibrationUI.SetActive(true);
-        _tableConfigurationController.SetTable(Table);
+        
+        Debug.Assert(Table!=null, "table was not assigned");
+        Debug.Assert(Room!=null, "room is not assigned");
+        _tableConfigurationController.Init(Table, Room);
     }
 
     // Update is called once per frame
@@ -57,12 +63,9 @@ public class TableConfigurationManager : MonoBehaviour
    
 
 
-    public void StartCalibration()
+    public void AutoCalibrateTablePosition()
     {
-       //rotation
-       
-       
-
+        
         Vector3 positonGuess = Player.instance.feetPositionGuess;
 
         Quaternion playerRotation = Quaternion.Euler(Player.instance.transform.forward);
@@ -83,6 +86,13 @@ public class TableConfigurationManager : MonoBehaviour
 
         Vector3 sizes= new Vector3(length,height, depth);
        // _tableConfigurationController.SetScale(sizes);
+    }
+
+
+    public void SetTableScale(float length, float height, float depth )
+    {
+        
+        _tableConfigurationController.SetScale(length,height,depth);
     }
     
 }

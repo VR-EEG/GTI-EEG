@@ -45,12 +45,31 @@ public class TableCalibrationUI : MonoBehaviour
             if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "Start Calibration", buttonStyle))
             {
                 //StartEyeTrackingCalibration();
-                TableConfigurationManager.Instance.StartCalibration();
+                TableConfigurationManager.Instance.AutoCalibrateTablePosition();
             }
             
             
             
+            valX += Mathf.RoundToInt(w)+2;
             
+            
+            if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "Set Table Scale", buttonStyle))
+            {
+
+                var vec = new Vector3(1, 1, 6);
+
+                var length = 6f; 
+                var depth = 1f; 
+                var height = 2f; 
+                //StartEyeTrackingCalibration(); / h / l / d
+                TableConfigurationManager.Instance.SetTableScale(length,height,depth);
+            }
+
+            
+
+
+
+
 
 
 

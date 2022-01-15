@@ -8,6 +8,7 @@ public class TableConfigurationController : MonoBehaviour
     private ObjectTransformHelper transformHelper;
     
     private GameObject _table;
+    private GameObject _room;
 
     private Bounds _bounds;
     
@@ -23,55 +24,63 @@ public class TableConfigurationController : MonoBehaviour
         
     }
 
-    public void SetBounds(GameObject table)
-    {
-        _bounds = transformHelper.GetBoundingBox(table);
-    }
-    
     public void SetPosition(Vector3 position)
     {
         _table.transform.position = position;
+        _room.transform.position = position;
     }
 
 
     public void SetRotation(Quaternion rotation)
     {
         _table.transform.rotation = rotation;
+        _room.transform.rotation = rotation;
     }
 
-    public void SetTable(GameObject table)
+    public void Init(GameObject table, GameObject room)
     {
         _table = table;
+        _room = room;
     }
 
 
 
-    public void SetScale(Vector3 scale)
+    public void SetScale(float length, float height, float depth )
     {
         transform.localScale = Vector3.one;
-
-
-        var size = new Vector3(scale.x, scale.y, scale.z);
-
-      
         
+        _bounds= transformHelper.GetBoundingBox(_table);
+        
+        var tableGroundNiveau = Player.instance.feetPositionGuess.y;
+        
+        var tableSizeHeight = _bounds.extents.y * 2;
+        
+
+              
+        float scaleY = height / _bounds.size.y;
+        float scaleX = length / _bounds.size.x;
+        float scaleZ = depth / _bounds.size.z;
+
+
+        _table.transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
+
         //center position
 
 
         //_table.transform.position = new Vector3(playerPositionGuess.x, playerPositionGuess.y, playerPositionGuess.z+5);
 
         //table height Position calculation
-        
+
         /*
-        var tableGroundNiveau = Player.instance.feetPositionGuess.y;
         
-        var tableSizeHeight = _bounds.extents.y * 2;
+        
+        
 
         var tablePlateheightPosition = tableGroundNiveau + tableSizeHeight;
         */
-        
-        
-        
+
+
+
 
 
 

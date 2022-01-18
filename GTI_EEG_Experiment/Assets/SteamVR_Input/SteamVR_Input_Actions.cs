@@ -57,6 +57,18 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_leaptool_GrabPinch;
         
+        private static SteamVR_Action_Boolean p_tableCalibration_MoveLeft;
+        
+        private static SteamVR_Action_Boolean p_tableCalibration_MoveRight;
+        
+        private static SteamVR_Action_Boolean p_tableCalibration_MoveFoward;
+        
+        private static SteamVR_Action_Boolean p_tableCalibration_MoveBackward;
+        
+        private static SteamVR_Action_Boolean p_tableCalibration_MoveUpward;
+        
+        private static SteamVR_Action_Boolean p_tableCalibration_MoveDownward;
+        
         public static SteamVR_Action_Boolean default_InteractUI
         {
             get
@@ -217,6 +229,54 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Action_Boolean tableCalibration_MoveLeft
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration_MoveLeft.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean tableCalibration_MoveRight
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration_MoveRight.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean tableCalibration_MoveFoward
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration_MoveFoward.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean tableCalibration_MoveBackward
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration_MoveBackward.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean tableCalibration_MoveUpward
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration_MoveUpward.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean tableCalibration_MoveDownward
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration_MoveDownward.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
         private static void InitializeActionArrays()
         {
             Valve.VR.SteamVR_Input.actions = new Valve.VR.SteamVR_Action[] {
@@ -239,7 +299,13 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.mixedreality_ExternalCamera,
-                    SteamVR_Actions.leaptool_GrabPinch};
+                    SteamVR_Actions.leaptool_GrabPinch,
+                    SteamVR_Actions.tableCalibration_MoveLeft,
+                    SteamVR_Actions.tableCalibration_MoveRight,
+                    SteamVR_Actions.tableCalibration_MoveFoward,
+                    SteamVR_Actions.tableCalibration_MoveBackward,
+                    SteamVR_Actions.tableCalibration_MoveUpward,
+                    SteamVR_Actions.tableCalibration_MoveDownward};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -259,7 +325,13 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
                     SteamVR_Actions.mixedreality_ExternalCamera,
-                    SteamVR_Actions.leaptool_GrabPinch};
+                    SteamVR_Actions.leaptool_GrabPinch,
+                    SteamVR_Actions.tableCalibration_MoveLeft,
+                    SteamVR_Actions.tableCalibration_MoveRight,
+                    SteamVR_Actions.tableCalibration_MoveFoward,
+                    SteamVR_Actions.tableCalibration_MoveBackward,
+                    SteamVR_Actions.tableCalibration_MoveUpward,
+                    SteamVR_Actions.tableCalibration_MoveDownward};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
@@ -278,7 +350,13 @@ namespace Valve.VR
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
-                    SteamVR_Actions.leaptool_GrabPinch};
+                    SteamVR_Actions.leaptool_GrabPinch,
+                    SteamVR_Actions.tableCalibration_MoveLeft,
+                    SteamVR_Actions.tableCalibration_MoveRight,
+                    SteamVR_Actions.tableCalibration_MoveFoward,
+                    SteamVR_Actions.tableCalibration_MoveBackward,
+                    SteamVR_Actions.tableCalibration_MoveUpward,
+                    SteamVR_Actions.tableCalibration_MoveDownward};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.default_Squeeze,
                     SteamVR_Actions.buggy_Throttle};
@@ -304,7 +382,13 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Throttle,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
-                    SteamVR_Actions.leaptool_GrabPinch};
+                    SteamVR_Actions.leaptool_GrabPinch,
+                    SteamVR_Actions.tableCalibration_MoveLeft,
+                    SteamVR_Actions.tableCalibration_MoveRight,
+                    SteamVR_Actions.tableCalibration_MoveFoward,
+                    SteamVR_Actions.tableCalibration_MoveBackward,
+                    SteamVR_Actions.tableCalibration_MoveUpward,
+                    SteamVR_Actions.tableCalibration_MoveDownward};
         }
         
         private static void PreInitActions()
@@ -329,6 +413,12 @@ namespace Valve.VR
             SteamVR_Actions.p_buggy_Reset = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/buggy/in/Reset")));
             SteamVR_Actions.p_mixedreality_ExternalCamera = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/mixedreality/in/ExternalCamera")));
             SteamVR_Actions.p_leaptool_GrabPinch = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/leaptool/in/GrabPinch")));
+            SteamVR_Actions.p_tableCalibration_MoveLeft = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/tableCalibration/in/MoveLeft")));
+            SteamVR_Actions.p_tableCalibration_MoveRight = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/tableCalibration/in/MoveRight")));
+            SteamVR_Actions.p_tableCalibration_MoveFoward = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/tableCalibration/in/MoveFoward")));
+            SteamVR_Actions.p_tableCalibration_MoveBackward = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/tableCalibration/in/MoveBackward")));
+            SteamVR_Actions.p_tableCalibration_MoveUpward = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/tableCalibration/in/MoveUpward")));
+            SteamVR_Actions.p_tableCalibration_MoveDownward = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/tableCalibration/in/MoveDownward")));
         }
     }
 }

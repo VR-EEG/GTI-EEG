@@ -9,8 +9,15 @@ public class TableConfigurationManager : MonoBehaviour
 {
     
     public static TableConfigurationManager Instance { get; private set; }
-
-
+    
+    
+    public SteamVR_ActionSet CalibrationActionSet;
+    public SteamVR_Action_Boolean MoveLeftInput;
+    public SteamVR_Action_Boolean MoveRightInput;
+    public SteamVR_Action_Boolean MoveFowardInput;
+    public SteamVR_Action_Boolean MoveBackwardInput;
+    public SteamVR_Action_Boolean MoveUpwardInput;
+    public SteamVR_Action_Boolean MoveDownWardInput;
     public GameObject Table;
 
     public GameObject Room;
@@ -21,6 +28,8 @@ public class TableConfigurationManager : MonoBehaviour
     private float depth;
     private float length;
     private float height;
+
+    private Vector2 horizontalMovement;
 
     private void Awake()
     {
@@ -36,7 +45,35 @@ public class TableConfigurationManager : MonoBehaviour
         }
 
     }
+
+    private void Update()
+    {
+        throw new NotImplementedException();
+    }
+
+
+    public void MovementHorizontalInput(SteamVR_Behaviour_Vector2 input, SteamVR_Input_Sources fromSource)
+    {
+        
+    }
+
+    public void SetActive(bool state)
+    {
+        _tableCalibrationUI.SetActive(state);
+        
+        if (state)
+            CalibrationActionSet.Activate();
+        else
+            CalibrationActionSet.Deactivate();
+    }
     
+
+
+    public void MoveManuallyTable(Vector3 direction)
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {

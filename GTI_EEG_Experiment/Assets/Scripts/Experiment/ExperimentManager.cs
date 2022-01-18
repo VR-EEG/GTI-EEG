@@ -892,7 +892,6 @@ public class ExperimentManager : MonoBehaviour
     
     
     
-    // Get the CalibrationData from the Calibration Scene 
     public void AdjustTableAndFloor()
     {
         Debug.Log("[ExperimentManager] Adjusting table and floor transforms.");
@@ -919,7 +918,7 @@ public class ExperimentManager : MonoBehaviour
         }
         
         // Adjust the table 
-        tableManager.SetTableTransform(tablePosition, tableRotation, tableScale);
+        //tableManager.SetTableTransform(tablePosition, tableRotation, tableScale);
         
         // Adjust the floor (and walls)
         room.transform.position = new Vector3(0, floorHeight, 0);

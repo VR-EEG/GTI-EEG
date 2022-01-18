@@ -6636,6 +6636,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff0e55333a257841adc40554b121149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CalibrationActionSet:
+    actionSetPath: /actions/tableCalibration
+  MoveLeftInput:
+    actionPath: 
+    needsReinit: 0
+  MoveRightInput:
+    actionPath: 
+    needsReinit: 0
+  MoveFowardInput:
+    actionPath: 
+    needsReinit: 0
+  MoveBackwardInput:
+    actionPath: 
+    needsReinit: 0
+  MoveUpwardInput:
+    actionPath: 
+    needsReinit: 0
+  MoveDownWardInput:
+    actionPath: 
+    needsReinit: 0
   Table: {fileID: 310719340}
   Room: {fileID: 1606998124}
 --- !u!114 &583254233

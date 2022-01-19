@@ -32,9 +32,11 @@ public class TableConfigurationManager : MonoBehaviour
     private float length;
     private float height;
 
-    private Vector2 horizontalMovement;
+    private Vector3 _tablePosition;
 
     private bool _isActive;
+
+    private bool _controllerIsOverriding;
 
     private void Awake()
     {
@@ -52,6 +54,7 @@ public class TableConfigurationManager : MonoBehaviour
     }
     private void Update()
     {
+        _tablePosition = Table.transform.position;
         if (Input.GetKeyDown(KeyCode.N))
         {
             Debug.Log("test");
@@ -63,38 +66,54 @@ public class TableConfigurationManager : MonoBehaviour
 
     public void MoveLeft(SteamVR_Action_Boolean leftInput, SteamVR_Input_Sources fromSource)
     {
+        _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.left;
         MoveTable(inputDirection);
     }
     
     public void MoveRight(SteamVR_Action_Boolean rightInput, SteamVR_Input_Sources fromSource)
     {
+        _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.right;
         MoveTable(inputDirection);
     }
     
     public void MoveForward(SteamVR_Action_Boolean forwardInput, SteamVR_Input_Sources fromSource)
     {
+        _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.forward;
         MoveTable(inputDirection);
     }
     
     public void MoveBackward(SteamVR_Action_Boolean backwardInput, SteamVR_Input_Sources fromSource)
     {
+        _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.back;
         MoveTable(inputDirection);
     }
     
     public void MoveUp(SteamVR_Action_Boolean upInput, SteamVR_Input_Sources fromSource)
     {
+        _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.up;
         MoveTable(inputDirection);
     }
     
     public void MoveDown(SteamVR_Action_Boolean downInput, SteamVR_Input_Sources fromSource)
     {
+        _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.down;
         MoveTable(inputDirection);
+    }
+
+    public bool ControllerIsOverriding()
+    {
+        return _controllerIsOverriding;
+    }
+
+    public void SetControllerIsOverriding(bool state)
+    {
+        _controllerIsOverriding = state;
     }
 
     public void SetActive(bool state)
@@ -115,6 +134,14 @@ public class TableConfigurationManager : MonoBehaviour
     {
         Debug.Log("move " + direction);
         Table.transform.position += direction*Speed*Time.deltaTime;
+        Room.transform.position = Table.transform.position;
+
+    }
+
+    public void SetTablePosition(Vector3 position)
+    {
+        Table.transform.position = position;
+        Room.transform.position = Table.transform.position;
     }
     
     // Start is called before the first frame update
@@ -136,9 +163,18 @@ public class TableConfigurationManager : MonoBehaviour
         MoveBackwardInput.AddOnStateDownListener(MoveBackward,SteamVR_Input_Sources.Any);
         MoveUpwardInput.AddOnStateDownListener(MoveUp,SteamVR_Input_Sources.Any);
         MoveDownWardInput.AddOnStateDownListener(MoveDown,SteamVR_Input_Sources.Any);
+        var x =  PlayerPrefs.GetFloat("TableX");
+        var y = PlayerPrefs.GetFloat("TableY");
+        var z = PlayerPrefs.GetFloat("TableZ");
+        _tablePosition = new Vector3(x, y, z);
+        SetTablePosition(_tablePosition);
+
     }
-    
-    
+
+    public Vector3 GetTablePosition()
+    {
+        return _tablePosition;
+    }
     
 
     public void AutoCalibrateTablePosition()

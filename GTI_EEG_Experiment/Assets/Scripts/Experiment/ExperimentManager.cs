@@ -921,7 +921,7 @@ public class ExperimentManager : MonoBehaviour
         //tableManager.SetTableTransform(tablePosition, tableRotation, tableScale);
         
         // Adjust the floor (and walls)
-        room.transform.position = new Vector3(0, floorHeight, 0);
+       // room.transform.position = new Vector3(0, floorHeight, 0);
     }
 
     

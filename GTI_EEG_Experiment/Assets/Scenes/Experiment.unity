@@ -6639,25 +6639,26 @@ MonoBehaviour:
   CalibrationActionSet:
     actionSetPath: /actions/tableCalibration
   MoveLeftInput:
-    actionPath: 
+    actionPath: /actions/tableCalibration/in/MoveLeft
     needsReinit: 0
   MoveRightInput:
-    actionPath: 
+    actionPath: /actions/tableCalibration/in/MoveRight
     needsReinit: 0
   MoveFowardInput:
-    actionPath: 
+    actionPath: /actions/tableCalibration/in/MoveFoward
     needsReinit: 0
   MoveBackwardInput:
-    actionPath: 
+    actionPath: /actions/tableCalibration/in/MoveBackward
     needsReinit: 0
   MoveUpwardInput:
-    actionPath: 
+    actionPath: /actions/tableCalibration/in/MoveUpward
     needsReinit: 0
   MoveDownWardInput:
-    actionPath: 
+    actionPath: /actions/tableCalibration/in/MoveDownward
     needsReinit: 0
   Table: {fileID: 310719340}
   Room: {fileID: 1606998124}
+  Speed: 1
 --- !u!114 &583254233
 MonoBehaviour:
   m_ObjectHideFlags: 0

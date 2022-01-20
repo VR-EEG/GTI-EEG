@@ -49,8 +49,8 @@ public class TriggerManager : MonoBehaviour
     // Object Transform Tools
     private ObjectTransformHelper transformHelper;
 
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {

@@ -498,8 +498,8 @@ public class CalibrationManager : MonoBehaviour
         cameraRig.transform.rotation = Quaternion.Euler(currentPlayerRotation);
 
         // Calibrate floor and table 
-        room.GetComponent<Transform>().position = floorPositionUpdated;
-        tableManipulatorScript.FitToFrontCornerPositions(leftCornerPosition, rightCornerPosition, tableDepth);
+        //room.GetComponent<Transform>().position = floorPositionUpdated;
+        //tableManipulatorScript.FitToFrontCornerPositions(leftCornerPosition, rightCornerPosition, tableDepth);
         floorWasCalibrated = true;
         tableWasCalibrated = true;
 

@@ -10,6 +10,9 @@ public class TableConfigurationController : MonoBehaviour
     
     private GameObject _table;
     private GameObject _room;
+    private GameObject _button;
+    private Transform _buttonPos;
+    [SerializeField] private Vector3 ButtonOffsetFromTable;
 
     private Bounds _bounds;
     
@@ -45,10 +48,12 @@ public class TableConfigurationController : MonoBehaviour
         _room.transform.rotation = rotation;
     }
 
-    public void Init(GameObject table, GameObject room)
+    public void Init(GameObject table, GameObject room, GameObject button, Transform buttonPosition)
     {
         _table = table;
         _room = room;
+        _button = button;
+        _buttonPos = buttonPosition;
     }
 
 
@@ -58,40 +63,14 @@ public class TableConfigurationController : MonoBehaviour
         transform.localScale = Vector3.one;
         
         _bounds= transformHelper.GetBoundingBox(_table);
-        
-        var tableGroundNiveau = Player.instance.feetPositionGuess.y;
-        
-        var tableSizeHeight = _bounds.extents.y * 2;
-        
 
-              
+
         float scaleY = (height / _bounds.size.y)/100;
         float scaleX = (length / _bounds.size.x)/100;
         float scaleZ = (depth / _bounds.size.z)/100;
-
-
         _table.transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
 
-        //center position
-
-
-        //_table.transform.position = new Vector3(playerPositionGuess.x, playerPositionGuess.y, playerPositionGuess.z+5);
-
-        //table height Position calculation
-
-        /*
-        
-        
-        
-
-        var tablePlateheightPosition = tableGroundNiveau + tableSizeHeight;
-        */
-
-
-
-
-
-
+        _button.transform.position = _buttonPos.position;
 
 
 

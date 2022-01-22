@@ -19,10 +19,12 @@ public class TableConfigurationManager : MonoBehaviour
     public SteamVR_Action_Boolean MoveUpwardInput;
     public SteamVR_Action_Boolean MoveDownWardInput;
     public GameObject Table;
-
     public GameObject Room;
+    public GameObject Button;
+    public Transform ButtonPosition;
 
     [SerializeField] private float Speed;
+    [SerializeField] private Vector3 ButtonOffsetFromTable;
     
     private TableConfigurationController _tableConfigurationController;
     private TableCalibrationUI _tableCalibrationUI;
@@ -57,8 +59,7 @@ public class TableConfigurationManager : MonoBehaviour
         _tablePosition = Table.transform.position;
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Debug.Log("test");
-           SetActive(!_isActive);
+            SetActive(!_isActive);
            _isActive = !_isActive;
         }
     }
@@ -141,6 +142,7 @@ public class TableConfigurationManager : MonoBehaviour
     public void SetTablePosition(Vector3 position)
     {
         Table.transform.position = position;
+        
         Room.transform.position = Table.transform.position;
     }
     
@@ -155,7 +157,7 @@ public class TableConfigurationManager : MonoBehaviour
         
         Debug.Assert(Table!=null, "table was not assigned");
         Debug.Assert(Room!=null, "room is not assigned");
-        _tableConfigurationController.Init(Table, Room);
+        _tableConfigurationController.Init(Table, Room,Button, ButtonPosition);
         
         MoveLeftInput.AddOnStateDownListener(MoveLeft,SteamVR_Input_Sources.Any);
         MoveRightInput.AddOnStateDownListener(MoveRight,SteamVR_Input_Sources.Any);
@@ -191,12 +193,12 @@ public class TableConfigurationManager : MonoBehaviour
         _tableConfigurationController.SetPosition(tablePosition);
         
     }
-
-
+    
     public void SetTableScale(float length, float height, float depth )
     {
         
         _tableConfigurationController.SetScale(length,height,depth);
+        
     }
     
 }

@@ -30,6 +30,8 @@ public class TableCalibrationUI : MonoBehaviour
     private string _zText;
 
     private bool _overridePosition;
+
+    private bool overrideScalePossible;
     
 
     public void SetActive(bool state)
@@ -65,6 +67,8 @@ public class TableCalibrationUI : MonoBehaviour
 
         _windowHeight = Screen.height;
         _windowWidth = Screen.width;
+
+        overrideScalePossible = false;
 
     }
 
@@ -202,6 +206,7 @@ public class TableCalibrationUI : MonoBehaviour
 
                 if (float.TryParse(_lengthText, out _length))
                 {
+                    overrideScalePossible=true;
                     PlayerPrefs.SetFloat("TableLength",_length);
                 }
             }
@@ -214,9 +219,11 @@ public class TableCalibrationUI : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
+                
                 CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
                 if (float.TryParse(_depthText, out _depth))
                 {
+                    overrideScalePossible=true;
                     PlayerPrefs.SetFloat("TableDepth",_depth);
                 }
             }
@@ -227,34 +234,57 @@ public class TableCalibrationUI : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
+               
                 CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
                 if (float.TryParse(_heightText, out _height))
                 {
+                    overrideScalePossible=true;
                     PlayerPrefs.SetFloat("TableHeight",_height);
                 }
             }
-            
 
             valY = (int)_windowHeight * 3 / 10 + heightBox*2+ spacing;
             valX =(int) _windowWidth/2;
             
-            GUI.backgroundColor = Color.cyan;
-            
-            if (GUI.Button(new Rect(valX, valY, w*2, heightBox*1.5f), "Set Table Scale", buttonStyle))
+            if (overrideScalePossible)
             {
-                TableConfigurationManager.Instance.SetTableScale(_length,_height,_depth);
+                Debug.Log("hello");
             }
             
-            GUI.backgroundColor = Color.cyan;
+            if (overrideScalePossible)
+            {
+                GUI.backgroundColor = Color.cyan;
+            
+                if (GUI.Button(new Rect(valX, valY, w*2, heightBox*1.5f), "Set Table Scale", buttonStyle))
+                {
+                    TableConfigurationManager.Instance.SetTableScale(_length,_height,_depth);
+                    overrideScalePossible = false;
+                }
+                
+                
+            
+                
+            
+                
+
+                
+            }
             
             valX = x;
-            
+            GUI.backgroundColor = Color.cyan;
             if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "AutoCalibrate Position", buttonStyle))
             {
                 TableConfigurationManager.Instance.AutoCalibrateTablePosition();
+                overrideScalePossible = false;
             }
             
+            
+            
+
+            
+            
+           
             
            
         }

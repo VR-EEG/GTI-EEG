@@ -418,11 +418,11 @@ public class UiManager : MonoBehaviour
         buttonStartExperiment.interactable = true;
         buttonQuit.interactable = true;
 
-        // Table or floor or subject data not set, cannot start experiment 
+        /*// Table or floor or subject data not set, cannot start experiment 
         if (!tableIsCalibrated | !floorIsCalibrated | !subjectDataIsSet)
         {
             buttonStartExperiment.interactable = false;
-        }
+        }*/
 
         // Make sure overlay is visible 
         statusOverlay.SetActive(true);

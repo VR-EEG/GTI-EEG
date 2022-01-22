@@ -714,7 +714,7 @@ public class ExperimentManager : MonoBehaviour
         headPositionVolumeManager.UpdateVolumeTransform();
         
         // Transform trigger 
-        triggerManager.UpdateTriggerTransform();
+        //triggerManager.UpdateTriggerTransform();
         
         // Setup tools 
         toolManager.UpdateToolData();

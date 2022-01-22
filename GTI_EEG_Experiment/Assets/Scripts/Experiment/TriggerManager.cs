@@ -91,7 +91,7 @@ public class TriggerManager : MonoBehaviour
         // If left, place trigger to the left, else (right or ambidextrous) place on the right 
         int handednessFactor = 0;
         
-        if (configManager.subjectHandedness.ToLower().Contains("left"))
+        /*if (configManager.subjectHandedness.ToLower().Contains("left"))
         {
             handednessFactor = -1;
             configManager.triggerIsOnSide = "left";
@@ -100,7 +100,7 @@ public class TriggerManager : MonoBehaviour
         {
             handednessFactor = 1;
             configManager.triggerIsOnSide = "right";
-        }
+        }*/
         
 
         // Get table surface center position and rotation and table extents
@@ -110,12 +110,12 @@ public class TriggerManager : MonoBehaviour
        
         // Trigger position non-rotated in world space, dependent on handedness of subject
         // From center of table specified percentage to the right and specified percentage to the front 
-        Vector3 triggerPosition = tableSurfaceCenterPosition +
+        /*Vector3 triggerPosition = tableSurfaceCenterPosition +
                                   new Vector3(tableExtents.x * configManager.triggerPositionTableFrontPercentage / 100.0f, 0,
                                       tableExtents.z * configManager.triggerPositionTableSidePercentage / 100.0f *
-                                      handednessFactor);
+                                      handednessFactor);*/
         
-        //Vector from table surface center to trigger position
+        /*//Vector from table surface center to trigger position
         Vector3 triggerOffsetFromTableCenter = triggerPosition - tableSurfaceCenterPosition;
         
         // Rotate offset vector
@@ -135,16 +135,16 @@ public class TriggerManager : MonoBehaviour
         
         // Rotate trigger pivot bottom center offset 
         Vector3 rotatedTriggerPivotBottomCenterOffset =
-            Quaternion.Euler(tableRotationEuler) * triggerPivotBottomCenterOffset;
+            Quaternion.Euler(tableRotationEuler) * triggerPivotBottomCenterOffset;*/
         
         // Rotate trigger to fit table rotation
-        transform.rotation = Quaternion.Euler(tableRotationEuler);
+       // transform.rotation = Quaternion.Euler(tableRotationEuler);
         
         // Update Trigger Position 
-        transform.position = triggerPositionRotated - rotatedTriggerPivotBottomCenterOffset;
+        //transform.position = triggerPositionRotated - rotatedTriggerPivotBottomCenterOffset;
         
         // Store trigger top position 
-        triggerTopPosition = transformHelper.GetBoundingBox(this.gameObject).center + new Vector3(0,transformHelper.GetBoundingBox(this.gameObject).extents.y,0);
+        //triggerTopPosition = transformHelper.GetBoundingBox(this.gameObject).center + new Vector3(0,transformHelper.GetBoundingBox(this.gameObject).extents.y,0);
     }
 
 

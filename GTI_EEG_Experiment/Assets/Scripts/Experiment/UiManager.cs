@@ -499,7 +499,7 @@ public class UiManager : MonoBehaviour
         }
         
         // Update trigger transform as handedness may have changed 
-        triggerManager.UpdateTriggerTransform();
+        //triggerManager.UpdateTriggerTransform();
         
         // Update status of subject data set in config manager 
         configManager.subjectDataIsSet = true;

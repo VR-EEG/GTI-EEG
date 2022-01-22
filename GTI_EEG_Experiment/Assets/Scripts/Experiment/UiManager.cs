@@ -266,7 +266,7 @@ public class UiManager : MonoBehaviour
         listOfMenus.Add(errorMessageMenu);
 
         // Setup listeners for the main menu buttons
-        buttonCalibrateTableFloor.onClick.AddListener(ClickedButtonCalibrateTableFloor);
+        //buttonCalibrateTableFloor.onClick.AddListener(ClickedButtonCalibrateTableFloor);
         buttonSetSubjectData.onClick.AddListener(ClickedButtonSetSubjectData);
         buttonStartExperiment.onClick.AddListener(ClickedButtonStartExperiment);
         buttonSettings.onClick.AddListener(ClickedButtonSettings);

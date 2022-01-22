@@ -314,7 +314,7 @@ public class ExperimentManager : MonoBehaviour
             if (triggerManager.GetInteractionHappened())
             {
                 // Head is in the correct position 
-                if (headPositionVolumeManager.GetHmdIsIntersectingHeadPositionVolume())
+                /*if (headPositionVolumeManager.GetHmdIsIntersectingHeadPositionVolume())
                 {
                     // Empty cue text and wait for delay between trials (and start) 
                     cueManager.UpdateCueText(CueStates.Empty); // Empty cue text 
@@ -336,7 +336,7 @@ public class ExperimentManager : MonoBehaviour
                     triggerManager.ResetInteractionHappened(); // Reset input to none 
                     experimentStateCoroutineIsStarted = false; // disable coroutine lock 
                     yield break; // break coroutine 
-                }
+                }*/
 
                 // Head is not yet in correct position 
                 else

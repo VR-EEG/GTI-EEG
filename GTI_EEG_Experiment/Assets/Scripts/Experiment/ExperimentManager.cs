@@ -905,8 +905,8 @@ public class ExperimentManager : MonoBehaviour
         GameObject configManager = GameObject.FindWithTag("ConfigManager");
         
         // Get table and floor calibration from config manager 
-        Vector3 tablePosition = configManager.GetComponent<ConfigManager>().tablePosition;
-        Vector3 tableRotation = configManager.GetComponent<ConfigManager>().tableRotation;
+      //  Vector3 tablePosition = configManager.GetComponent<ConfigManager>().tablePosition;
+     //   Vector3 tableRotation = configManager.GetComponent<ConfigManager>().tableRotation;
         Vector3 tableScale = configManager.GetComponent<ConfigManager>().tableScale;
         float floorHeight = configManager.GetComponent<ConfigManager>().floorHeight;
         

@@ -35,6 +35,11 @@ public class TableConfigurationController : MonoBehaviour
         
     }
 
+    public Quaternion GetTableRotation()
+    {
+        return _table.transform.rotation;
+    }
+    
     public void SetPosition(Vector3 position)
     {
         _table.transform.position = position;
@@ -70,7 +75,7 @@ public class TableConfigurationController : MonoBehaviour
         float scaleZ = (depth / _bounds.size.z)/100;
         _table.transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
 
-        _button.transform.position = _buttonPos.position;
+        //_button.transform.position = _buttonPos.position;
 
 
 

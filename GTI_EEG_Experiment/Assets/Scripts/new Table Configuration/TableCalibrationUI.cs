@@ -272,12 +272,20 @@ public class TableCalibrationUI : MonoBehaviour
             }
             
             valX = x;
-            GUI.backgroundColor = Color.cyan;
+            GUI.backgroundColor = Color.red;
             if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "AutoCalibrate Position", buttonStyle))
             {
                 TableConfigurationManager.Instance.AutoCalibrateTablePosition();
-                overrideScalePossible = false;
+                TableConfigurationManager.Instance.AutoCalibrateButtonPosition();
             }
+            
+            
+            valX = (int) (x+w*1.5f+1);
+            if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "AutoCalibrate Button", buttonStyle))
+            {
+                TableConfigurationManager.Instance.AutoCalibrateButtonPosition();
+            }
+
             
             
             

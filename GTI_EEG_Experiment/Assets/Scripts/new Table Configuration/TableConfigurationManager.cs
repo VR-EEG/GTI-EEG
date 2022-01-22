@@ -21,18 +21,21 @@ public class TableConfigurationManager : MonoBehaviour
     public GameObject Table;
     public GameObject Room;
     public GameObject Button;
+    public GameObject CueText;
     public Transform ButtonPosition;
 
     [SerializeField] private float Speed;
-    [SerializeField] private Vector3 ButtonOffsetFromTable;
+    [SerializeField] private Vector2 ButtonOffsetToPlayer;
+    
+    
     
     private TableConfigurationController _tableConfigurationController;
     private TableCalibrationUI _tableCalibrationUI;
-    
 
-    private float depth;
-    private float length;
-    private float height;
+
+    private float _depth;
+    private float _length;
+    private float _height;
 
     private Vector3 _tablePosition;
 
@@ -139,11 +142,17 @@ public class TableConfigurationManager : MonoBehaviour
 
     }
 
+    public void MoveButton(Vector3 direction)
+    {
+        Button.transform.position += direction;
+    }
+
     public void SetTablePosition(Vector3 position)
     {
         Table.transform.position = position;
         
         Room.transform.position = Table.transform.position;
+        
     }
     
     // Start is called before the first frame update
@@ -186,19 +195,47 @@ public class TableConfigurationManager : MonoBehaviour
 
         Quaternion playerRotation = Quaternion.Euler(Player.instance.transform.forward);
         
-        var tablePosition = new Vector3(positonGuess.x, positonGuess.y, positonGuess.z + 1);
+        var tablePosition = new Vector3(positonGuess.x, positonGuess.y, positonGuess.z +_depth/2);
         
         _tableConfigurationController.SetRotation(playerRotation);
 
         _tableConfigurationController.SetPosition(tablePosition);
         
     }
+
+    public void AutoCalibrateButtonPosition()
+    {
+        Vector3 positonGuess = Player.instance.feetPositionGuess;
+
+
+        Quaternion rot = _tableConfigurationController.GetTableRotation();
+
+        var offset = ButtonOffsetToPlayer;
+
+
+
+        Vector3 pos = new Vector3(positonGuess.x+offset.x, _height, positonGuess.z+offset.y);
+
+        pos.x += ButtonOffsetToPlayer.x;
+        pos.z += ButtonOffsetToPlayer.y;
+
+        Button.transform.position = pos;
+        Button.transform.rotation = rot;
+
+
+    }
     
     public void SetTableScale(float length, float height, float depth )
     {
-        
+        _length = length/100;
+        _height = height/100;
+        _depth = depth/100;
         _tableConfigurationController.SetScale(length,height,depth);
         
     }
+    
+    
+    
+    
     
 }

@@ -555,14 +555,14 @@ public class CalibrationManager : MonoBehaviour
         GameObject configManager = GameObject.FindWithTag("ConfigManager");
 
         // Get current table and floor calibration 
-        Vector3 tablePosition = table.GetComponent<Transform>().position;
-        Vector3 tableRotation = table.GetComponent<Transform>().rotation.eulerAngles;
+        //Vector3 tablePosition = table.GetComponent<Transform>().position;
+        //Vector3 tableRotation = table.GetComponent<Transform>().rotation.eulerAngles;
         Vector3 tableScale = table.GetComponent<Transform>().localScale;
         float floorHeight = room.GetComponent<Transform>().position.y;
         
         // Update calibration data 
-        configManager.GetComponent<ConfigManager>().tablePosition = tablePosition;
-        configManager.GetComponent<ConfigManager>().tableRotation = tableRotation;
+       // configManager.GetComponent<ConfigManager>().tablePosition = tablePosition;
+        //configManager.GetComponent<ConfigManager>().tableRotation = tableRotation;
         configManager.GetComponent<ConfigManager>().tableScale = tableScale;
         configManager.GetComponent<ConfigManager>().floorHeight = floorHeight;
         configManager.GetComponent<ConfigManager>().floorIsCalibrated = floorWasCalibrated;

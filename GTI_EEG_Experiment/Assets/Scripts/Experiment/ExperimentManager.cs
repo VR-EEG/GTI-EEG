@@ -12,6 +12,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class ExperimentManager : MonoBehaviour
 {
@@ -101,6 +102,11 @@ public class ExperimentManager : MonoBehaviour
     // Did a resume from block pause just happen?
     private bool resumingFromBlockPause = false;
 
+    private bool _acceptButtonPress;
+
+    private bool _isInPractise;
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -135,6 +141,17 @@ public class ExperimentManager : MonoBehaviour
             // Change to idle mode 
             experimentState = ExperimentStates.Idle;
         }
+
+
+        triggerManager.TriggerPressed += TriggerPressedAccepted;
+        //TODO find a better place to set this setting
+        _isInPractise = true;
+    }
+
+
+    private void TriggerPressedAccepted()
+    {
+        _acceptButtonPress = true;
     }
 
     // Update is called once per frame
@@ -230,7 +247,7 @@ public class ExperimentManager : MonoBehaviour
             case ExperimentStates.Idle:
                 break;
             default:
-                Debug.Log("[ExperimentManager] Specified invalid Experiment State, ignoring!");
+                Debug.LogWarning("[ExperimentManager] Specified invalid Experiment State, ignoring!");
                 break;
         }
     }
@@ -311,64 +328,28 @@ public class ExperimentManager : MonoBehaviour
         while (true)
         {
             // Trigger interaction appeared
-            if (triggerManager.GetInteractionHappened())
+            if (_acceptButtonPress)
             {
-                // Head is in the correct position 
-                /*if (headPositionVolumeManager.GetHmdIsIntersectingHeadPositionVolume())
-                {
-                    // Empty cue text and wait for delay between trials (and start) 
-                    cueManager.UpdateCueText(CueStates.Empty); // Empty cue text 
-                    yield return
-                        new WaitForSeconds(configManager
-                            .delayBetweenTriggerInteractionAndCuePresentation); // Pause before first trial for a certain time 
-
-                    // Change experiment state
-                    if (configManager.isInPractice)
+                cueManager.UpdateCueText(CueStates.Start);
+                triggerManager.ResetInteractionHappened();
+                    
+                    yield return new WaitForSeconds(.1f);
+                    
+                    if (_isInPractise)
                     {
-                        experimentState = ExperimentStates.Practice; // practice section 
+                        experimentState = ExperimentStates.Practice; 
                     }
                     else
                     {
-                        experimentState = ExperimentStates.Measuring; // experiment measuring section
+                        experimentState = ExperimentStates.Measuring;
                     }
-
-                    // Reset experiment state settings
-                    triggerManager.ResetInteractionHappened(); // Reset input to none 
-                    experimentStateCoroutineIsStarted = false; // disable coroutine lock 
-                    yield break; // break coroutine 
-                }*/
-
-                // Head is not yet in correct position 
-                else
-                {
-                    Debug.Log("[ExperimentManager] Head is not at the correct position to start measuring.");
-                    
-                    triggerManager.ResetInteractionHappened(); // Reset the interaction happened 
-                    cueManager.UpdateCueText(CueStates.StartMoveHead); // Show info that moving head is necessary
-
-                    // Wait for head to move to correct position 
-                    while (!headPositionVolumeManager.GetHmdIsIntersectingHeadPositionVolume())
-                    {
-                        yield return new WaitForSeconds(.1f);
-                    }
-                    
-                    Debug.Log("[ExperimentManager] Head is now at the correct position to start measuring.");
-                    
-                    // Update cue when head is at correct position and wait for new trigger interaction 
-                    cueManager.UpdateCueText(CueStates.Start);
-                    triggerManager.ResetInteractionHappened();
-                    
-                    yield return new WaitForSeconds(.1f);
-                }
+                    _acceptButtonPress = false;
+                    break;
             }
-            
-            // No trigger interaction appeared
-            else
-            {
-                // Keep this coroutine running with a delay to reduce CPU load 
-                yield return new WaitForSeconds(.1f);
-            }
+            yield return new WaitForSeconds(.1f);
         }
+
+        experimentStateCoroutineIsStarted = false;
     }
     
     
@@ -384,7 +365,7 @@ public class ExperimentManager : MonoBehaviour
         yield return new WaitForSeconds(configManager.informationalCuePresentationDuration);
         
         // Go to start state next  
-        experimentState = ExperimentStates.Start;
+       
                 
         // Reset experiment state settings
         configManager.isInPractice = false; // Not in practice anymore 
@@ -397,10 +378,13 @@ public class ExperimentManager : MonoBehaviour
         StartEyetrackingSetup();
         
         yield return new WaitUntil(() => EyetrackingManagerNew.Instance.IsSetupClosed());
+
+        //configManager.isInPractice = false;
+
+        _isInPractise = false;
+        experimentState = ExperimentStates.Start;
         ReturnToRoom();
-                
-        yield break; // break coroutine 
-        
+        experimentStateCoroutineIsStarted = false;
     }
     
     
@@ -412,7 +396,7 @@ public class ExperimentManager : MonoBehaviour
         // Check if utcon index is valid 
         if (configManager.practiceUtconIdx < 0)
         {
-            throw new Exception("UTCON index is negative!");
+            Debug.LogError("no practise UTICON");
         }
         
         // Check if utcon index is outside of practice trial number range, in that case, assume practice end is reached
@@ -466,7 +450,7 @@ public class ExperimentManager : MonoBehaviour
         while (true)
         {
             // Trigger interaction appeared
-            if (triggerManager.GetInteractionHappened())
+            if (_acceptButtonPress)
             {
                 // Empty display of cue and tool and wait for a certain time between trials 
                 toolManager.DisplayNoTool(); // Deactivate tool display 
@@ -479,6 +463,7 @@ public class ExperimentManager : MonoBehaviour
                 configManager.practiceUtconIdx += 1; // Increase utcon index to display next item in the next coroutine call 
                 resumingFromBlockPause = false; // deactivate block pause lock 
                 experimentStateCoroutineIsStarted = false; // disable coroutine lock 
+                _acceptButtonPress = false;
                 yield break; // break coroutine 
             }
             
@@ -569,7 +554,7 @@ public class ExperimentManager : MonoBehaviour
         while (true)
         {
             // Trigger interaction appeared
-            if (triggerManager.GetInteractionHappened())
+            if (_acceptButtonPress)
             {
                 double[] buttonPressedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
                 LSLStreams.Instance.lslOButtonPressedTimeStamp.push_sample(buttonPressedTimestamp);
@@ -588,6 +573,7 @@ public class ExperimentManager : MonoBehaviour
                 configManager.experimentUtconIdx += 1; // Increase utcon index to display next item in the next coroutine call 
                 resumingFromBlockPause = false; // deactivate block pause lock 
                 experimentStateCoroutineIsStarted = false; // disable coroutine lock 
+                _acceptButtonPress = false;
                 yield break; // break coroutine 
             }
             
@@ -634,7 +620,7 @@ public class ExperimentManager : MonoBehaviour
         while (true)
         {
             // Trigger interaction appeared
-            if (triggerManager.GetInteractionHappened())
+            if (_acceptButtonPress)
             {
                 // Increment current block number 
                 configManager.currentBlock += 1;
@@ -649,6 +635,7 @@ public class ExperimentManager : MonoBehaviour
 
                 yield return new WaitUntil(() => EyetrackingManagerNew.Instance.IsSetupClosed());
                 ReturnToRoom();
+                _acceptButtonPress = false;
                 // Break coroutine 
                 yield break;  
             }
@@ -720,7 +707,7 @@ public class ExperimentManager : MonoBehaviour
         toolManager.UpdateToolData();
         
         // Setup cue 
-        cueManager.UpdateCueTransform();
+       // cueManager.UpdateCueTransform();
         
         // Load practice flow utcons 
         LoadPracticeFlowUtcons();

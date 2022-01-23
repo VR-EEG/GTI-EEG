@@ -49,6 +49,8 @@ public class TriggerManager : MonoBehaviour
     // Object Transform Tools
     private ObjectTransformHelper transformHelper;
 
+    public event Action TriggerPressed;
+
 
 
     // Start is called before the first frame update
@@ -174,7 +176,7 @@ public class TriggerManager : MonoBehaviour
     //simple Interaction button elicit by SteamVR Interaction Event
     public void ButtonPressed()
     {
-        triggerInteractionHappened = true;
+       TriggerPressed.Invoke();
     }
     
     

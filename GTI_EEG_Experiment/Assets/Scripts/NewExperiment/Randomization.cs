@@ -10,6 +10,15 @@ namespace NewExperiment
             return Guid.NewGuid().ToString();
         }
         
+        
+        
+        /// <summary>
+        /// Fisher-Yates randomization shuffle
+        /// </summary>
+        /// <param name="list"> any type of List</param>
+        /// <param name="rnd"> seed for randomisation</param>
+        /// <typeparam name="T">input and return type of list</typeparam>
+        /// <returns></returns>
         public static List<T> Shuffle<T>(List<T> list, System.Random rnd)
         {
             int n = list.Count;

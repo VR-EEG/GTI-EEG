@@ -24,70 +24,10 @@ public class DataSavingManager : MonoBehaviour
             SavePath = Application.persistentDataPath;
         }
     }
-
-    // Write arbitrary data to disk 
-    public void WriteSerializableDataToDisk(object data, string filePath, bool prettyPrint=true, bool saveAsync=true)
-    {
-        // Check data is existent
-        if (data is null)
-        {
-            Debug.Log("[FileIO] Not writing data at " + filePath + " to disk. No data.");
-            return;
-        }
     
-        // Make sure directory for file exists 
-        FileInfo fileInfo = new FileInfo(filePath);
-        fileInfo.Directory.Create();
-        
-        // Serialize data 
-        string serialized = JsonUtility.ToJson(data,prettyPrint);
-        
-        // Write data
-        if (!saveAsync)
-        {
-            // Save waiting for finish 
-            Debug.Log("[FileIO] Writing data non-async at " + filePath + " to disk.");
-            File.WriteAllText(filePath, serialized);
-            Debug.Log("[FileIO] Writing data finished.");
-        }
-        else
-        {
-            // Save Async 
-            SaveData saveData = new SaveData();
-            saveData.data = serialized;
-            saveData.path = filePath;
-            Thread saverThread = new Thread(SavingWorker);  
-            saverThread.Start(saveData);
-        }
-        
-        Debug.Log("hello from writer");
-        
-    }
-
-    // Capsule for data to write to disk 
-    private class SaveData
-    {
-        public string data;
-        public string path;
-    }
-    
-    // Used for threaded writing to disk 
-    private void SavingWorker(object payload)
-    {
-        // Extract data 
-        string data = ((SaveData) payload).data;
-        string path = ((SaveData) payload).path;
-        
-        Debug.Log("[FileIO] Writing data async at " + path + " to disk.");
-        File.WriteAllText(path, data);
-        Debug.Log("[FileIO] Writing data finished.");
-    }
-
-
     private List <string> ConvertToJson<T>(List<T> genericList)
     {
         List<string> list = new List<string>();
-        //list.Add("[");
         foreach (var g in genericList)
         {
            // Debug.Log(g.ToString());
@@ -95,8 +35,6 @@ public class DataSavingManager : MonoBehaviour
             list.Add(jsonString);
         }
         
-        //list.Add("]");
-
         return list;
     }
     
@@ -145,7 +83,6 @@ public class DataSavingManager : MonoBehaviour
         }
     }
     
-    
     public void Save<T>(T file, string  fileName)
     {
         var data = ConvertToJson(file);
@@ -162,19 +99,19 @@ public class DataSavingManager : MonoBehaviour
         Debug.Log("saved  " +fileName + " to : " + SavePath );
     }
     
-    //this prints data in a "pretty" format, so csv reader can interpret this better for single data frames. unfortunately, in this approach, data cant be load again, into unity since it corrupts the json format. Keep this in mind using this function
-    //TODO potentially introduce another method for this
-    public void SaveList<T>(List<T> file, string  fileName)         
+    
+    public void SaveList<T>(List<T> file, string  fileName, bool pythonConform=false)         
     {
         var stringList = ConvertToJson(file);
 
         string path = GetPathForSaveFile(fileName);
         
-        // I implemented the LoopAR Data saving, this time I got Access Violation.  I dont get why,  I needed a new File Stream Implementation 
         FileStream fileStream= new FileStream(path, FileMode.Create);
         using (var fileWriter= new StreamWriter(fileStream))
         {
-            fileWriter.Write("[");
+            if(pythonConform)
+                fileWriter.Write("[");
+            
             fileWriter.WriteLine();
             for (int i = 0; i < stringList.Count; i++)
             {
@@ -184,18 +121,15 @@ public class DataSavingManager : MonoBehaviour
                     fileWriter.Write(",");
                 fileWriter.WriteLine();
             }
-            fileWriter.Write("]");
+            
+            if(pythonConform)
+                fileWriter.Write("]");
         }
         
         
         Debug.Log("saved  " +fileName + " to : " + SavePath );
     }
-
-    public void SaveToWav(AudioClip audioClip, string Filename)
-    {
-        SavWav.Save(Filename, audioClip);
-    }
-
+    
     private string GetPathForSaveFile(string fileName, string format=".json")
     {
         string name = fileName + format;
@@ -208,13 +142,4 @@ public class DataSavingManager : MonoBehaviour
         return SavePath;
     }
     
-}
-
-[Serializable]
-class AudioClipSample
-{
-    public int frequency;
-    public int samples;
-    public int channels;
-    public float[] sample;
 }

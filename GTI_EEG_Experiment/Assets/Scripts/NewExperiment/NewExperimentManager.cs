@@ -10,11 +10,12 @@ using Random = System.Random;
 public class NewExperimentManager : MonoBehaviour
 {
     private ExperimentState _experimentState = ExperimentState.MainMenu;
-    private TrailState _trailState = TrailState.Pause;
+    private TrialState _trialState = TrialState.StandBy;
     
 
    
     [SerializeField] private int amountOfBlocks;
+    [SerializeField] private float trialDuration=3;
     [SerializeField] private List<GameObject> tools;
     [SerializeField] private List<string> ques;
     
@@ -22,12 +23,17 @@ public class NewExperimentManager : MonoBehaviour
     private GameObject _currentTool;
     private List<BlockItem> _experimentBlocks;
     private BlockItem _currentBlock;
-    private Tuple<int, int, int> _currentTrail;
+    private Tuple<int, int, int> _currentTrial;
+    private int _trialCount;
+    private BlockData _currentBlockData;
     void Start()
     {
+        _trialCount = 0;
         _participantID = Randomization.GenerateID();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
         _currentBlock = _experimentBlocks[0];
+        _currentTrial = _currentBlock.TrailItems[0];
+        _currentBlockData = new BlockData();
     }
     
     private List<BlockItem> GenerateExperimentBlocks(int amount)
@@ -57,7 +63,6 @@ public class NewExperimentManager : MonoBehaviour
             blockItem.TrailItems = Randomization.Shuffle(trailItems, new Random(blockItem.RandomisationSeed));
             blocks.Add(blockItem);
         }
-
         return blocks;
     }
 
@@ -66,8 +71,8 @@ public class NewExperimentManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            NextTrail();
-            
+            _experimentState = ExperimentState.Experiment;
+            ButtonPress();
         }
     }
     
@@ -88,36 +93,67 @@ public class NewExperimentManager : MonoBehaviour
         
     }
 
-    public void AcceptButtonPress()
+    public void ButtonPress()
     {
-        if (_experimentState == ExperimentState.Experiment)
+        if (_trialState == TrialState.StandBy&& _experimentState == ExperimentState.Experiment) //the very first trial
         {
-            if (_trailState == TrailState.EndOfTrail)
-            {
-                
-            }
+            StartTrial();
         }
-        //Collect Time Stamp
+        else
+        {
+            NextTrial();
+        }
     }
 
-    private void NextTrail()
+   
+
+    private void StartTrial()
     {
+        StartCoroutine(RunTrial(trialDuration));
+    }
+
+    private IEnumerator RunTrial(float trialDuration)
+    {
+        _trialState = TrialState.Trail;
+        var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
+        //Show Cue
+        
+        yield return new WaitForSeconds(trialDuration);
+        
+        var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
+        var trialInformation = new TrialInformation()
+        {
+            ToolId = _currentTrial.Item1,
+            Que = _currentTrial.Item2,
+            Orientation = _currentTrial.Item3,
+            TrialNumber = _trialCount,
+            TimeStampBegin = beginTimeStamp,
+            TimeStampEnd = endTimeStamp
+        };
+        
+        _currentBlockData.trialList.Add(trialInformation);
+        _trialState = TrialState.EndOfTrail;
+    }
+
+    private void NextTrial()
+    {
+        if (_trialState != TrialState.EndOfTrail)
+            return;
         if (_experimentState == ExperimentState.Pause)
             return;
         
         if (_currentBlock.TrailItems.Count >1)
         {
-            _currentTrail = null;
-            _currentTrail = _currentBlock.TrailItems[1];
+            _currentTrial = null;
+            _currentTrial = _currentBlock.TrailItems[1];
             _currentBlock.TrailItems.RemoveAt(0);
-            
-            
-            Debug.Log(_currentTrail.Item1);
-            
+            _trialCount++;
+            StartTrial();
         }
         else
         {
             _experimentState = ExperimentState.Pause;
+            _trialState = TrialState.StandBy;
             Debug.Log("pause");
         }
     }
@@ -126,10 +162,6 @@ public class NewExperimentManager : MonoBehaviour
         //Get Trail data 
         while (_experimentState== ExperimentState.Experiment)
         {
-            
-            
-            
-            
             //if trail data is empty 
             yield return new WaitForEndOfFrame();
         }
@@ -138,7 +170,7 @@ public class NewExperimentManager : MonoBehaviour
     
 }
 
-[Serializable] public class BlockItem
+ public class BlockItem
 {
     public int RandomisationSeed;
     public string ParticipantID;
@@ -146,12 +178,17 @@ public class NewExperimentManager : MonoBehaviour
     public List<Tuple<int, int, int>> TrailItems;
 }
 
-enum TrailState
+
+
+
+enum TrialState
 {
     Trail,
     EndOfTrail,
-    Pause
+    StandBy
 }
+
+
 
 
 

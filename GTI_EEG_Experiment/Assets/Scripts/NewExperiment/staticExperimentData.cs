@@ -20,7 +20,7 @@ namespace NewExperiment
     }
 
     [Serializable]
-    public class TrialInformation
+    public struct TrialInformation
     {
         [SerializeField] public double TimeStampBegin;
         [SerializeField] public double TimeStampEnd;
@@ -34,6 +34,8 @@ namespace NewExperiment
     [Serializable]
     public class BlockData
     {
+        [SerializeField] public string  participantID;
+        [SerializeField] public int  index;
         [SerializeField] public double  timeStampBegin;
         [SerializeField] public double  timeStampEnd;
         [SerializeField] public List<TrialInformation> trialList = new List<TrialInformation>();

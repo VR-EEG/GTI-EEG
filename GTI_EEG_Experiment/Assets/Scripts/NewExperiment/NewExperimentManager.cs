@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NewExperiment;
@@ -23,14 +23,13 @@ public class NewExperimentManager : MonoBehaviour
     {
         _participantID = Randomization.GenerateID();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
-
     }
     
     private List<BlockItem> GenerateExperimentBlocks(int amount)
     {
        var  blocks = new List<BlockItem>(); 
         
-        for (int i = 1; i < amount; i++)
+        for (int i = 0; i < amount; i++)
         {
             var blockItem = new BlockItem
             {
@@ -40,9 +39,9 @@ public class NewExperimentManager : MonoBehaviour
                 TrailItems=new List<Tuple<int, int, int>>()
             };
             var trailItems = new List<Tuple<int, int, int>>();
-            for (var j = 0; i < tools.Count; i++)
+            for (var j = 0; j < tools.Count; j++)
             {
-                for (var k = 0; j < ques.Count; j++)
+                for (var k = 0; k < ques.Count; k++)
                 {
                     var congruentOrientation = new Tuple<int, int, int>(j, k, 0);
                     trailItems.Add(congruentOrientation);
@@ -100,7 +99,7 @@ public class NewExperimentManager : MonoBehaviour
     
 }
 
-public class BlockItem
+[Serializable] public class BlockItem
 {
     public int RandomisationSeed;
     public string ParticipantID;

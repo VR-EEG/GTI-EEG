@@ -28,7 +28,7 @@ namespace NewExperiment
         [SerializeField] public int TrialNumber;
         [SerializeField] public int ToolId;
         [SerializeField] public int Orientation;
-        [SerializeField] public int Que;
+        [SerializeField] public int Task;
     }
     
     [Serializable]

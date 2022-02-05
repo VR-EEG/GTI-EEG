@@ -9,40 +9,71 @@ using Random = System.Random;
 
 public class NewExperimentManager : MonoBehaviour
 {
+    public static NewExperimentManager Instance { get ; set; }
+    
+    
     private ExperimentState _experimentState = ExperimentState.MainMenu;
     private TrialState _trialState = TrialState.StandBy;
     
     [SerializeField] private int amountOfBlocks;
     [SerializeField] private float trialDuration=3;
     [SerializeField] private List<GameObject> tools;
-    [SerializeField] private List<string> ques;
+    [SerializeField] private List<string> Tasks;
     
     private string _participantID;
     private GameObject _currentTool;
     private List<BlockItem> _experimentBlocks;
     private BlockItem _currentBlock;
+    private BlockItem _tutorialBlock;
+    
     private Tuple<int, int, int> _currentTrial;
     private int _trialCount;
     private int _blockCount;
     private BlockData _currentBlockData;
 
     private bool test;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
-        _trialCount = 0;
-        _blockCount = 0;
+        _trialCount = 1;
+        _blockCount = 1;
         _participantID = Randomization.GenerateID();
+        _tutorialBlock = GenerateTutorialBlock();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
-        _currentBlock = _experimentBlocks[0];
-        _currentTrial = _currentBlock.TrailItems[0];
         _currentBlockData = new BlockData();
+    }
+
+
+    private BlockItem GenerateTutorialBlock()
+    {
+        var tutorialBlock = new BlockItem()
+        {
+            RandomisationSeed = 0,
+            TrailItems = new List<Tuple<int, int, int>>()
+        };
+        for (var k = 0; k < Tasks.Count; k++)
+        {
+            var congruentOrientation = new Tuple<int, int, int>(0, k, 0); // only tutorial hammer is available here
+            tutorialBlock.TrailItems.Add(congruentOrientation);
+            var incongruentOrientation= new Tuple<int, int, int>(0, k, 1);
+            tutorialBlock.TrailItems.Add(incongruentOrientation);
+        }
+
+        return tutorialBlock;
     }
     
     private List<BlockItem> GenerateExperimentBlocks(int amount)
     {
        var  blocks = new List<BlockItem>(); 
         
-        for (int i = 0; i < amount; i++)
+        for (var blockIndex = 0; blockIndex < amount; blockIndex++) // first tool which is not the tutorial hammer
         {
             var blockItem = new BlockItem
             {
@@ -50,13 +81,13 @@ public class NewExperimentManager : MonoBehaviour
                 TrailItems=new List<Tuple<int, int, int>>()
             };
             var trailItems = new List<Tuple<int, int, int>>();
-            for (var j = 0; j < tools.Count; j++)
+            for (var toolIndex = 1; toolIndex < tools.Count; toolIndex++)
             {
-                for (var k = 0; k < ques.Count; k++)
+                for (var taskIndex = 0; taskIndex < Tasks.Count; taskIndex++)
                 {
-                    var congruentOrientation = new Tuple<int, int, int>(j, k, 0);
+                    var congruentOrientation = new Tuple<int, int, int>(toolIndex, taskIndex, 0);
                     trailItems.Add(congruentOrientation);
-                    var incongruentOrientation= new Tuple<int, int, int>(j, k, 1);
+                    var incongruentOrientation= new Tuple<int, int, int>(toolIndex, taskIndex, 1);
                     trailItems.Add(incongruentOrientation);
                 }
             }
@@ -71,23 +102,36 @@ public class NewExperimentManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            _experimentState = ExperimentState.BetweenTrials;
-            if (!test)
-            {
-                test = true;
-                StartNewBlock();
-            }
-
-            _experimentState = ExperimentState.Experiment;
-            
             ButtonPress();
         }
+    }
+
+
+    public ExperimentState GetExperimentState()
+    {
+        return _experimentState;
     }
     
 
     public void StartExperiment()
     {
-        
+        _experimentState = ExperimentState.Experiment;
+        _trialState = TrialState.StandBy;
+        _currentBlock = _experimentBlocks[0];
+        _currentTrial = _currentBlock.TrailItems[0];
+    }
+
+    public void ContinueExperiment()
+    {
+        StartNewBlock();
+    }
+    
+    public void StartTutorial()
+    {
+        _experimentState = ExperimentState.Training;
+        _trialState = TrialState.StandBy;
+        _currentTrial = _tutorialBlock.TrailItems[0];
+        _currentBlock = _tutorialBlock;
     }
 
 
@@ -103,13 +147,22 @@ public class NewExperimentManager : MonoBehaviour
 
     public void ButtonPress()
     {
-        if (_trialState == TrialState.StandBy&& _experimentState == ExperimentState.Experiment) //the very first trial
+        switch (_experimentState)
         {
-            StartTrial();
-        }
-        else if(_trialState == TrialState.EndOfTrail)
-        {
-            NextTrial();
+            case ExperimentState.MainMenu:
+            case ExperimentState.BetweenBlocks:
+            case ExperimentState.Finished:
+                return;
+            case ExperimentState.Training:
+                if(_trialState==TrialState.StandBy||_trialState == TrialState.EndOfTrail)
+                    NextTutorialTrial();
+                break;
+            case ExperimentState.Experiment:
+                if (_trialState == TrialState.StandBy) //the very first trial
+                    StartTrial();
+                else if(_trialState == TrialState.EndOfTrail)
+                    NextTrial();
+                break;
         }
     }
 
@@ -120,32 +173,49 @@ public class NewExperimentManager : MonoBehaviour
         StartCoroutine(RunTrial(trialDuration));
     }
 
-    private IEnumerator RunTrial(float trialDuration)
+    private IEnumerator RunTrial(float trialDuration,bool isTutorial=false)
     {
         _trialState = TrialState.Trail;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
         //Show Cue
         
-        yield return new WaitForSeconds(trialDuration);
+        yield return new WaitForSeconds(0f);
+        Debug.Log(_currentTrial.Item1 +" "+ _currentTrial.Item2 +" "+ _currentTrial.Item3);
         
-        var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
-        var trialInformation = new TrialInformation()
+        if (!isTutorial)
         {
-            ToolId = _currentTrial.Item1,
-            Que = _currentTrial.Item2,
-            Orientation = _currentTrial.Item3,
-            TrialNumber = _trialCount,
-            TimeStampBegin = beginTimeStamp,
-            TimeStampEnd = endTimeStamp
-        };
+            var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
+            var trialInformation = new TrialInformation()
+            {
+                ToolId = _currentTrial.Item1,
+                Task = _currentTrial.Item2,
+                Orientation = _currentTrial.Item3,
+                TrialNumber = _trialCount,
+                TimeStampBegin = beginTimeStamp,
+                TimeStampEnd = endTimeStamp
+            };
         
-        _currentBlockData.trialList.Add(trialInformation);
+            _currentBlockData.trialList.Add(trialInformation);
+        }
+        
         _trialState = TrialState.EndOfTrail;
     }
+    private void NextTutorialTrial()
+    {
+        if (_experimentState == ExperimentState.BetweenBlocks)
+            return;
+        _trialState = TrialState.Trail;
 
+        var tmp = _tutorialBlock.TrailItems[0];
+        _tutorialBlock.TrailItems.RemoveAt(0);
+        _tutorialBlock.TrailItems.Add(tmp);
+        _currentTrial = _tutorialBlock.TrailItems[0];
+
+        StartCoroutine(RunTrial(trialDuration, true));
+    }
     private void NextTrial()
     {
-        if (_experimentState == ExperimentState.BetweenTrials)
+        if (_experimentState == ExperimentState.BetweenBlocks)
             return;
         _trialState = TrialState.Trail;
         
@@ -165,9 +235,9 @@ public class NewExperimentManager : MonoBehaviour
 
     private void StartNewBlock()
     {
-        if (_experimentState == ExperimentState.BetweenTrials)
+        if (_experimentState == ExperimentState.BetweenBlocks)
         {
-            if (_experimentBlocks.Count - 1 > 0)
+            if (amountOfBlocks-_blockCount > 0)
             {
                 _currentBlock = null;
                 _experimentBlocks.RemoveAt(0);
@@ -191,9 +261,9 @@ public class NewExperimentManager : MonoBehaviour
     private void FinalizeBlock()
     {
         _trialState = TrialState.StandBy;
-        if (_experimentBlocks.Count - 1 > 0)
+        if (amountOfBlocks-_blockCount > 0)
         {
-            _experimentState = ExperimentState.BetweenTrials;
+            _experimentState = ExperimentState.BetweenBlocks;
             SaveBlock();
             Debug.Log("pause");
         }
@@ -237,12 +307,13 @@ enum TrialState
 
 
 
-enum ExperimentState
+public enum ExperimentState
 {
     ParticipantID,
     MainMenu,
+    ReadyForTraining,
     Training,
-    BetweenTrials,
+    BetweenBlocks,
     Experiment,
     Finished,
     TableCalibration,

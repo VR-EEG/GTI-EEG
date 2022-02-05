@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,8 +10,9 @@ using Random = System.Random;
 public class NewExperimentManager : MonoBehaviour
 {
     public static NewExperimentManager Instance { get ; set; }
-    
-    
+
+    [SerializeField] private TextController _textController;
+
     private ExperimentState _experimentState = ExperimentState.MainMenu;
     private TrialState _trialState = TrialState.StandBy;
     
@@ -30,9 +31,16 @@ public class NewExperimentManager : MonoBehaviour
     private int _trialCount;
     private int _blockCount;
     private BlockData _currentBlockData;
-
-    private bool test;
     
+    //instruction texts
+    private string welcomeText = "Welcome to \n the Experiment!";
+    private string instructionText = "Interact with\ntrigger to begin.";
+    private string tutorialText = "This is the\npractice section.";
+    private string breakText = "This is the\npractice section.";
+    private string endText = "Experiment complete. \n Thank you!";
+
+    private bool _trialCompleted;
+
     private void Awake()
     {
         if (Instance == null)
@@ -49,6 +57,7 @@ public class NewExperimentManager : MonoBehaviour
         _tutorialBlock = GenerateTutorialBlock();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
         _currentBlockData = new BlockData();
+        _textController.ShowText(welcomeText);
     }
 
 
@@ -133,9 +142,22 @@ public class NewExperimentManager : MonoBehaviour
         _trialState = TrialState.StandBy;
         _currentTrial = _tutorialBlock.TrailItems[0];
         _currentBlock = _tutorialBlock;
+        StartCoroutine(ShowInstructionsSucessively());
     }
 
-
+    private IEnumerator ShowInstructionsSucessively()
+    {
+        while (_trialState == TrialState.StandBy)
+        {
+            if(_trialState == TrialState.StandBy)
+                _textController.ShowText(tutorialText);
+            yield return new WaitForSeconds(2);
+            if(_trialState == TrialState.StandBy)
+                _textController.ShowText(instructionText);
+            yield return new WaitForSeconds(2);
+        }
+    }
+    
     public void StartTableCalibration()
     {
         
@@ -155,7 +177,7 @@ public class NewExperimentManager : MonoBehaviour
             case ExperimentState.Finished:
                 return;
             case ExperimentState.Training:
-                if(_trialState==TrialState.StandBy||_trialState == TrialState.EndOfTrail)
+                if(_trialState==TrialState.StandBy||_trialState == TrialState.EndOfTrial)
                     NextTutorialTrial();
                 break;
             case ExperimentState.Experiment:
@@ -165,62 +187,80 @@ public class NewExperimentManager : MonoBehaviour
                     _trialCount++;
                     StartTrial();
                 }
-                else if(_trialState == TrialState.EndOfTrail)
+                else if(_trialState == TrialState.EndOfTrial)
                     NextTrial();
                 break;
         }
     }
-
-   
-
+    
     private void StartTrial()
     {
         StartCoroutine(RunTrial(trialDuration));
     }
 
+    private void ShowTool(int toolId, int direction)
+    {
+        if (direction == 1)
+            tools[toolId].transform.rotation *= Quaternion.Euler(0,180,0);
+        tools[toolId].SetActive(true);
+    }
+
+    private void HideTool(int toolId)
+    {
+        tools[toolId].SetActive(false);
+    }
+
     private IEnumerator RunTrial(float trialDuration,bool isTutorial=false)
     {
-        _trialState = TrialState.Trail;
+        _trialCompleted = false;
+        _trialState = TrialState.Trial;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
-        //Show Cue
+        yield return new WaitForSeconds(0.5f);
+        _textController.ShowText(tasks[_currentTrial.Item2],true);
+        yield return new WaitForSeconds(2f);
+        _textController.ShowText("",true);
+        yield return new WaitForSeconds(0.5f);
+        ShowTool(_currentTrial.Item1,_currentTrial.Item3);
+        yield return new WaitForSeconds(3f);
+        //beep
         
-        yield return new WaitForSeconds(0f);
-        Debug.Log(_currentTrial.Item1 +" "+ _currentTrial.Item2 +" "+ _currentTrial.Item3);
+        //TODO button click ends and time stamp is given
+
         
-        if (!isTutorial)
+        _trialState = TrialState.EndOfTrial;
+
+        yield return new WaitUntil(() => _trialCompleted);
+        if (isTutorial) yield break;
+        var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
+        var trialInformation = new TrialInformation()
         {
-            var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
-            var trialInformation = new TrialInformation()
-            {
-                ToolId = _currentTrial.Item1,
-                Task = _currentTrial.Item2,
-                Orientation = _currentTrial.Item3,
-                TrialNumber = _trialCount,
-                TimeStampBegin = beginTimeStamp,
-                TimeStampEnd = endTimeStamp
-            };
-        
-            _currentBlockData.trialList.Add(trialInformation);
-        }
-        _trialState = TrialState.EndOfTrail;
+            ToolId = _currentTrial.Item1,
+            Task = _currentTrial.Item2,
+            Orientation = _currentTrial.Item3,
+            TrialNumber = _trialCount,
+            TimeStampBegin = beginTimeStamp,
+            TimeStampEnd = endTimeStamp
+        };
+        _currentBlockData.trialList.Add(trialInformation);
+
     }
    
     private void NextTrial()
     {
         if (_experimentState == ExperimentState.BetweenBlocks)
             return;
-        _trialState = TrialState.Trail;
+        _trialState = TrialState.Trial;
         
         if (_currentBlock.TrailItems.Count -1  >0)
         {
-            _currentTrial = null;
-            _currentBlock.TrailItems.RemoveAt(0);
-            _currentTrial = _currentBlock.TrailItems[0];
-            _trialCount++;
+            _trialCompleted = true;
+           HideTool(_currentTrial.Item1);
+           
             StartTrial();
         }
         else
         {
+            HideTool(_currentTrial.Item1);
             FinalizeBlock();   
         }
     }
@@ -229,7 +269,7 @@ public class NewExperimentManager : MonoBehaviour
     {
         if (_experimentState == ExperimentState.BetweenBlocks)
             return;
-        _trialState = TrialState.Trail;
+        _trialState = TrialState.Trial;
 
         var tmp = _tutorialBlock.TrailItems[0];
         _tutorialBlock.TrailItems.RemoveAt(0);
@@ -294,8 +334,8 @@ public class NewExperimentManager : MonoBehaviour
 
 enum TrialState
 {
-    Trail,
-    EndOfTrail,
+    Trial,
+    EndOfTrial,
     StandBy
 }
 

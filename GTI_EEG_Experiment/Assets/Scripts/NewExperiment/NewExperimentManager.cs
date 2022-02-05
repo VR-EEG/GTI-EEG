@@ -18,7 +18,7 @@ public class NewExperimentManager : MonoBehaviour
     [SerializeField] private int amountOfBlocks;
     [SerializeField] private float trialDuration=3;
     [SerializeField] private List<GameObject> tools;
-    [SerializeField] private List<string> Tasks;
+    [SerializeField] private List<string> tasks;
     
     private string _participantID;
     private GameObject _currentTool;
@@ -42,7 +42,8 @@ public class NewExperimentManager : MonoBehaviour
     }
     void Start()
     {
-        _trialCount = 1;
+        Debug.Assert(tasks.Count>0, "Task list is empty");
+        _trialCount = 0;    //will be added at first trial
         _blockCount = 1;
         _participantID = Randomization.GenerateID();
         _tutorialBlock = GenerateTutorialBlock();
@@ -58,7 +59,7 @@ public class NewExperimentManager : MonoBehaviour
             RandomisationSeed = 0,
             TrailItems = new List<Tuple<int, int, int>>()
         };
-        for (var k = 0; k < Tasks.Count; k++)
+        for (var k = 0; k < tasks.Count; k++)
         {
             var congruentOrientation = new Tuple<int, int, int>(0, k, 0); // only tutorial hammer is available here
             tutorialBlock.TrailItems.Add(congruentOrientation);
@@ -83,7 +84,7 @@ public class NewExperimentManager : MonoBehaviour
             var trailItems = new List<Tuple<int, int, int>>();
             for (var toolIndex = 1; toolIndex < tools.Count; toolIndex++)
             {
-                for (var taskIndex = 0; taskIndex < Tasks.Count; taskIndex++)
+                for (var taskIndex = 0; taskIndex < tasks.Count; taskIndex++)
                 {
                     var congruentOrientation = new Tuple<int, int, int>(toolIndex, taskIndex, 0);
                     trailItems.Add(congruentOrientation);
@@ -158,8 +159,12 @@ public class NewExperimentManager : MonoBehaviour
                     NextTutorialTrial();
                 break;
             case ExperimentState.Experiment:
-                if (_trialState == TrialState.StandBy) //the very first trial
+                if (_trialState == TrialState.StandBy)
+                {
+                    //the very first trial
+                    _trialCount++;
                     StartTrial();
+                }
                 else if(_trialState == TrialState.EndOfTrail)
                     NextTrial();
                 break;
@@ -197,22 +202,9 @@ public class NewExperimentManager : MonoBehaviour
         
             _currentBlockData.trialList.Add(trialInformation);
         }
-        
         _trialState = TrialState.EndOfTrail;
     }
-    private void NextTutorialTrial()
-    {
-        if (_experimentState == ExperimentState.BetweenBlocks)
-            return;
-        _trialState = TrialState.Trail;
-
-        var tmp = _tutorialBlock.TrailItems[0];
-        _tutorialBlock.TrailItems.RemoveAt(0);
-        _tutorialBlock.TrailItems.Add(tmp);
-        _currentTrial = _tutorialBlock.TrailItems[0];
-
-        StartCoroutine(RunTrial(trialDuration, true));
-    }
+   
     private void NextTrial()
     {
         if (_experimentState == ExperimentState.BetweenBlocks)
@@ -231,6 +223,20 @@ public class NewExperimentManager : MonoBehaviour
         {
             FinalizeBlock();   
         }
+    }
+    
+    private void NextTutorialTrial()
+    {
+        if (_experimentState == ExperimentState.BetweenBlocks)
+            return;
+        _trialState = TrialState.Trail;
+
+        var tmp = _tutorialBlock.TrailItems[0];
+        _tutorialBlock.TrailItems.RemoveAt(0);
+        _tutorialBlock.TrailItems.Add(tmp);
+        _currentTrial = _tutorialBlock.TrailItems[0];
+
+        StartCoroutine(RunTrial(trialDuration, true));
     }
 
     private void StartNewBlock()
@@ -274,17 +280,7 @@ public class NewExperimentManager : MonoBehaviour
         }
        
     }
-    private IEnumerator ExperimentStart()
-    {
-        //Get Trail data 
-        while (_experimentState== ExperimentState.Experiment)
-        {
-            //if trail data is empty 
-            yield return new WaitForEndOfFrame();
-        }
 
-    }
-    
 }
 
  public class BlockItem
@@ -309,9 +305,7 @@ enum TrialState
 
 public enum ExperimentState
 {
-    ParticipantID,
     MainMenu,
-    ReadyForTraining,
     Training,
     BetweenBlocks,
     Experiment,

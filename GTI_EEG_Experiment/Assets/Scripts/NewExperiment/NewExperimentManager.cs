@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,6 +39,7 @@ public class NewExperimentManager : MonoBehaviour
     private string breakText = "This is the\npractice section.";
     private string endText = "Experiment complete. \n Thank you!";
 
+    private bool _buttonPressed;
     private bool _trialCompleted;
 
     private void Awake()
@@ -75,7 +76,6 @@ public class NewExperimentManager : MonoBehaviour
             var incongruentOrientation= new Tuple<int, int, int>(0, k, 1);
             tutorialBlock.TrailItems.Add(incongruentOrientation);
         }
-
         return tutorialBlock;
     }
     
@@ -115,20 +115,19 @@ public class NewExperimentManager : MonoBehaviour
             ButtonPress();
         }
     }
-
-
+    
     public ExperimentState GetExperimentState()
     {
         return _experimentState;
     }
     
-
     public void StartExperiment()
     {
         _experimentState = ExperimentState.Experiment;
         _trialState = TrialState.StandBy;
         _currentBlock = _experimentBlocks[0];
         _currentTrial = _currentBlock.TrailItems[0];
+        
     }
 
     public void ContinueExperiment()
@@ -184,11 +183,17 @@ public class NewExperimentManager : MonoBehaviour
                 if (_trialState == TrialState.StandBy)
                 {
                     //the very first trial
+                    _buttonPressed = false;
                     _trialCount++;
+                    _trialCompleted = true;
                     StartTrial();
                 }
-                else if(_trialState == TrialState.EndOfTrial)
-                    NextTrial();
+                else if (_trialState == TrialState.EndOfTrial)
+                {
+                    _buttonPressed=true;
+                    StartTrial();
+                }
+                    
                 break;
         }
     }
@@ -212,15 +217,23 @@ public class NewExperimentManager : MonoBehaviour
 
     private IEnumerator RunTrial(float trialDuration,bool isTutorial=false)
     {
+        yield return new WaitUntil(() => _trialCompleted);
         _trialCompleted = false;
+        // fill current data
+        var trial = _currentTrial;
+        var trialNumber = _trialCount;
+        
+        yield return new WaitForEndOfFrame();
+        
+        
         _trialState = TrialState.Trial;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
         yield return new WaitForSeconds(0.5f);
-        _textController.ShowText(tasks[_currentTrial.Item2],true);
+        _textController.ShowText(tasks[trial.Item2],true);
         yield return new WaitForSeconds(2f);
         _textController.ShowText("",true);
         yield return new WaitForSeconds(0.5f);
-        ShowTool(_currentTrial.Item1,_currentTrial.Item3);
+        ShowTool(trial.Item1,trial.Item3);
         yield return new WaitForSeconds(3f);
         //beep
         
@@ -229,19 +242,36 @@ public class NewExperimentManager : MonoBehaviour
         
         _trialState = TrialState.EndOfTrial;
 
-        yield return new WaitUntil(() => _trialCompleted);
+        yield return new WaitUntil(() => _buttonPressed);
+        _buttonPressed = false;
         if (isTutorial) yield break;
         var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
         var trialInformation = new TrialInformation()
         {
-            ToolId = _currentTrial.Item1,
-            Task = _currentTrial.Item2,
-            Orientation = _currentTrial.Item3,
-            TrialNumber = _trialCount,
+            ToolId = trial.Item1,
+            Task = trial.Item2,
+            Orientation = trial.Item3,
+            TrialNumber = trialNumber,
             TimeStampBegin = beginTimeStamp,
             TimeStampEnd = endTimeStamp
         };
         _currentBlockData.trialList.Add(trialInformation);
+        
+        HideTool(_currentTrial.Item1);
+        
+        if (_currentBlock.TrailItems.Count - 1 > 0)
+        {
+            // remove trialItem
+            _currentBlock.TrailItems.RemoveAt(0);
+            _currentTrial = _currentBlock.TrailItems[0];
+        }
+        else
+        {
+            FinalizeBlock();
+        }
+
+        _trialCompleted = true;
+        _trialState = TrialState.StandBy;
 
     }
    
@@ -253,14 +283,14 @@ public class NewExperimentManager : MonoBehaviour
         
         if (_currentBlock.TrailItems.Count -1  >0)
         {
-            _trialCompleted = true;
-           HideTool(_currentTrial.Item1);
+            _buttonPressed = true;
+           
            
             StartTrial();
         }
         else
         {
-            HideTool(_currentTrial.Item1);
+            
             FinalizeBlock();   
         }
     }

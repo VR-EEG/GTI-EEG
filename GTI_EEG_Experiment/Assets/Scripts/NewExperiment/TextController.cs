@@ -24,12 +24,12 @@ public class TextController : MonoBehaviour
     
     void Start()
     {
-        configManager = GameObject.FindGameObjectWithTag(configManagerTag).GetComponent<ConfigManager>();
+//        configManager = GameObject.FindGameObjectWithTag(configManagerTag).GetComponent<ConfigManager>();
         objectTransformHelper = GetComponent<ObjectTransformHelper>();
     }
 
 
-    public void UpdateCueText(string text, bool large)
+    public void ShowText(string text, bool large=false)
     {
         if (large)
         {
@@ -40,7 +40,7 @@ public class TextController : MonoBehaviour
             ChangeCueFontSize(fontSizeSmall);
         }
         
-        ChangeCueText("text");
+        ChangeCueText(text);
     }
     
     public void UpdateCueText(ExperimentManager.CueStates cueState)

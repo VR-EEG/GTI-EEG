@@ -26,9 +26,10 @@ public class TableConfigurationManager : MonoBehaviour
 
     [SerializeField] private float Speed;
     [SerializeField] private Vector2 ButtonOffsetToPlayer;
-    
-    
-    
+    [SerializeField] private ButtonConfiguration _buttonConfiguration;
+
+
+
     private TableConfigurationController _tableConfigurationController;
     private TableCalibrationUI _tableCalibrationUI;
 
@@ -150,7 +151,14 @@ public class TableConfigurationManager : MonoBehaviour
     public void SetTablePosition(Vector3 position)
     {
         Table.transform.position = position;
-        
+        if (_buttonConfiguration != null)
+        {
+            _buttonConfiguration.AdjustPosition();
+        }
+        else
+        {
+            Debug.LogWarning("button is not active");
+        }
         Room.transform.position = Table.transform.position;
         
     }
@@ -162,7 +170,7 @@ public class TableConfigurationManager : MonoBehaviour
         _tableCalibrationUI = GetComponent<TableCalibrationUI>();
         _tableConfigurationController = GetComponent<TableConfigurationController>();
         
-        _tableCalibrationUI.SetActive(true);
+        _tableCalibrationUI.SetActive(false);
         
         Debug.Assert(Table!=null, "table was not assigned");
         Debug.Assert(Room!=null, "room is not assigned");
@@ -179,6 +187,7 @@ public class TableConfigurationManager : MonoBehaviour
         var z = PlayerPrefs.GetFloat("TableZ");
         _tablePosition = new Vector3(x, y, z);
         SetTablePosition(_tablePosition);
+        
 
     }
 
@@ -231,7 +240,7 @@ public class TableConfigurationManager : MonoBehaviour
         _height = height/100;
         _depth = depth/100;
         _tableConfigurationController.SetScale(length,height,depth);
-        
+        _buttonConfiguration.AdjustPosition();
     }
     
     

@@ -20,7 +20,7 @@ namespace NewExperiment
     }
 
     [Serializable]
-    public struct TrialInformation
+    public class TrialInformation
     {
         [SerializeField] public double TimeStampBegin;
         [SerializeField] public double TimeStampEnd;

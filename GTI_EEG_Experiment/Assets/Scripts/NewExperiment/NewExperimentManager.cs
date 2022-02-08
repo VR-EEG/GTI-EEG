@@ -15,7 +15,7 @@ public class NewExperimentManager : MonoBehaviour
 
     private ExperimentState _experimentState = ExperimentState.MainMenu;
     private TrialState _trialState = TrialState.StandBy;
-    
+    [SerializeField] private Transform toolSpawnPoint;
     [SerializeField] private int amountOfBlocks;
     [SerializeField] private float trialDuration=3;
     [SerializeField] private List<GameObject> tools;
@@ -59,6 +59,7 @@ public class NewExperimentManager : MonoBehaviour
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
         _currentBlockData = new BlockData();
         _textController.ShowText(welcomeText);
+        _trialCompleted = true;
     }
 
 
@@ -83,7 +84,7 @@ public class NewExperimentManager : MonoBehaviour
     {
        var  blocks = new List<BlockItem>(); 
         
-        for (var blockIndex = 0; blockIndex < amount; blockIndex++) // first tool which is not the tutorial hammer
+        for (var blockIndex = 0; blockIndex < amount; blockIndex++) 
         {
             var blockItem = new BlockItem
             {
@@ -91,7 +92,7 @@ public class NewExperimentManager : MonoBehaviour
                 TrailItems=new List<Tuple<int, int, int>>()
             };
             var trailItems = new List<Tuple<int, int, int>>();
-            for (var toolIndex = 1; toolIndex < tools.Count; toolIndex++)
+            for (var toolIndex = 1; toolIndex < tools.Count; toolIndex++) // first tool which is not the tutorial hammer
             {
                 for (var taskIndex = 0; taskIndex < tasks.Count; taskIndex++)
                 {
@@ -110,10 +111,7 @@ public class NewExperimentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ButtonPress();
-        }
+        
     }
     
     public ExperimentState GetExperimentState()
@@ -123,11 +121,19 @@ public class NewExperimentManager : MonoBehaviour
     
     public void StartExperiment()
     {
+        StartCoroutine(ProcessLastTrail());
+    }
+
+    private IEnumerator ProcessLastTrail()
+    {
+        if(!_trialCompleted)
+            yield return new WaitUntil(() => _trialState == TrialState.EndOfTrial);
+        
+        tools[0].SetActive(false);
         _experimentState = ExperimentState.Experiment;
         _trialState = TrialState.StandBy;
         _currentBlock = _experimentBlocks[0];
         _currentTrial = _currentBlock.TrailItems[0];
-        
     }
 
     public void ContinueExperiment()
@@ -176,21 +182,29 @@ public class NewExperimentManager : MonoBehaviour
             case ExperimentState.Finished:
                 return;
             case ExperimentState.Training:
-                if(_trialState==TrialState.StandBy||_trialState == TrialState.EndOfTrial)
+                if (_trialState == TrialState.StandBy || _trialState == TrialState.EndOfTrial)
+                {
+                    if (tools[0] != null)
+                    {
+                        tools[0].SetActive(false);
+                    }
+                    _trialCompleted = true;
                     NextTutorialTrial();
+                }
                 break;
             case ExperimentState.Experiment:
                 if (_trialState == TrialState.StandBy)
                 {
                     //the very first trial
                     _buttonPressed = false;
-                    _trialCount++;
                     _trialCompleted = true;
+                    _trialState = TrialState.Trial;
                     StartTrial();
                 }
                 else if (_trialState == TrialState.EndOfTrial)
                 {
                     _buttonPressed=true;
+                    _trialState = TrialState.Trial;
                     StartTrial();
                 }
                     
@@ -205,11 +219,18 @@ public class NewExperimentManager : MonoBehaviour
 
     private void ShowTool(int toolId, int direction)
     {
+        foreach (var tool in tools)
+        {
+            tool.SetActive(false);
+        }
+        tools[toolId].transform.rotation = Quaternion.identity;
         if (direction == 1)
             tools[toolId].transform.rotation *= Quaternion.Euler(0,180,0);
+        
+        tools[toolId].transform.position = toolSpawnPoint.transform.position;
         tools[toolId].SetActive(true);
     }
-
+    
     private void HideTool(int toolId)
     {
         tools[toolId].SetActive(false);
@@ -218,14 +239,14 @@ public class NewExperimentManager : MonoBehaviour
     private IEnumerator RunTrial(float trialDuration,bool isTutorial=false)
     {
         yield return new WaitUntil(() => _trialCompleted);
+        if(!isTutorial)
+            _trialCount++;
+        
         _trialCompleted = false;
-        // fill current data
         var trial = _currentTrial;
         var trialNumber = _trialCount;
         
         yield return new WaitForEndOfFrame();
-        
-        
         _trialState = TrialState.Trial;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
         yield return new WaitForSeconds(0.5f);
@@ -238,13 +259,14 @@ public class NewExperimentManager : MonoBehaviour
         //beep
         
         //TODO button click ends and time stamp is given
-
-        
         _trialState = TrialState.EndOfTrial;
-
+        if (isTutorial)
+        {
+            yield break;
+        }
         yield return new WaitUntil(() => _buttonPressed);
         _buttonPressed = false;
-        if (isTutorial) yield break;
+        
         var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
         var trialInformation = new TrialInformation()
         {
@@ -299,6 +321,7 @@ public class NewExperimentManager : MonoBehaviour
     {
         if (_experimentState == ExperimentState.BetweenBlocks)
             return;
+       
         _trialState = TrialState.Trial;
 
         var tmp = _tutorialBlock.TrailItems[0];

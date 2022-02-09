@@ -223,7 +223,7 @@ public class NewExperimentManager : MonoBehaviour
         {
             tool.SetActive(false);
         }
-        tools[toolId].transform.rotation = Quaternion.identity;
+        tools[toolId].transform.rotation = Quaternion.Euler(0,90,0);
         if (direction == 1)
             tools[toolId].transform.rotation *= Quaternion.Euler(0,180,0);
         

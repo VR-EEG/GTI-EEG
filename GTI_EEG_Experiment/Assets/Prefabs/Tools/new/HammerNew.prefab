@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5936924071614246533}
-  - component: {fileID: 5821212078881175408}
+  - component: {fileID: 8208175030354617325}
   m_Layer: 0
   m_Name: HammerManualCollider
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 5110018599490000726}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5821212078881175408
+--- !u!65 &8208175030354617325
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,8 +42,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.22720414, y: 0.030202784, z: 0.040166043}
-  m_Center: {x: 0.01993057, y: -0.001118627, z: 0.002775573}
+  m_Size: {x: 0.037660956, y: 0.0327392, z: 0.22734037}
+  m_Center: {x: 0.004104674, y: -0.00028326362, z: -0.019523397}
 --- !u!1 &2017682657472734483
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2857612600729831219}
-  - component: {fileID: 2238714677727242036}
+  - component: {fileID: 8643713246754354126}
   m_Layer: 0
   m_Name: HammerManualCollider
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Transform:
   m_Father: {fileID: 5110018599490000726}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2238714677727242036
+--- !u!65 &8643713246754354126
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,8 +152,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03906083, y: 0.03201671, z: 0.13847677}
-  m_Center: {x: -0.113000005, y: 0.00057440996, z: -0.0038028583}
+  m_Size: {x: 0.13931635, y: 0.0327392, z: 0.039304197}
+  m_Center: {x: -0.0030059367, y: -0.00028326362, z: 0.11294466}
 --- !u!1 &5787423178993694619
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,50 +317,6 @@ Transform:
   m_Father: {fileID: 3052145834762573568}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6082525566774551095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6082525566774551094}
-  - component: {fileID: 6082525566774551093}
-  m_Layer: 0
-  m_Name: HammerHandleCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6082525566774551094
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6082525566774551095}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6082525567746716345}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6082525566774551093
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6082525566774551095}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15364893, y: 0.08147714, z: 0.18046936}
-  m_Center: {x: 0.07682445, y: 0, z: 0}
 --- !u!1 &6082525567602642541
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,12 +442,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6082525566774551094}
-  - {fileID: 4014929497840246723}
+  - {fileID: 134841039102081155}
   m_Father: {fileID: 3052145834762573568}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7264513048202718045
+--- !u!1 &7282637316955386889
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -499,42 +454,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4014929497840246723}
-  - component: {fileID: 6075871564199499755}
+  - component: {fileID: 134841039102081155}
+  - component: {fileID: 49438748058208551}
   m_Layer: 0
-  m_Name: HammerEffectorCollider
+  m_Name: HammerOversized
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4014929497840246723
+--- !u!4 &134841039102081155
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264513048202718045}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 7282637316955386889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6082525567746716345}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6075871564199499755
+--- !u!65 &49438748058208551
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264513048202718045}
+  m_GameObject: {fileID: 7282637316955386889}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15364893, y: 0.08147714, z: 0.18046936}
-  m_Center: {x: -0.07682445, y: 0, z: 0}
+  m_Size: {x: 0.2089746, y: 0.0491088, z: 0.39868546}
+  m_Center: {x: -0.003005933, y: -0.00028326362, z: -0.0002984032}
 --- !u!1001 &6952921087586340789
 PrefabInstance:
   m_ObjectHideFlags: 0

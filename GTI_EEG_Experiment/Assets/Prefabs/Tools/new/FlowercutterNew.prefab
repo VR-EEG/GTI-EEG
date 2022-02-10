@@ -1,54 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &619652988432109517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 366139802929985221}
-  - component: {fileID: 8340965579074065248}
-  m_Layer: 0
-  m_Name: FlowercutterEffectorBottomAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &366139802929985221
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619652988432109517}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.0675, z: -0.388}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4363757311902586931}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &8340965579074065248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619652988432109517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 7
-  attachmentPointIdPointOfInterestRight: 6
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 1
-  pointOfInterestIsEffector: 0
 --- !u!1 &1124537706004362281
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,11 +30,11 @@ Transform:
   - {fileID: 8900290644967062746}
   - {fileID: 3238470794701045547}
   - {fileID: 6131125163967144101}
-  - {fileID: 4363757311902586931}
+  - {fileID: 1787706569914958384}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2622872154492421680
+--- !u!1 &2048282184780401108
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,48 +42,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5019466952708472989}
-  - component: {fileID: 4302076687393699334}
-  m_Layer: 0
-  m_Name: FlowercutterHandleBottomAttachmentPointSteamVR
+  - component: {fileID: 5530130376875460116}
+  - component: {fileID: 6411768088103786936}
+  m_Layer: 10
+  m_Name: AttachmentSphereEffector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5019466952708472989
+--- !u!4 &5530130376875460116
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2622872154492421680}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0.0223, z: 0.3143}
+  m_GameObject: {fileID: 2048282184780401108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.002, z: 0.1407}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4363757311902586931}
+  m_Father: {fileID: 1787706569914958384}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 0}
---- !u!114 &4302076687393699334
-MonoBehaviour:
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6411768088103786936
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2622872154492421680}
+  m_GameObject: {fileID: 2048282184780401108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 3
-  attachmentPointIdPointOfInterestRight: 2
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 0
-  pointOfInterestIsEffector: 1
---- !u!1 &2851798062498673142
+  serializedVersion: 2
+  m_Radius: 0.1391544
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2408194671420209626
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,32 +86,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4363757311902586931}
-  m_Layer: 0
-  m_Name: AttachmentPointsSteamVR
+  - component: {fileID: 179609689453899826}
+  - component: {fileID: 7353167364762907760}
+  m_Layer: 10
+  m_Name: AttachmentSphereHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4363757311902586931
+--- !u!4 &179609689453899826
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2851798062498673142}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 2408194671420209626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0017, z: -0.1387}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 892260228235088830}
-  - {fileID: 5019466952708472989}
-  - {fileID: 8184250150110750438}
-  - {fileID: 366139802929985221}
-  m_Father: {fileID: 1124537706004362278}
-  m_RootOrder: 3
+  m_Children: []
+  m_Father: {fileID: 1787706569914958384}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7353167364762907760
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408194671420209626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1391544
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3708019820658139697
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +166,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04196707, y: 0.01700943, z: 0.27830884}
   m_Center: {x: -0.000000004656613, y: -0.0057535795, z: 0}
+--- !u!1 &3843898885115847093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1787706569914958384}
+  m_Layer: 0
+  m_Name: AttachmentPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1787706569914958384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843898885115847093}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 179609689453899826}
+  - {fileID: 5530130376875460116}
+  m_Father: {fileID: 1124537706004362278}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3952465944760909542
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,104 +260,6 @@ Transform:
   m_Father: {fileID: 1124537706004362278}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6764621912696713907
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 892260228235088830}
-  - component: {fileID: 3407626438135619954}
-  m_Layer: 0
-  m_Name: FlowercutterHandleTopAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &892260228235088830
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6764621912696713907}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.0144, z: 0.315}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4363757311902586931}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &3407626438135619954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6764621912696713907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 1
-  attachmentPointIdPointOfInterestRight: 0
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 0
-  pointOfInterestIsEffector: 1
---- !u!1 &7470722248301769599
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8184250150110750438}
-  - component: {fileID: 8343566962758507}
-  m_Layer: 0
-  m_Name: FlowercutterEffectorTopAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8184250150110750438
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7470722248301769599}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0008, y: 0.022, z: -0.3849}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4363757311902586931}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8343566962758507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7470722248301769599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 5
-  attachmentPointIdPointOfInterestRight: 4
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 1
-  pointOfInterestIsEffector: 0
 --- !u!1 &7629945096239170112
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +271,7 @@ GameObject:
   - component: {fileID: 1955609347958126295}
   - component: {fileID: 2462791771137720924}
   m_Layer: 0
-  m_Name: FlowercutterEffectorCollider
+  m_Name: FlowercutterOversizedCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +302,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04196707, y: 0.01700943, z: 0.27830884}
+  m_Size: {x: 0.0629506, y: 0.025514144, z: 0.4174632}
   m_Center: {x: -0.000000004656613, y: -0.0057535795, z: 0}
 --- !u!1 &8300094462621018208
 GameObject:

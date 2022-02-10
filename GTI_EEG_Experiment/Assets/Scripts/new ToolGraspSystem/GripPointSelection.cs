@@ -230,10 +230,10 @@ public class GripPointSelection : MonoBehaviour
 
     private void OutSideTrigger()
     {
-        if (_flipFix)
+        /*if (_flipFix)
         {
             _flipFix =! _flipFix;
-        }
+        }*/
     }
     
 

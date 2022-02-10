@@ -10,9 +10,7 @@ public class AttachmentTrigger : MonoBehaviour
     public event Action OutsideAttachmentTrigger;
 
     private Hand _hand;
-
-
-    private bool _handIsCongruent;
+    
     private bool _activated;
     private bool _isInsideTrigger;
     private float _currentAngle;
@@ -74,6 +72,7 @@ public class AttachmentTrigger : MonoBehaviour
     {
         if (other.name=="HoverPoint")
         {
+            _isInsideTrigger = false;
             OutsideAttachmentTrigger?.Invoke();
         }
     }

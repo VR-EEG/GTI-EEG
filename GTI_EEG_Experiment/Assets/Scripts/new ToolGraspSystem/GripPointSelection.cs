@@ -29,9 +29,13 @@ public class GripPointSelection : MonoBehaviour
     private Hand _hand;
 
     private bool _toolOrientationCongruent;
-    
-    
-     
+
+    private bool _objectIsAttached;
+
+    private bool _flipFix;
+    private bool _flipFixRunning;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,43 +54,51 @@ public class GripPointSelection : MonoBehaviour
         
 
         _interactable.onAttachedToHand += ObjectAttached;
+        _interactable.onDetachedFromHand += DetachedFromHand;
 
 
-        handleAttachmentTrigger.InsideAttachmentTrigger += HandCloseToHandle;
-        //handleAttachmentTrigger.OutsideAttachmentTrigger += ;
+        handleAttachmentTrigger.OnInsideTriggerEvent += HandCloseToHandle;
+        handleAttachmentTrigger.OutsideAttachmentTrigger += OutSideTrigger;
         
-       effectorAttachmentTrigger.InsideAttachmentTrigger += HandCloseToEffector;
+       effectorAttachmentTrigger.OnInsideTriggerEvent += HandCloseToEffector;
 
        
 
        _hand = Player.instance.rightHand;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
+        
 
+        if (!_objectIsAttached)
+        {
+          
+        }
         
         if (_interactable.isHovering)
         {
 
-
-            if (_toolOrientationCongruent)
+            if (!_objectIsAttached)
             {
-                _incongruentMainPoseBlendingBehavior.influence = 0;
-                _incongruentHandlePoseBlendingBehaviour.influence = 0;
-                _incongruentEffectorPoseBlendingBehaviour.influence = 0;
-                _congruentEffectorPoseBlendingBehaviour.influence = 1;
-                _congruentHandlePoseBlendingBehaviour.influence = 1;
+                if (_toolOrientationCongruent)
+                {
+                    _incongruentMainPoseBlendingBehavior.influence = 0;
+                    _incongruentHandlePoseBlendingBehaviour.influence = 0;
+                    _incongruentEffectorPoseBlendingBehaviour.influence = 0;
+                    _congruentEffectorPoseBlendingBehaviour.influence = 1;
+                    _congruentHandlePoseBlendingBehaviour.influence = 1;
+                }
+                else
+                {
+                    _incongruentMainPoseBlendingBehavior.influence = 1;
+                    _incongruentHandlePoseBlendingBehaviour.influence = 1;
+                    _incongruentEffectorPoseBlendingBehaviour.influence = 1;
+                    _congruentEffectorPoseBlendingBehaviour.influence = 0;
+                    _congruentHandlePoseBlendingBehaviour.influence = 0;
+                }
             }
-            else
-            {
-                _incongruentMainPoseBlendingBehavior.influence = 1;
-                _incongruentHandlePoseBlendingBehaviour.influence = 1;
-                _incongruentEffectorPoseBlendingBehaviour.influence = 1;
-                _congruentEffectorPoseBlendingBehaviour.influence = 0;
-                _congruentHandlePoseBlendingBehaviour.influence = 0;
-            }
+            
              
             
             
@@ -133,21 +145,51 @@ public class GripPointSelection : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+        
+       
+    }
+
 
     private void ObjectAttached(Hand hand)
     {
+        Debug.Log("attached");
+        _objectIsAttached = true;
+        _flipFix = true;
+
+    }
+    
+    private void DetachedFromHand(Hand hand)
+    {
+        _objectIsAttached = false;
+        if (!_flipFixRunning)
+        {
+            _flipFixRunning = true;
+            StartCoroutine(FlipFixRoute());
+        }
         
         
 
-       
-        
-        
     }
+    private IEnumerator FlipFixRoute()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (!_objectIsAttached)
+        {
+            _flipFix = false;
+        }
+
+        _flipFixRunning = false;
+    }
+    
 
 
     private void SetToolOrientation(object sender, ToolShownEventArgs toolShownEventArgs)
     {
-        _toolOrientationCongruent = Convert.ToBoolean(toolShownEventArgs.orientation);
+      //  _toolOrientationCongruent = Convert.ToBoolean(toolShownEventArgs.orientation);
     }
 
     private Vector3 CalculateClosestPointOnTool(Vector3 centerPosition, Vector3 edgePosition, Vector3 handPosition, bool centerIsLeft)
@@ -170,17 +212,45 @@ public class GripPointSelection : MonoBehaviour
     }
 
 
-    private void HandCloseToHandle()
+ 
+
+
+    private void HandCloseToHandle(object sender, InsideTriggerEventArgs insideTriggerEventArgs)
     {
-        Debug.Log("inside");
+        Debug.Log(insideTriggerEventArgs.HandOrientation);
+        _toolOrientationCongruent = insideTriggerEventArgs.HandOrientation<0;
+        
+        if (_flipFix)
+        {
+            _toolOrientationCongruent =! _toolOrientationCongruent;
+        }
         _handleIsCloser = true;
+
+    }
+
+    private void OutSideTrigger()
+    {
+        if (_flipFix)
+        {
+            _flipFix =! _flipFix;
+        }
     }
     
 
-    private void HandCloseToEffector()
+    private void HandCloseToEffector(object sender, InsideTriggerEventArgs insideTriggerEventArgs)
     {
+        Debug.Log(insideTriggerEventArgs.HandOrientation);
+        _toolOrientationCongruent = insideTriggerEventArgs.HandOrientation<0;
+        
+        if (_flipFix)
+        {
+            _toolOrientationCongruent =! _toolOrientationCongruent;
+        }
         _handleIsCloser = false;
     }
 
-    
+    private void OnDisable()
+    {
+        _flipFix = false;
+    }
 }

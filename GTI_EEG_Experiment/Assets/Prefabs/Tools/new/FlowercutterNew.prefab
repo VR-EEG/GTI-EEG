@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5530130376875460116}
   - component: {fileID: 6411768088103786936}
+  - component: {fileID: 8696543190280854289}
   m_Layer: 10
   m_Name: AttachmentSphereEffector
   m_TagString: Untagged
@@ -78,6 +79,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1391544
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8696543190280854289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048282184780401108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120805156871fb5429858d7bbd1bcb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2408194671420209626
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 179609689453899826}
   - component: {fileID: 7353167364762907760}
+  - component: {fileID: 6964301567057778076}
   m_Layer: 10
   m_Name: AttachmentSphereHandle
   m_TagString: Untagged
@@ -122,6 +136,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.1391544
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6964301567057778076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408194671420209626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120805156871fb5429858d7bbd1bcb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3708019820658139697
 GameObject:
   m_ObjectHideFlags: 0

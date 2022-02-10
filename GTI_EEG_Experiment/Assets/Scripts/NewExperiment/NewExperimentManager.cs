@@ -41,6 +41,14 @@ public class NewExperimentManager : MonoBehaviour
 
     private bool _buttonPressed;
     private bool _trialCompleted;
+    
+    
+    
+    
+    
+    //Events
+
+    public event EventHandler<ToolShownEventArgs> OnToolShown;
 
     private void Awake()
     {
@@ -229,6 +237,9 @@ public class NewExperimentManager : MonoBehaviour
         
         tools[toolId].transform.position = toolSpawnPoint.transform.position;
         tools[toolId].SetActive(true);
+
+        var toolShownEventArgs = new ToolShownEventArgs(toolId, direction);
+        OnToolShown.Invoke(this, toolShownEventArgs);
     }
     
     private void HideTool(int toolId)
@@ -405,4 +416,17 @@ public enum ExperimentState
     Finished,
     TableCalibration,
     EyetrackingCalibration
+}
+
+
+public class ToolShownEventArgs : EventArgs
+{
+    public ToolShownEventArgs(int toolId, int orientation)
+    {
+        this.toolId = toolId;
+        this.orientation = orientation;
+    }
+
+    public int toolId { get; set; }
+    public int orientation{ get; set; }
 }

@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &87951379703229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8438398069499722156}
+  - component: {fileID: 8044198927026782025}
+  - component: {fileID: 8072512126851438263}
+  m_Layer: 0
+  m_Name: HandleSphereAttachmentPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8438398069499722156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87951379703229}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1440704}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8033170087965238599}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8044198927026782025
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87951379703229}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14407045
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8072512126851438263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87951379703229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120805156871fb5429858d7bbd1bcb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &4711633724024606436
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378106158313438440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.041676454, y: 0.022292465, z: 0.28814086}
+  m_Center: {x: -0.000031542033, y: 0.0061516496, z: 0.000018760562}
 --- !u!1 &532812612370910034
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,7 +99,7 @@ Transform:
   m_Children:
   - {fileID: 2248636862710327527}
   - {fileID: 6651084138567842666}
-  - {fileID: 739125799283720887}
+  - {fileID: 8033170087965238599}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,40 +147,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.010649495, y: 0.009136885, z: 0.084344774}
   m_Center: {x: 0.00026872195, y: 0.01272944, z: -0.023869}
---- !u!1 &1567067996396313218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 739125799283720887}
-  m_Layer: 0
-  m_Name: AttachmentPointsSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &739125799283720887
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567067996396313218}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02530003, y: 0.025300037, z: 0.025300026}
-  m_Children:
-  - {fileID: 7510111710986835549}
-  - {fileID: 4482536150748407544}
-  - {fileID: 7410933920595940510}
-  - {fileID: 6407398402971975961}
-  m_Father: {fileID: 532812612370910061}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1641888718322533122
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +181,7 @@ Transform:
   m_Father: {fileID: 532812612370910061}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1942562941671022289
+--- !u!1 &2069913026752811527
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,145 +189,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4482536150748407544}
-  - component: {fileID: 5142364969178747397}
+  - component: {fileID: 1827269816035155781}
+  - component: {fileID: 3967077153521062251}
+  - component: {fileID: 6020703186779575077}
   m_Layer: 0
-  m_Name: ForkHandleBottomAttachmentPointSteamVR
+  m_Name: EffectorSphereAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4482536150748407544
+--- !u!4 &1827269816035155781
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942562941671022289}
+  m_GameObject: {fileID: 2069913026752811527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: -0.64}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1440704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 739125799283720887}
+  m_Father: {fileID: 8033170087965238599}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5142364969178747397
+--- !u!135 &3967077153521062251
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069913026752811527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14407045
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6020703186779575077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942562941671022289}
+  m_GameObject: {fileID: 2069913026752811527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
+  m_Script: {fileID: 11500000, guid: 120805156871fb5429858d7bbd1bcb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 3
-  attachmentPointIdPointOfInterestRight: 2
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 0
-  pointOfInterestIsEffector: 1
---- !u!1 &2078531090728615418
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6407398402971975961}
-  - component: {fileID: 5276540203506596147}
-  m_Layer: 0
-  m_Name: ForkEffectorBottomAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6407398402971975961
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078531090728615418}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.92, z: -1.11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 739125799283720887}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5276540203506596147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078531090728615418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 7
-  attachmentPointIdPointOfInterestRight: 6
-  attachmentPointIdPointOfInterestIndependent: 5
-  pointOfInterestIsHandle: 1
-  pointOfInterestIsEffector: 0
---- !u!1 &2372099187787644009
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7510111710986835549}
-  - component: {fileID: 3930435094451419056}
-  m_Layer: 0
-  m_Name: ForkHandleTopAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7510111710986835549
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372099187787644009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 1.16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 739125799283720887}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3930435094451419056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372099187787644009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 1
-  attachmentPointIdPointOfInterestRight: 0
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 0
-  pointOfInterestIsEffector: 1
 --- !u!1 &2895554700765744967
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +477,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.03977406, y: 0.009136877, z: 0.079002656}
   m_Center: {x: -0.0010404857, y: 0.012729446, z: -0.026540034}
---- !u!1 &7197741395950217936
+--- !u!1 &8780348723133547218
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -539,47 +485,30 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7410933920595940510}
-  - component: {fileID: 7627871550839011739}
+  - component: {fileID: 8033170087965238599}
   m_Layer: 0
-  m_Name: ForkEffectorTopAttachmentPointSteamVR
+  m_Name: AttachmentPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7410933920595940510
+--- !u!4 &8033170087965238599
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7197741395950217936}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.92, z: 1.27}
+  m_GameObject: {fileID: 8780348723133547218}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.000031542033, y: 0.00615165, z: 0.000018760562}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 739125799283720887}
+  m_Children:
+  - {fileID: 8438398069499722156}
+  - {fileID: 1827269816035155781}
+  m_Father: {fileID: 532812612370910061}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7627871550839011739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7197741395950217936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 5
-  attachmentPointIdPointOfInterestRight: 4
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 1
-  pointOfInterestIsEffector: 0
 --- !u!1001 &532812610803312097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -672,6 +601,12 @@ PrefabInstance:
 --- !u!4 &4764345449611923195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: da9cecf62ad649e43a5bc2a962349629,
+    type: 3}
+  m_PrefabInstance: {fileID: 532812610803312097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8378106158313438440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: da9cecf62ad649e43a5bc2a962349629,
     type: 3}
   m_PrefabInstance: {fileID: 532812610803312097}
   m_PrefabAsset: {fileID: 0}

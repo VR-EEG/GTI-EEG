@@ -239,6 +239,8 @@ public class NewExperimentManager : MonoBehaviour
             tools[toolId].transform.rotation *= Quaternion.Euler(0,180,0);
         
         tools[toolId].transform.position = toolSpawnPoint.transform.position;
+        tools[toolId].GetComponent<Rigidbody>().isKinematic = false;
+        tools[toolId].GetComponent<Rigidbody>().velocity = Vector3.zero;
         tools[toolId].SetActive(true);
 
         var toolShownEventArgs = new ToolShownEventArgs(toolId, direction);
@@ -247,6 +249,8 @@ public class NewExperimentManager : MonoBehaviour
     
     private void HideTool(int toolId)
     {
+        tools[toolId].GetComponent<Rigidbody>().isKinematic = true;
+        tools[toolId].GetComponent<Rigidbody>().velocity = Vector3.zero;
         tools[toolId].SetActive(false);
     }
 

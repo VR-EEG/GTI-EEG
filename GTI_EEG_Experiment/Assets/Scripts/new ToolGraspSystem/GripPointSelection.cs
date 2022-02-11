@@ -10,10 +10,6 @@ public class GripPointSelection : MonoBehaviour
     private Interactable _interactable;
 
     private SteamVR_Skeleton_Poser _skeletonPoser;
-
-
-    [SerializeField] private float toolLength;
-
     [SerializeField] private AttachmentTrigger handleAttachmentTrigger;
     [SerializeField] private AttachmentTrigger effectorAttachmentTrigger;
     private GameObject dominantAttachmentTrigger;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,6 +42,8 @@ public class NewExperimentManager : MonoBehaviour
     private bool _buttonPressed;
     private bool _trialCompleted;
     
+    [SerializeField] private AudioSource _beepSound;
+    
     
     
     
@@ -68,6 +70,7 @@ public class NewExperimentManager : MonoBehaviour
         _currentBlockData = new BlockData();
         _textController.ShowText(welcomeText);
         _trialCompleted = true;
+        _beepSound.GetComponent<AudioSource>();
     }
 
 
@@ -267,8 +270,8 @@ public class NewExperimentManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ShowTool(trial.Item1,trial.Item3);
         yield return new WaitForSeconds(3f);
-        //beep
-        
+        _beepSound.Play();
+
         //TODO button click ends and time stamp is given
         _trialState = TrialState.EndOfTrial;
         if (isTutorial)

@@ -59,6 +59,11 @@ public class EyetrackingValidation : MonoBehaviour
         return _eyeValidationData.EyeValidationError;
     }
 
+    public EyeValidationData GetValidationData()
+    {
+        return _eyeValidationData;
+    }
+
     private IEnumerator ValidateEyeTracker(float delay=2)
     {
         if (_isValidationRunning) yield break;
@@ -161,21 +166,22 @@ public class EyetrackingValidation : MonoBehaviour
     {
         if (_isErrorCheckRunning) yield break;
         _isErrorCheckRunning = true;
+        Debug.Log("EEG Baselinecheck...");
         
-        //todo time stamp start
-        
-        //set game object on (validation sphere
-        // yield return 5 seconds
-        
-        //set game object off
-        
-        
-        //time stamp end
-        
-        //eventuell event
-        
-        
-      
+        double timestampBegin = TimeManager.Instance.GetCurrentUnixTimeStamp();
+        //TODO LSL magic?
+        _hmdTransform = EyetrackingManagerNew.Instance.GetHmdTransform();
+        fixationPoint.transform.parent =  _hmdTransform.gameObject.transform;
+        fixationPoint.transform.position = _hmdTransform.position + _hmdTransform.rotation * new Vector3(0,0,30);
+        fixationPoint.transform.LookAt(_hmdTransform);
+        fixationPoint.SetActive(true);
+        yield return new WaitForSeconds(5f);
+       fixationPoint.SetActive(false);
+       double timeStampEnd = TimeManager.Instance.GetCurrentUnixTimeStamp();
+       //TODO LSL magic?
+       Debug.Log("...finished");
+       _isErrorCheckRunning = false;
+
     }
     
     private EyeValidationData GetEyeValidationData()

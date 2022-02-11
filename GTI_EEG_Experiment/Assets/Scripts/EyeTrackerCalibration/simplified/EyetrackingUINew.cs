@@ -6,9 +6,7 @@ using UnityEngine;
 public class EyetrackingUINew : MonoBehaviour
 {
     private bool _isActivated;
-
-    private ConfigManager _configManager;
-
+    
     private void Start()
     {
         _isActivated = false;
@@ -61,6 +59,13 @@ public class EyetrackingUINew : MonoBehaviour
                     EyetrackingManagerNew.Instance.StartValidation();
                 }
                 
+                valX +=  Mathf.RoundToInt(w*1.5f) + 2;
+                if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "Baseline Check", buttonStyle))
+                {
+                    EyetrackingManagerNew.Instance.StartEEGBaselineCheck();
+                }
+                
+                
                 valY = Screen.height / 2 + 100;
                 valX += Mathf.RoundToInt(w);
                 valX +=  Mathf.RoundToInt(w*1.5f) + 2;
@@ -70,7 +75,6 @@ public class EyetrackingUINew : MonoBehaviour
                 {
                     EyetrackingManagerNew.Instance.CloseSetup();
                 }
-                
                 
                 valX = x;
 
@@ -110,12 +114,12 @@ public class EyetrackingUINew : MonoBehaviour
                         if (EyetrackingManagerNew.Instance.IsValidationSucessful())
                         {
                             GUI.color = Color.green;
-                            GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent(_configManager.latestEyeTrackingValidationResults.ToString()), boxStyle);
+                            GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent(EyetrackingManagerNew.Instance.GetValidationResults().ToString()), boxStyle);
                         }
                         else
                         {
                             GUI.color = Color.red;
-                            GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent(_configManager.latestEyeTrackingValidationResults.ToString()), boxStyle);
+                            GUI.Box(new Rect(valX, valY, w*1.5f, 80), new GUIContent(EyetrackingManagerNew.Instance.GetValidationResults().ToString()), boxStyle);
                         }
                     }
                     else

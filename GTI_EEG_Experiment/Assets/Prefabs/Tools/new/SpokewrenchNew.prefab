@@ -1,67 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &152065125872007034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5910653129525494130}
-  - component: {fileID: 3274175050215129814}
-  m_Layer: 0
-  m_Name: SpokewrenchEffectorBottomAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5910653129525494130
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152065125872007034}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -258, z: 11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2645348193474184016}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &3274175050215129814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152065125872007034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 7
-  attachmentPointIdPointOfInterestRight: 6
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 1
-  pointOfInterestIsEffector: 0
---- !u!65 &6994748541702714732
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552471784310626404}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.07918506, y: 0.07918505, z: 0.24406531}
-  m_Center: {x: 0, y: 0.0014949273, z: -0.008697763}
 --- !u!1 &1583023595593448689
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,59 +30,10 @@ Transform:
   - {fileID: 2271513712093684922}
   - {fileID: 7397885636937197397}
   - {fileID: 7397885637632978621}
-  - {fileID: 2645348193474184016}
+  - {fileID: 8372798042314720715}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &2135565630464456288
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1925569851784776046}
-  - component: {fileID: 4109825005886532575}
-  m_Layer: 0
-  m_Name: SpokewrenchHandleTopAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1925569851784776046
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135565630464456288}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 347, z: -1107}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2645348193474184016}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &4109825005886532575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2135565630464456288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 1
-  attachmentPointIdPointOfInterestRight: 0
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 0
-  pointOfInterestIsEffector: 1
 --- !u!1 &2423626203848970923
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +78,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.051166177, y: 0.02361703, z: 0.05077648}
   m_Center: {x: -0.0000782609, y: 0.011278033, z: 0.08794665}
---- !u!1 &2660900370950576500
+--- !u!1 &2584441513385501136
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,32 +86,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2645348193474184016}
+  - component: {fileID: 7633925352874854721}
+  - component: {fileID: 5645989791362760439}
+  - component: {fileID: 5695947168378251044}
   m_Layer: 0
-  m_Name: AttachmentPointsSteamVR
+  m_Name: HandleSphereAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2645348193474184016
+--- !u!4 &7633925352874854721
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2660900370950576500}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.20000005, y: 0.19999999, z: 0.20000005}
-  m_Children:
-  - {fileID: 1925569851784776046}
-  - {fileID: 7182752558531284005}
-  - {fileID: 9081439546958815927}
-  - {fileID: 5910653129525494130}
-  m_Father: {fileID: 2567999885559090914}
-  m_RootOrder: 3
+  m_GameObject: {fileID: 2584441513385501136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1220326}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8372798042314720715}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5645989791362760439
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584441513385501136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.12203265
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5695947168378251044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584441513385501136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120805156871fb5429858d7bbd1bcb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3007894064660194307
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,55 +254,6 @@ Transform:
   m_Father: {fileID: 2567999885559090914}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4665922552259692471
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9081439546958815927}
-  - component: {fileID: 127814561037632675}
-  m_Layer: 0
-  m_Name: SpokewrenchEffectorTopAttachmentPointSteamVR
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9081439546958815927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665922552259692471}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 272, z: 11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2645348193474184016}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &127814561037632675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665922552259692471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 5
-  attachmentPointIdPointOfInterestRight: 4
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 1
-  pointOfInterestIsEffector: 0
 --- !u!1 &4978889634392488169
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +298,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.07918506, y: 0.0027313232, z: 0.08139181}
   m_Center: {x: 0, y: 0.0014948845, z: 0.0221349}
+--- !u!1 &5625464118455846251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8372798042314720715}
+  m_Layer: 0
+  m_Name: AttachmentPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8372798042314720715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625464118455846251}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0014948845, z: -0.008697748}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7633925352874854721}
+  - {fileID: 3595293680488834898}
+  m_Father: {fileID: 2567999885559090914}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7397885636937197398
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +394,7 @@ Transform:
   m_Father: {fileID: 2567999885559090914}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8137117080441921004
+--- !u!1 &8394115720539583672
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,47 +402,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7182752558531284005}
-  - component: {fileID: 4567378635722587823}
+  - component: {fileID: 3595293680488834898}
+  - component: {fileID: 6577172248341274100}
+  - component: {fileID: 1830915572269828235}
   m_Layer: 0
-  m_Name: SpokewrenchHandleBottomAttachmentPointSteamVR
+  m_Name: EffectorSphereAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7182752558531284005
+--- !u!4 &3595293680488834898
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8137117080441921004}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -343, z: -1081}
+  m_GameObject: {fileID: 8394115720539583672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1220326}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2645348193474184016}
+  m_Father: {fileID: 8372798042314720715}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 180, y: -90, z: 0}
---- !u!114 &4567378635722587823
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6577172248341274100
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8394115720539583672}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.12203265
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1830915572269828235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8137117080441921004}
+  m_GameObject: {fileID: 8394115720539583672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144445d0ae7e2d548a7c8b68f1cd4275, type: 3}
+  m_Script: {fileID: 11500000, guid: 120805156871fb5429858d7bbd1bcb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poseIsDependentOnPointOfInterestSide: 1
-  attachmentPointIdPointOfInterestLeft: 3
-  attachmentPointIdPointOfInterestRight: 2
-  attachmentPointIdPointOfInterestIndependent: -1
-  pointOfInterestIsHandle: 0
-  pointOfInterestIsEffector: 1
 --- !u!1001 &7397885637458231661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -640,12 +543,6 @@ PrefabInstance:
 --- !u!4 &2580603286200527479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 6dc7916d514c911489d143dc1ea18d83,
-    type: 3}
-  m_PrefabInstance: {fileID: 7397885637458231661}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1552471784310626404 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 6dc7916d514c911489d143dc1ea18d83,
     type: 3}
   m_PrefabInstance: {fileID: 7397885637458231661}
   m_PrefabAsset: {fileID: 0}

@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3519639960544924041}
   - component: {fileID: 8663257357667545787}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FishscalerHandleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5478775420784914369}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1391264
@@ -372,7 +372,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6120352906407014032}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1391264

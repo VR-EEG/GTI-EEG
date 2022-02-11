@@ -72,7 +72,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718286456887225891}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1063704
@@ -204,7 +204,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2846077395750466467}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1063704
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6480175287072735112}
   - component: {fileID: 3473590865731444990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PaintbrushOverSizedCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

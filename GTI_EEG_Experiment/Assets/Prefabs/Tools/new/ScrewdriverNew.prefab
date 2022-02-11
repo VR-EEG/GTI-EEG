@@ -155,7 +155,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109340949779439852}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1668675
@@ -226,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2530829093390083009}
   - component: {fileID: 5334840300632617424}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ScrewdriverCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +429,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8110644652323414320}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1668675

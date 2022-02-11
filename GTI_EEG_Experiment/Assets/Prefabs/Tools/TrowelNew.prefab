@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2097998274608936723}
   - component: {fileID: 7552203717589301204}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Oversized
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2250747115119918848}
   - component: {fileID: 6485359171812965367}
   - component: {fileID: 3461874480223633844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TrowelEffectorSphereAttachmentCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3949089717478906619}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.19773415
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 4402617726530399611}
   - component: {fileID: 5580749363011634127}
   - component: {fileID: 5358457399445688944}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TrowelHandleSphereAttachmentCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8729777087834747322}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.19773415

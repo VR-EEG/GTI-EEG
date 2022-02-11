@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 using ViveSR.anipal.Eye;
 
 public class EyetrackingManagerNew : MonoBehaviour
@@ -10,13 +12,11 @@ public class EyetrackingManagerNew : MonoBehaviour
 
     [SerializeField] private float ValidationThreshold;
     private EyetrackingUINew EyetrackingUI;
-    private ConfigManager configManager;
-    [SerializeField] private EyeTrackingController eyeTrackingController;
 
     [SerializeField] private bool StartValidationAutomaticallyAfterCalibration;
 
     public GameObject GrayRoomSphere;
-    public EyeTrackingValidation _eyetrackingValidation;
+   // public EyeTrackingValidation _eyetrackingValidation;
     public int SamplingRate = 90;
     private Transform _hmdTransform;
     private bool _eyeValidationSucessful;
@@ -37,12 +37,15 @@ public class EyetrackingManagerNew : MonoBehaviour
     private Vector3 _leftEyeValidationErrorAngles;
     private Vector3 _rightEyeValidationErrorAngles;
 
-    private EyeTrackingValidation.EyeTrackingValidationData _validationData;
+   // private EyeTrackingValidation.EyeTrackingValidationData _validationData;
     
     
     private Vector3 CombinedEyeAngleOffset;
     private Vector3 LeftEyeAngleOffset;
     private Vector3 RightEyeAngleOffset;
+
+
+    private EyetrackingValidation _eyetrackingValidation;
 
 
     private void Awake()
@@ -64,20 +67,11 @@ public class EyetrackingManagerNew : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        configManager = GameObject.FindGameObjectWithTag("ConfigManager").GetComponent<ConfigManager>();
         EyetrackingUI = GetComponent<EyetrackingUINew>();
-        
+        _hmdTransform = Player.instance.hmdTransform;
+
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-  
-
-
+    
     public void StartSetup()
     {
         _setupColosed = false;
@@ -116,7 +110,6 @@ public class EyetrackingManagerNew : MonoBehaviour
     public void StartCalibration()
     {
         _calibrationInitialized=true;
-        configManager.resumeExperimentAfterEyeTrackerCalibrationValidation = true;
         StartCoroutine(CalibrateDevice());
     }
 
@@ -151,17 +144,12 @@ public class EyetrackingManagerNew : MonoBehaviour
     {
         return _validationInProgress;
     }
-
-    public void ValidationCompleted()
+    
+   
+    public void ValidationCompleted(bool result)
     {
-        Vector3 results = configManager.latestEyeTrackingValidationResults;
-
-        if (results.x < ValidationThreshold || results.y < ValidationThreshold || results.z < ValidationThreshold)
-        {
-            _validationSucessful = true;
-        }
-
         _validationInProgress = false;
+        _validationSucessful = result;
     }
     
     public bool IsValidationSucessful()
@@ -173,12 +161,18 @@ public class EyetrackingManagerNew : MonoBehaviour
     {
         _validationInitialized = true;
         _validationInProgress=true;
-        eyeTrackingController.LaunchEyeValidation();
+        _eyetrackingValidation.ValidateEyeTracking();
     }
 
     public void StartRecording()
     {
         Debug.Log("<color=green>Recording eye-tracking Data!</color>");
+        // usally done here , however we use LSL so bricked
+    }
+
+    public Transform GetHmdTransform()
+    {
+        return _hmdTransform;
     }
 
 

@@ -12,7 +12,6 @@ public class EyetrackingUINew : MonoBehaviour
     private void Start()
     {
         _isActivated = false;
-        _configManager = GameObject.FindGameObjectWithTag("ConfigManager").GetComponent<ConfigManager>();
     }
 
     public void Activate(bool state)

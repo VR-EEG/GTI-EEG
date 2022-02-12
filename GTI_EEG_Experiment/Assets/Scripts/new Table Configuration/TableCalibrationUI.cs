@@ -29,6 +29,10 @@ public class TableCalibrationUI : MonoBehaviour
     private string _yText;
     private string _zText;
 
+    private string _xButtonText;
+    private string _yButtonText;
+    private string _zButtonText;
+
     private bool _overridePosition;
 
     private bool overrideScalePossible;
@@ -41,30 +45,6 @@ public class TableCalibrationUI : MonoBehaviour
     
     private void Start()
     {
-        if (PlayerPrefs.HasKey("TableLength"))
-        {
-            _length = PlayerPrefs.GetFloat("TableLength");
-            _lengthText = _length.ToString(CultureInfo.InvariantCulture);
-        }
-        
-        if (PlayerPrefs.HasKey("TableHeight"))
-        {
-            _height = PlayerPrefs.GetFloat("TableHeight");
-            _heightText = _height.ToString(CultureInfo.InvariantCulture);
-        }
-        
-        if(PlayerPrefs.HasKey("TableDepth"))
-        {
-            _depth = PlayerPrefs.GetFloat("TableDepth");
-            _depthText = _depth.ToString(CultureInfo.InvariantCulture);
-        }
-        
-        if (_length != 0 && _height != 0 && _depth != 0)
-        {
-            TableConfigurationManager.Instance.SetTableScale(_length,_height,_depth);
-        }
-
-
         _windowHeight = Screen.height;
         _windowWidth = Screen.width;
 
@@ -102,32 +82,33 @@ public class TableCalibrationUI : MonoBehaviour
             
             
             //X
-            GUI.Box(new Rect(valX, valY+heightBox, wm, 40), position.x.ToString("0.00",CultureInfo.InvariantCulture), boxStyle);
-            valY =+ heightBox + spacing;
-            GUI.Box(new Rect(valX, valY+heightBox, wm, 40), "X", boxStyle);
-            valY =+ heightBox + spacing;
+            GUI.Box(new Rect(valX, valY, wm, heightBox), position.x.ToString("0.00",CultureInfo.InvariantCulture), boxStyle);
+            valY += heightBox + spacing;
+            GUI.Box(new Rect(valX, valY, wm, heightBox), "X", boxStyle);
+            valY += heightBox + spacing;
             
             _xText = GUI.TextField(new Rect(valX, valY, wm, 40), _xText);
             
             //Y
             valY = y;
             valX += wm+spacing;
-            GUI.Box(new Rect(valX, valY+heightBox, wm, 40), position.y.ToString("0.00",CultureInfo.InvariantCulture), boxStyle);
-            valY =+ heightBox + spacing;
-            GUI.Box(new Rect(valX, valY+heightBox, wm, 40), "Y", boxStyle);
-            valY =+ heightBox + spacing;
+            GUI.Box(new Rect(valX, valY, wm, heightBox), position.y.ToString("0.00",CultureInfo.InvariantCulture), boxStyle);
+            valY += heightBox + spacing;
+            GUI.Box(new Rect(valX, valY, wm, heightBox), "Y", boxStyle);
+            valY += heightBox + spacing;
             _yText = GUI.TextField(new Rect(valX, valY, wm, 40), _yText);
             //Z
             valY = y;
             valX += wm+spacing;
-            GUI.Box(new Rect(valX, valY+heightBox, wm, 40), position.z.ToString("0.00",CultureInfo.InvariantCulture), boxStyle);
-            valY =+ heightBox + spacing;
-            GUI.Box(new Rect(valX, valY+heightBox, wm, 40), "Z", boxStyle);
-            valY =+ heightBox + spacing;
+            GUI.Box(new Rect(valX, valY, wm, 40), position.z.ToString("0.00",CultureInfo.InvariantCulture), boxStyle);
+            valY += heightBox + spacing;
+            GUI.Box(new Rect(valX, valY, wm, 40), "Z", boxStyle);
+            valY += heightBox + spacing;
             _zText = GUI.TextField(new Rect(valX, valY, wm, 40), _zText);
             
             //set button
             valX += wm+spacing;
+            valY = y;
             GUI.backgroundColor = Color.cyan;
             if (GUI.Button(new Rect(valX, valY, w, 80), "Set", buttonStyle))
             {
@@ -184,9 +165,9 @@ public class TableCalibrationUI : MonoBehaviour
             if (GUI.Button(new Rect(valX, valY, w, 80), "Save", buttonStyle))
             {
                 Vector3 TablePosition = TableConfigurationManager.Instance.GetTablePosition();
-                PlayerPrefs.SetFloat("TableX",TablePosition.x);
-                PlayerPrefs.SetFloat("TableY",TablePosition.y);
-                PlayerPrefs.SetFloat("TableZ",TablePosition.z);
+                
+                TableConfigurationManager.Instance.SaveTablePosition(TablePosition.x,TablePosition.y,TablePosition.z);
+                
             }
 
 
@@ -207,7 +188,8 @@ public class TableCalibrationUI : MonoBehaviour
                 if (float.TryParse(_lengthText, out _length))
                 {
                     overrideScalePossible=true;
-                    PlayerPrefs.SetFloat("TableLength",_length);
+                    TableConfigurationManager.Instance.SetLength(_length);
+                    TableConfigurationManager.Instance.SaveTableSize();
                 }
             }
             
@@ -224,7 +206,8 @@ public class TableCalibrationUI : MonoBehaviour
                 if (float.TryParse(_depthText, out _depth))
                 {
                     overrideScalePossible=true;
-                    PlayerPrefs.SetFloat("TableDepth",_depth);
+                    TableConfigurationManager.Instance.SetDepth(_depth);
+                    TableConfigurationManager.Instance.SaveTableSize();
                 }
             }
             valX += w +2 ;
@@ -240,7 +223,8 @@ public class TableCalibrationUI : MonoBehaviour
                 if (float.TryParse(_heightText, out _height))
                 {
                     overrideScalePossible=true;
-                    PlayerPrefs.SetFloat("TableHeight",_height);
+                    TableConfigurationManager.Instance.SetLength(_height);
+                    TableConfigurationManager.Instance.SaveTableSize();
                 }
             }
 
@@ -261,15 +245,10 @@ public class TableCalibrationUI : MonoBehaviour
                     TableConfigurationManager.Instance.SetTableScale(_length,_height,_depth);
                     overrideScalePossible = false;
                 }
-                
-                
-            
-                
-            
-                
-
-                
             }
+            
+            
+            
             
             valX = x;
             GUI.backgroundColor = Color.red;

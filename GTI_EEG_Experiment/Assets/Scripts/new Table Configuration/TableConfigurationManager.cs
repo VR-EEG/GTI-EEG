@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
@@ -18,6 +19,7 @@ public class TableConfigurationManager : MonoBehaviour
     public SteamVR_Action_Boolean MoveBackwardInput;
     public SteamVR_Action_Boolean MoveUpwardInput;
     public SteamVR_Action_Boolean MoveDownWardInput;
+    public SteamVR_Action_Boolean SelectInput;
     public GameObject Table;
     public GameObject Room;
     public GameObject Button;
@@ -33,6 +35,8 @@ public class TableConfigurationManager : MonoBehaviour
     private TableConfigurationController _tableConfigurationController;
     private TableCalibrationUI _tableCalibrationUI;
 
+    private int _selectIndex;
+
 
     private float _depth;
     private float _length;
@@ -41,6 +45,9 @@ public class TableConfigurationManager : MonoBehaviour
     private Vector3 _tablePosition;
 
     private bool _isActive;
+
+    private bool _tableIsActive;
+    private bool _buttonIsActive;
 
     private bool _controllerIsOverriding;
 
@@ -57,58 +64,102 @@ public class TableConfigurationManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        _selectIndex = 0;
     }
-    private void Update()
-    {
-        _tablePosition = Table.transform.position;
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SetActive(!_isActive);
-           _isActive = !_isActive;
-        }
-    }
+    
+    
+    
 
+    private void MoveObject(Vector3 direction)
+    {
+        if (_buttonIsActive)
+        {
+            ButtonPosition.parent = null;
+            MoveButton(direction);
+        }
+            
+        if(_tableIsActive)
+            MoveTable(direction);
+        
+        ButtonPosition.parent = Table.transform;
+
+    }
 
     public void MoveLeft(SteamVR_Action_Boolean leftInput, SteamVR_Input_Sources fromSource)
     {
         _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.left;
-        MoveTable(inputDirection);
+        MoveObject(inputDirection);
     }
     
     public void MoveRight(SteamVR_Action_Boolean rightInput, SteamVR_Input_Sources fromSource)
     {
         _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.right;
-        MoveTable(inputDirection);
+        MoveObject(inputDirection);
     }
     
     public void MoveForward(SteamVR_Action_Boolean forwardInput, SteamVR_Input_Sources fromSource)
     {
         _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.forward;
-        MoveTable(inputDirection);
+        MoveObject(inputDirection);
     }
     
     public void MoveBackward(SteamVR_Action_Boolean backwardInput, SteamVR_Input_Sources fromSource)
     {
         _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.back;
-        MoveTable(inputDirection);
+        MoveObject(inputDirection);
     }
     
     public void MoveUp(SteamVR_Action_Boolean upInput, SteamVR_Input_Sources fromSource)
     {
         _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.up;
-        MoveTable(inputDirection);
+        MoveObject(inputDirection);
     }
     
     public void MoveDown(SteamVR_Action_Boolean downInput, SteamVR_Input_Sources fromSource)
     {
         _controllerIsOverriding = true;
         Vector3 inputDirection = Vector3.down;
-        MoveTable(inputDirection);
+        MoveObject(inputDirection);
+    }
+    
+    public void Select(SteamVR_Action_Boolean selectInput, SteamVR_Input_Sources fromSource)
+    {
+        _controllerIsOverriding = true;
+        _selectIndex++;
+
+        if (_selectIndex > 2)
+        {
+            _selectIndex = 0;
+        }
+        Debug.Log(_selectIndex);
+        SelectbyIndex(_selectIndex);
+    }
+
+    private void SelectbyIndex(int i)
+    {
+        switch (i)
+        {
+            case 0: 
+                _tableIsActive = true;
+                _buttonIsActive = false;
+                NewExperimentManager.Instance.ShowText("Table");
+                break;
+            case 1:
+                _tableIsActive = false;
+                _buttonIsActive = true;
+                NewExperimentManager.Instance.ShowText("Button");
+                break;
+            case 2:
+                _tableIsActive = true;
+                _buttonIsActive = true;
+                NewExperimentManager.Instance.ShowText("Both");
+                break;
+        }
     }
 
     public bool ControllerIsOverriding()
@@ -121,7 +172,52 @@ public class TableConfigurationManager : MonoBehaviour
         _controllerIsOverriding = state;
     }
 
-    public void SetActive(bool state)
+
+    public void SaveTablePosition()
+    {
+        PlayerPrefs.SetFloat("TableX",_tablePosition.x);
+        PlayerPrefs.SetFloat("TableY",_tablePosition.y);
+        PlayerPrefs.SetFloat("TableZ",_tablePosition.z);
+    }
+
+
+
+    public void SetHeight(float height)
+    {
+        _height = height;
+    }
+
+    public void SetLength(float length)
+    {
+        _length = length;
+    }
+
+    public void SetDepth(float depth)
+    {
+        _depth = depth;
+    }
+    
+    public void SaveTableSize()
+    {
+        PlayerPrefs.SetFloat("TableLength", _length);
+        PlayerPrefs.SetFloat("TableHeight", _height);
+        PlayerPrefs.SetFloat("TableDepth", _depth);
+    }
+
+    public void SaveButtonPosition(float positionX, float positionY, float positionZ)
+    {
+        
+    }
+    
+    
+
+
+    public void StartSetup()
+    {
+        SetActive(true);
+    }
+    
+    private void SetActive(bool state)
     {
         _tableCalibrationUI.SetActive(state);
         
@@ -145,7 +241,8 @@ public class TableConfigurationManager : MonoBehaviour
 
     public void MoveButton(Vector3 direction)
     {
-        Button.transform.position += direction;
+        ButtonPosition.transform.position += direction*Speed*Time.deltaTime;
+        _buttonConfiguration.AdjustPosition();
     }
 
     public void SetTablePosition(Vector3 position)
@@ -182,11 +279,37 @@ public class TableConfigurationManager : MonoBehaviour
         MoveBackwardInput.AddOnStateDownListener(MoveBackward,SteamVR_Input_Sources.Any);
         MoveUpwardInput.AddOnStateDownListener(MoveUp,SteamVR_Input_Sources.Any);
         MoveDownWardInput.AddOnStateDownListener(MoveDown,SteamVR_Input_Sources.Any);
+        SelectInput.AddOnStateDownListener(Select,SteamVR_Input_Sources.Any);
+        
         var x =  PlayerPrefs.GetFloat("TableX");
         var y = PlayerPrefs.GetFloat("TableY");
         var z = PlayerPrefs.GetFloat("TableZ");
         _tablePosition = new Vector3(x, y, z);
         SetTablePosition(_tablePosition);
+        
+        
+        if (PlayerPrefs.HasKey("TableLength"))
+        {
+            _length = PlayerPrefs.GetFloat("TableLength");
+        }
+        
+        if (PlayerPrefs.HasKey("TableHeight"))
+        {
+            _height = PlayerPrefs.GetFloat("TableHeight");
+        }
+        
+        if(PlayerPrefs.HasKey("TableDepth"))
+        {
+            _depth = PlayerPrefs.GetFloat("TableDepth");
+        }
+        
+        if (_length != 0 && _height != 0 && _depth != 0)
+        {
+            SetTableScale(_length,_height,_depth);
+        }
+        
+        
+        
         
 
     }
@@ -228,8 +351,9 @@ public class TableConfigurationManager : MonoBehaviour
         pos.x += ButtonOffsetToPlayer.x;
         pos.z += ButtonOffsetToPlayer.y;
 
-        Button.transform.position = pos;
-        Button.transform.rotation = rot;
+
+        ButtonPosition.position = pos;
+        _buttonConfiguration.AdjustPosition();
 
 
     }

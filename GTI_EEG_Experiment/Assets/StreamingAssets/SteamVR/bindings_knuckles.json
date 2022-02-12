@@ -353,7 +353,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/tablecalibration/in/confirmleft"
+                     "output" : "/actions/tablecalibration/in/selectobject"
                   }
                },
                "mode" : "trigger",
@@ -380,7 +380,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/tablecalibration/in/confirmleft"
+                     "output" : "/actions/tablecalibration/in/selectobject"
                   }
                },
                "mode" : "trigger",
@@ -388,6 +388,9 @@
             },
             {
                "inputs" : {
+                  "center" : {
+                     "output" : "/actions/tablecalibration/in/selectobejct"
+                  },
                   "east" : {
                      "output" : "/actions/tablecalibration/in/moveright"
                   },
@@ -409,6 +412,9 @@
             },
             {
                "inputs" : {
+                  "center" : {
+                     "output" : "/actions/tablecalibration/in/selectobejct"
+                  },
                   "east" : {
                      "output" : "/actions/tablecalibration/in/moveright"
                   },

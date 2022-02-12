@@ -64,5 +64,13 @@ namespace Valve.VR
                 return SteamVR_Actions.tableCalibration_MoveDownward;
             }
         }
+        
+        public virtual SteamVR_Action_Boolean SelectObject
+        {
+            get
+            {
+                return SteamVR_Actions.tableCalibration_SelectObject;
+            }
+        }
     }
 }

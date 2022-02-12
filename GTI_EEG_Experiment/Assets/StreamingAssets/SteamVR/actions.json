@@ -109,6 +109,10 @@
     {
       "name": "/actions/tableCalibration/in/MoveDownward",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/SelectObject",
+      "type": "boolean"
     }
   ],
   "action_sets": [

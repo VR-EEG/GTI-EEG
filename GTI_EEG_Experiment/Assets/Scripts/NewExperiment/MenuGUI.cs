@@ -51,34 +51,37 @@ namespace NewExperiment
             {
                 case ExperimentState.MainMenu:
                 {
-                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Tutorial", buttonStyle))
+                    if (GUI.Button(new Rect(x, y, (int) (buttonSizeW*1.5), buttonSizeH), "Begin Experiment", buttonStyle))
                     {
                         NewExperimentManager.Instance.StartTutorial();
                     }
 
                     x += buttonSizeW + space;
-
-
-                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Experiment", buttonStyle))
-                    {
-                        NewExperimentManager.Instance.StartExperiment();
-                    }
-            
-            
+                    
                     x += buttonSizeW + space;
             
                     if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Configuration", buttonStyle))
                     {
-                        NewExperimentManager.Instance.StartTutorial();
+                        NewExperimentManager.Instance.StartTableCalibration();
                     }
 
                     break;
                 }
                 case ExperimentState.Training:
                 {
+                    x += buttonSizeW + space;
+                    
+                    x += buttonSizeW + space;
+                    
+                    x += buttonSizeW + space;
+                    
+                    
+                    x += buttonSizeW + space;
+                    
+                    
                     if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Finish", buttonStyle))
                     {
-                        NewExperimentManager.Instance.StartExperiment();
+                        NewExperimentManager.Instance.SetBetweenBlocks();
                     }
 
                     break;
@@ -93,21 +96,21 @@ namespace NewExperiment
                     x += buttonSizeW + space;
 
 
-                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Calibrate Eyetracking", buttonStyle))
+                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Calibration", buttonStyle))
                     {
-                        
+                        NewExperimentManager.Instance.StartEyeCalibration();
                     }
-            
-            
                     x += buttonSizeW + space;
             
-                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Configuration", buttonStyle))
+                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Table", buttonStyle))
                     {
-                        NewExperimentManager.Instance.StartTutorial();
+                        NewExperimentManager.Instance.StartTableCalibration();
                     }
 
                     break;
                 }
+                case ExperimentState.EyetrackingCalibration:
+                    break;
                 case ExperimentState.Finished:
                 {
                     if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Finish", buttonStyle))

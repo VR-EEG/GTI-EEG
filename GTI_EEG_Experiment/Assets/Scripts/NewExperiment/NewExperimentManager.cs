@@ -1,17 +1,21 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using NewExperiment;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class NewExperimentManager : MonoBehaviour
 {
     public static NewExperimentManager Instance { get ; set; }
-
+    
     [SerializeField] private TextController _textController;
+
+    [SerializeField]private EyetrackingManagerNew eyetrackingManager;
+    [SerializeField] private TableConfigurationManager tableConfigurationManager;
 
     private ExperimentState _experimentState = ExperimentState.MainMenu;
     private TrialState _trialState = TrialState.StandBy;
@@ -43,6 +47,8 @@ public class NewExperimentManager : MonoBehaviour
     private bool _trialCompleted;
     
     [SerializeField] private AudioSource _beepSound;
+
+    private Vector3 _playerPosition;
     
     
     
@@ -71,6 +77,8 @@ public class NewExperimentManager : MonoBehaviour
         _textController.ShowText(welcomeText);
         _trialCompleted = true;
         _beepSound.GetComponent<AudioSource>();
+
+        
     }
 
 
@@ -124,6 +132,17 @@ public class NewExperimentManager : MonoBehaviour
     {
         
     }
+
+
+    public GameObject GetTool()
+    {
+        return _currentTool;
+    }
+
+    public void ShowText(string text)
+    {
+        _textController.ShowText(text);
+    }
     
     public ExperimentState GetExperimentState()
     {
@@ -132,19 +151,19 @@ public class NewExperimentManager : MonoBehaviour
     
     public void StartExperiment()
     {
-        StartCoroutine(ProcessLastTrail());
+        _experimentState = ExperimentState.Experiment;
+        _trialState = TrialState.StandBy;
+        _currentBlock = _experimentBlocks[0];
+        _currentTrial = _currentBlock.TrailItems[0];
     }
 
     private IEnumerator ProcessLastTrail()
     {
         if(!_trialCompleted)
             yield return new WaitUntil(() => _trialState == TrialState.EndOfTrial);
-        
-        tools[0].SetActive(false);
-        _experimentState = ExperimentState.Experiment;
-        _trialState = TrialState.StandBy;
-        _currentBlock = _experimentBlocks[0];
-        _currentTrial = _currentBlock.TrailItems[0];
+
+        _experimentState = ExperimentState.BetweenBlocks;
+
     }
 
     public void ContinueExperiment()
@@ -176,14 +195,25 @@ public class NewExperimentManager : MonoBehaviour
     
     public void StartTableCalibration()
     {
-        
+        tableConfigurationManager.StartSetup();
+        _experimentState = ExperimentState.TableCalibration;
     }
 
     public void StartEyeCalibration()
     {
+        _playerPosition = Player.instance.transform.position;
+        Player.instance.transform.position = eyetrackingManager.GrayRoomSphere.transform.position;
+        eyetrackingManager.StartSetup();
+        _experimentState = ExperimentState.EyetrackingCalibration;
         
     }
 
+    public void EndEyeCalibration()
+    {
+        Player.instance.transform.position = _playerPosition;
+        _experimentState = ExperimentState.BetweenBlocks; 
+    }
+    
     public void ButtonPress()
     {
         switch (_experimentState)
@@ -242,6 +272,7 @@ public class NewExperimentManager : MonoBehaviour
         tools[toolId].GetComponent<Rigidbody>().isKinematic = false;
         tools[toolId].GetComponent<Rigidbody>().velocity = Vector3.zero;
         tools[toolId].SetActive(true);
+        _currentTool = tools[toolId];
 
         var toolShownEventArgs = new ToolShownEventArgs(toolId, direction);
         OnToolShown.Invoke(this, toolShownEventArgs);
@@ -392,6 +423,15 @@ public class NewExperimentManager : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Only used for the end Of Tutorial session
+    /// </summary>
+    /// <returns></returns>
+    public void SetBetweenBlocks()
+    {
+        StartCoroutine(ProcessLastTrail());
+    }
+
 }
 
  public class BlockItem
@@ -421,8 +461,8 @@ public enum ExperimentState
     BetweenBlocks,
     Experiment,
     Finished,
+    EyetrackingCalibration,
     TableCalibration,
-    EyetrackingCalibration
 }
 
 

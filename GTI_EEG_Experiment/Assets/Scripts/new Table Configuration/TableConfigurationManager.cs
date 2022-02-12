@@ -24,10 +24,10 @@ public class TableConfigurationManager : MonoBehaviour
     public GameObject Room;
     public GameObject Button;
     public GameObject CueText;
-    public Transform ButtonPosition;
+    public Transform spawnAndButtonPosition;
 
     [SerializeField] private float Speed;
-    [SerializeField] private Vector2 ButtonOffsetToPlayer;
+    [SerializeField] private float SpawnPointOffset;
     [SerializeField] private ButtonConfiguration _buttonConfiguration;
 
 
@@ -74,14 +74,14 @@ public class TableConfigurationManager : MonoBehaviour
     {
         if (_buttonIsActive)
         {
-            ButtonPosition.parent = null;
+            spawnAndButtonPosition.parent = null;
             MoveButton(direction);
         }
             
         if(_tableIsActive)
             MoveTable(direction);
         
-        ButtonPosition.parent = Table.transform;
+        spawnAndButtonPosition.parent = Table.transform;
 
     }
 
@@ -175,9 +175,12 @@ public class TableConfigurationManager : MonoBehaviour
 
     public void SaveTablePosition()
     {
+        _tablePosition = Table.transform.position;
         PlayerPrefs.SetFloat("TableX",_tablePosition.x);
         PlayerPrefs.SetFloat("TableY",_tablePosition.y);
         PlayerPrefs.SetFloat("TableZ",_tablePosition.z);
+        
+        SaveButtonPosition();
     }
 
 
@@ -204,9 +207,12 @@ public class TableConfigurationManager : MonoBehaviour
         PlayerPrefs.SetFloat("TableDepth", _depth);
     }
 
-    public void SaveButtonPosition(float positionX, float positionY, float positionZ)
+    public void SaveButtonPosition()
     {
-        
+        var pos = spawnAndButtonPosition.transform.position;
+        PlayerPrefs.SetFloat("ButtonX", pos.x);
+        PlayerPrefs.SetFloat("ButtonY", pos.y);
+        PlayerPrefs.SetFloat("ButtonZ", pos.z);
     }
     
     
@@ -215,6 +221,20 @@ public class TableConfigurationManager : MonoBehaviour
     public void StartSetup()
     {
         SetActive(true);
+    }
+
+    public void CloseSetup()
+    {
+        SetActive(false);
+        if (NewExperimentManager.Instance.GetFormerExperimentState() == ExperimentState.BetweenBlocks)
+        {
+            NewExperimentManager.Instance.SetBetweenBlocks();
+        }
+        else
+        {
+            NewExperimentManager.Instance.SetMainMenu();
+        }
+
     }
     
     private void SetActive(bool state)
@@ -229,6 +249,8 @@ public class TableConfigurationManager : MonoBehaviour
         {
             CalibrationActionSet.Deactivate();
         }
+        
+        _buttonConfiguration.DisplaySpawnZone(state);
     }
     
     public void MoveTable(Vector3 direction)
@@ -241,20 +263,16 @@ public class TableConfigurationManager : MonoBehaviour
 
     public void MoveButton(Vector3 direction)
     {
-        ButtonPosition.transform.position += direction*Speed*Time.deltaTime;
+        spawnAndButtonPosition.transform.position += direction*Speed*Time.deltaTime;
         _buttonConfiguration.AdjustPosition();
     }
 
-    public void SetTablePosition(Vector3 position)
+    public void SetTablePosition(Vector3 position, bool withoutButton = false)
     {
         Table.transform.position = position;
-        if (_buttonConfiguration != null)
+        if (!withoutButton)
         {
             _buttonConfiguration.AdjustPosition();
-        }
-        else
-        {
-            Debug.LogWarning("button is not active");
         }
         Room.transform.position = Table.transform.position;
         
@@ -271,7 +289,7 @@ public class TableConfigurationManager : MonoBehaviour
         
         Debug.Assert(Table!=null, "table was not assigned");
         Debug.Assert(Room!=null, "room is not assigned");
-        _tableConfigurationController.Init(Table, Room,Button, ButtonPosition);
+        _tableConfigurationController.Init(Table, Room);
         
         MoveLeftInput.AddOnStateDownListener(MoveLeft,SteamVR_Input_Sources.Any);
         MoveRightInput.AddOnStateDownListener(MoveRight,SteamVR_Input_Sources.Any);
@@ -285,7 +303,14 @@ public class TableConfigurationManager : MonoBehaviour
         var y = PlayerPrefs.GetFloat("TableY");
         var z = PlayerPrefs.GetFloat("TableZ");
         _tablePosition = new Vector3(x, y, z);
-        SetTablePosition(_tablePosition);
+
+        
+        
+        
+        
+        SetTablePosition(_tablePosition, false);
+        
+        
         
         
         if (PlayerPrefs.HasKey("TableLength"))
@@ -308,6 +333,13 @@ public class TableConfigurationManager : MonoBehaviour
             SetTableScale(_length,_height,_depth);
         }
         
+        
+        var xbutton = PlayerPrefs.GetFloat("ButtonX");
+        var ybutton = PlayerPrefs.GetFloat("ButtonY");
+        var zbutton = PlayerPrefs.GetFloat("ButtonZ");
+        spawnAndButtonPosition.transform.position = new Vector3(xbutton, ybutton, zbutton); ;
+        _buttonConfiguration.AdjustPosition();
+
         
         
         
@@ -333,6 +365,8 @@ public class TableConfigurationManager : MonoBehaviour
 
         _tableConfigurationController.SetPosition(tablePosition);
         
+        _buttonConfiguration.AdjustPosition();
+        
     }
 
     public void AutoCalibrateButtonPosition()
@@ -341,20 +375,14 @@ public class TableConfigurationManager : MonoBehaviour
 
 
         Quaternion rot = _tableConfigurationController.GetTableRotation();
-
-        var offset = ButtonOffsetToPlayer;
-
+        
 
 
-        Vector3 pos = new Vector3(positonGuess.x+offset.x, _height, positonGuess.z+offset.y);
-
-        pos.x += ButtonOffsetToPlayer.x;
-        pos.z += ButtonOffsetToPlayer.y;
-
-
-        ButtonPosition.position = pos;
+      
+        var pos = new Vector3(positonGuess.x, positonGuess.y + _height ,positonGuess.z+SpawnPointOffset);
+        spawnAndButtonPosition.position = pos;
         _buttonConfiguration.AdjustPosition();
-
+        
 
     }
     

@@ -10,10 +10,6 @@ public class TableConfigurationController : MonoBehaviour
     
     private GameObject _table;
     private GameObject _room;
-    private GameObject _button;
-    private Transform _buttonPos;
-    [SerializeField] private Vector3 ButtonOffsetFromTable;
-
     private Bounds _bounds;
     
     // Start is called before the first frame update
@@ -53,12 +49,10 @@ public class TableConfigurationController : MonoBehaviour
         _room.transform.rotation = rotation;
     }
 
-    public void Init(GameObject table, GameObject room, GameObject button, Transform buttonPosition)
+    public void Init(GameObject table, GameObject room)
     {
         _table = table;
         _room = room;
-        _button = button;
-        _buttonPos = buttonPosition;
     }
 
 

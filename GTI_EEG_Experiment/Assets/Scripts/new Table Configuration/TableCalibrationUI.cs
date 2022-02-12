@@ -164,9 +164,8 @@ public class TableCalibrationUI : MonoBehaviour
 
             if (GUI.Button(new Rect(valX, valY, w, 80), "Save", buttonStyle))
             {
-                Vector3 TablePosition = TableConfigurationManager.Instance.GetTablePosition();
                 
-                TableConfigurationManager.Instance.SaveTablePosition(TablePosition.x,TablePosition.y,TablePosition.z);
+                TableConfigurationManager.Instance.SaveTablePosition();
                 
             }
 
@@ -251,8 +250,9 @@ public class TableCalibrationUI : MonoBehaviour
             
             
             valX = x;
+            valY = Screen.height / 2;
             GUI.backgroundColor = Color.red;
-            if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "AutoCalibrate Position", buttonStyle))
+            if (GUI.Button(new Rect(valX, valY, w*1.5f, 80), "AutoCalibrate Position", buttonStyle))
             {
                 TableConfigurationManager.Instance.AutoCalibrateTablePosition();
                 TableConfigurationManager.Instance.AutoCalibrateButtonPosition();
@@ -260,20 +260,41 @@ public class TableCalibrationUI : MonoBehaviour
             
             
             valX = (int) (x+w*1.5f+1);
-            if (GUI.Button(new Rect(valX, Screen.height/2, w*1.5f, 80), "AutoCalibrate Button", buttonStyle))
+            if (GUI.Button(new Rect(valX, valY, w*1.5f, 80), "AutoCalibrate Button", buttonStyle))
             {
                 TableConfigurationManager.Instance.AutoCalibrateButtonPosition();
             }
+            
+            
+            
+            
+            valX += (int) (x+w*1.5f+1);
+            
+            
+            
+            if (GUI.Button(new Rect(valX, valY, w*1.5f, 80), "Close Setup", buttonStyle))
+            {
+                TableConfigurationManager.Instance.CloseSetup();
 
-            
-            
-            
+                if (NewExperimentManager.Instance.GetExperimentState() == ExperimentState.BetweenBlocks)
+                {
+                    NewExperimentManager.Instance.SetBetweenBlocks();
+                }
+                else
+                {
+                    
+                }
+                
+            }
 
-            
-            
-           
-            
-           
+
+
+
+
+
+
+
+
         }
     }
 }

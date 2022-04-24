@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
 using LSL;
+using UnityEditor;
 
 public class LSLStreams : MonoBehaviour
 {
     #region Fields
 
     public static LSLStreams Instance { get; private set; } // used to allow easy access of this script in other scripts
-
-    private ConfigManager _configManager;
     
-    private string subjectID;
+    
+    private string uniqueIdentifier;
 
     private const double NominalRate = liblsl.IRREGULAR_RATE; // irregular sampling rate
 
@@ -82,10 +82,9 @@ public class LSLStreams : MonoBehaviour
 
     #region Streams initialization
 
-    public void Start()   
+    public void Start()
     {
-        _configManager = GameObject.FindWithTag("ConfigManager").GetComponent<ConfigManager>();
-        subjectID = _configManager.subjectId;
+        uniqueIdentifier = GUID.Generate().ToString();  //this variable is only used to recognize streams
         
         lslIFrameTracking = new liblsl.StreamInfo(
             "FrameTracking",
@@ -93,7 +92,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_int32,
-            subjectID);
+            uniqueIdentifier);
         lslIFrameTracking.desc().append_child("CurrentFrame");
         lslOFrameTracking = new liblsl.StreamOutlet(lslIFrameTracking);
 
@@ -104,7 +103,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
         );
         lslIFrameTimeStamp.desc().append_child("CurrentFrameTimeStamp");
         lslOFrameTimeStamp = new liblsl.StreamOutlet(lslIFrameTimeStamp);
@@ -115,7 +114,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
         );
         lslITrialStartMeasurementTimeStamp.desc().append_child("TrialStartMeasurementTimeStamp");
         lslOTrialStartMeasurementTimeStamp = new liblsl.StreamOutlet(lslITrialStartMeasurementTimeStamp);
@@ -126,7 +125,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
         );
         lslICueTimeStamp.desc().append_child("CueTimeStamp");
         lslOCueTimeStamp = new liblsl.StreamOutlet(lslICueTimeStamp);
@@ -137,7 +136,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
         );
         lslICueDisappearedTimeStamp.desc().append_child("CueDisappearedTimeStamp");
         lslOCueDisappearedTimeStamp = new liblsl.StreamOutlet(lslICueDisappearedTimeStamp);
@@ -148,7 +147,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
             );
         lslIObjectShownTimeStamp.desc().append_child("ObjectShownTimeStamp");
         lslOObjectShownTimeStamp = new liblsl.StreamOutlet(lslIObjectShownTimeStamp);
@@ -159,7 +158,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
         );
         lslIBeepPlayedTimeStamp.desc().append_child("BeepPlayedTimeStamp");
         lslOBeepPlayedTimeStamp = new liblsl.StreamOutlet(lslIBeepPlayedTimeStamp);
@@ -170,7 +169,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
             );
         lslIButtonPressedTimeStamp.desc().append_child("ButtonPressedTimeStamp");
         lslOButtonPressedTimeStamp = new liblsl.StreamOutlet(lslIButtonPressedTimeStamp);
@@ -182,7 +181,7 @@ public class LSLStreams : MonoBehaviour
             1,
             NominalRate,
             liblsl.channel_format_t.cf_double64,
-            subjectID
+            uniqueIdentifier
         );
         lslITrialStopMeasurementTimeStamp.desc().append_child("TrialStopMeasurementTimeStamp");
         lslOTrialStopMeasurementTimeStamp = new liblsl.StreamOutlet(lslITrialStopMeasurementTimeStamp);
@@ -194,7 +193,7 @@ public class LSLStreams : MonoBehaviour
             7,
             NominalRate,
             liblsl.channel_format_t.cf_int32,
-            subjectID
+            uniqueIdentifier
         );
         lslIToolCueOrientationInt.desc().append_child("trialID");
         lslIToolCueOrientationInt.desc().append_child("blockNumber");
@@ -212,7 +211,7 @@ public class LSLStreams : MonoBehaviour
             5,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            subjectID
+            uniqueIdentifier
         );
         lslIToolCueOrientationString.desc().append_child("toolName");
         lslIToolCueOrientationString.desc().append_child("cueOrientationName");
@@ -228,7 +227,7 @@ public class LSLStreams : MonoBehaviour
             58,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            subjectID
+            uniqueIdentifier
         );
         lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeOpennessLeft");
         lslIEyeTrackingGazeHMDFloat.desc().append_child("eyeOpennessRight");
@@ -296,7 +295,7 @@ public class LSLStreams : MonoBehaviour
             14,
             NominalRate,
             liblsl.channel_format_t.cf_int8,
-            subjectID
+            uniqueIdentifier
         );
         lslIGazeValidity.desc().append_child("LeftDataGazeOriginValidity");
         lslIGazeValidity.desc().append_child("LeftDataGazeDirectionValidity");
@@ -320,7 +319,7 @@ public class LSLStreams : MonoBehaviour
             3,
             NominalRate,
             liblsl.channel_format_t.cf_string,
-            subjectID
+            uniqueIdentifier
         );
         lslIEyeTrackingGazeHMDString.desc().append_child("hitObjectNameCombinedEyes");
         lslIEyeTrackingGazeHMDString.desc().append_child("hitObjectNameLeftEye");
@@ -334,7 +333,7 @@ public class LSLStreams : MonoBehaviour
             23,
             NominalRate,
             liblsl.channel_format_t.cf_float32,
-            subjectID
+            uniqueIdentifier
         );
         lslIInput.desc().append_child("controllerTriggerPressed");
         lslIInput.desc().append_child("controllerPosition.x");

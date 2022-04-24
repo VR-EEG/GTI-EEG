@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using Leap.Unity.Infix;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
@@ -252,10 +252,11 @@ namespace LSL
             
             LSLStreams.Instance.lslOFrameTracking.push_sample(currentTimestamp);
             LSLStreams.Instance.lslOFrameTracking.push_sample(liveDataFrame);
-            }
             
             yield return new WaitForEndOfFrame();
+            }
             
+         
             
            
             

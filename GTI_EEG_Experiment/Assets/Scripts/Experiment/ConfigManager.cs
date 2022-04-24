@@ -238,7 +238,7 @@ public class ConfigManager : MonoBehaviour
     // Exclude ids for utcon flow creation 
     public List<int> excludeToolIdsForUtconFlowCreation = new List<int>();
     
-    // Block Pause Indicator in Utcon csvs 
+    // Block BetweenBlocks Indicator in Utcon csvs 
     public string blockPauseIndicator;
     
     // Manual collider included string 

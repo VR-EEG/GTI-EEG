@@ -22,7 +22,6 @@ namespace NewExperiment
         public static List<T> Shuffle<T>(List<T> list, System.Random rnd)
         {
             int n = list.Count;
-            
             while (n > 1)
             {
                 n--;
@@ -32,7 +31,6 @@ namespace NewExperiment
                 list[k] = list[n];
                 list[n] = value;
             }
-
             return list;
         }
     }

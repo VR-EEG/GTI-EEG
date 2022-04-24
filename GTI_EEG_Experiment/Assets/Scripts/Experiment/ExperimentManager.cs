@@ -28,7 +28,7 @@ public class ExperimentManager : MonoBehaviour
     public GameObject room; 
     
     // Cue 
-    public CueManager cueManager; 
+    public TextController textController; 
     
     // Tools
     public ToolManager toolManager; 
@@ -297,7 +297,7 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("[ExperimentManager] Now in state PracticeStart.");
         
         // Update Cue text 
-        cueManager.UpdateCueText(CueStates.PracticeStart);
+        textController.UpdateCueText(CueStates.PracticeStart);
         
         // Display info for a few seconds before continuing 
         yield return new WaitForSeconds(configManager.informationalCuePresentationDuration);
@@ -319,7 +319,7 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("[ExperimentManager] Now in state Start.");
         
         // Update Cue text 
-        cueManager.UpdateCueText(CueStates.Start);
+        textController.UpdateCueText(CueStates.Start);
         
         // Reset input to none to make sure spam input is ignored 
         triggerManager.ResetInteractionHappened(); 
@@ -330,7 +330,7 @@ public class ExperimentManager : MonoBehaviour
             // Trigger interaction appeared
             if (_acceptButtonPress)
             {
-                cueManager.UpdateCueText(CueStates.Start);
+                textController.UpdateCueText(CueStates.Start);
                 triggerManager.ResetInteractionHappened();
                     
                     yield return new WaitForSeconds(.1f);
@@ -359,7 +359,7 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("[ExperimentManager] Now in state PracticeEnd.");
         
         // Update Cue text 
-        cueManager.UpdateCueText(CueStates.PracticeEnd);
+        textController.UpdateCueText(CueStates.PracticeEnd);
         
         // Display info for a few seconds before continuing 
         yield return new WaitForSeconds(configManager.informationalCuePresentationDuration);
@@ -425,11 +425,11 @@ public class ExperimentManager : MonoBehaviour
         configManager.currentUtcon = currentUtcon;
         
         // Update cue text dependent on utcon 
-        cueManager.UpdateCueTextFromUtcon(currentUtcon);
+        textController.UpdateCueTextFromUtcon(currentUtcon);
         
         // Wait cue displaying time before deactivating cue again 
         yield return new WaitForSeconds(configManager.cuePresentationDuration);
-        cueManager.UpdateCueText(CueStates.Empty);
+        textController.UpdateCueText(CueStates.Empty);
         
         // Wait before displaying tool 
         yield return new WaitForSeconds(configManager.delayBetweenCueAndToolPresentation);
@@ -454,8 +454,8 @@ public class ExperimentManager : MonoBehaviour
             {
                 // Empty display of cue and tool and wait for a certain time between trials 
                 toolManager.DisplayNoTool(); // Deactivate tool display 
-                cueManager.UpdateCueText(CueStates.Empty); // Empty cue text
-                yield return new WaitForSeconds(configManager.delayBetweenTriggerInteractionAndCuePresentation); // Pause between trials for a certain time 
+                textController.UpdateCueText(CueStates.Empty); // Empty cue text
+                yield return new WaitForSeconds(configManager.delayBetweenTriggerInteractionAndCuePresentation); // BetweenBlocks between trials for a certain time 
                 
                 // Reset experiment states 
                 triggerManager.ResetInteractionHappened(); // Reset input to none 
@@ -517,14 +517,14 @@ public class ExperimentManager : MonoBehaviour
         measurementManager.StartMeasurement();
         
         // Update cue text dependent on utcon 
-        cueManager.UpdateCueTextFromUtcon(currentUtcon);
+        textController.UpdateCueTextFromUtcon(currentUtcon);
         
         double[] cueTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
         LSLStreams.Instance.lslOCueTimeStamp.push_sample(cueTimestamp);
         
         // Wait cue displaying time before deactivating cue again 
         yield return new WaitForSeconds(configManager.cuePresentationDuration);
-        cueManager.UpdateCueText(CueStates.Empty);
+        textController.UpdateCueText(CueStates.Empty);
         
         double[] cueDisappearedTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp() };
         LSLStreams.Instance.lslOCueDisappearedTimeStamp.push_sample(cueDisappearedTimestamp);
@@ -564,8 +564,8 @@ public class ExperimentManager : MonoBehaviour
                 
                 // Empty display of cue and tool and wait for a certain time between trials 
                 toolManager.DisplayNoTool(); // Deactivate tool display 
-                cueManager.UpdateCueText(CueStates.Empty); // Empty cue text
-                yield return new WaitForSeconds(configManager.delayBetweenTriggerInteractionAndCuePresentation); // Pause between trials for a certain time 
+                textController.UpdateCueText(CueStates.Empty); // Empty cue text
+                yield return new WaitForSeconds(configManager.delayBetweenTriggerInteractionAndCuePresentation); // BetweenBlocks between trials for a certain time 
                 
                 // Reset experiment states 
                 triggerManager.ResetInteractionHappened(); // Reset input to none 
@@ -611,7 +611,7 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("[ExperimentManager] Now in state BlockPause.");
         
         // Update Cue text 
-        cueManager.UpdateCueText(CueStates.Pause);
+        textController.UpdateCueText(CueStates.Pause);
         
         // Reset input to none to make sure spam input is ignored 
         triggerManager.ResetInteractionHappened(); 
@@ -656,7 +656,7 @@ public class ExperimentManager : MonoBehaviour
         Debug.Log("[ExperimentManager] Now in state End.");
         
         // Update Cue text 
-        cueManager.UpdateCueText(CueStates.End);
+        textController.UpdateCueText(CueStates.End);
         
         // Write subject data to json 
         //measurementManager.WriteSubjectDataToJson();
@@ -677,7 +677,7 @@ public class ExperimentManager : MonoBehaviour
         experimentStateCoroutineIsStarted = false; // disable coroutine lock 
         
         // Update Cue text 
-        cueManager.UpdateCueText(CueStates.Empty);
+        textController.UpdateCueText(CueStates.Empty);
         
         // Show main menu in UI 
         uiManager.UpdateAndShowMainMenu();
@@ -707,7 +707,7 @@ public class ExperimentManager : MonoBehaviour
         toolManager.UpdateToolData();
         
         // Setup cue 
-       // cueManager.UpdateCueTransform();
+       // textController.UpdateCueTransform();
         
         // Load practice flow utcons 
         LoadPracticeFlowUtcons();
@@ -815,7 +815,7 @@ public class ExperimentManager : MonoBehaviour
                     // Found pause indicator 
                     if (lineElem.ToLower() == configManager.blockPauseIndicator)
                     {
-                        // Add Pause idx to list, holds idx of utcon BEFORE which block pause happens 
+                        // Add BetweenBlocks idx to list, holds idx of utcon BEFORE which block pause happens 
                         pauseIdx.Add(utconCount);
                     }
 
@@ -856,7 +856,7 @@ public class ExperimentManager : MonoBehaviour
             // Found pause indicator 
             if (item.ToLower() == configManager.blockPauseIndicator)
             {
-                // Add Pause idx to list, holds idx of utcon BEFORE which block pause happens 
+                // Add BetweenBlocks idx to list, holds idx of utcon BEFORE which block pause happens 
                 pauseIdx.Add(utconCount);
             }
 

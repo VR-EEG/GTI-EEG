@@ -827,7 +827,7 @@ public class UiManager : MonoBehaviour
                 buttonSaveSubjectData.interactable = true;
             }
             
-            // Pause for a short time and check again 
+            // BetweenBlocks for a short time and check again 
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -923,7 +923,7 @@ public class UiManager : MonoBehaviour
                 buttonSaveUtconFlowToDisk.interactable = true;
             }
             
-            // Pause for a short time and check again 
+            // BetweenBlocks for a short time and check again 
             yield return new WaitForSeconds(0.1f);
         }
         

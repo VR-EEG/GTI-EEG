@@ -129,6 +129,7 @@ public class ToolToHandAttacher : MonoBehaviour
     // SteamVR 
     void OnPickUp()
     {
+        //TODO invoke by event don't care about some readout
         // Update config manager, is a little faster than OnAttachedToHand 
         configManager.isToolCurrentlyAttachedToHand = true;
         
@@ -136,19 +137,7 @@ public class ToolToHandAttacher : MonoBehaviour
     
     // SteamVR
     // Tool attached to hand 
-    void OnAttachedToHand(Hand hand)
-    {
-      
-    }
 
-    // SteamVR 
-    // Tool detached from hand
-    void OnDetachedFromHand(Hand hand)
-    {
-        // Update config manager
-        configManager.isToolCurrentlyAttachedToHand = false;
-    }
-    
     // STEAMVR
     // Hand hover over tool starts
     void OnHandHoverBegin(Hand hand)
@@ -202,7 +191,6 @@ public class ToolToHandAttacher : MonoBehaviour
         }
         
         // Attachment pose is dependent on where the rest of the tool is located relative to the hand 
-        else
         {
             // Pose is dependent on position of point of interest 
 
@@ -221,6 +209,9 @@ public class ToolToHandAttacher : MonoBehaviour
                 pointOfInterest = toolDetails.toolHandleCollider.bounds.center; 
             }
 
+            pointOfInterest = tapInfo.transform.position;
+            
+        
             
             // Calculate distance depending on used hand 
             if (hand.handType == SteamVR_Input_Sources.RightHand)

@@ -9,9 +9,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Leap;
 using Leap.Unity;
-using LeapInternal;
-using UnityEditor;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -142,7 +141,7 @@ public class ToolManager : MonoBehaviour
         transformHelper = GetComponent<ObjectTransformHelper>();
         
         // Find Config Manager
-        configManager = GameObject.FindGameObjectWithTag(configManagerTag).GetComponent<ConfigManager>();
+//        configManager = GameObject.FindGameObjectWithTag(configManagerTag).GetComponent<ConfigManager>();
     }
 
 
@@ -577,6 +576,14 @@ public class ToolManager : MonoBehaviour
             {
                 foreach (Transform child in attachmentPoints.GetChildren())
                 {
+                    var spehere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    spehere.transform.localScale = Vector3.one*0.01f;
+                    spehere.transform.position = child.transform.position;
+                    
+                    spehere.GetComponent<Renderer>().material.color = Color.red;
+                    spehere.transform.parent = child;
+                    attachmentTransforms.Add(child);
+
                     attachmentTransforms.Add(child);
                 }
             }
@@ -612,9 +619,10 @@ public class ToolManager : MonoBehaviour
             // Add transforms 
             if (attachmentPoints != null)
             {
+                
                 foreach (Transform child in attachmentPoints.GetChildren())
                 {
-                    attachmentTransforms.Add(child);
+          
                 }
             }
 
@@ -813,6 +821,7 @@ public class ToolManager : MonoBehaviour
         // Getting tool details not successful 
         else
         {
+            //TODO extremely dangerous call
             Debug.Log("[ToolManager] Could not extract tool details for ToolID " + toolId.ToString() + ".");
             throw new Exception();
         }

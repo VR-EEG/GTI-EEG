@@ -16,7 +16,7 @@ public class NewExperimentManager : MonoBehaviour
 
     [SerializeField]private EyetrackingManagerNew eyetrackingManager;
     [SerializeField] private TableConfigurationManager tableConfigurationManager;
-
+    private ExperimentState _formerExperimentState = ExperimentState.MainMenu;
     private ExperimentState _experimentState = ExperimentState.MainMenu;
     private TrialState _trialState = TrialState.StandBy;
     [SerializeField] private Transform toolSpawnPoint;
@@ -148,6 +148,11 @@ public class NewExperimentManager : MonoBehaviour
     {
         return _experimentState;
     }
+
+    public ExperimentState GetFormerExperimentState()
+    {
+        return _formerExperimentState;
+    }
     
     public void StartExperiment()
     {
@@ -157,13 +162,12 @@ public class NewExperimentManager : MonoBehaviour
         _currentTrial = _currentBlock.TrailItems[0];
     }
 
-    private IEnumerator ProcessLastTrail()
+    private IEnumerator ProcessPotentialLastTrail()
     {
-        if(!_trialCompleted)
+        if(_trialState != TrialState.StandBy)
             yield return new WaitUntil(() => _trialState == TrialState.EndOfTrial);
 
         _experimentState = ExperimentState.BetweenBlocks;
-
     }
 
     public void ContinueExperiment()
@@ -196,6 +200,7 @@ public class NewExperimentManager : MonoBehaviour
     public void StartTableCalibration()
     {
         tableConfigurationManager.StartSetup();
+        _formerExperimentState = _experimentState;
         _experimentState = ExperimentState.TableCalibration;
     }
 
@@ -204,6 +209,7 @@ public class NewExperimentManager : MonoBehaviour
         _playerPosition = Player.instance.transform.position;
         Player.instance.transform.position = eyetrackingManager.GrayRoomSphere.transform.position;
         eyetrackingManager.StartSetup();
+        _formerExperimentState = _experimentState;
         _experimentState = ExperimentState.EyetrackingCalibration;
         
     }
@@ -211,7 +217,7 @@ public class NewExperimentManager : MonoBehaviour
     public void EndEyeCalibration()
     {
         Player.instance.transform.position = _playerPosition;
-        _experimentState = ExperimentState.BetweenBlocks; 
+        _experimentState = _formerExperimentState;
     }
     
     public void ButtonPress()
@@ -429,7 +435,12 @@ public class NewExperimentManager : MonoBehaviour
     /// <returns></returns>
     public void SetBetweenBlocks()
     {
-        StartCoroutine(ProcessLastTrail());
+        StartCoroutine(ProcessPotentialLastTrail());
+    }
+    
+    public void SetMainMenu()
+    {
+        _experimentState = ExperimentState.MainMenu;
     }
 
 }

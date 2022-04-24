@@ -10,30 +10,39 @@ namespace LSL
     {
         
         //TODO assign these via Init method
-        private Transform HMD;
-        private Hand Hand; // there is only a right hand in this experiment
-        private Transform CurrentTaskObject;
+        private Transform _hmd;
+        private Hand _hand; // there is only a right hand in this experiment
+        private Transform _currentTaskObject;
+
+        private bool _isRecording;
 
 
         public void Init()
         {
             //Get References in scene
+            _hmd = Player.instance.hmdTransform;
+            _hand = Player.instance.rightHand;
         }
         
         public void AssignNewTaskObject(GameObject TaskObject)
         {
-            CurrentTaskObject = TaskObject.transform;
+            _currentTaskObject = TaskObject.transform;
         }
         
         private IEnumerator StartRecording()
         {
-            var hmdPos = HMD.position;
-            var hmdRot = HMD.rotation.eulerAngles;
-            var hmdForward = HMD.forward;
-            
-            var handTransform = Hand.transform;
+            while (_isRecording)
+            {
+                 var hmdPos = _hmd.position;
+            var hmdRot = _hmd.rotation.eulerAngles;
+            var hmdForward = _hmd.forward;
+
+            var handTransform = _hand.transform;
             var handPos = handTransform.position;
             var handRot = handTransform.rotation.eulerAngles;
+            
+            
+            double[] currentTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp()};
             
             
             SRanipal_Eye_v2.GetVerboseData(out var verboseData);
@@ -73,9 +82,9 @@ namespace LSL
             
             //tool object
 
-            var taskObjectPosition = CurrentTaskObject.position;
-            var taskObjectRotation = CurrentTaskObject.rotation.eulerAngles;
-            var taskObjectIsInHand = Hand.ObjectIsAttached(CurrentTaskObject.gameObject) ? 1f : 0f;
+            var taskObjectPosition = _currentTaskObject.position;
+            var taskObjectRotation = _currentTaskObject.rotation.eulerAngles;
+            var taskObjectIsInHand = _hand.ObjectIsAttached(_currentTaskObject.gameObject) ? 1f : 0f;
             
             
             
@@ -87,7 +96,7 @@ namespace LSL
             if (Physics.Raycast(eyePositionCombinedWorld, eyeDirectionCombinedWorld,
                     out var hitInfo, 10f))
             {
-                if (hitInfo.collider.gameObject == CurrentTaskObject.gameObject)
+                if (hitInfo.collider.gameObject == _currentTaskObject.gameObject)
                 {
                     taskObjectWasHit=1f;
                 }
@@ -207,12 +216,16 @@ namespace LSL
                 targetPosition.z,
             };
             
+            LSLStreams.Instance.lslOFrameTracking.push_sample(currentTimestamp);
             LSLStreams.Instance.lslOFrameTracking.push_sample(liveDataFrame);
-      
-           
-
-
+            }
+            
             yield return new WaitForEndOfFrame();
+            
+            
+           
+            
+          
         }
     }
 }

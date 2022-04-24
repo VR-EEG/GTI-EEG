@@ -53,7 +53,16 @@ public class NewExperimentManager : MonoBehaviour
     
     //Events
 
-    public event EventHandler<ToolShownEventArgs> OnToolShown;
+    public event Action<int, int, int, int> OnTrialBegin;
+    public event Action OnTrialEnd;
+    public event Action OnCueShowBegin;
+    public event Action OnCueShowEnd;
+    public event Action OnBeepSound;
+    
+    public event Action OnToolIsShown;
+    //public event Action On
+
+    public event EventHandler<ToolShownEventArgs> OnToolIsSetUp;
 
     private void Awake()
     {
@@ -285,7 +294,7 @@ public class NewExperimentManager : MonoBehaviour
         _currentTool = tools[toolId];
 
         var toolShownEventArgs = new ToolShownEventArgs(toolId, direction);
-        OnToolShown.Invoke(this, toolShownEventArgs);
+        OnToolIsSetUp?.Invoke(this, toolShownEventArgs);
     }
     
     private void HideTool(int toolId)
@@ -308,14 +317,20 @@ public class NewExperimentManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         _trialState = TrialState.Trial;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
+        OnTrialBegin?.Invoke(trialNumber,trial.Item1,trial.Item2,trial.Item3);
         yield return new WaitForSeconds(0.5f);
         _textController.ShowText(tasks[trial.Item2],true);
+        OnCueShowBegin?.Invoke();
         yield return new WaitForSeconds(2f);
         _textController.ShowText("",true);
+        OnCueShowEnd?.Invoke();
         yield return new WaitForSeconds(0.5f);
         ShowTool(trial.Item1,trial.Item3);
+        OnToolIsShown?.Invoke();
         yield return new WaitForSeconds(3f);
+        OnBeepSound?.Invoke();
         _beepSound.Play();
+       
 
         //TODO button click ends and time stamp is given
         _trialState = TrialState.EndOfTrial;
@@ -324,6 +339,7 @@ public class NewExperimentManager : MonoBehaviour
             yield break;
         }
         yield return new WaitUntil(() => _buttonPressed);
+        OnTrialEnd?.Invoke();
         _buttonPressed = false;
         
         var endTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
@@ -479,6 +495,7 @@ public enum ExperimentState
     EyetrackingCalibration,
     TableCalibration,
 }
+
 
 
 public class ToolShownEventArgs : EventArgs

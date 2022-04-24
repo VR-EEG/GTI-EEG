@@ -250,8 +250,8 @@ namespace LSL
                 targetPosition.z,
             };
             
-            LSLStreams.Instance.lslOFrameTracking.push_sample(currentTimestamp);
-            LSLStreams.Instance.lslOFrameTracking.push_sample(liveDataFrame);
+            LSLStreams.Instance.LslOEyetrackingFrameTimeStamp.push_sample(currentTimestamp);
+            LSLStreams.Instance.lslOEyeTrackingGazeHMDFloat.push_sample(liveDataFrame);
             
             yield return new WaitForEndOfFrame();
             }

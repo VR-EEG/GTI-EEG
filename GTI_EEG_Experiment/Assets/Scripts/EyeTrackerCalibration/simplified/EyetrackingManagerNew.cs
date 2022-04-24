@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using LSL;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 using ViveSR.anipal.Eye;
@@ -10,6 +11,8 @@ public class EyetrackingManagerNew : MonoBehaviour
 {
     public static EyetrackingManagerNew Instance { get; private set; }
 
+
+    private newLSLRecorder _lslRecorder;
     [SerializeField] private float ValidationThreshold;
     private EyetrackingUINew EyetrackingUI;
 
@@ -51,7 +54,7 @@ public class EyetrackingManagerNew : MonoBehaviour
 
     private void Awake()
     {
-           
+        
         //singleton pattern a la Unity
         if (Instance == null)
         {
@@ -62,6 +65,8 @@ public class EyetrackingManagerNew : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        _lslRecorder = GetComponent<newLSLRecorder>();
 
     }
 
@@ -188,8 +193,14 @@ public class EyetrackingManagerNew : MonoBehaviour
 
     public void StartRecording()
     {
+        _lslRecorder.Init();
         Debug.Log("<color=green>Recording eye-tracking Data!</color>");
-        // usally done here , however we use LSL so bricked
+        _lslRecorder.StartRecording();
+    }
+    public void StopRecording()
+    {
+        Debug.Log("<color=red>Stop recording eyetracking data!</color>");
+        _lslRecorder.StopRecording();
     }
 
     public Transform GetHmdTransform()

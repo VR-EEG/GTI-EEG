@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using LSL;
 using NewExperiment;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
@@ -50,10 +51,6 @@ public class NewExperimentManager : MonoBehaviour
 
     private Vector3 _playerPosition;
     
-    
-    
-    
-    
     //Events
 
     public event EventHandler<ToolShownEventArgs> OnToolShown;
@@ -77,8 +74,6 @@ public class NewExperimentManager : MonoBehaviour
         _textController.ShowText(welcomeText);
         _trialCompleted = true;
         _beepSound.GetComponent<AudioSource>();
-
-        
     }
 
 
@@ -130,7 +125,15 @@ public class NewExperimentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            EyetrackingManagerNew.Instance.StartRecording();
+        }
         
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            EyetrackingManagerNew.Instance.StopRecording();
+        }
     }
 
 
@@ -160,6 +163,7 @@ public class NewExperimentManager : MonoBehaviour
         _trialState = TrialState.StandBy;
         _currentBlock = _experimentBlocks[0];
         _currentTrial = _currentBlock.TrailItems[0];
+     
     }
 
     private IEnumerator ProcessPotentialLastTrail()

@@ -15,11 +15,25 @@ namespace LSL
         private Transform _currentTaskObject;
 
         private bool _isRecording;
+        private bool _toolIsAssigned;
 
+
+        private Coroutine _recordingCouroutine;
+
+
+        public void StartRecording()
+        {
+            _recordingCouroutine= StartCoroutine(Recording());
+        }
+
+        public void StopRecording()
+        {
+            _isRecording = false;
+        }
 
         public void Init()
         {
-            //Get References in scene
+            //Get References in scene, that are active
             _hmd = Player.instance.hmdTransform;
             _hand = Player.instance.rightHand;
         }
@@ -27,10 +41,22 @@ namespace LSL
         public void AssignNewTaskObject(GameObject TaskObject)
         {
             _currentTaskObject = TaskObject.transform;
+            _toolIsAssigned = true;
+        }
+
+        public void ExpelAssginedObject()
+        {
+            _toolIsAssigned = false;
+            _currentTaskObject = null;
         }
         
-        private IEnumerator StartRecording()
+        private IEnumerator Recording()
         {
+            if (_isRecording)
+                yield return null;
+
+            _isRecording = true;
+            
             while (_isRecording)
             {
                  var hmdPos = _hmd.position;
@@ -81,10 +107,18 @@ namespace LSL
             var eyeDirectionRightLocal = rayRightEye.direction;
             
             //tool object
-
-            var taskObjectPosition = _currentTaskObject.position;
-            var taskObjectRotation = _currentTaskObject.rotation.eulerAngles;
-            var taskObjectIsInHand = _hand.ObjectIsAttached(_currentTaskObject.gameObject) ? 1f : 0f;
+            var taskObjectPosition = new Vector3();
+            var taskObjectRotation = new Vector3();
+            var taskObjectIsInHand = 0f; 
+            
+            if (_toolIsAssigned)
+            {
+                taskObjectPosition = _currentTaskObject.position;
+                taskObjectRotation = _currentTaskObject.rotation.eulerAngles;
+                taskObjectIsInHand = _hand.ObjectIsAttached(_currentTaskObject.gameObject)?1:0;
+            }
+            
+            
             
             
             

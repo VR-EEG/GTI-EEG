@@ -41,31 +41,12 @@ public class AttachmentTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-      
-        
         if (other.name=="HoverPoint")
         {
             _currentAngle = Quaternion.Dot(_hand.transform.rotation, this.transform.rotation);
             _isInsideTrigger=true;
         }
         
-    }
-    
-
-    private void OnTriggerEnter(Collider other)
-    {
-        /*if (other.name == "HoverPoint")
-        {
-            var localPosition = other.transform.InverseTransformPoint(this._hand.transform.position);
-            if (localPosition.x < 0)
-            {
-                Debug.Log(localPosition + " concruent");
-            }
-            else
-            {
-                Debug.Log(localPosition + "incongruent");
-            }
-        }*/
     }
 
     private void OnTriggerExit(Collider other)

@@ -46,7 +46,7 @@ public class GripPointSelection : MonoBehaviour
         _incongruentEffectorPoseBlendingBehaviour = _skeletonPoser.GetBlendingBehaviour("BlendToEffectorIncongruent");
         
 
-        NewExperimentManager.Instance.OnToolShown += SetToolOrientation; 
+        NewExperimentManager.Instance.OnToolIsSetUp += SetToolOrientation; 
         
 
         _interactable.onAttachedToHand += ObjectAttached;
@@ -71,8 +71,13 @@ public class GripPointSelection : MonoBehaviour
         {
           
         }
-        
-        if (_interactable.isHovering)
+
+        if (!_interactable.isHovering)
+        {
+            return;
+        }
+           
+        else
         {
 
             if (!_objectIsAttached)
@@ -213,7 +218,7 @@ public class GripPointSelection : MonoBehaviour
 
     private void HandCloseToHandle(object sender, InsideTriggerEventArgs insideTriggerEventArgs)
     {
-        Debug.Log(insideTriggerEventArgs.HandOrientation);
+//        Debug.Log(insideTriggerEventArgs.HandOrientation);
         _toolOrientationCongruent = insideTriggerEventArgs.HandOrientation<0;
         
         if (_flipFix)
@@ -226,10 +231,10 @@ public class GripPointSelection : MonoBehaviour
 
     private void OutSideTrigger()
     {
-        /*if (_flipFix)
-        {
-            _flipFix =! _flipFix;
-        }*/
+         /*if(_flipFix)
+         {
+             _flipFix =! _flipFix;
+         }*/
     }
     
 

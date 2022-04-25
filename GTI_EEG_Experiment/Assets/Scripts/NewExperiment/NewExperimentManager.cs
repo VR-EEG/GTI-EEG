@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,6 +39,8 @@ public class NewExperimentManager : MonoBehaviour
     
     //instruction texts
     private string welcomeText = "Welcome to \n the Experiment!";
+    private string trialText = "Interact with\ntrigger to begin nex trial.";
+    private string pauseText = "Pause";
     private string instructionText = "Interact with\ntrigger to begin.";
     private string tutorialText = "This is the\npractice section.";
     private string breakText = "This is the\npractice section.";
@@ -75,7 +77,7 @@ public class NewExperimentManager : MonoBehaviour
     {
         Debug.Assert(tasks.Count>0, "Task list is empty");
         _trialCount = 0;    //will be added at first trial
-        _blockCount = 1;
+        _blockCount = 0;
         _participantID = Randomization.GenerateID();
         _tutorialBlock = GenerateTutorialBlock();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
@@ -136,7 +138,7 @@ public class NewExperimentManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            EyetrackingManagerNew.Instance.StartRecording();
+            
         }
         
         if (Input.GetKeyDown(KeyCode.B))
@@ -172,7 +174,6 @@ public class NewExperimentManager : MonoBehaviour
         _trialState = TrialState.StandBy;
         _currentBlock = _experimentBlocks[0];
         _currentTrial = _currentBlock.TrailItems[0];
-     
     }
 
     private IEnumerator ProcessPotentialLastTrail()
@@ -199,7 +200,7 @@ public class NewExperimentManager : MonoBehaviour
 
     private IEnumerator ShowInstructionsSucessively()
     {
-        while (_trialState == TrialState.StandBy)
+        while (_trialState == TrialState.StandBy&& _experimentState == ExperimentState.Training)
         {
             if(_trialState == TrialState.StandBy)
                 _textController.ShowText(tutorialText);
@@ -258,6 +259,7 @@ public class NewExperimentManager : MonoBehaviour
                     //the very first trial
                     _buttonPressed = false;
                     _trialCompleted = true;
+                    
                     _trialState = TrialState.Trial;
                     StartTrial();
                 }
@@ -306,7 +308,13 @@ public class NewExperimentManager : MonoBehaviour
 
     private IEnumerator RunTrial(float trialDuration,bool isTutorial=false)
     {
+        
+        
         yield return new WaitUntil(() => _trialCompleted);
+        if (_experimentState == ExperimentState.BetweenBlocks)
+            yield break;
+        _textController.ShowText("");
+        
         if(!isTutorial)
             _trialCount++;
         
@@ -421,8 +429,11 @@ public class NewExperimentManager : MonoBehaviour
                 _currentBlockData.timeStampBegin = TimeManager.Instance.GetCurrentUnixTimeStamp();
                 _currentBlockData.participantID = _participantID;
                 _currentBlockData.index = _blockCount;
+                _currentTrial = _currentBlock.TrailItems[0];
                 _experimentState = ExperimentState.Experiment;
                 _trialState = TrialState.StandBy;
+                _textController.ShowText(trialText);
+                EyetrackingManagerNew.Instance.StartRecording();
             }
         }
     }
@@ -436,11 +447,12 @@ public class NewExperimentManager : MonoBehaviour
     private void FinalizeBlock()
     {
         _trialState = TrialState.StandBy;
+        EyetrackingManagerNew.Instance.StopRecording();
         if (amountOfBlocks-_blockCount > 0)
         {
             _experimentState = ExperimentState.BetweenBlocks;
             SaveBlock();
-            Debug.Log("pause");
+            _textController.ShowText(pauseText);
         }
         else
         {
@@ -464,7 +476,16 @@ public class NewExperimentManager : MonoBehaviour
         _experimentState = ExperimentState.MainMenu;
     }
 
+
+    public void SaveConfiguration()
+    {
+        var scale = TableConfigurationManager.Instance.Table.transform.localScale;
+        double applicationStartTime = TimeManager.Instance.GetApplicationStarTime();
+    }
 }
+
+
+
 
  public class BlockItem
 {

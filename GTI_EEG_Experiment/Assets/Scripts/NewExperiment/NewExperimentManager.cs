@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -373,10 +373,10 @@ public class NewExperimentManager : MonoBehaviour
         else
         {
             FinalizeBlock();
+            _trialState = TrialState.StandBy;
         }
-
         _trialCompleted = true;
-        _trialState = TrialState.StandBy;
+        
 
     }
    
@@ -446,13 +446,13 @@ public class NewExperimentManager : MonoBehaviour
 
     private void FinalizeBlock()
     {
-        _trialState = TrialState.StandBy;
+        //_trialState = TrialState.StandBy;
         EyetrackingManagerNew.Instance.StopRecording();
         if (amountOfBlocks-_blockCount > 0)
         {
             _experimentState = ExperimentState.BetweenBlocks;
             SaveBlock();
-            _textController.ShowText(pauseText);
+            _textController.ShowText(pauseText, true);
         }
         else
         {

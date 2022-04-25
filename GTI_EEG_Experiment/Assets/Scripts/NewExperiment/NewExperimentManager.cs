@@ -422,6 +422,7 @@ public class NewExperimentManager : MonoBehaviour
                 _currentBlockData.participantID = _participantID;
                 _currentBlockData.index = _blockCount;
                 _experimentState = ExperimentState.Experiment;
+                _trialState = TrialState.StandBy;
             }
         }
     }

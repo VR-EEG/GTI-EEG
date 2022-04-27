@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Leap.Unity;
@@ -94,7 +94,7 @@ public class LSLRecorder : MonoBehaviour
 
         double[] currentTimestamp = { TimeManager.Instance.GetCurrentUnixTimeStamp()};
         
-        LSLStreams.Instance.lslOFrameTimeStamp.push_sample(currentTimestamp);
+        LSLStreams.Instance.LslOEyetrackingFrameTimeStamp.push_sample(currentTimestamp);
 
         SRanipal_Eye_v2.GetVerboseData(out var verboseData); 
 

@@ -240,7 +240,7 @@ public class GripPointSelection : MonoBehaviour
 
     private void HandCloseToEffector(object sender, InsideTriggerEventArgs insideTriggerEventArgs)
     {
-        Debug.Log(insideTriggerEventArgs.HandOrientation);
+//        Debug.Log(insideTriggerEventArgs.HandOrientation);
         _toolOrientationCongruent = insideTriggerEventArgs.HandOrientation<0;
         
         if (_flipFix)

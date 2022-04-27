@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2250747115119918848}
   - component: {fileID: 6485359171812965367}
   - component: {fileID: 3461874480223633844}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrowelEffectorSphereAttachmentCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 4402617726530399611}
   - component: {fileID: 5580749363011634127}
   - component: {fileID: 5358457399445688944}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: TrowelHandleSphereAttachmentCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2240254037894142206}
   - component: {fileID: 2341200706054189625}
   - component: {fileID: 8658069746683692061}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandleSphereAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 3836911781659106297}
   - component: {fileID: 1805215623879636514}
   - component: {fileID: 7652179050857630817}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EffectorSphereAttachmentPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -293,8 +293,11 @@ public class NewExperimentManager : MonoBehaviour
         tools[toolId].GetComponent<Rigidbody>().isKinematic = false;
         tools[toolId].GetComponent<Rigidbody>().velocity = Vector3.zero;
         tools[toolId].SetActive(true);
+        
         _currentTool = tools[toolId];
-
+        
+        EyetrackingManagerNew.Instance.AssignCurrentTool(_currentTool);
+        
         var toolShownEventArgs = new ToolShownEventArgs(toolId, direction);
         OnToolIsSetUp?.Invoke(this, toolShownEventArgs);
     }
@@ -321,7 +324,7 @@ public class NewExperimentManager : MonoBehaviour
         _trialCompleted = false;
         var trial = _currentTrial;
         var trialNumber = _trialCount;
-        
+
         yield return new WaitForEndOfFrame();
         _trialState = TrialState.Trial;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
@@ -363,6 +366,7 @@ public class NewExperimentManager : MonoBehaviour
         _currentBlockData.trialList.Add(trialInformation);
         
         HideTool(_currentTrial.Item1);
+        EyetrackingManagerNew.Instance.ExpelCurrentTool();
         
         if (_currentBlock.TrailItems.Count - 1 > 0)
         {
@@ -482,6 +486,9 @@ public class NewExperimentManager : MonoBehaviour
         var scale = TableConfigurationManager.Instance.Table.transform.localScale;
         double applicationStartTime = TimeManager.Instance.GetApplicationStarTime();
     }
+    
+    
+    
 }
 
 

@@ -197,6 +197,18 @@ public class EyetrackingManagerNew : MonoBehaviour
         Debug.Log("<color=green>Recording eye-tracking Data!</color>");
         _lslRecorder.StartRecording();
     }
+
+
+    public void AssignCurrentTool(GameObject Tool)
+    {
+        _lslRecorder.AssignNewTaskObject(Tool);
+    }
+
+    public void ExpelCurrentTool()
+    {
+        _lslRecorder.ExpelAssginedObject();
+    }
+    
     public void StopRecording()
     {
         Debug.Log("<color=red>Stop recording eyetracking data!</color>");

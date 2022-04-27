@@ -63,7 +63,10 @@ public class TimeManager : MonoBehaviour
     }
     
 
-  
+    public double GetApplicationStarTime()
+    {
+        return _applicationStartTime;
+    }
     
     public void SetExperimentStartTime()
     {

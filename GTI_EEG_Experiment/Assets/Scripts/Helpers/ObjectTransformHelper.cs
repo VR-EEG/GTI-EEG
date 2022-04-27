@@ -28,7 +28,7 @@ public class ObjectTransformHelper : MonoBehaviour
     public Bounds GetBoundingBox(GameObject gameObject)
     {
         
-        Debug.Log("[ObjectTransformTools] Calculating axis-aligned bounding box of game object \"" + gameObject.name + "\".");
+//        Debug.Log("[ObjectTransformTools] Calculating axis-aligned bounding box of game object \"" + gameObject.name + "\".");
         
         // Init bounds and get child renderers 
         Bounds bounds; // DO NOT INIT WITH NEW BOUNDS(), otherwise bounds will always include (0,0,0)

@@ -2,13 +2,13 @@
   "source": "Unity",
   "applications": [
     {
-      "app_key": "application.generated.unity.toolleap.exe",
+      "app_key": "application.generated.unity.gtidecoding.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "D:\\GTI_EEG_Nora\\GTIL_LSL\\GTI_leap_LSL\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "G:\\Unity Projects\\GTI-EEG\\GTI_EEG_Experiment\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
-          "name": "ToolLeap [Testing]"
+          "name": "GTI-decoding [Testing]"
         }
       }
     }

@@ -85,6 +85,34 @@
     {
       "name": "/actions/leaptool/in/GrabPinch",
       "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/MoveLeft",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/MoveRight",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/MoveFoward",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/MoveBackward",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/MoveUpward",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/MoveDownward",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/tableCalibration/in/SelectObject",
+      "type": "boolean"
     }
   ],
   "action_sets": [
@@ -106,6 +134,10 @@
     },
     {
       "name": "/actions/leaptool",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/tableCalibration",
       "usage": "single"
     }
   ],

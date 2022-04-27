@@ -27,6 +27,8 @@ namespace Valve.VR
         
         private static SteamVR_Input_ActionSet_leaptool p_leaptool;
         
+        private static SteamVR_Input_ActionSet_tableCalibration p_tableCalibration;
+        
         public static SteamVR_Input_ActionSet_default _default
         {
             get
@@ -67,6 +69,14 @@ namespace Valve.VR
             }
         }
         
+        public static SteamVR_Input_ActionSet_tableCalibration tableCalibration
+        {
+            get
+            {
+                return SteamVR_Actions.p_tableCalibration.GetCopy<SteamVR_Input_ActionSet_tableCalibration>();
+            }
+        }
+        
         private static void StartPreInitActionSets()
         {
             SteamVR_Actions.p__default = ((SteamVR_Input_ActionSet_default)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_default>("/actions/default")));
@@ -74,12 +84,14 @@ namespace Valve.VR
             SteamVR_Actions.p_buggy = ((SteamVR_Input_ActionSet_buggy)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_buggy>("/actions/buggy")));
             SteamVR_Actions.p_mixedreality = ((SteamVR_Input_ActionSet_mixedreality)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_mixedreality>("/actions/mixedreality")));
             SteamVR_Actions.p_leaptool = ((SteamVR_Input_ActionSet_leaptool)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_leaptool>("/actions/leaptool")));
+            SteamVR_Actions.p_tableCalibration = ((SteamVR_Input_ActionSet_tableCalibration)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_tableCalibration>("/actions/tableCalibration")));
             Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
                     SteamVR_Actions._default,
                     SteamVR_Actions.platformer,
                     SteamVR_Actions.buggy,
                     SteamVR_Actions.mixedreality,
-                    SteamVR_Actions.leaptool};
+                    SteamVR_Actions.leaptool,
+                    SteamVR_Actions.tableCalibration};
         }
     }
 }

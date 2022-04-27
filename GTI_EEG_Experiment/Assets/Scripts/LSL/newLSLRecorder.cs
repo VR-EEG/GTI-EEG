@@ -1,5 +1,4 @@
 using System.Collections;
-using Leap.Unity.Infix;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 using ViveSR.anipal.Eye;

@@ -285,13 +285,20 @@ public class NewExperimentManager : MonoBehaviour
         {
             tool.SetActive(false);
         }
+        
         tools[toolId].transform.rotation = Quaternion.Euler(0,90,0);
         if (direction == 1)
-            tools[toolId].transform.rotation *= Quaternion.Euler(0,180,0);
+            tools[toolId].transform.rotation *= Quaternion.Euler(0,0,180);
+        else
+        {
+            tools[toolId].transform.rotation *= Quaternion.Euler(0,-180,0);
+        }
+        
+        Debug.Log(direction);
         
         tools[toolId].transform.position = toolSpawnPoint.transform.position;
-        tools[toolId].GetComponent<Rigidbody>().isKinematic = false;
         tools[toolId].GetComponent<Rigidbody>().velocity = Vector3.zero;
+        tools[toolId].GetComponent<Rigidbody>().isKinematic = false;
         tools[toolId].SetActive(true);
         
         _currentTool = tools[toolId];

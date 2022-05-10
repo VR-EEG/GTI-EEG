@@ -7,8 +7,8 @@ using Valve.VR.InteractionSystem;
 
 public class AttachmentSystem : MonoBehaviour
 {
-    [SerializeField] private TriggerTest _congruent;
-    [SerializeField] private TriggerTest _incongruent;
+    [SerializeField] private AttachmentZone _congruent;
+    [SerializeField] private AttachmentZone _incongruent;
 
     private float _concruentDistance;
     private float _incongruentDistance;
@@ -93,7 +93,7 @@ public class AttachmentSystem : MonoBehaviour
 
             var ratio = (_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
 
-            Debug.Log("congruent "+ratio);
+ //           Debug.Log("congruent "+ratio);
 
             _congruentMainPoseBlendingBehavior.value = 0;
             _congruentHandlePoseBlendingBehaviour.value = 0;
@@ -135,7 +135,7 @@ public class AttachmentSystem : MonoBehaviour
             var  distanceToHandle = _incongruent.GetDistanceToHandle();
             var ratio = (_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
             
-            Debug.Log("incongruent "+ratio);
+//            Debug.Log("incongruent "+ratio);
             
             _congruentMainPoseBlendingBehavior.value = 0;
             _congruentHandlePoseBlendingBehaviour.value = 0;

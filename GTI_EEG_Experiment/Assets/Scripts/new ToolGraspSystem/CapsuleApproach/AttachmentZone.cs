@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-public class TriggerTest : MonoBehaviour
+public class AttachmentZone : MonoBehaviour
 {
 
     private Hand _hand;

@@ -42,6 +42,13 @@ public class AttachmentZone : MonoBehaviour
         return _distanceToHand;
     }
 
+    public void SetDebugstate(bool state)
+    {
+        Handle.GetComponent<MeshRenderer>().enabled = state;
+        Effector.GetComponent<MeshRenderer>().enabled = state;
+        Ball.GetComponent<MeshRenderer>().enabled = state;
+    }
+
     public float HandleEffectorDistance
     {
         get

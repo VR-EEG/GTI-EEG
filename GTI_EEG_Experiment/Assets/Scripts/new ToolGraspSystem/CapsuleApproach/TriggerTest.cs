@@ -8,6 +8,8 @@ public class TriggerTest : MonoBehaviour
 
     private Hand _hand;
 
+    private Transform _handBack;
+
     private Collider _collider;
 
     [SerializeField] private GameObject Ball;
@@ -30,6 +32,7 @@ public class TriggerTest : MonoBehaviour
     void Start()
     {
         _hand = Player.instance.rightHand;
+        _handBack = _hand.GetComponentInChildren<HandBack>().transform;
         _collider = this.transform.GetComponent<Collider>();
         _handleEffectorDistance = Vector3.Distance(Effector.transform.position, Handle.transform.position);
     }
@@ -81,7 +84,8 @@ public class TriggerTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var handPosition = _hand.transform.position;
+        //var handPosition = _hand.transform.position;
+        var handPosition = _handBack.transform.position;
         ClosestPoint.transform.position = _collider.ClosestPoint(handPosition);
         Ball.transform.localPosition = new Vector3(0f,
             0f, ClosestPoint.localPosition.z);

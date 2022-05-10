@@ -63,7 +63,7 @@ public class TriggerTest : MonoBehaviour
 
     public float OrthonormalDistance()
     {
-        return Mathf.Clamp(_orthonormalDistance,0f,_handleEffectorDistance);
+        return _orthonormalDistance;
     }
     
     public bool IsHandCloserToHandle()
@@ -86,7 +86,7 @@ public class TriggerTest : MonoBehaviour
         Ball.transform.localPosition = new Vector3(0f,
             0f, ClosestPoint.localPosition.z);
         _orthonormalDistance = (Ball.transform.localPosition.z);
-        Debug.Log(_orthonormalDistance);
+        //Debug.Log(_orthonormalDistance);
         _distanceToHand = Vector3.Distance(handPosition, Ball.transform.position);
         _distanceToHandle = Vector3.Distance(Handle.transform.position, Ball.transform.position);
         _distanceToEffector = Vector3.Distance(Effector.transform.position, Ball.transform.position);

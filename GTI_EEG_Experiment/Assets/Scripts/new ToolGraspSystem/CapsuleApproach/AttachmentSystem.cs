@@ -144,30 +144,30 @@ public class AttachmentSystem : MonoBehaviour
             _incongruentHandlePoseBlendingBehaviour.value = 0;
             _incongruentEffectorPoseBlendingBehaviour.value = 0;
             
-            _congruentMainPoseBlendingBehavior.influence = 0;
-            _congruentHandlePoseBlendingBehaviour.influence = 0;
-            _congruentEffectorPoseBlendingBehaviour.influence = 0;
-            _incongruentMainPoseBlendingBehavior.influence = 0;
-            _incongruentHandlePoseBlendingBehaviour.influence = 0;
-            _incongruentEffectorPoseBlendingBehaviour.influence = 0;
+            _congruentMainPoseBlendingBehavior.influence = 1;
+            _congruentHandlePoseBlendingBehaviour.influence = 1;
+            _congruentEffectorPoseBlendingBehaviour.influence = 1;
+            _incongruentMainPoseBlendingBehavior.influence = 1;
+            _incongruentHandlePoseBlendingBehaviour.influence = 1;
+            _incongruentEffectorPoseBlendingBehaviour.influence = 1;
             
             
             if (_incongruent.IsHandCloserToHandle())
             {
                
                 _incongruentHandlePoseBlendingBehaviour.value = 1f-ratio;
-                _incongruentMainPoseBlendingBehavior.value = ratio;
+                _incongruentMainPoseBlendingBehavior.value = 1;
                 
-                _incongruentHandlePoseBlendingBehaviour.influence =1 - ratio;
-                _incongruentMainPoseBlendingBehavior.influence = ratio;
+                //_incongruentHandlePoseBlendingBehaviour.influence =1 - ratio;
+                //_incongruentMainPoseBlendingBehavior.influence = ratio;
             }
             else
             {
                 _incongruentEffectorPoseBlendingBehaviour.value = ratio;
-                _incongruentMainPoseBlendingBehavior.value = (1f-  ratio);
+               _incongruentMainPoseBlendingBehavior.value = 1;
                
-                _incongruentEffectorPoseBlendingBehaviour.influence = ratio;
-                _incongruentMainPoseBlendingBehavior.influence= (1f-  ratio);
+                //_incongruentEffectorPoseBlendingBehaviour.influence = ratio;
+                //_incongruentMainPoseBlendingBehavior.influence= (1f-  ratio);
                
             }
             

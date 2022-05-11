@@ -65,7 +65,7 @@ public class EyetrackingManagerNew : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        
         _lslRecorder = GetComponent<newLSLRecorder>();
 
     }
@@ -76,6 +76,18 @@ public class EyetrackingManagerNew : MonoBehaviour
         EyetrackingUI = GetComponent<EyetrackingUINew>();
         
         _eyetrackingValidation = GetComponent<EyetrackingValidation>();
+    }
+
+    public EyetrackingValidation EyetrackingValidation
+    {
+        get
+        {
+            if (_eyetrackingValidation == null)
+            {
+                return GetComponent<EyetrackingValidation>();
+            }
+            return _eyetrackingValidation;
+        }
     }
     
     public void StartSetup()
@@ -92,7 +104,9 @@ public class EyetrackingManagerNew : MonoBehaviour
         _setupColosed = true;
         NewExperimentManager.Instance.EndEyeCalibration();
     }
+
     
+     
 
     public bool IsSetupClosed()
     {

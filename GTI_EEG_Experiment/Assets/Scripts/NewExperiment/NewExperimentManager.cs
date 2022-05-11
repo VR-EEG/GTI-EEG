@@ -181,6 +181,14 @@ public class NewExperimentManager : MonoBehaviour
         if(_trialState != TrialState.StandBy)
             yield return new WaitUntil(() => _trialState == TrialState.EndOfTrial);
 
+
+        foreach (var tool in tools)
+        {
+            HideTool(tool.transform.GetSiblingIndex());
+        }
+    
+        
+
         _experimentState = ExperimentState.BetweenBlocks;
     }
 

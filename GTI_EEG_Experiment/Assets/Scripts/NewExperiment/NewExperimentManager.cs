@@ -39,9 +39,9 @@ public class NewExperimentManager : MonoBehaviour
     
     //instruction texts
     private string welcomeText = "Welcome to \n the Experiment!";
-    private string trialText = "Interact with\ntrigger to begin nex trial.";
+    private string trialText = "Interact with\n button to begin next trial.";
     private string pauseText = "Pause";
-    private string instructionText = "Interact with\ntrigger to begin.";
+    private string instructionText = "Interact with\n button to begin.";
     private string tutorialText = "This is the\npractice section.";
     private string breakText = "This is the\npractice section.";
     private string endText = "Experiment complete. \n Thank you!";

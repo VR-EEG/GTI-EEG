@@ -230,10 +230,6 @@ public class TableCalibrationUI : MonoBehaviour
             valY = (int)_windowHeight * 3 / 10 + heightBox*2+ spacing;
             valX =(int) _windowWidth/2;
             
-            if (overrideScalePossible)
-            {
-                Debug.Log("hello");
-            }
             
             if (overrideScalePossible)
             {

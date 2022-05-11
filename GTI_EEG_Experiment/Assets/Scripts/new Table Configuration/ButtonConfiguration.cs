@@ -15,6 +15,7 @@ public class ButtonConfiguration : MonoBehaviour
 
     private void Start()
     {
+        this.transform.position = buttonPositionOnTable.transform.position;
         var pos = button.transform.localPosition;
         pos = new Vector3(pos.x + offsetOfButton.x, pos.y, pos.z + offsetOfButton.y);
         button.transform.localPosition = pos;

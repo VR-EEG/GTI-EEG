@@ -303,10 +303,14 @@ public class TableConfigurationManager : MonoBehaviour
         var y = PlayerPrefs.GetFloat("TableY");
         var z = PlayerPrefs.GetFloat("TableZ");
         _tablePosition = new Vector3(x, y, z);
-
         
         
+        var xSize = PlayerPrefs.GetFloat("TableLength", _length);
+        var ySize = PlayerPrefs.GetFloat("TableHeight", _height);
+        var ZSize = PlayerPrefs.GetFloat("TableDepth", _depth);
         
+        
+        //SetTableScale(xSize,ySize,ZSize);
         
         SetTablePosition(_tablePosition, false);
         
@@ -330,14 +334,14 @@ public class TableConfigurationManager : MonoBehaviour
         
         if (_length != 0 && _height != 0 && _depth != 0)
         {
-            SetTableScale(_length,_height,_depth);
+          //  SetTableScale(_length,_height,_depth);
         }
         
         
         var xbutton = PlayerPrefs.GetFloat("ButtonX");
         var ybutton = PlayerPrefs.GetFloat("ButtonY");
         var zbutton = PlayerPrefs.GetFloat("ButtonZ");
-        spawnAndButtonPosition.transform.position = new Vector3(xbutton, ybutton, zbutton); ;
+        //spawnAndButtonPosition.transform.position = new Vector3(xbutton, ybutton, zbutton); ;
         _buttonConfiguration.AdjustPosition();
 
         

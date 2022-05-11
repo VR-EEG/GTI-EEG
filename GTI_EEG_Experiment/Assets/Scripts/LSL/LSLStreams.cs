@@ -84,7 +84,7 @@ public class LSLStreams : MonoBehaviour
 
     public void Start()
     {
-        uniqueIdentifier = GUID.Generate().ToString(); //this variable is only used to recognize streams
+        uniqueIdentifier = System.Guid.NewGuid().ToString(); //this variable is only used to recognize streams
 
         
 

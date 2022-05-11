@@ -303,10 +303,14 @@ public class TableConfigurationManager : MonoBehaviour
         var y = PlayerPrefs.GetFloat("TableY");
         var z = PlayerPrefs.GetFloat("TableZ");
         _tablePosition = new Vector3(x, y, z);
-
         
         
+        var xSize = PlayerPrefs.GetFloat("TableLength", _length);
+        var ySize = PlayerPrefs.GetFloat("TableHeight", _height);
+        var ZSize = PlayerPrefs.GetFloat("TableDepth", _depth);
         
+        
+        //SetTableScale(xSize,ySize,ZSize);
         
         SetTablePosition(_tablePosition, false);
         

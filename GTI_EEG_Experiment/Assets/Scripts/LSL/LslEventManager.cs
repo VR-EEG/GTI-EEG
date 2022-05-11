@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 
@@ -29,6 +29,8 @@ using UnityEngine;
             _experimentManager.OnToolIsShown += CollectToolShownTimeStamp;
 
             _eyetrackingValidation.BaseLineCheckStarted += CollectBaseLineStartTimeStamp;
+            
+            _eyetrackingValidation.BaseLineCheckEnded += CollectBaseLineEndTimeStamp;
 
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,11 +154,11 @@ public class EyetrackingValidation : MonoBehaviour
             CalculateValidationError(anglesZ) > ErrorThreshold ||
             _eyeValidationData.EyeValidationError == Vector3.zero)
         {
-            success = true;
+         
         }
         else
         {
-            success = false;
+            success = true;
         }
         
         

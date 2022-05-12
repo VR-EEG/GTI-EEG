@@ -178,14 +178,7 @@ public class EyetrackingManagerNew : MonoBehaviour
 
     public Vector3 GetValidationResults()
     {
-        if (_validationSucessful)
-        {
-            return _currentValidationData.EyeValidationError;
-        }
-        else
-        {
-            return Vector3.zero;
-        }
+        return _currentValidationData.EyeValidationError;
     }
     
     public bool IsValidationSucessful()

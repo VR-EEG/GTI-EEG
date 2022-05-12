@@ -14,6 +14,13 @@ public class LSLStreams : MonoBehaviour
 
     private const double NominalRate = liblsl.IRREGULAR_RATE;
     
+    
+    private liblsl.StreamInfo lslIValidationResultFloat;
+    public liblsl.StreamOutlet lslOValidationResultFloat;
+    
+    private liblsl.StreamInfo lslIValidationResultTimeStamp;
+    public liblsl.StreamOutlet lslOValidationResultTimeStamp;
+    
     // irregular sampling rate
     private liblsl.StreamInfo lslIBaselineBeginTimeStamp;
     public liblsl.StreamOutlet lslOBaselineBeginTimeStamp;
@@ -91,6 +98,30 @@ public class LSLStreams : MonoBehaviour
     public void Start()
     {
         uniqueIdentifier = System.Guid.NewGuid().ToString(); //this variable is only used to recognize streams
+
+        lslIValidationResultFloat = new liblsl.StreamInfo("ValidationResults",
+            "Markers",
+            3,
+            NominalRate,
+            liblsl.channel_format_t.cf_float32,
+            uniqueIdentifier
+            );
+        lslIValidationResultFloat.desc().append_child("xError");
+        lslIValidationResultFloat.desc().append_child("yError");
+        lslIValidationResultFloat.desc().append_child("zError");
+
+        lslOValidationResultFloat = new liblsl.StreamOutlet(lslIValidationResultFloat);
+        
+        lslIValidationResultTimeStamp = new liblsl.StreamInfo(
+            "ValidationResultTimeStamp",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            uniqueIdentifier
+        );
+        lslIValidationResultTimeStamp.desc().append_child("ValidationResultTimeStamp");
+        lslOValidationResultTimeStamp = new liblsl.StreamOutlet(lslIBaselineBeginTimeStamp);
 
         lslIBaselineBeginTimeStamp = new liblsl.StreamInfo(
             "BaseLineBeginTimeStamp",

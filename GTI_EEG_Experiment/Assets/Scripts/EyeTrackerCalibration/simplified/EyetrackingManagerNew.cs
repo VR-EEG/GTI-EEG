@@ -52,6 +52,9 @@ public class EyetrackingManagerNew : MonoBehaviour
     private EyeValidationData _currentValidationData;
 
 
+    public event Action<Vector3> OnValidationCompleted;
+
+
     private void Awake()
     {
         
@@ -173,6 +176,8 @@ public class EyetrackingManagerNew : MonoBehaviour
         _currentValidationData = _eyetrackingValidation.GetValidationData();
         _validationInProgress = false;
         _validationSucessful = result;
+        
+        OnValidationCompleted?.Invoke(_currentValidationData.EyeValidationError);
     }
 
 

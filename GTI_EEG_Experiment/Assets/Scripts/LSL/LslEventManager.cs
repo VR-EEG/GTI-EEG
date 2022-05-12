@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 
@@ -32,6 +32,24 @@ using UnityEngine;
             
             _eyetrackingValidation.BaseLineCheckEnded += CollectBaseLineEndTimeStamp;
 
+
+            EyetrackingManagerNew.Instance.OnValidationCompleted += CollectValidationData;
+        }
+
+
+        private void CollectValidationData(Vector3 error)
+        {
+            double[] currentTimestamp =
+            {
+                TimeManager.Instance.GetCurrentUnixTimeStamp(),
+            };
+            LSLStreams.Instance.lslOValidationResultTimeStamp.push_sample(currentTimestamp);
+            
+            var data = new float[3];
+            data[0] = error.x;
+            data[1] = error.y;
+            data[2] = error.z;
+            LSLStreams.Instance.lslOValidationResultFloat.push_sample(data);
         }
 
         private void CollectBaseLineStartTimeStamp()

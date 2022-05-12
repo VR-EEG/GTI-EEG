@@ -81,6 +81,10 @@ public class NewExperimentManager : MonoBehaviour
         _participantID = Randomization.GenerateID();
         _tutorialBlock = GenerateTutorialBlock();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
+        
+        ConfigDataManager.Instance.SaveBlockInformation(_experimentBlocks);
+        
+        
         _currentBlockData = new BlockData();
         _textController.ShowText(welcomeText);
         _trialCompleted = true;

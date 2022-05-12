@@ -113,7 +113,7 @@ public class LSLStreams : MonoBehaviour
             uniqueIdentifier
         );
         lslIBaselineEndTimeStamp.desc().append_child("BaseLineEndTimeStamp");
-        lslOBaselineBeginTimeStamp = new liblsl.StreamOutlet(lslIBaselineEndTimeStamp);
+        lslOBaselineEndTimeStamp = new liblsl.StreamOutlet(lslIBaselineEndTimeStamp);
 
         lslITrialStartMeasurementTimeStamp = new liblsl.StreamInfo(
             "TrialStartMeasurementTimeStamp",
@@ -195,7 +195,7 @@ public class LSLStreams : MonoBehaviour
 
 
         lslITrialInformationInt = new liblsl.StreamInfo(
-            "ToolCueOrientationInt",
+            "TrialInformationInt",
             "Markers",
             4,
             NominalRate,

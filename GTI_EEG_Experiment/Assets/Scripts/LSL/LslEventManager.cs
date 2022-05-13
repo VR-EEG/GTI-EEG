@@ -6,6 +6,8 @@ using UnityEngine;
     {
         private NewExperimentManager _experimentManager;
         
+        private EyetrackingValidation _eyetrackingValidation;
+        
         private int currentTrialId;
         private int currentTrialTool;
         private int currentTrialOrientation;
@@ -14,30 +16,78 @@ using UnityEngine;
         private void Start()
         {
             _experimentManager = NewExperimentManager.Instance;
+
+            _eyetrackingValidation = EyetrackingManagerNew.Instance.EyetrackingValidation;
             
             
-            _experimentManager.OnTrialBegin += CollectTrialBeginTimeStamp;
+            _experimentManager.OnTrialBegin += CollectTrialBeginInformation;
             _experimentManager.OnTrialEnd += CollectTrialEndTimeStamp;
 
             _experimentManager.OnBeepSound += CollectBeepSoundTimeStamp;
             _experimentManager.OnCueShowBegin += CollectCueShowBeginTimeStamp;
             _experimentManager.OnCueShowEnd += CollectCueShowEndTimeStamp;
             _experimentManager.OnToolIsShown += CollectToolShownTimeStamp;
+
+            _eyetrackingValidation.BaseLineCheckStarted += CollectBaseLineStartTimeStamp;
             
+            _eyetrackingValidation.BaseLineCheckEnded += CollectBaseLineEndTimeStamp;
+
+
+            EyetrackingManagerNew.Instance.OnValidationCompleted += CollectValidationData;
         }
 
-        
-        private void CollectTrialBeginTimeStamp(int trialNumber, int toolID, int task, int orientation)
+
+        private void CollectValidationData(Vector3 error)
         {
             double[] currentTimestamp =
             {
                 TimeManager.Instance.GetCurrentUnixTimeStamp(),
+            };
+            LSLStreams.Instance.lslOValidationResultTimeStamp.push_sample(currentTimestamp);
+            
+            var data = new float[3];
+            data[0] = error.x;
+            data[1] = error.y;
+            data[2] = error.z;
+            LSLStreams.Instance.lslOValidationResultFloat.push_sample(data);
+        }
+
+        private void CollectBaseLineStartTimeStamp()
+        {
+            double[] currentTimestamp =
+            {
+                TimeManager.Instance.GetCurrentUnixTimeStamp(),
+            };
+            LSLStreams.Instance.lslOBaselineBeginTimeStamp.push_sample(currentTimestamp);
+        }
+        
+        private void CollectBaseLineEndTimeStamp()
+        {
+            double[] currentTimestamp =
+            {
+                TimeManager.Instance.GetCurrentUnixTimeStamp(),
+            };
+            LSLStreams.Instance.lslOBaselineEndTimeStamp.push_sample(currentTimestamp);
+        }
+
+
+
+        private void CollectTrialBeginInformation(int trialNumber, int toolID, int task, int orientation)
+        {
+            double[] currentTimestamp =
+            {
+                TimeManager.Instance.GetCurrentUnixTimeStamp(),
+            };
+            LSLStreams.Instance.lslOTrialStartMeasurementTimeStamp.push_sample(currentTimestamp);
+
+            int[] trialData =
+            {
                 trialNumber,
                 toolID,
                 task,
                 orientation
             };
-            LSLStreams.Instance.lslOTrialStartMeasurementTimeStamp.push_sample(currentTimestamp);
+            LSLStreams.Instance.lslOTrialInformationInt.push_sample(trialData);
         }
 
         private void CollectTrialEndTimeStamp()

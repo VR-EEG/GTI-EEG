@@ -12,12 +12,28 @@ public class LSLStreams : MonoBehaviour
     
     private string uniqueIdentifier;
 
-    private const double NominalRate = liblsl.IRREGULAR_RATE; // irregular sampling rate
-
+    private const double NominalRate = liblsl.IRREGULAR_RATE;
+    
+    
+    private liblsl.StreamInfo lslIValidationResultFloat;
+    public liblsl.StreamOutlet lslOValidationResultFloat;
+    
+    private liblsl.StreamInfo lslIValidationResultTimeStamp;
+    public liblsl.StreamOutlet lslOValidationResultTimeStamp;
+    
+    // irregular sampling rate
+    private liblsl.StreamInfo lslIBaselineBeginTimeStamp;
+    public liblsl.StreamOutlet lslOBaselineBeginTimeStamp;
+    
+    private liblsl.StreamInfo lslIBaselineEndTimeStamp;
+    public liblsl.StreamOutlet lslOBaselineEndTimeStamp;
+    
     // variables to save date to LSL
     private liblsl.StreamInfo lslIFrameTracking;
     public liblsl.StreamOutlet lslOFrameTracking; // saved in LSLRecorder.cs
 
+
+    
     private liblsl.StreamInfo lslIEyetrackingFrameTimeStamp;
     public liblsl.StreamOutlet LslOEyetrackingFrameTimeStamp; // saved in LSLRecorder.cs
     
@@ -40,13 +56,10 @@ public class LSLStreams : MonoBehaviour
     public liblsl.StreamOutlet lslOButtonPressedTimeStamp; // saved in ExperimentManager.cs
     
     private liblsl.StreamInfo lslITrialStopMeasurementTimeStamp;
-    public liblsl.StreamOutlet lslOTrialStopMeasurementTimeStamp; // saved in MeasurementManager.cs
+    public liblsl.StreamOutlet lslOTrialStopMeasurementTimeStamp; 
     
-    private liblsl.StreamInfo lslIToolCueOrientationInt;
-    public liblsl.StreamOutlet lslOToolCueOrientationInt; // saved in LSLRecorder.cs
-
-    private liblsl.StreamInfo lslIToolCueOrientationString;
-    public liblsl.StreamOutlet lslOToolCueOrientationString; // saved in LSLRecorder.cs
+    private liblsl.StreamInfo lslITrialInformationInt;
+    public liblsl.StreamOutlet lslOTrialInformationInt; // saved in LSLRecorder.cs
     
     private liblsl.StreamInfo lslIEyeTrackingGazeHMDFloat;
     public liblsl.StreamOutlet lslOEyeTrackingGazeHMDFloat; // saved in LSLRecorder.cs
@@ -86,7 +99,52 @@ public class LSLStreams : MonoBehaviour
     {
         uniqueIdentifier = System.Guid.NewGuid().ToString(); //this variable is only used to recognize streams
 
+        lslIValidationResultFloat = new liblsl.StreamInfo("ValidationResults",
+            "Markers",
+            3,
+            NominalRate,
+            liblsl.channel_format_t.cf_float32,
+            uniqueIdentifier
+            );
+        lslIValidationResultFloat.desc().append_child("xError");
+        lslIValidationResultFloat.desc().append_child("yError");
+        lslIValidationResultFloat.desc().append_child("zError");
+
+        lslOValidationResultFloat = new liblsl.StreamOutlet(lslIValidationResultFloat);
         
+        lslIValidationResultTimeStamp = new liblsl.StreamInfo(
+            "ValidationResultTimeStamp",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            uniqueIdentifier
+        );
+        lslIValidationResultTimeStamp.desc().append_child("ValidationResultTimeStamp");
+        lslOValidationResultTimeStamp = new liblsl.StreamOutlet(lslIValidationResultTimeStamp);
+
+        lslIBaselineBeginTimeStamp = new liblsl.StreamInfo(
+            "BaseLineBeginTimeStamp",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            uniqueIdentifier
+        );
+        lslIBaselineBeginTimeStamp.desc().append_child("BaseLineBeginTimeStamp");
+        lslOBaselineBeginTimeStamp = new liblsl.StreamOutlet(lslIBaselineBeginTimeStamp);
+        
+        
+        lslIBaselineEndTimeStamp = new liblsl.StreamInfo(
+            "BaseLineEndTimeStamp",
+            "Markers",
+            1,
+            NominalRate,
+            liblsl.channel_format_t.cf_double64,
+            uniqueIdentifier
+        );
+        lslIBaselineEndTimeStamp.desc().append_child("BaseLineEndTimeStamp");
+        lslOBaselineEndTimeStamp = new liblsl.StreamOutlet(lslIBaselineEndTimeStamp);
 
         lslITrialStartMeasurementTimeStamp = new liblsl.StreamInfo(
             "TrialStartMeasurementTimeStamp",
@@ -120,7 +178,7 @@ public class LSLStreams : MonoBehaviour
         );
         lslICueDisappearedTimeStamp.desc().append_child("CueDisappearedTimeStamp");
         lslOCueDisappearedTimeStamp = new liblsl.StreamOutlet(lslICueDisappearedTimeStamp);
-
+    
         lslIObjectShownTimeStamp = new liblsl.StreamInfo(
             "ObjectShownTimeStamp",
             "Marker",
@@ -167,40 +225,23 @@ public class LSLStreams : MonoBehaviour
         lslOTrialStopMeasurementTimeStamp = new liblsl.StreamOutlet(lslITrialStopMeasurementTimeStamp);
 
 
-        lslIToolCueOrientationInt = new liblsl.StreamInfo(
-            "ToolCueOrientationInt",
+        lslITrialInformationInt = new liblsl.StreamInfo(
+            "TrialInformationInt",
             "Markers",
-            7,
+            4,
             NominalRate,
             liblsl.channel_format_t.cf_int32,
             uniqueIdentifier
         );
-        lslIToolCueOrientationInt.desc().append_child("trialID");
-        lslIToolCueOrientationInt.desc().append_child("blockNumber");
-        lslIToolCueOrientationInt.desc().append_child("utcon");
-        lslIToolCueOrientationInt.desc().append_child("toolId");
-        lslIToolCueOrientationInt.desc().append_child("cueOrientationId");
-        lslIToolCueOrientationInt.desc().append_child("toolIsCurrentlyAttachedToHand");
-        lslIToolCueOrientationInt.desc().append_child("toolIsCurrentlyDisplayedOnTable");
-        lslOToolCueOrientationInt = new liblsl.StreamOutlet(lslIToolCueOrientationInt);
-
-
-        lslIToolCueOrientationString = new liblsl.StreamInfo(
-            "ToolCueOrientationString",
-            "Markers",
-            5,
-            NominalRate,
-            liblsl.channel_format_t.cf_string,
-            uniqueIdentifier
-        );
-        lslIToolCueOrientationString.desc().append_child("toolName");
-        lslIToolCueOrientationString.desc().append_child("cueOrientationName");
-        lslIToolCueOrientationString.desc().append_child("cueName");
-        lslIToolCueOrientationString.desc().append_child("toolHandleOrientation");
-        lslIToolCueOrientationString.desc().append_child("closestAttachmentPointOnToolToHand");
-        lslOToolCueOrientationString = new liblsl.StreamOutlet(lslIToolCueOrientationString);
-
-
+        lslITrialInformationInt.desc().append_child("TrialNumber");
+        lslITrialInformationInt.desc().append_child("ToolId");
+        lslITrialInformationInt.desc().append_child("Task");
+        lslITrialInformationInt.desc().append_child("Orientation");
+        lslOTrialInformationInt = new liblsl.StreamOutlet(lslITrialInformationInt);
+        
+        
+        
+        
         lslIEyetrackingFrameTimeStamp = new liblsl.StreamInfo(
             "EyetrackingTimeStamp",
             "Markers",

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
@@ -30,8 +31,8 @@ public class TableConfigurationManager : MonoBehaviour
     [SerializeField] private float SpawnPointOffset;
     [SerializeField] private ButtonConfiguration _buttonConfiguration;
 
-
-
+    [SerializeField] private BoxCollider _tableExtends; 
+    private Vector3 _tableSizes;
     private TableConfigurationController _tableConfigurationController;
     private TableCalibrationUI _tableCalibrationUI;
 
@@ -65,10 +66,30 @@ public class TableConfigurationManager : MonoBehaviour
         }
 
         _selectIndex = 0;
+        
+        
+        MeasureTable();
     }
-    
-    
-    
+
+    private void MeasureTable()
+    {
+        if (_tableExtends != null)
+        {
+            _tableSizes = _tableExtends.size;
+            
+        }
+    }
+
+
+    public Vector3 GetTableSizes()
+    {
+        return _tableSizes;
+    }
+
+    public Transform ButtonAndSpawnPointRelation()
+    {
+        return _buttonConfiguration.transform;
+    }
 
     private void MoveObject(Vector3 direction)
     {

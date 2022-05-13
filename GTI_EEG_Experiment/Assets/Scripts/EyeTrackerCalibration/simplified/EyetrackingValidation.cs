@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +28,9 @@ public class EyetrackingValidation : MonoBehaviour
     private List<EyeValidationData> _eyeValidationDataFrames;
     private EyeValidationData _eyeValidationData;
     private const float ErrorThreshold = 1.0f;
+    
+    public event Action BaseLineCheckStarted;
+    public event Action BaseLineCheckEnded;
 
     #endregion
 
@@ -151,11 +154,11 @@ public class EyetrackingValidation : MonoBehaviour
             CalculateValidationError(anglesZ) > ErrorThreshold ||
             _eyeValidationData.EyeValidationError == Vector3.zero)
         {
-            success = true;
+         
         }
         else
         {
-            success = false;
+            success = true;
         }
         
         
@@ -168,8 +171,7 @@ public class EyetrackingValidation : MonoBehaviour
         _isErrorCheckRunning = true;
         Debug.Log("EEG Baselinecheck...");
         
-        double timestampBegin = TimeManager.Instance.GetCurrentUnixTimeStamp();
-        //TODO LSL magic?
+        BaseLineCheckStarted?.Invoke();
         _hmdTransform = EyetrackingManagerNew.Instance.GetHmdTransform();
         fixationPoint.transform.parent =  _hmdTransform.gameObject.transform;
         fixationPoint.transform.position = _hmdTransform.position + _hmdTransform.rotation * new Vector3(0,0,30);
@@ -177,8 +179,7 @@ public class EyetrackingValidation : MonoBehaviour
         fixationPoint.SetActive(true);
         yield return new WaitForSeconds(5f);
        fixationPoint.SetActive(false);
-       double timeStampEnd = TimeManager.Instance.GetCurrentUnixTimeStamp();
-       //TODO LSL magic?
+       BaseLineCheckEnded?.Invoke();
        Debug.Log("...finished");
        _isErrorCheckRunning = false;
 

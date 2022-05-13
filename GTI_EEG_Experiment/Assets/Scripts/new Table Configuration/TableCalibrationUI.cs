@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using NewExperiment;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
@@ -156,6 +157,8 @@ public class TableCalibrationUI : MonoBehaviour
                 {
                     TablePosition.z = pos.z;
                 }
+                
+                ConfigDataManager.Instance.SetPlayerOffset(TablePosition);
                 
                 TableConfigurationManager.Instance.SetTablePosition(TablePosition);
             }

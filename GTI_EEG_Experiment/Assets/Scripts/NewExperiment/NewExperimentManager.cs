@@ -39,9 +39,9 @@ public class NewExperimentManager : MonoBehaviour
     
     //instruction texts
     private string welcomeText = "Welcome to \n the Experiment!";
-    private string trialText = "Interact with\ntrigger to begin nex trial.";
+    private string trialText = "Interact with\n button to begin next trial.";
     private string pauseText = "Pause";
-    private string instructionText = "Interact with\ntrigger to begin.";
+    private string instructionText = "Interact with\n button to begin.";
     private string tutorialText = "This is the\npractice section.";
     private string breakText = "This is the\npractice section.";
     private string endText = "Experiment complete. \n Thank you!";
@@ -81,10 +81,16 @@ public class NewExperimentManager : MonoBehaviour
         _participantID = Randomization.GenerateID();
         _tutorialBlock = GenerateTutorialBlock();
         _experimentBlocks = GenerateExperimentBlocks(amountOfBlocks);
+        
+        ConfigDataManager.Instance.SaveBlockInformation(_experimentBlocks);
+        
+        
         _currentBlockData = new BlockData();
         _textController.ShowText(welcomeText);
         _trialCompleted = true;
         _beepSound.GetComponent<AudioSource>();
+        
+        ConfigDataManager.Instance.SaveConfigurationFile(tools,tasks);
     }
 
 
@@ -132,20 +138,7 @@ public class NewExperimentManager : MonoBehaviour
         }
         return blocks;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            
-        }
-        
-        /*if (Input.GetKeyDown(KeyCode.B))
-        {
-            EyetrackingManagerNew.Instance.StopRecording();
-        }*/
-    }
+    
 
 
     public GameObject GetTool()
@@ -180,6 +173,14 @@ public class NewExperimentManager : MonoBehaviour
     {
         if(_trialState != TrialState.StandBy)
             yield return new WaitUntil(() => _trialState == TrialState.EndOfTrial);
+
+
+        foreach (var tool in tools)
+        {
+            HideTool(tool.transform.GetSiblingIndex());
+        }
+    
+        
 
         _experimentState = ExperimentState.BetweenBlocks;
     }

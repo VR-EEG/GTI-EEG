@@ -52,6 +52,9 @@ public class EyetrackingManagerNew : MonoBehaviour
     private EyeValidationData _currentValidationData;
 
 
+    public event Action<Vector3> OnValidationCompleted;
+
+
     private void Awake()
     {
         
@@ -65,7 +68,7 @@ public class EyetrackingManagerNew : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        
         _lslRecorder = GetComponent<newLSLRecorder>();
 
     }
@@ -76,6 +79,18 @@ public class EyetrackingManagerNew : MonoBehaviour
         EyetrackingUI = GetComponent<EyetrackingUINew>();
         
         _eyetrackingValidation = GetComponent<EyetrackingValidation>();
+    }
+
+    public EyetrackingValidation EyetrackingValidation
+    {
+        get
+        {
+            if (_eyetrackingValidation == null)
+            {
+                return GetComponent<EyetrackingValidation>();
+            }
+            return _eyetrackingValidation;
+        }
     }
     
     public void StartSetup()
@@ -92,7 +107,9 @@ public class EyetrackingManagerNew : MonoBehaviour
         _setupColosed = true;
         NewExperimentManager.Instance.EndEyeCalibration();
     }
+
     
+     
 
     public bool IsSetupClosed()
     {
@@ -159,19 +176,14 @@ public class EyetrackingManagerNew : MonoBehaviour
         _currentValidationData = _eyetrackingValidation.GetValidationData();
         _validationInProgress = false;
         _validationSucessful = result;
+        
+        OnValidationCompleted?.Invoke(_currentValidationData.EyeValidationError);
     }
 
 
     public Vector3 GetValidationResults()
     {
-        if (_validationSucessful)
-        {
-            return _currentValidationData.EyeValidationError;
-        }
-        else
-        {
-            return Vector3.zero;
-        }
+        return _currentValidationData.EyeValidationError;
     }
     
     public bool IsValidationSucessful()

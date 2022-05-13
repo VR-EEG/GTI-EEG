@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace NewExperiment
 {
     public class ConfigDataManager: MonoBehaviour
     {
         public static ConfigDataManager Instance { get ; private set; }
-        
-        
-        
+
+
+        private Vector3 playerOffset;
+
+        private List<GameObject> tools;
+        private List<string> tasks;
         
         private void Awake()
         {
@@ -16,11 +21,14 @@ namespace NewExperiment
             {
                 Instance = this;
             }
-            
         }
 
 
-
+        public void SetPlayerOffset(Vector3 offset)
+        {
+            playerOffset = offset;
+            SaveConfigurationFile();
+        }
 
 
         public void SaveBlockInformation(List<BlockItem> blocks)
@@ -48,14 +56,24 @@ namespace NewExperiment
             }
         }
 
-
-        public void SaveConfigurationFile(List<GameObject> tools, List<string> tasks, GameObject table, GameObject player)
+        private void SaveConfigurationFile()
         {
+            SaveConfigurationFile(tools,tasks);
+        }
+        
+        public void SaveConfigurationFile(List<GameObject> tools, List<string> tasks)
+        {
+            this.tools = tools;
+            this.tasks = tasks;
             ConfigurationData configurationData = new ConfigurationData();
             
             configurationData.Orientation = new List<string>() { "Congruent", "InCongruent" };
 
             configurationData.Cues = tasks;
+
+            configurationData.MappedTool = new List<string>();
+            configurationData.ToolColliderCenter = new List<Vector3>();
+            configurationData.ToolColliderExtends = new List<Vector3>();
 
             for (int i = 0; i < tools.Count; i++)
             {
@@ -68,11 +86,23 @@ namespace NewExperiment
 
             var calibratedTablePositions = TableConfigurationManager.Instance.spawnAndButtonPosition;
 
-            configurationData.ButtonPosition = calibratedTablePositions.GetChild(0).position;
-            configurationData.Spawnpoint = calibratedTablePositions.GetChild(1).position;
+            configurationData.GlobalSpawnAndButtonPosition = calibratedTablePositions.position;
 
 
-            configurationData.roomPosition = TableConfigurationManager.Instance.Room.transform.position;
+            var localOffset = TableConfigurationManager.Instance.ButtonAndSpawnPointRelation();
+            configurationData.ButtonPositionLocalOffset = localOffset.GetChild(0).localPosition;
+            configurationData.SpawnpointLocalOffset = localOffset.GetChild(1).localPosition;
+
+
+            configurationData.RoomPosition = TableConfigurationManager.Instance.Room.transform.position;
+            
+            configurationData.TableSizes = TableConfigurationManager.Instance.GetTableSizes();
+            configurationData.TablePosition = TableConfigurationManager.Instance.GetTableSizes();
+
+
+            configurationData.PlayerPositionOffset = playerOffset;
+            
+            DataSavingManager.Instance.Save(configurationData, "gti_config_"+TimeManager.Instance.GetCurrentUnixTimeStamp());
         }
         
     }
@@ -101,9 +131,11 @@ namespace NewExperiment
         public List<Vector3> ToolColliderExtends;
         public List<Vector3> ToolColliderCenter;
         public Vector3 PlayerPositionOffset;
-        public Vector3 TableScale;
-        public Vector3 Spawnpoint;
-        public Vector3 ButtonPosition;
-        public Vector3 roomPosition;
+        public Vector3 TableSizes;
+        public Vector3 TablePosition;
+        public Vector3 GlobalSpawnAndButtonPosition;
+        public Vector3 SpawnpointLocalOffset;
+        public Vector3 ButtonPositionLocalOffset;
+        public Vector3 RoomPosition;
     }
 }

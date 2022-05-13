@@ -89,6 +89,8 @@ public class NewExperimentManager : MonoBehaviour
         _textController.ShowText(welcomeText);
         _trialCompleted = true;
         _beepSound.GetComponent<AudioSource>();
+        
+        ConfigDataManager.Instance.SaveConfigurationFile(tools,tasks);
     }
 
 
@@ -136,20 +138,7 @@ public class NewExperimentManager : MonoBehaviour
         }
         return blocks;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            
-        }
-        
-        /*if (Input.GetKeyDown(KeyCode.B))
-        {
-            EyetrackingManagerNew.Instance.StopRecording();
-        }*/
-    }
+    
 
 
     public GameObject GetTool()

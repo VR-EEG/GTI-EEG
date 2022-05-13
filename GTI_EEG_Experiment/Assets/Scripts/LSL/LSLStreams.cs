@@ -121,7 +121,7 @@ public class LSLStreams : MonoBehaviour
             uniqueIdentifier
         );
         lslIValidationResultTimeStamp.desc().append_child("ValidationResultTimeStamp");
-        lslOValidationResultTimeStamp = new liblsl.StreamOutlet(lslIBaselineBeginTimeStamp);
+        lslOValidationResultTimeStamp = new liblsl.StreamOutlet(lslIValidationResultTimeStamp);
 
         lslIBaselineBeginTimeStamp = new liblsl.StreamInfo(
             "BaseLineBeginTimeStamp",

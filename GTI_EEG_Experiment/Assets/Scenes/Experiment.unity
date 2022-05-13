@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 9641438}
   - component: {fileID: 9641435}
   - component: {fileID: 9641437}
+  - component: {fileID: 9641433}
   m_Layer: 0
   m_Name: Paintbrush
   m_TagString: Untagged
@@ -186,6 +187,19 @@ Transform:
   m_Father: {fileID: 1412043274}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9641433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9641431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &9641434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,6 +656,7 @@ GameObject:
   - component: {fileID: 45824823}
   - component: {fileID: 45824820}
   - component: {fileID: 45824818}
+  - component: {fileID: 45824822}
   m_Layer: 0
   m_Name: Spatula
   m_TagString: Untagged
@@ -800,6 +815,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &45824822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45824816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &45824823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +1023,7 @@ GameObject:
   - component: {fileID: 102739020}
   - component: {fileID: 102739017}
   - component: {fileID: 102739015}
+  - component: {fileID: 102739019}
   m_Layer: 0
   m_Name: Trowel
   m_TagString: Untagged
@@ -1153,6 +1182,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &102739019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102739013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &102739020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1705,6 +1747,7 @@ GameObject:
   - component: {fileID: 198384293}
   - component: {fileID: 198384290}
   - component: {fileID: 198384288}
+  - component: {fileID: 198384292}
   m_Layer: 0
   m_Name: Paletteknife
   m_TagString: Untagged
@@ -1863,6 +1906,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &198384292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198384286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &198384293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2058,6 +2114,7 @@ GameObject:
   - component: {fileID: 205098545}
   - component: {fileID: 205098541}
   - component: {fileID: 205098539}
+  - component: {fileID: 205098543}
   m_Layer: 0
   m_Name: Daisygrubber
   m_TagString: Untagged
@@ -2216,6 +2273,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &205098543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205098537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &205098545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2606,6 +2676,7 @@ GameObject:
   - component: {fileID: 267309617}
   - component: {fileID: 267309614}
   - component: {fileID: 267309612}
+  - component: {fileID: 267309616}
   m_Layer: 0
   m_Name: Screwdriver
   m_TagString: Untagged
@@ -2764,6 +2835,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &267309616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267309610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &267309617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4253,6 +4337,12 @@ Transform:
   m_Father: {fileID: 1234843198}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &916170568 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8625414787259074743, guid: 0e435d699dd8e6244921233ec96b16e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8625414787466982008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &942620456 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9d6b4a471d2ef0e49a2fbb1198a59315,
@@ -4493,6 +4583,7 @@ GameObject:
   - component: {fileID: 1074404076}
   - component: {fileID: 1074404071}
   - component: {fileID: 1074404073}
+  - component: {fileID: 1074404074}
   m_Layer: 0
   m_Name: WrenchNew
   m_TagString: Untagged
@@ -4651,6 +4742,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 6419815891716139017}
   _incongruent: {fileID: 6419815891716139016}
+--- !u!114 &1074404074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074404068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1074404076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5246,6 +5350,7 @@ GameObject:
   - component: {fileID: 1268189638}
   - component: {fileID: 1268189633}
   - component: {fileID: 1268189635}
+  - component: {fileID: 1268189636}
   m_Layer: 0
   m_Name: Fishscaler
   m_TagString: Untagged
@@ -5404,6 +5509,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 864177031139619448}
   _incongruent: {fileID: 864177031139619447}
+--- !u!114 &1268189636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268189630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1268189638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5630,6 +5748,7 @@ GameObject:
   - component: {fileID: 1281855958}
   - component: {fileID: 1281855955}
   - component: {fileID: 1281855953}
+  - component: {fileID: 1281855957}
   m_Layer: 0
   m_Name: Flowercutter
   m_TagString: Untagged
@@ -5789,6 +5908,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &1281855957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281855951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 1432085447}
 --- !u!114 &1281855958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5984,6 +6116,7 @@ GameObject:
   - component: {fileID: 1294306110}
   - component: {fileID: 1294306106}
   - component: {fileID: 1294306104}
+  - component: {fileID: 1294306108}
   m_Layer: 0
   m_Name: Spokewrench
   m_TagString: Untagged
@@ -6142,6 +6275,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &1294306108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294306102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1294306110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6399,6 +6545,7 @@ GameObject:
   - component: {fileID: 1351368265}
   - component: {fileID: 1351368262}
   - component: {fileID: 1351368260}
+  - component: {fileID: 1351368264}
   m_Layer: 0
   m_Name: Zester
   m_TagString: Untagged
@@ -6557,6 +6704,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &1351368264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351368258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1351368265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7114,6 +7274,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5fdf432aa90e74cb17b639155896b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1432085447 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6214876328308448725, guid: 34940389797c40a489b4affb9fb76282,
+    type: 3}
+  m_PrefabInstance: {fileID: 6583942283252500726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1439747838
 GameObject:
   m_ObjectHideFlags: 0
@@ -8120,6 +8286,7 @@ GameObject:
   - component: {fileID: 1652131662}
   - component: {fileID: 1652131658}
   - component: {fileID: 1652131656}
+  - component: {fileID: 1652131660}
   m_Layer: 0
   m_Name: Fork
   m_TagString: Untagged
@@ -8278,6 +8445,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &1652131660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652131654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1652131662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9300,6 +9480,7 @@ GameObject:
   - component: {fileID: 1897770129}
   - component: {fileID: 1897770124}
   - component: {fileID: 1897770127}
+  - component: {fileID: 1897770126}
   m_Layer: 0
   m_Name: PracticeHammer
   m_TagString: Untagged
@@ -9445,6 +9626,19 @@ MonoBehaviour:
   highlightOnHover: 0
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &1897770126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897770121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToolOversizedCollider: {fileID: 916170568}
 --- !u!114 &1897770127
 MonoBehaviour:
   m_ObjectHideFlags: 0

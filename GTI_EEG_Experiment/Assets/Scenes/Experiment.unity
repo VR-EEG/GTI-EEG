@@ -3068,7 +3068,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 310719341}
-  - component: {fileID: 310719342}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -3093,21 +3092,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &310719342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310719340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70747143b1bf60e418af19d81b6946ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ToolSpawnPoint: {fileID: 416487537}
-  ButtonSpawnPoint: {fileID: 416487537}
-  TableCollider: {fileID: 1651102907}
 --- !u!1 &322984970
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,6 +3769,7 @@ MonoBehaviour:
   Speed: 1
   SpawnPointOffset: 0.3
   _buttonConfiguration: {fileID: 180485793}
+  _tableExtends: {fileID: 1651102907}
 --- !u!114 &583254233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4601,7 +4586,7 @@ GameObject:
   - component: {fileID: 1074404073}
   - component: {fileID: 1074404074}
   m_Layer: 0
-  m_Name: WrenchNew
+  m_Name: Wrench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

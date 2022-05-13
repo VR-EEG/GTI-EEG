@@ -33,6 +33,7 @@ namespace NewExperiment
 
         public void SaveBlockInformation(List<BlockItem> blocks)
         {
+            List<BlockInformation> blockInfoList= new List<BlockInformation>();
             for (int i = 0; i < blocks.Count; i++)
             {
                 var block = blocks[i];
@@ -53,7 +54,12 @@ namespace NewExperiment
                     };
                     blockInformation.Trials.Add(trialData);
                 }
+                
+                blockInfoList.Add(blockInformation);
             }
+            
+            DataSavingManager.Instance.SaveList(blockInfoList,"gti_blockInfo_"+TimeManager.Instance.GetCurrentUnixTimeStamp(),true);
+            
         }
 
         private void SaveConfigurationFile()
@@ -116,7 +122,7 @@ namespace NewExperiment
         public List<TrialData> Trials;
     }
     
-    public class TrialData
+    [Serializable] public class TrialData
     {
         public int toolID;
         public int taskID;

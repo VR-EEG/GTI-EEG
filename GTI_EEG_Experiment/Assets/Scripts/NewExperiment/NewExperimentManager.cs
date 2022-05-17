@@ -343,7 +343,7 @@ public class NewExperimentManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _textController.ShowText("",true);
         OnCueShowEnd?.Invoke();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         ShowTool(trial.Item1,trial.Item3);
         OnToolIsShown?.Invoke();
         yield return new WaitForSeconds(3f);

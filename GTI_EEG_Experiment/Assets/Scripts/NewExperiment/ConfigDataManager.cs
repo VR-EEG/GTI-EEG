@@ -83,7 +83,7 @@ namespace NewExperiment
 
             for (int i = 0; i < tools.Count; i++)
             {
-                configurationData.MappedTool.Add(tools[i].gameObject.name);
+                configurationData.MappedTool.Add(i+ ":" +"'"+tools[i].gameObject.name+"'");
                 
                 configurationData.ToolColliderCenter.Add(tools[i].GetComponent<ToolData>().ToolOversizedCollider.center);
                 configurationData.ToolColliderExtends.Add(tools[i].GetComponent<ToolData>().ToolOversizedCollider.size);

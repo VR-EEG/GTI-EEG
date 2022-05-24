@@ -77,21 +77,24 @@ namespace LSL
                 var combinedEyeData =  verboseData.combined.eye_data;
                 float combinedValidityBitMask = combinedEyeData.eye_data_validata_bit_mask;
                 
-                var eyePositionCombinedWorld = hmdPos + rayCombineEye.origin;
-                var eyeDirectionCombinedWorld = hmdPos + rayCombineEye.direction;
-                var eyePositionCombinedLocal = rayCombineEye.origin;
-                var eyeDirectionCombinedLocal = rayCombineEye.direction;
+                
+                Vector3 coordinateAdaptedGazeDirectionCombined = new Vector3(verboseData.combined.eye_data.gaze_direction_normalized.x * -1,  verboseData.combined.eye_data.gaze_direction_normalized.y, verboseData.combined.eye_data.gaze_direction_normalized.z);
+                var eyePositionCombinedWorld = hmdPos + combinedEyeData.gaze_origin_mm/1000;
+                var eyeDirectionCombinedWorld = hmdRot + coordinateAdaptedGazeDirectionCombined;
+                var eyePositionCombinedLocal = combinedEyeData.gaze_origin_mm/1000;
+                var eyeDirectionCombinedLocal = coordinateAdaptedGazeDirectionCombined;
 
                 SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out var rayLeftEye);
                 
                 var leftEyeData =  verboseData.left;
                 float leftEyeDataValidityBitMask = leftEyeData.eye_data_validata_bit_mask;
                 var leftOpenness = leftEyeData.eye_openness;
-
-                var eyePositionLeftWorld = hmdPos + rayLeftEye.origin;
-                var eyeDirectionLeftWorld = hmdPos + rayLeftEye.direction;
-                var eyePositionLeftLocal = rayLeftEye.origin;
-                var eyeDirectionLeftLocal = rayLeftEye.direction;
+                
+                Vector3 coordinateAdaptedGazeDirectionLeft = new Vector3(verboseData.left.gaze_direction_normalized.x * -1,  verboseData.left.gaze_direction_normalized.y, verboseData.left.gaze_direction_normalized.z);
+                var eyePositionLeftWorld = hmdPos + leftEyeData.gaze_origin_mm/1000;
+                var eyeDirectionLeftWorld = hmdRot + coordinateAdaptedGazeDirectionLeft;
+                var eyePositionLeftLocal = leftEyeData.gaze_origin_mm/1000;
+                var eyeDirectionLeftLocal = coordinateAdaptedGazeDirectionLeft;
 
                 
                 SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out var rayRightEye);
@@ -100,10 +103,11 @@ namespace LSL
                 float rightEyeDataValidityBitMask = rightEyeData.eye_data_validata_bit_mask;
                 var rightOpenness = rightEyeData.eye_openness;
                 
-                var eyePositionRightWorld = hmdPos + rayRightEye.origin;
-                var eyeDirectionRightWorld = hmdPos + rayRightEye.direction;
-                var eyePositionRightLocal = rayRightEye.origin;
-                var eyeDirectionRightLocal = rayRightEye.direction;
+                Vector3 coordinateAdaptedGazeDirectionRight = new Vector3(verboseData.right.gaze_direction_normalized.x * -1,  verboseData.right.gaze_direction_normalized.y, verboseData.right.gaze_direction_normalized.z);
+                var eyePositionRightWorld = hmdPos + rightEyeData.gaze_origin_mm/1000;
+                var eyeDirectionRightWorld = hmdRot + coordinateAdaptedGazeDirectionRight;
+                var eyePositionRightLocal = rightEyeData.gaze_origin_mm/1000;
+                var eyeDirectionRightLocal = coordinateAdaptedGazeDirectionRight;
                 
                 //tool object
                 var taskObjectPosition = new Vector3();
@@ -129,7 +133,7 @@ namespace LSL
                 if (Physics.Raycast(eyePositionCombinedWorld, eyeDirectionCombinedWorld,
                         out var hitInfo, 10f))
                 {
-                    if (hitInfo.collider.gameObject == _currentTaskObject.gameObject)
+                    if (_toolIsAssigned&&hitInfo.collider.gameObject == _currentTaskObject.gameObject)
                     {
                         taskObjectWasHit=1f;
                     }

@@ -134,7 +134,6 @@ namespace LSL
                         if (hitInfo.collider == _currentTaskObject.GetComponent<ToolData>().ToolOversizedCollider)
                         {
                             taskObjectWasHit=1f;
-                            Debug.Log("was hit"+_currentTaskObject.gameObject);
                         }
                     }
                     targetHitPosition = hitInfo.point;

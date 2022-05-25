@@ -129,8 +129,6 @@ namespace LSL
                 if (Physics.Raycast(eyePositionCombinedWorld, eyeDirectionCombinedWorld,
                         out var hitInfo, 10f, ~ignoredLayers))
                 {
-                    
-                    Debug.Log(hitInfo.collider.name);
                     if (_toolIsAssigned)
                     {
                         if (hitInfo.collider == _currentTaskObject.GetComponent<ToolData>().ToolOversizedCollider)

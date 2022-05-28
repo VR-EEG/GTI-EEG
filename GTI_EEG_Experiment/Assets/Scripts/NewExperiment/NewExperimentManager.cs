@@ -337,13 +337,13 @@ public class NewExperimentManager : MonoBehaviour
         _trialState = TrialState.Trial;
         var beginTimeStamp = TimeManager.Instance.GetCurrentUnixTimeStamp();
         OnTrialBegin?.Invoke(trialNumber,trial.Item1,trial.Item2,trial.Item3);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         _textController.ShowText(tasks[trial.Item2],true);
         OnCueShowBegin?.Invoke();
         yield return new WaitForSeconds(2f);
         _textController.ShowText("",true);
         OnCueShowEnd?.Invoke();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         ShowTool(trial.Item1,trial.Item3);
         OnToolIsShown?.Invoke();
         yield return new WaitForSeconds(3f);

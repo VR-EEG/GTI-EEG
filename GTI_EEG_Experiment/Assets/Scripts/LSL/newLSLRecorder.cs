@@ -8,15 +8,15 @@ namespace LSL
     public class newLSLRecorder: MonoBehaviour
     {
         
-        //TODO assign these via Init method
+        public LayerMask ignoredLayers;
+        
         private Transform _hmd;
         private Hand _hand; // there is only a right hand in this experiment
         private Transform _currentTaskObject;
 
         private bool _isRecording;
         private bool _toolIsAssigned;
-
-
+        
         private Coroutine _recordingCouroutine;
 
 
@@ -59,9 +59,9 @@ namespace LSL
             while (_isRecording)
             { 
                 var hmdPos = _hmd.position;
-                var hmdRot = _hmd.rotation.eulerAngles;
+                var hmdRot = _hmd.rotation;
+                var hmdRotEuler = hmdRot.eulerAngles;
                 var hmdForward = _hmd.forward;
-
                 var handTransform = _hand.transform;
                 var handPos = handTransform.position;
                 var handRot = handTransform.rotation.eulerAngles;
@@ -77,21 +77,24 @@ namespace LSL
                 var combinedEyeData =  verboseData.combined.eye_data;
                 float combinedValidityBitMask = combinedEyeData.eye_data_validata_bit_mask;
                 
-                var eyePositionCombinedWorld = hmdPos + rayCombineEye.origin;
-                var eyeDirectionCombinedWorld = hmdPos + rayCombineEye.direction;
-                var eyePositionCombinedLocal = rayCombineEye.origin;
-                var eyeDirectionCombinedLocal = rayCombineEye.direction;
+                
+                Vector3 coordinateAdaptedGazeDirectionCombined = new Vector3(verboseData.combined.eye_data.gaze_direction_normalized.x * -1,  verboseData.combined.eye_data.gaze_direction_normalized.y, verboseData.combined.eye_data.gaze_direction_normalized.z);
+                var eyePositionCombinedWorld = hmdPos + combinedEyeData.gaze_origin_mm/1000;
+                var eyeDirectionCombinedWorld = hmdRot * coordinateAdaptedGazeDirectionCombined;
+                var eyePositionCombinedLocal = combinedEyeData.gaze_origin_mm/1000;
+                var eyeDirectionCombinedLocal = coordinateAdaptedGazeDirectionCombined;
 
                 SRanipal_Eye_v2.GetGazeRay(GazeIndex.LEFT, out var rayLeftEye);
                 
                 var leftEyeData =  verboseData.left;
                 float leftEyeDataValidityBitMask = leftEyeData.eye_data_validata_bit_mask;
                 var leftOpenness = leftEyeData.eye_openness;
-
-                var eyePositionLeftWorld = hmdPos + rayLeftEye.origin;
-                var eyeDirectionLeftWorld = hmdPos + rayLeftEye.direction;
-                var eyePositionLeftLocal = rayLeftEye.origin;
-                var eyeDirectionLeftLocal = rayLeftEye.direction;
+                
+                Vector3 coordinateAdaptedGazeDirectionLeft = new Vector3(verboseData.left.gaze_direction_normalized.x * -1,  verboseData.left.gaze_direction_normalized.y, verboseData.left.gaze_direction_normalized.z);
+                var eyePositionLeftWorld = hmdPos + leftEyeData.gaze_origin_mm/1000;
+                var eyeDirectionLeftWorld = hmdRot * coordinateAdaptedGazeDirectionLeft;
+                var eyePositionLeftLocal = leftEyeData.gaze_origin_mm/1000;
+                var eyeDirectionLeftLocal = coordinateAdaptedGazeDirectionLeft;
 
                 
                 SRanipal_Eye_v2.GetGazeRay(GazeIndex.RIGHT, out var rayRightEye);
@@ -100,10 +103,11 @@ namespace LSL
                 float rightEyeDataValidityBitMask = rightEyeData.eye_data_validata_bit_mask;
                 var rightOpenness = rightEyeData.eye_openness;
                 
-                var eyePositionRightWorld = hmdPos + rayRightEye.origin;
-                var eyeDirectionRightWorld = hmdPos + rayRightEye.direction;
-                var eyePositionRightLocal = rayRightEye.origin;
-                var eyeDirectionRightLocal = rayRightEye.direction;
+                Vector3 coordinateAdaptedGazeDirectionRight = new Vector3(verboseData.right.gaze_direction_normalized.x * -1,  verboseData.right.gaze_direction_normalized.y, verboseData.right.gaze_direction_normalized.z);
+                var eyePositionRightWorld = hmdPos + rightEyeData.gaze_origin_mm/1000;
+                var eyeDirectionRightWorld = hmdRot * coordinateAdaptedGazeDirectionRight;
+                var eyePositionRightLocal = rightEyeData.gaze_origin_mm/1000;
+                var eyeDirectionRightLocal = coordinateAdaptedGazeDirectionRight;
                 
                 //tool object
                 var taskObjectPosition = new Vector3();
@@ -116,29 +120,26 @@ namespace LSL
                     taskObjectRotation = _currentTaskObject.rotation.eulerAngles;
                     taskObjectIsInHand = _hand.ObjectIsAttached(_currentTaskObject.gameObject)?1:0;
                 }
-            
-            
-            
-            
-            
+                
                 // Raycast
 
                 var taskObjectWasHit=0f;
                 var targetHitPosition= new Vector3();
                 var targetPosition= new Vector3();
                 if (Physics.Raycast(eyePositionCombinedWorld, eyeDirectionCombinedWorld,
-                        out var hitInfo, 10f))
+                        out var hitInfo, 10f, ~ignoredLayers))
                 {
-                    if (hitInfo.collider.gameObject == _currentTaskObject.gameObject)
+                    if (_toolIsAssigned)
                     {
-                        taskObjectWasHit=1f;
+                        if (hitInfo.collider == _currentTaskObject.GetComponent<ToolData>().ToolOversizedCollider)
+                        {
+                            taskObjectWasHit=1f;
+                        }
                     }
-
                     targetHitPosition = hitInfo.point;
                     targetPosition = hitInfo.collider.transform.position;
                 }
                 
-            
                 //fill lsl data
                 float[] liveDataFrame =
                 {
@@ -147,9 +148,9 @@ namespace LSL
                     hmdPos.y,
                     hmdPos.z,
                 
-                    hmdRot.x,
-                    hmdRot.y,
-                    hmdRot.z,
+                    hmdRotEuler.x,
+                    hmdRotEuler.y,
+                    hmdRotEuler.z,
                 
                     hmdForward.x,
                     hmdForward.y,

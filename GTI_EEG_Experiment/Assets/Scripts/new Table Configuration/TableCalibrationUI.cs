@@ -175,7 +175,7 @@ public class TableCalibrationUI : MonoBehaviour
 
 
 
-            valY =(int) _windowHeight*3 / 10;
+            /*valY =(int) _windowHeight*3 / 10;
             valX =(int) _windowWidth/2;
             GUI.backgroundColor = Color.black;
             
@@ -262,7 +262,7 @@ public class TableCalibrationUI : MonoBehaviour
             if (GUI.Button(new Rect(valX, valY, w*1.5f, 80), "AutoCalibrate Button", buttonStyle))
             {
                 TableConfigurationManager.Instance.AutoCalibrateButtonPosition();
-            }
+            }*/
             
             
             

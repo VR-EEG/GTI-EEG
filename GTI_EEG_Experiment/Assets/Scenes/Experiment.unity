@@ -7964,7 +7964,6 @@ MonoBehaviour:
   tableConfigurationManager: {fileID: 583254232}
   toolSpawnPoint: {fileID: 416487537}
   amountOfBlocks: 6
-  trialDuration: 3
   tools:
   - {fileID: 1897770121}
   - {fileID: 1281855951}
@@ -11089,12 +11088,12 @@ PrefabInstance:
     - target: {fileID: 3212163543420393862, guid: d86b67a6dc5883c428e76d416732ccb4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1208
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3212163543420393862, guid: d86b67a6dc5883c428e76d416732ccb4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1165
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3212163543420393862, guid: d86b67a6dc5883c428e76d416732ccb4,
         type: 3}

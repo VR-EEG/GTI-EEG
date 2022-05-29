@@ -15,6 +15,9 @@ namespace NewExperiment
         private int space =20;
         private int _y;
         private int _x;
+
+
+        private NewExperimentManager _manager;
         private void Start()
         {
             
@@ -22,6 +25,9 @@ namespace NewExperiment
             _x = (int)(Screen.width * xRatio);
 
             Debug.Log(_x+ " - " +_y);
+            
+            
+            _manager= NewExperimentManager.Instance;
         }
 
         private void OnGUI()
@@ -32,7 +38,6 @@ namespace NewExperiment
             var y = _x/2;
             var boxStyle = new GUIStyle(GUI.skin.box)
             {
-            
                 fontSize = 30,
                 fontStyle = FontStyle.Bold,
                 alignment = TextAnchor.MiddleCenter
@@ -44,7 +49,7 @@ namespace NewExperiment
                 alignment = TextAnchor.MiddleCenter
             };
 
-            var state = NewExperimentManager.Instance.GetExperimentState();
+            var state = _manager.GetExperimentState();
 
 
             switch (state)
@@ -113,14 +118,26 @@ namespace NewExperiment
                     break;
                 case ExperimentState.Finished:
                 {
-                    if (GUI.Button(new Rect(x, y, buttonSizeW, buttonSizeH), "Finish", buttonStyle))
-                    {
-                        
-                    }
-
                     break;
                 };
             }
+            
+            
+            //display
+
+            var xDisplay = _x / 4;
+            var yDisplay = _y / 8;
+            
+            GUI.Box(new Rect(xDisplay, yDisplay, buttonSizeW*2, buttonSizeH),state.ToString(), boxStyle);
+            if (state == ExperimentState.Experiment||state== ExperimentState.BetweenBlocks)
+            {
+                var xD = xDisplay + buttonSizeW * 2 + 1;
+                GUI.Box(new Rect(xD, yDisplay, buttonSizeW, buttonSizeH),"Block "+_manager.GetCurrentBlock(), boxStyle);
+                
+                GUI.Box(new Rect(xD+buttonSizeW+1, yDisplay, buttonSizeW, buttonSizeH),"Trial "+_manager.GetCurrentTrial(), boxStyle);
+            }
+            
+
         }
     }
 }

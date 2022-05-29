@@ -58,7 +58,7 @@ public class TableCalibrationUI : MonoBehaviour
         if (_isActive)
         {
             var position = TableConfigurationManager.Instance.GetTablePosition();
-            var y =(int) _windowHeight / 10;
+            var y =(int) _windowHeight / 8 + 2;
             var x = (int)_windowWidth / 10;
             var w = 200;
             var wm = 100;

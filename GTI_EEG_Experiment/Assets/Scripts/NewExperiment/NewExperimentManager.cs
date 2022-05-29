@@ -160,6 +160,16 @@ public class NewExperimentManager : MonoBehaviour
     {
         return _formerExperimentState;
     }
+
+    public int GetCurrentBlock()
+    {
+        return _blockCount;
+    }
+
+    public int GetCurrentTrial()
+    {
+        return _trialCount;
+    }
     
     public void StartExperiment()
     {
@@ -295,7 +305,6 @@ public class NewExperimentManager : MonoBehaviour
             tools[toolId].transform.rotation *= Quaternion.Euler(0,-180,0);
         }
         
-        Debug.Log(direction);
         
         tools[toolId].transform.position = toolSpawnPoint.transform.position;
         tools[toolId].GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -449,6 +458,11 @@ public class NewExperimentManager : MonoBehaviour
                 if(_experimentBlocks.Count>1)
                     _experimentBlocks.RemoveAt(0);
             }
+            else
+            {
+                _textController.ShowText(endText);
+            }
+            
         }
     }
 

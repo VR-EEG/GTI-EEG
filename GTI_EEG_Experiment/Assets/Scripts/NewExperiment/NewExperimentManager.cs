@@ -457,11 +457,7 @@ public class NewExperimentManager : MonoBehaviour
                 if(_experimentBlocks.Count>1)
                     _experimentBlocks.RemoveAt(0);
             }
-            else
-            {
-                _textController.ShowText(endText);
-            }
-            
+
         }
     }
 
@@ -484,6 +480,7 @@ public class NewExperimentManager : MonoBehaviour
         else
         {
             SaveBlock();
+            _textController.ShowText(endText,true);
             _experimentState = ExperimentState.Finished;
         }
        

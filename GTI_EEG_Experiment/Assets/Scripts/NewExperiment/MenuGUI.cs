@@ -129,13 +129,15 @@ namespace NewExperiment
             var yDisplay = _y / 8;
             
             GUI.Box(new Rect(xDisplay, yDisplay, buttonSizeW*2, buttonSizeH),state.ToString(), boxStyle);
-            if (state == ExperimentState.Experiment||state== ExperimentState.BetweenBlocks)
+            if (state == ExperimentState.Experiment||state== ExperimentState.BetweenBlocks||state == ExperimentState.Finished)
             {
                 var xD = xDisplay + buttonSizeW * 2 + 1;
                 GUI.Box(new Rect(xD, yDisplay, buttonSizeW, buttonSizeH),"Block "+_manager.GetCurrentBlock(), boxStyle);
                 
                 GUI.Box(new Rect(xD+buttonSizeW+1, yDisplay, buttonSizeW, buttonSizeH),"Trial "+_manager.GetCurrentTrial(), boxStyle);
             }
+            
+            
             
 
         }

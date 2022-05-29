@@ -433,9 +433,8 @@ public class NewExperimentManager : MonoBehaviour
         {
             if (amountOfBlocks-_blockCount > 0)
             {
-                _currentBlock = null;
-                _experimentBlocks.RemoveAt(0);
                 _currentBlock = _experimentBlocks[0];
+                
                 _blockCount++;
                 _currentBlockData = new BlockData();
                 _currentBlockData.timeStampBegin = TimeManager.Instance.GetCurrentUnixTimeStamp();
@@ -446,6 +445,9 @@ public class NewExperimentManager : MonoBehaviour
                 _trialState = TrialState.StandBy;
                 _textController.ShowText(trialText);
                 EyetrackingManagerNew.Instance.StartRecording();
+                
+                if(_experimentBlocks.Count>1)
+                    _experimentBlocks.RemoveAt(0);
             }
         }
     }

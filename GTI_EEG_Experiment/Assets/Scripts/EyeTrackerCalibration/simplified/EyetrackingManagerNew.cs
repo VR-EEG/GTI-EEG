@@ -153,7 +153,7 @@ public class EyetrackingManagerNew : MonoBehaviour
         _calibrationSuccess = success;
         _calibrationInProgress = false;
 
-        if (StartValidationAutomaticallyAfterCalibration)
+        if (StartValidationAutomaticallyAfterCalibration&&success)
         {
             StartValidation();
         }

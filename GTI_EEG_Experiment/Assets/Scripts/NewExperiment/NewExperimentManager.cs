@@ -22,7 +22,6 @@ public class NewExperimentManager : MonoBehaviour
     private TrialState _trialState = TrialState.StandBy;
     [SerializeField] private Transform toolSpawnPoint;
     [SerializeField] private int amountOfBlocks;
-    [SerializeField] private float trialDuration=3;
     [SerializeField] private List<GameObject> tools;
     [SerializeField] private List<string> tasks;
     
@@ -287,7 +286,7 @@ public class NewExperimentManager : MonoBehaviour
     
     private void StartTrial()
     {
-        StartCoroutine(RunTrial(trialDuration));
+        StartCoroutine(RunTrial());
     }
 
     private void ShowTool(int toolId, int direction)
@@ -326,7 +325,7 @@ public class NewExperimentManager : MonoBehaviour
         tools[toolId].SetActive(false);
     }
 
-    private IEnumerator RunTrial(float trialDuration,bool isTutorial=false)
+    private IEnumerator RunTrial(bool isTutorial=false)
     {
         
         
@@ -433,7 +432,7 @@ public class NewExperimentManager : MonoBehaviour
         _tutorialBlock.TrailItems.Add(tmp);
         _currentTrial = _tutorialBlock.TrailItems[0];
 
-        StartCoroutine(RunTrial(trialDuration, true));
+        StartCoroutine(RunTrial(true));
     }
 
     private void StartNewBlock()

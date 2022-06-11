@@ -120,6 +120,11 @@ public class DataSavingManager : MonoBehaviour
 
         var path = GetPathForSaveFile(fileName);
 
+        if (!Directory.Exists(SavePath))
+        {
+            Directory.CreateDirectory(SavePath);
+        }
+
         FileStream fileStream= new FileStream(path, FileMode.Create);
         using (var fileWriter= new StreamWriter(fileStream))
         {

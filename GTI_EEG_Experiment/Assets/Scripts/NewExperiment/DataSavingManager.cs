@@ -9,6 +9,8 @@ public class DataSavingManager : MonoBehaviour
 {
     public static DataSavingManager Instance { get ; private set; }
     [SerializeField] private String SavePath;
+    [SerializeField] private bool UseDateDirectoryExtension = true;
+    private string DateDirectoryExtension;
 
     private string _participantId;
 
@@ -18,10 +20,22 @@ public class DataSavingManager : MonoBehaviour
         {
             Instance = this;
         }
+
+
+        DateDirectoryExtension = GetDirectoryExtension();
         
         if (SavePath == "")
         {
             SavePath = Application.persistentDataPath;
+        }
+
+        if (Directory.Exists(SavePath))
+        {
+            SavePath = Path.Combine(SavePath, DateDirectoryExtension);
+        }
+        else
+        {
+            Debug.LogError("Path do not exist. Crash");
         }
     }
     
@@ -104,8 +118,8 @@ public class DataSavingManager : MonoBehaviour
     {
         var stringList = ConvertToJson(file);
 
-        string path = GetPathForSaveFile(fileName);
-        
+        var path = GetPathForSaveFile(fileName);
+
         FileStream fileStream= new FileStream(path, FileMode.Create);
         using (var fileWriter= new StreamWriter(fileStream))
         {
@@ -129,11 +143,17 @@ public class DataSavingManager : MonoBehaviour
         
         Debug.Log("saved  " +fileName + " to : " + SavePath );
     }
+
+
+    private string GetDirectoryExtension()
+    {
+        var stringDate = String.Format("{0}-{1}-{2}", DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+        return stringDate;
+    }
     
     private string GetPathForSaveFile(string fileName, string format=".json")
     {
         string name = fileName + format;
-        // return Path.Combine(Application.persistentDataPath, name);
         return Path.Combine(SavePath, name);
     }
 

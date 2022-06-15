@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 6547964012760677541}
   - component: {fileID: 3747555330671711801}
   m_Layer: 9
-  m_Name: Oversized
+  m_Name: OversizedSpatula
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6298936261069233024}
   - component: {fileID: 6587434822032809034}
   m_Layer: 9
-  m_Name: Oversized
+  m_Name: OversizedWrench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

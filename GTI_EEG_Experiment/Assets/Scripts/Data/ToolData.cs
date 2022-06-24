@@ -5,13 +5,27 @@ using UnityEngine;
 
 public class ToolData : MonoBehaviour
 {
-    public BoxCollider ToolOversizedCollider;
+    private BoxCollider _toolOversizedCollider;
 
 
     private void Awake()
     {
-        ToolOversizedCollider = GetComponentInChildren<BoxCollider>();
+        _toolOversizedCollider = GetComponentInChildren<BoxCollider>();
         
         this.gameObject.SetActive(false);
+    }
+
+    public BoxCollider GetToolOversizedCollider()
+    {
+        if (_toolOversizedCollider != null)
+        {
+            return _toolOversizedCollider;
+        }
+        else
+        {
+            _toolOversizedCollider = GetComponentInChildren<BoxCollider>();
+            return _toolOversizedCollider;
+        }
+       
     }
 }

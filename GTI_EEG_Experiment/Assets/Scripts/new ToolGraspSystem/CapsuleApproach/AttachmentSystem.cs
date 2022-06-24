@@ -37,6 +37,10 @@ public class AttachmentSystem : MonoBehaviour
     private SteamVR_Skeleton_Poser.PoseBlendingBehaviour _congruentMainPoseBlendingBehaviorDown;
     private SteamVR_Skeleton_Poser.PoseBlendingBehaviour _congruentHandlePoseBlendingBehaviourDown;
     private SteamVR_Skeleton_Poser.PoseBlendingBehaviour _congruentEffectorPoseBlendingBehaviourDown;
+    
+    private SteamVR_Skeleton_Poser.PoseBlendingBehaviour _incongruentMainPoseBlendingBehaviorDown;
+    private SteamVR_Skeleton_Poser.PoseBlendingBehaviour _incongruentHandlePoseBlendingBehaviourDown;
+    private SteamVR_Skeleton_Poser.PoseBlendingBehaviour _incongruentEffectorPoseBlendingBehaviourDown;
 
     private float _distanceBetweenHandleAndEffector;
     // Start is called before the first frame update
@@ -55,7 +59,11 @@ public class AttachmentSystem : MonoBehaviour
         _congruentMainPoseBlendingBehaviorDown = _skeletonPoser.GetBlendingBehaviour("BlendToMainDown"); 
         _congruentHandlePoseBlendingBehaviourDown = _skeletonPoser.GetBlendingBehaviour("BlendToHandleDown"); 
         _congruentEffectorPoseBlendingBehaviourDown= _skeletonPoser.GetBlendingBehaviour("BlendToEffectorDown");
-
+        
+        _incongruentMainPoseBlendingBehaviorDown = _skeletonPoser.GetBlendingBehaviour("BlendToMainDownIncongruent"); 
+        _incongruentHandlePoseBlendingBehaviourDown = _skeletonPoser.GetBlendingBehaviour("BlendToHandleDownIncongruent"); 
+        _incongruentEffectorPoseBlendingBehaviourDown= _skeletonPoser.GetBlendingBehaviour("BlendToEffectorDownIncongruent");
+        
         _interactable.onAttachedToHand += OnAttachHand;
         _interactable.onDetachedFromHand += OnDetachFromHand;
         _isInteractable = true;
@@ -87,6 +95,10 @@ public class AttachmentSystem : MonoBehaviour
         _congruentMainPoseBlendingBehavior.value = 0;
         _congruentEffectorPoseBlendingBehaviour.value = 0;
         _congruentHandlePoseBlendingBehaviour.value= 0;
+
+        _congruentHandlePoseBlendingBehaviourDown.value = 0f;
+        _congruentMainPoseBlendingBehaviorDown.value = 0f;
+        _congruentEffectorPoseBlendingBehaviourDown.value = 0f;
         
         _incongruentMainPoseBlendingBehavior.influence = 0;
         _incongruentHandlePoseBlendingBehaviour.influence = 0;
@@ -99,6 +111,13 @@ public class AttachmentSystem : MonoBehaviour
         _congruentMainPoseBlendingBehaviorDown.influence = 0;
         _congruentHandlePoseBlendingBehaviourDown.influence = 0;
         _congruentEffectorPoseBlendingBehaviourDown.influence = 0;
+        
+        _incongruentMainPoseBlendingBehaviorDown.influence = 0;
+        _incongruentHandlePoseBlendingBehaviourDown.influence = 0;
+        _incongruentEffectorPoseBlendingBehaviourDown.influence = 0;
+        
+        
+        
 
         _congruentDistance = _congruent.GetDistanceToHand();
         _incongruentDistance = _incongruent.GetDistanceToHand();
@@ -129,7 +148,7 @@ public class AttachmentSystem : MonoBehaviour
             }
             else
             {
-                var ratio = (_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
+                var ratio = (_incongruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
 
                 /*_congruentMainPoseBlendingBehavior.influence = 1;
                 _congruentHandlePoseBlendingBehaviour.influence = 1;
@@ -162,6 +181,7 @@ public class AttachmentSystem : MonoBehaviour
 
                 _congruentMainPoseBlendingBehavior.influence = 0f;
                 _incongruentMainPoseBlendingBehavior.influence = 0f;
+                _congruentMainPoseBlendingBehaviorDown.influence = 0f;
                 
                 _congruentMainPoseBlendingBehaviorDown.influence = 2f; // this for some reasons worked to get the overweight influence
                 if (_congruent.IsHandCloserToHandle())
@@ -188,6 +208,39 @@ public class AttachmentSystem : MonoBehaviour
             }
             else
             {
+                var ratio = (_incongruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
+                
+                _congruentMainPoseBlendingBehavior.influence = 0f;
+                _incongruentMainPoseBlendingBehavior.influence = 0f;
+                _congruentMainPoseBlendingBehaviorDown.influence = 0;
+                
+                _incongruentMainPoseBlendingBehaviorDown.influence = 2f; // this for some reasons worked to get the overweight influence
+                if (_congruent.IsHandCloserToHandle())
+                {
+                    _incongruentHandlePoseBlendingBehaviourDown.influence = 1f;
+                    _incongruentEffectorPoseBlendingBehaviourDown.value = 0f;
+                    _incongruentHandlePoseBlendingBehaviourDown.value = Mathf.Clamp01(1f-ratio);
+                    _incongruentMainPoseBlendingBehaviorDown.value = Mathf.Clamp01(ratio);
+                    // _congruentHandlePoseBlendingBehaviourDown.influence = Mathf.Clamp01(1f-ratio);
+                    //_congruentMainPoseBlendingBehaviorDown.influence =  Mathf.Clamp01(ratio);
+                }
+                else
+                {
+                    _incongruentEffectorPoseBlendingBehaviourDown.influence = 1f;
+                    _incongruentHandlePoseBlendingBehaviourDown.value = 0f;
+                    _incongruentEffectorPoseBlendingBehaviourDown.value = Mathf.Clamp01(ratio); 
+                    _incongruentMainPoseBlendingBehaviorDown.value = Mathf.Clamp01(1f-ratio); 
+                    //   _congruentEffectorPoseBlendingBehaviourDown.influence = Mathf.Clamp01(ratio); 
+                    //   _congruentMainPoseBlendingBehaviorDown.influence= Mathf.Clamp01(1f-ratio);
+                } 
+            
+                _incongruent.SetColor(_congruent.IsHandCloserToHandle() ? Color.red : Color.blue);
+                _congruent.SetColor(Color.white);
+                
+                
+               
+                
+                
                 /*var ratio = (_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
 //            Debug.Log("incongruent "+ratio);
 

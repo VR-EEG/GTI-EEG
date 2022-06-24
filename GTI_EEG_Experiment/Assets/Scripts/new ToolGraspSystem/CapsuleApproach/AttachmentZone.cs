@@ -8,7 +8,7 @@ public class AttachmentZone : MonoBehaviour
 
     private Hand _hand;
 
-    private Transform _handBack;
+    private Transform _armExtension;
 
     private Collider _collider;
 
@@ -32,7 +32,7 @@ public class AttachmentZone : MonoBehaviour
     void Start()
     {
         _hand = Player.instance.rightHand;
-        _handBack = _hand.GetComponentInChildren<HandBack>().transform;
+        _armExtension = _hand.GetComponentInChildren<ArmExtension>().transform;
         _collider = this.transform.GetComponent<Collider>();
         _handleEffectorDistance = Vector3.Distance(Effector.transform.position, Handle.transform.position);
     }
@@ -92,13 +92,13 @@ public class AttachmentZone : MonoBehaviour
     void Update()
     {
         //var handPosition = _hand.transform.position;
-        var handPosition = _handBack.transform.position;
-        ClosestPoint.transform.position = _collider.ClosestPoint(handPosition);
+        var armPosition = _armExtension.transform.position;
+        ClosestPoint.transform.position = _collider.ClosestPoint(armPosition);
         Ball.transform.localPosition = new Vector3(0f,
             0f, ClosestPoint.localPosition.z);
         _orthonormalDistance = (Ball.transform.localPosition.z);
         //Debug.Log(_orthonormalDistance);
-        _distanceToHand = Vector3.Distance(handPosition, Ball.transform.position);
+        _distanceToHand = Vector3.Distance(armPosition, Ball.transform.position);
         _distanceToHandle = Vector3.Distance(Handle.transform.position, Ball.transform.position);
         _distanceToEffector = Vector3.Distance(Effector.transform.position, Ball.transform.position);
         

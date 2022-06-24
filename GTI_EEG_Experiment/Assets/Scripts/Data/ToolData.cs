@@ -7,25 +7,26 @@ public class ToolData : MonoBehaviour
 {
     private BoxCollider _toolOversizedCollider;
 
-
+    [HideInInspector] public BoxCollider toolOverSizedCollider
+    {
+        get
+        {
+            if (_toolOversizedCollider == null)
+            {
+                _toolOversizedCollider = GetComponentInChildren<BoxCollider>();
+            }
+            else
+            {
+                return _toolOversizedCollider;
+            }
+            return null;
+        }
+       
+    }
     private void Awake()
     {
         _toolOversizedCollider = GetComponentInChildren<BoxCollider>();
         
         this.gameObject.SetActive(false);
-    }
-
-    public BoxCollider GetToolOversizedCollider()
-    {
-        if (_toolOversizedCollider != null)
-        {
-            return _toolOversizedCollider;
-        }
-        else
-        {
-            _toolOversizedCollider = GetComponentInChildren<BoxCollider>();
-            return _toolOversizedCollider;
-        }
-       
     }
 }

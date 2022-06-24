@@ -86,7 +86,7 @@ namespace NewExperiment
             {
                 configurationData.MappedTool.Add(i+ ":" +"'"+tools[i].gameObject.name+"'");
                 
-                BoxCollider collider = tools[i].GetComponent<ToolData>().GetToolOversizedCollider();
+                BoxCollider collider = tools[i].GetComponent<ToolData>().toolOverSizedCollider;
                 if (collider != null)
                 {
                     configurationData.ToolColliderCenter.Add(collider.center);

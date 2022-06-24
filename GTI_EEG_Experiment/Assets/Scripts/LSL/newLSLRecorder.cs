@@ -131,7 +131,7 @@ namespace LSL
                 {
                     if (_toolIsAssigned)
                     {
-                        if (hitInfo.collider == _currentTaskObject.GetComponent<ToolData>().GetToolOversizedCollider())
+                        if (hitInfo.collider == _currentTaskObject.GetComponent<ToolData>().toolOverSizedCollider)
                         {
                             taskObjectWasHit=1f;
                         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace NewExperiment
@@ -85,8 +86,14 @@ namespace NewExperiment
             {
                 configurationData.MappedTool.Add(i+ ":" +"'"+tools[i].gameObject.name+"'");
                 
-                configurationData.ToolColliderCenter.Add(tools[i].GetComponent<ToolData>().ToolOversizedCollider.center);
-                configurationData.ToolColliderExtends.Add(tools[i].GetComponent<ToolData>().ToolOversizedCollider.size);
+                BoxCollider collider = tools[i].GetComponent<ToolData>().toolOverSizedCollider;
+                if (collider != null)
+                {
+                    configurationData.ToolColliderCenter.Add(collider.center);
+                    configurationData.ToolColliderExtends.Add(collider.size);
+                }
+                /*configurationData.ToolColliderCenter.Add(tools[i].GetComponent<ToolData>().GetToolOversizedCollider().center);
+                configurationData.ToolColliderExtends.Add(tools[i].GetComponent<ToolData>().GetToolOversizedCollider().size);*/
             }
 
 

@@ -149,14 +149,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9641431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8685149969661862094}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &9641433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &9641434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 4718641426625065519}
   _incongruent: {fileID: 4718641426625065518}
+  _upperSideDetector: {fileID: 1347544864}
 --- !u!114 &9641438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,8 +327,12 @@ MonoBehaviour:
   - Paintbrush_3
   - Paintbrush_4
   - Paintbrush_5
-  - Hammer_6
-  - Hammer_7
+  - Paintbrush_0_down
+  - Paintbrush_1_down
+  - Paintbrush_2_down
+  - Paintbrush_3_down
+  - Paintbrush_4_down
+  - Paintbrush_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -336,17 +340,21 @@ MonoBehaviour:
   skeletonMainPose: {fileID: 11400000, guid: f8a1e88d31dc69241ae7f6f5881c2c53, type: 2}
   skeletonAdditionalPoses:
   - {fileID: 11400000, guid: 249acba4d5df7334490dc536539a297c, type: 2}
-  - {fileID: 11400000, guid: f4c808d92ba851a419d9db44fb3a47b2, type: 2}
-  - {fileID: 11400000, guid: 0630aa3b064660745a17ce6a504c16b8, type: 2}
+  - {fileID: 11400000, guid: 3f55c7c6bd56a954ca7ebe7adc1b61de, type: 2}
+  - {fileID: 11400000, guid: 2f2146c2c304afc488becfa24cfb9bed, type: 2}
   - {fileID: 11400000, guid: c1791bf4cc0c5b84da8cac2e9a419a89, type: 2}
   - {fileID: 11400000, guid: 2b60034ad3970f3449e3c76df08e897c, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 48aceecb5ba3ce849a33d505a5fe6b6a, type: 2}
+  - {fileID: 11400000, guid: 4006cf0462d1af94880aab659f64ec90, type: 2}
+  - {fileID: 11400000, guid: f4c808d92ba851a419d9db44fb3a47b2, type: 2}
+  - {fileID: 11400000, guid: 0630aa3b064660745a17ce6a504c16b8, type: 2}
+  - {fileID: 11400000, guid: 1c722256e89b5754db2b6488c9bab7fd, type: 2}
+  - {fileID: 11400000, guid: 22515ad2078d2ad4ab49a6d59a4a3d28, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 3
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -486,6 +494,144 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!114 &16168384 stripped
 MonoBehaviour:
@@ -528,14 +674,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45824816}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1913294100}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &45824818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 1697861818}
   _incongruent: {fileID: 481722766}
+  _upperSideDetector: {fileID: 1517240222}
 --- !u!114 &45824819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,7 +831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &45824823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,10 +850,14 @@ MonoBehaviour:
   - Spatula_1
   - Spatula_2
   - Spatula_3
-  - Spatula_5
   - Spatula_4
-  - Hammer_6
-  - Hammer_7
+  - Spatula_5
+  - Spatula_0_down
+  - Spatula_1_down
+  - Spatula_2_down
+  - Spatula_3_down
+  - Spatula_4_down
+  - Spatula_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -717,15 +867,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a57a0f8cf947574dbb4590f534f3e42, type: 2}
   - {fileID: 11400000, guid: 9ee578e1fcce7f9418cc98149a97cf41, type: 2}
   - {fileID: 11400000, guid: 7e3bd91b0dbdbea46b965b5fc3577bf9, type: 2}
-  - {fileID: 11400000, guid: f53dcdb78bdf3e746bd0cfe75bc2e188, type: 2}
   - {fileID: 11400000, guid: 78afec168924abf46835c8b37da317a5, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: f53dcdb78bdf3e746bd0cfe75bc2e188, type: 2}
+  - {fileID: 11400000, guid: fc4d9048966e8d84ca5b29e9822d7f7f, type: 2}
+  - {fileID: 11400000, guid: c7c94cb8779350d498dfcfe919527517, type: 2}
+  - {fileID: 11400000, guid: 9d985e25d9cbc5f4891d4a9fd20ef255, type: 2}
+  - {fileID: 11400000, guid: 4d6efef2822745f45b49e9750a672625, type: 2}
+  - {fileID: 11400000, guid: 82a502659d13d1d4a86ae74303b13021, type: 2}
+  - {fileID: 11400000, guid: ba1e3417fe0fcbd44a621aa24cfb69fa, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 6
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -865,6 +1019,144 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &101226922
 GameObject:
@@ -973,14 +1265,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102739013}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.077, z: -0.0082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1692537478}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &102739015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +1287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 1692537480}
   _incongruent: {fileID: 1692537479}
+  _upperSideDetector: {fileID: 682841359}
 --- !u!114 &102739016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1129,7 +1422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 554012425}
 --- !u!114 &102739020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1443,12 @@ MonoBehaviour:
   - Trowel_3
   - Trowel_4
   - Trowel_5
+  - Trowel_0_down
+  - Trowel_1_down
+  - Trowel_2_down
+  - Trowel_3_down
+  - Trowel_4_down
+  - Trowel_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -1162,11 +1460,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5c37b09a9a0d8d14cab5821e61bbaefe, type: 2}
   - {fileID: 11400000, guid: fc75a77008353024096ccf7b2d830ad0, type: 2}
   - {fileID: 11400000, guid: 9f6df26c1c37f9d4e972448be711e4f7, type: 2}
+  - {fileID: 11400000, guid: 4ef42ccc096fbfb4da094f42054cbcdf, type: 2}
+  - {fileID: 11400000, guid: a01bf9b64a603964e8483239017257a9, type: 2}
+  - {fileID: 11400000, guid: e48fae23a83ed0e4e9a813bfdf918cb7, type: 2}
+  - {fileID: 11400000, guid: 7a522c0077d453f4099eddac642b4ae2, type: 2}
+  - {fileID: 11400000, guid: 7de4dbd14561bbf42938944a918aabe2, type: 2}
+  - {fileID: 11400000, guid: 8ccc819a3f95adf46a5f47e2a7f64038, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 11
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -1306,7 +1610,157 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
+--- !u!114 &112569678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8297726045505964789, guid: cd9180fa4bf93bf4f98b01bde903f08a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7397885637818642855}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &180485791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,14 +1845,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198384286}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.0674, z: -0.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 120117629766912154}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &198384288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,6 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 3258736824546005278}
   _incongruent: {fileID: 3258736824546005277}
+  _upperSideDetector: {fileID: 922112106}
 --- !u!114 &198384289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1547,7 +2002,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &198384293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,8 +2023,12 @@ MonoBehaviour:
   - Paletteknife_3
   - Paletteknife_4
   - Paletteknife_5
-  - Paletteknife_6
-  - Paletteknife_7
+  - Paletteknife_0_down
+  - Paletteknife_1_down
+  - Paletteknife_2_down
+  - Paletteknife_3_down
+  - Paletteknife_4_down
+  - Paletteknife_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -1582,13 +2040,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e0bcf24bd818ec46bacf08d07c879c0, type: 2}
   - {fileID: 11400000, guid: 9f7927eb4cf49994bb45116b2b5f7c69, type: 2}
   - {fileID: 11400000, guid: 7b8b7c08adcc5c449b82ba07dcf9a5fa, type: 2}
-  - {fileID: 11400000, guid: 4598c76c235b37e4483acca2138f9cf1, type: 2}
-  - {fileID: 11400000, guid: 6840dc62b71d5f84880986d3a7f25eef, type: 2}
+  - {fileID: 11400000, guid: 625d87cf5c19e0c4584d7f4d5d1bc1a4, type: 2}
+  - {fileID: 11400000, guid: b14cb1eedbe9ccf4e816ab6017009d22, type: 2}
+  - {fileID: 11400000, guid: 2775d0e37bb2bae449c37656e1c4c818, type: 2}
+  - {fileID: 11400000, guid: e50c678664bd6f040b9ae0807044234e, type: 2}
+  - {fileID: 11400000, guid: bb8f4898b61e19e48890fd097ca8a310, type: 2}
+  - {fileID: 11400000, guid: 2c959c8825698e74c88b4f85e89f80be, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 11
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -1728,6 +2190,144 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &205098537
 GameObject:
@@ -1758,14 +2358,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205098537}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.018, y: 0.0549, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4340800270500395716}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &205098539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,6 +2380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 1254582889589974588}
   _incongruent: {fileID: 1254582889589974587}
+  _upperSideDetector: {fileID: 1526387830}
 --- !u!114 &205098540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1914,7 +2515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &205098545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,8 +2536,12 @@ MonoBehaviour:
   - Daisygrubber_3
   - Daisygrubber_4
   - Daisygrubber_5
-  - Hammer_6
-  - Hammer_7
+  - Daisygrubber_0_down
+  - Daisygrubber_1_down
+  - Daisygrubber_2_down
+  - Daisygrubber_3_down
+  - Daisygrubber_4_down
+  - Daisygrubber_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -1949,13 +2553,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8f693aece34e7ee42adbc4f5ae4bb083, type: 2}
   - {fileID: 11400000, guid: 46bf6ec811e40d54dbf25a0634f1edb6, type: 2}
   - {fileID: 11400000, guid: 9b70c36f0ed25714aa43d010b41f0ae2, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 03b047770a229a341a08656dd9166d79, type: 2}
+  - {fileID: 11400000, guid: 8669314472c826747bcaac164c0f54bb, type: 2}
+  - {fileID: 11400000, guid: c8b2b718abbcdb848a298e2fb3c7740c, type: 2}
+  - {fileID: 11400000, guid: a5a392306aeed8a4fac700e8c39b23e8, type: 2}
+  - {fileID: 11400000, guid: ac0428cf444daf34c9ea04b04db5128b, type: 2}
+  - {fileID: 11400000, guid: 3c21ae729349b954eac0243e0276a116, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 1
+  previewPoseSelection: 11
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -2076,6 +2684,144 @@ MonoBehaviour:
     enabled: 1
     influence: 1
     pose: 5
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
     value: 0
     action_single:
       actionPath: 
@@ -2257,6 +3003,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1767313007}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &267169798 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 319886451969800064, guid: 4f1afb08e78da24409f1c1840300bc0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5642743494609505127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &267309610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,14 +3044,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267309610}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.0833, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7087853864859485685}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &267309612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2308,6 +3066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 4382067982342845046}
   _incongruent: {fileID: 4382067982342845045}
+  _upperSideDetector: {fileID: 801920545}
 --- !u!114 &267309613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2442,7 +3201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &267309617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,8 +3222,12 @@ MonoBehaviour:
   - Screwdriver_3
   - Screwdriver_4
   - Screwdriver_5
-  - Screwdriver_6
-  - Screwdriver_7
+  - Screwdriver_0_down
+  - Screwdriver_1_down
+  - Screwdriver_2_down
+  - Screwdriver_3_down
+  - Screwdriver_4_down
+  - Screwdriver_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -2474,16 +3236,20 @@ MonoBehaviour:
   skeletonAdditionalPoses:
   - {fileID: 11400000, guid: f8967bac08068cb418f35f7a7c166596, type: 2}
   - {fileID: 11400000, guid: 466e162f734d0734caa79a685766450a, type: 2}
-  - {fileID: 11400000, guid: f7ef51bdb763b9e448ce7518bf4b35f1, type: 2}
+  - {fileID: 11400000, guid: 9d33de056c235064da3ba7aa12910358, type: 2}
   - {fileID: 11400000, guid: 35d240298a5e8d14c9098c94972eaa3d, type: 2}
   - {fileID: 11400000, guid: 1a2e2ae3d2156b54785a394e3672b8cc, type: 2}
-  - {fileID: 11400000, guid: 4a657092748ff2b479189049135a5ddb, type: 2}
-  - {fileID: 11400000, guid: 94dc405e2d891374e8e074607c2d14fe, type: 2}
+  - {fileID: 11400000, guid: 357974402a70bef4cb22b4d7b097529d, type: 2}
+  - {fileID: 11400000, guid: e7e75b2c4acb2c64cbc787864521d1a7, type: 2}
+  - {fileID: 11400000, guid: 6b42925844c0158438c4949859b8b80d, type: 2}
+  - {fileID: 11400000, guid: f7ef51bdb763b9e448ce7518bf4b35f1, type: 2}
+  - {fileID: 11400000, guid: 5b74404317abc4f4f8be534319a55a82, type: 2}
+  - {fileID: 11400000, guid: 1802abc0c1b034c4992cc1311e8fa4d7, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 6
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -2623,6 +3389,144 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabPinch
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &310719340
 GameObject:
@@ -2668,7 +3572,7 @@ GameObject:
   - component: {fileID: 322984971}
   - component: {fileID: 322984972}
   m_Layer: 2
-  m_Name: Handback
+  m_Name: ArmExtension
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2682,7 +3586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322984970}
   m_LocalRotation: {x: 0.32650563, y: 0.212631, z: -0.6272114, w: 0.67437977}
-  m_LocalPosition: {x: 0.0468, y: -0.016, z: -0.099}
+  m_LocalPosition: {x: 0.077, y: 0.154, z: -0.267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2131249472}
@@ -3043,12 +3947,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502215722}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &554012425 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 7552203717589301204, guid: 2c9e8a4e0f892a54dac894fe27cf1a5f,
+--- !u!114 &574529948 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 254172389703485334, guid: 34940389797c40a489b4affb9fb76282,
     type: 3}
-  m_PrefabInstance: {fileID: 1692537477}
+  m_PrefabInstance: {fileID: 6583942283252500726}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &583254231
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,18 +4073,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61990fd206f74b94181972379845dfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &682841359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5010548844894239243, guid: 2c9e8a4e0f892a54dac894fe27cf1a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1692537477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &801920545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2317136605087063029, guid: 80382f168487fe342803dfcce85a5b26,
+    type: 3}
+  m_PrefabInstance: {fileID: 4382067982342845044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &802362917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2258891273160661547, guid: b9b407c4c33d4da41a9c301cb46400b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419815891716139015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &903374640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8625414786580387144, guid: 0e435d699dd8e6244921233ec96b16e8,
     type: 3}
   m_PrefabInstance: {fileID: 8625414787466982008}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &916170568 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 8625414787259074743, guid: 0e435d699dd8e6244921233ec96b16e8,
+--- !u!114 &922112106 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6307034290194607710, guid: d86b67a6dc5883c428e76d416732ccb4,
     type: 3}
-  m_PrefabInstance: {fileID: 8625414787466982008}
+  m_PrefabInstance: {fileID: 3258736824546005276}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &942620456 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9d6b4a471d2ef0e49a2fbb1198a59315,
@@ -3402,14 +4354,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074404068}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.0658, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5158282144526966136}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1074404070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3546,6 +4498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 6419815891716139017}
   _incongruent: {fileID: 6419815891716139016}
+  _upperSideDetector: {fileID: 802362917}
 --- !u!114 &1074404074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3558,7 +4511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1074404076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3580,8 +4532,12 @@ MonoBehaviour:
   - Wrench_3
   - Wrench_4
   - Wrench_5
-  - Hammer_6
-  - Hammer_7
+  - Wrench_0_down
+  - Wrench_1_down
+  - Wrench_2_down
+  - Wrench_3_down
+  - Wrench_4_down
+  - Wrench_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -3593,8 +4549,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef133f1958cb84844a5647ea2b744789, type: 2}
   - {fileID: 11400000, guid: c72279f1f2faa5e48afeab09972b45df, type: 2}
   - {fileID: 11400000, guid: 3c9fe55b3ac5f9c47ac757e88473d394, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 9601604b97c1d5c42bb4aa0e812785ce, type: 2}
+  - {fileID: 11400000, guid: aad7ce3cd020fdb439a4a4c99f598adb, type: 2}
+  - {fileID: 11400000, guid: 889bcd8664440944f8a9d5b973812e61, type: 2}
+  - {fileID: 11400000, guid: f85dde45de03abf40b52d5ba1e665884, type: 2}
+  - {fileID: 11400000, guid: 98a07299020c8054496feccad1476a71, type: 2}
+  - {fileID: 11400000, guid: ed23b810aa81e0646a2d0293b0c53c62, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
@@ -3720,6 +4680,144 @@ MonoBehaviour:
     enabled: 1
     influence: 1
     pose: 5
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
     value: 0
     action_single:
       actionPath: 
@@ -4045,14 +5143,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268189630}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.116, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3455633733827203257}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1268189632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4189,6 +5287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 864177031139619448}
   _incongruent: {fileID: 864177031139619447}
+  _upperSideDetector: {fileID: 1835449165}
 --- !u!114 &1268189636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4201,7 +5300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1268189638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4223,8 +5321,12 @@ MonoBehaviour:
   - Fishscaler_3
   - Fishscaler_4
   - Fishscaler_5
-  - Hammer_6
-  - Hammer_7
+  - Fishscaler_0_down
+  - Fishscaler_1_down
+  - Fishscaler_2_down
+  - Fishscaler_3_down
+  - Fishscaler_4_down
+  - Fishscaler_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -4236,13 +5338,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce88bef88d922f3449f8d2818be6a0df, type: 2}
   - {fileID: 11400000, guid: 19777be49de9a704291894b09d435b8a, type: 2}
   - {fileID: 11400000, guid: 9c06f5b26636e2e48bb04e4d47e5b606, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: e4a2e9c8c54668d4680c375020cf841c, type: 2}
+  - {fileID: 11400000, guid: 6decb7c4ebe45ae4280e37e07f928d5b, type: 2}
+  - {fileID: 11400000, guid: bdcc76cbea8c21046b7dd66c3417732b, type: 2}
+  - {fileID: 11400000, guid: 6f956630fd26a7041b248d2952f4f930, type: 2}
+  - {fileID: 11400000, guid: b9c07eb34dca91c42b6b996f4814c49d, type: 2}
+  - {fileID: 11400000, guid: f16a6e54c0aa90d4e8a528a68bfde366, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 11
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -4382,6 +5488,144 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &1281855951
 GameObject:
@@ -4412,14 +5656,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281855951}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.081, y: 1.066, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.195, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6108558444533169360}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1281855953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4434,6 +5678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 6583942283252500728}
   _incongruent: {fileID: 6583942283252500727}
+  _upperSideDetector: {fileID: 574529948}
 --- !u!114 &1281855954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4568,7 +5813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 1432085447}
 --- !u!114 &1281855958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4590,8 +5834,12 @@ MonoBehaviour:
   - Flowercutter_3
   - Flowercutter_4
   - Flowercutter_5
-  - Hammer_6
-  - Hammer_7
+  - Flowercutter_0_down
+  - Flowercutter_1_down
+  - Flowercutter_2_down
+  - Flowercutter_3_down
+  - Flowercutter_4_down
+  - Flowercutter_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -4603,13 +5851,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: db10cfc1d6686864dae10aebedc21e49, type: 2}
   - {fileID: 11400000, guid: 68441f5ba47812345a60b8b5e760db2e, type: 2}
   - {fileID: 11400000, guid: 10c650b9118c4bd40a49e2d0024f5c57, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 0b42ceeb71303a448b7f1b23dc6f0d92, type: 2}
+  - {fileID: 11400000, guid: e0ec4d366888f9749b32506efdac4961, type: 2}
+  - {fileID: 11400000, guid: 426ea268a2c55b547abfefd2a074f12a, type: 2}
+  - {fileID: 11400000, guid: e00f36d7cdf4acf479a3d77030f10dfc, type: 2}
+  - {fileID: 11400000, guid: f16d938988ea09046a6bef5fe6d695b4, type: 2}
+  - {fileID: 11400000, guid: 6d8836349a689f64c968f31acb4740c2, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 2
+  previewPoseSelection: 5
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -4749,6 +6001,144 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
 --- !u!1 &1294306102
 GameObject:
@@ -4779,14 +6169,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294306102}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.0632, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4974735416278826821}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1294306104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4801,6 +6191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 7397885637818642857}
   _incongruent: {fileID: 7397885637818642856}
+  _upperSideDetector: {fileID: 112569678}
 --- !u!114 &1294306105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4935,7 +6326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1294306110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4957,8 +6347,12 @@ MonoBehaviour:
   - Spokewrench_3
   - Spokewrench_4
   - Spokewrench_5
-  - Hammer_6
-  - Hammer_7
+  - Spokewrench_0_down
+  - Spokewrench_1_down
+  - Spokewrench_2_down
+  - Spokewrench_3_down
+  - Spokewrench_4_down
+  - Spokewrench_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -4970,13 +6364,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 52e472c0fc1c00843bd0b763f9ba5c29, type: 2}
   - {fileID: 11400000, guid: d40a775ab84c7494c91bb9c30e3769c4, type: 2}
   - {fileID: 11400000, guid: 8ad06f8d85deb984190f10ccea6f0419, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 9a15dbe6410b2f147907ce895ecc7cc4, type: 2}
+  - {fileID: 11400000, guid: eee58050ebfa92d4d81f82adc5fd027b, type: 2}
+  - {fileID: 11400000, guid: d4194e7b7b7f81b4fa8d280f5dccc52f, type: 2}
+  - {fileID: 11400000, guid: 33aa6c2030e49da4cbee8d99f07af18f, type: 2}
+  - {fileID: 11400000, guid: f6868064b2480d74c93e7dbb8cd69aca, type: 2}
+  - {fileID: 11400000, guid: 7d565a706ae8de440bf015d397c24e55, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 11
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -5116,7 +6514,157 @@ MonoBehaviour:
       pinky: 1
       values: 010101010101
     previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
   scale: 1
+--- !u!114 &1347544864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2685005174529678539, guid: d559e5f2d0b30274fb9e0e0eb4118199,
+    type: 3}
+  m_PrefabInstance: {fileID: 4718641426625065517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1351368258
 GameObject:
   m_ObjectHideFlags: 0
@@ -5146,14 +6694,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351368258}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.1476, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2272851862880572982}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1351368260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5168,6 +6716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 5642743494609505129}
   _incongruent: {fileID: 5642743494609505128}
+  _upperSideDetector: {fileID: 267169798}
 --- !u!114 &1351368261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5302,7 +6851,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1351368265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5324,8 +6872,12 @@ MonoBehaviour:
   - Zester_3
   - Zester_4
   - Zester_5
-  - Hammer_6
-  - Hammer_7
+  - Zester_0_down
+  - Zester_1_down
+  - Zester_2_down
+  - Zester_3_down
+  - Zester_4_down
+  - Zester_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -5337,13 +6889,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9e4b2c8fa18891d4aae57cb33066a7c1, type: 2}
   - {fileID: 11400000, guid: fb045f1af3c565f48a3b1d212504b686, type: 2}
   - {fileID: 11400000, guid: e88907d1b3523574c9e74bb1ab95b344, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 89a2a6f83c1c3d64a897ba164b99a055, type: 2}
+  - {fileID: 11400000, guid: 0818fcd8d5c2c114bb62ab5005036171, type: 2}
+  - {fileID: 11400000, guid: 189a06c84b4def3409191c1adacc7b30, type: 2}
+  - {fileID: 11400000, guid: d5551cf64ca9125438dc229def82c554, type: 2}
+  - {fileID: 11400000, guid: 01182bb636e578747ae4a4a682d77597, type: 2}
+  - {fileID: 11400000, guid: f3824961cbb16a444b3fd2346af090ca, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 5
+  previewPoseSelection: 11
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -5464,6 +7020,144 @@ MonoBehaviour:
     enabled: 1
     influence: 1
     pose: 5
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
     value: 0
     action_single:
       actionPath: 
@@ -5805,7 +7499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412043273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0093, y: 0.961, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1897770122}
@@ -5860,12 +7554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5fdf432aa90e74cb17b639155896b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1432085447 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 6214876328308448725, guid: 34940389797c40a489b4affb9fb76282,
-    type: 3}
-  m_PrefabInstance: {fileID: 6583942283252500726}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1475687038
 GameObject:
   m_ObjectHideFlags: 0
@@ -6213,6 +7901,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34bdfc0fd7404b1486190da58b122958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1517240222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1820676693440580559, guid: 6a2ea0ff3e16fd04f82b4841e013ad83,
+    type: 3}
+  m_PrefabInstance: {fileID: 1913294099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1526387830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 12587964647313159, guid: 04e5b135b0d380e4c82aad89801ac46f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1254582889589974586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1533204165
 Mesh:
   m_ObjectHideFlags: 0
@@ -6503,14 +8215,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652131654}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.0394, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1181206304}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &1652131656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6525,6 +8237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 532812611265268815}
   _incongruent: {fileID: 532812611265268814}
+  _upperSideDetector: {fileID: 2056721213}
 --- !u!114 &1652131657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6659,7 +8372,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 0}
 --- !u!114 &1652131662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6681,8 +8393,12 @@ MonoBehaviour:
   - Fork_3
   - Fork_4
   - Fork_5
-  - Hammer_6
-  - Hammer_7
+  - Fork_0_down
+  - Fork_1_down
+  - Fork_2_down
+  - Fork_3_down
+  - Fork_4_down
+  - Fork_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -6694,8 +8410,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c80cef94e69b6084f8a3dbbb1a04f040, type: 2}
   - {fileID: 11400000, guid: 67409716d0e379c4283ec6bd8f67c392, type: 2}
   - {fileID: 11400000, guid: 7ee5fef21d6b5b34e80e8a5abb520d86, type: 2}
-  - {fileID: 11400000, guid: c4bb362cb78d04d4cb4b89763505a1e9, type: 2}
-  - {fileID: 11400000, guid: 54655f448e239164693d80c11e448dee, type: 2}
+  - {fileID: 11400000, guid: 64de63514073c5a43ac707b9714a8dfe, type: 2}
+  - {fileID: 11400000, guid: 8b8854146859c27468a90210ee0b7de7, type: 2}
+  - {fileID: 11400000, guid: 5de079b9dfcb74f4cad155be1fe4fc55, type: 2}
+  - {fileID: 11400000, guid: d9490f7fdc887fa43b08cebc7623f548, type: 2}
+  - {fileID: 11400000, guid: 3f591447c3a54f449a949572160b9ee0, type: 2}
+  - {fileID: 11400000, guid: 6fe1b2db5b6abb54499dea387f2abce7, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
@@ -6821,6 +8541,144 @@ MonoBehaviour:
     enabled: 1
     influence: 1
     pose: 5
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 9
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 0
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
     value: 0
     action_single:
       actionPath: 
@@ -7471,6 +9329,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54886e9eb64e7a549851fac9df6ed781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1835449165 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6295278870020314487, guid: 9f7d788d2d83a1348b8988e7c0c25583,
+    type: 3}
+  m_PrefabInstance: {fileID: 864177031139619446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1872459248 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 905381061086220346, guid: c72d976706a6b0441ae4d296a6171aba,
@@ -7506,14 +9376,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897770121}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.01, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.0191, y: 0.441, z: -0.0061}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 903374640}
   m_Father: {fileID: 1412043274}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1897770123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7648,7 +9518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b1c2cbfd820b0941be54693c47a6c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToolOversizedCollider: {fileID: 916170568}
 --- !u!114 &1897770127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7663,6 +9532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _congruent: {fileID: 1770987338}
   _incongruent: {fileID: 16168384}
+  _upperSideDetector: {fileID: 1998761595}
 --- !u!114 &1897770129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7679,11 +9549,17 @@ MonoBehaviour:
   blendEditorExpanded: 1
   poseNames:
   - Hammer_0 (MAIN)
-  - Hammer_1
-  - Hammer_2
-  - Hammer_3
-  - Hammer_4
-  - Hammer_5
+  - Hammer_1_up
+  - Hammer_2_up
+  - Hammer_3_up
+  - Hammer_4_up
+  - Hammer_5_up
+  - Hammer_0_down
+  - Hammer_1_down
+  - Hammer_2_down
+  - Hammer_3_down
+  - Hammer_4_down
+  - Hammer_5_down
   overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf,
     type: 3}
   overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25,
@@ -7693,13 +9569,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ba60cfce9fb58b45a63f1f4bec7ddc8, type: 2}
   - {fileID: 11400000, guid: a2ef91c8d68fd9146a8bbe5fc405dcf8, type: 2}
   - {fileID: 11400000, guid: 4e6ece85c675dfc46893fa09c7603855, type: 2}
-  - {fileID: 11400000, guid: 95c4fefc6f72c724dae25be138bbeeef, type: 2}
   - {fileID: 11400000, guid: c1f11749dc2f3d64fad69bbb5eceb9fc, type: 2}
+  - {fileID: 11400000, guid: 95c4fefc6f72c724dae25be138bbeeef, type: 2}
+  - {fileID: 11400000, guid: 075a0bff229452d4dbd4c8b0e48fb392, type: 2}
+  - {fileID: 11400000, guid: dd84c885c46791a48a8cfb97de570d5e, type: 2}
+  - {fileID: 11400000, guid: 20abdacc998ffd8478fa3f679512b9e3, type: 2}
+  - {fileID: 11400000, guid: d94ab75206a66194daa6f108e033c662, type: 2}
+  - {fileID: 11400000, guid: 495f35008eaaf274f9689c6ab683b5c0, type: 2}
+  - {fileID: 11400000, guid: e991eb7a4a78121478c4a793e01ad710, type: 2}
   showLeftPreview: 0
   showRightPreview: 0
   previewLeftInstance: {fileID: 0}
   previewRightInstance: {fileID: 0}
-  previewPoseSelection: 0
+  previewPoseSelection: 8
   blendingBehaviours:
   - name: BlendToMain
     enabled: 1
@@ -7820,6 +9702,144 @@ MonoBehaviour:
     enabled: 1
     influence: 1
     pose: 5
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDown
+    enabled: 1
+    influence: 1
+    pose: 6
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDown
+    enabled: 1
+    influence: 1
+    pose: 7
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDown
+    enabled: 1
+    influence: 1
+    pose: 8
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToMainDownIncongruent
+    enabled: 1
+    influence: 0.1796
+    pose: 9
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToHandleDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 10
+    value: 1
+    action_single:
+      actionPath: 
+      needsReinit: 0
+    action_bool:
+      actionPath: /actions/default/in/GrabGrip
+      needsReinit: 0
+    smoothingSpeed: 0
+    type: 0
+    useMask: 0
+    mask:
+      palm: 1
+      thumb: 1
+      index: 1
+      middle: 1
+      ring: 1
+      pinky: 1
+      values: 010101010101
+    previewEnabled: 1
+  - name: BlendToEffectorDownIncongruent
+    enabled: 1
+    influence: 1
+    pose: 11
     value: 1
     action_single:
       actionPath: 
@@ -7965,6 +9985,73 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1913294099}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1998761595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1599553833830659389, guid: 0e435d699dd8e6244921233ec96b16e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8625414787466982008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2056721213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5843643750250435412, guid: 18f4ceb74a6ccd142bba85aec39257c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 532812611265268813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206ed311a6794c745ad19b99e3028e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2100711532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100711533}
+  - component: {fileID: 2100711534}
+  m_Layer: 2
+  m_Name: HandBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100711533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100711532}
+  m_LocalRotation: {x: 0.32650563, y: 0.212631, z: -0.6272114, w: 0.67437977}
+  m_LocalPosition: {x: 0.0519, y: 0.0095, z: -0.1247}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2131249472}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 135, y: 170, z: 90}
+--- !u!114 &2100711534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100711532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59c17c2dfb9f674d8823df8e5acc9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2112127471
 GameObject:
   m_ObjectHideFlags: 0
@@ -8381,11 +10468,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PaletteknifeNew
       objectReference: {fileID: 0}
-    - target: {fileID: 1929999568240290709, guid: d86b67a6dc5883c428e76d416732ccb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3212163543420393862, guid: d86b67a6dc5883c428e76d416732ccb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8440,16 +10522,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5054271311479992220, guid: d86b67a6dc5883c428e76d416732ccb4,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b4edc615f2620d84e9b15f48a5f99a79, type: 2}
-    - target: {fileID: 6780370406997252928, guid: d86b67a6dc5883c428e76d416732ccb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d86b67a6dc5883c428e76d416732ccb4, type: 3}

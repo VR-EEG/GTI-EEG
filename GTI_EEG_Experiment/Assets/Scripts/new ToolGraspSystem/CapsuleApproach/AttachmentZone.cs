@@ -8,6 +8,8 @@ public class AttachmentZone : MonoBehaviour
 
     private Hand _hand;
 
+    private Transform _armExtension;
+
     private Transform _handBack;
 
     private Collider _collider;
@@ -18,7 +20,7 @@ public class AttachmentZone : MonoBehaviour
     [SerializeField]private GameObject Effector;
     [SerializeField] private Transform ClosestPoint;
 
-    private float _distanceToHand;
+    private float _distanceToArmExtensionPoint;
     
     private float _distanceToHandle;
     private float _distanceToEffector;
@@ -33,13 +35,15 @@ public class AttachmentZone : MonoBehaviour
     {
         _hand = Player.instance.rightHand;
         _handBack = _hand.GetComponentInChildren<HandBack>().transform;
+        _armExtension = _hand.GetComponentInChildren<ArmExtension>().transform;
         _collider = this.transform.GetComponent<Collider>();
         _handleEffectorDistance = Vector3.Distance(Effector.transform.position, Handle.transform.position);
     }
 
     public float GetDistanceToHand()
     {
-        return _distanceToHand;
+        
+        return _distanceToArmExtensionPoint;
     }
 
     public void SetDebugstate(bool state)
@@ -92,15 +96,16 @@ public class AttachmentZone : MonoBehaviour
     void Update()
     {
         //var handPosition = _hand.transform.position;
+        var armPosition = _armExtension.transform.position;
         var handPosition = _handBack.transform.position;
         ClosestPoint.transform.position = _collider.ClosestPoint(handPosition);
         Ball.transform.localPosition = new Vector3(0f,
             0f, ClosestPoint.localPosition.z);
         _orthonormalDistance = (Ball.transform.localPosition.z);
         //Debug.Log(_orthonormalDistance);
-        _distanceToHand = Vector3.Distance(handPosition, Ball.transform.position);
-        _distanceToHandle = Vector3.Distance(Handle.transform.position, Ball.transform.position);
-        _distanceToEffector = Vector3.Distance(Effector.transform.position, Ball.transform.position);
+        _distanceToArmExtensionPoint = Vector3.Distance(armPosition, Ball.transform.position);           //stay as it is
+        _distanceToHandle = Vector3.Distance(Handle.transform.position, Ball.transform.position);      
+        _distanceToEffector = Vector3.Distance(Effector.transform.position, Ball.transform.position);  
         
         
 

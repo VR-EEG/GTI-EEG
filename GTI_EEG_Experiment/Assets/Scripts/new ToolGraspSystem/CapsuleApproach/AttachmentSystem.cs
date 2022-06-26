@@ -127,7 +127,7 @@ public class AttachmentSystem : MonoBehaviour
         {
             if (_congruentDistance < _incongruentDistance)
             {
-                var ratio = (_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
+                var ratio = Mathf.Clamp01((_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/_distanceBetweenHandleAndEffector);
 
                 if (_congruent.IsHandCloserToHandle())
                 {
@@ -149,7 +149,7 @@ public class AttachmentSystem : MonoBehaviour
             }
             else
             {
-                var ratio = (_incongruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
+                var ratio = Mathf.Clamp01((_incongruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/_distanceBetweenHandleAndEffector);
                 _incongruentMainPoseBlendingBehavior.influence = 1;
                 _incongruentHandlePoseBlendingBehaviour.influence = 1;
                 _incongruentEffectorPoseBlendingBehaviour.influence = 1;
@@ -174,7 +174,7 @@ public class AttachmentSystem : MonoBehaviour
         {
             if (_congruentDistance < _incongruentDistance)
             {
-                var ratio = (_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
+                var ratio = Mathf.Clamp01((_congruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/_distanceBetweenHandleAndEffector);
 
                 _congruentMainPoseBlendingBehavior.influence = 0f;
                 _incongruentMainPoseBlendingBehavior.influence = 0f;
@@ -185,15 +185,15 @@ public class AttachmentSystem : MonoBehaviour
                 {
                     _congruentHandlePoseBlendingBehaviourDown.influence = 1f;
                     _congruentEffectorPoseBlendingBehaviourDown.value = 0f;
-                    _congruentHandlePoseBlendingBehaviourDown.value = Mathf.Clamp01(1f-ratio);
-                    _congruentMainPoseBlendingBehaviorDown.value = Mathf.Clamp01(ratio);
+                    _congruentHandlePoseBlendingBehaviourDown.value = (1f-ratio);
+                    _congruentMainPoseBlendingBehaviorDown.value = (ratio);
                 }
                 else
                 {
                     _congruentEffectorPoseBlendingBehaviourDown.influence = 1f;
                     _congruentHandlePoseBlendingBehaviourDown.value = 0f;
-                    _congruentEffectorPoseBlendingBehaviourDown.value = Mathf.Clamp01(ratio); 
-                    _congruentMainPoseBlendingBehaviorDown.value = Mathf.Clamp01(1f-ratio);
+                    _congruentEffectorPoseBlendingBehaviourDown.value = (ratio); 
+                    _congruentMainPoseBlendingBehaviorDown.value = (1f-ratio);
                 } 
             
                 _congruent.SetColor(_congruent.IsHandCloserToHandle() ? Color.red : Color.blue); 
@@ -201,7 +201,7 @@ public class AttachmentSystem : MonoBehaviour
             }
             else
             {
-                var ratio = (_incongruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/(_distanceBetweenHandleAndEffector);
+                var ratio = Mathf.Clamp01((_incongruent.OrthonormalDistance()+_distanceBetweenHandleAndEffector/2)/_distanceBetweenHandleAndEffector);
                 
                 _congruentMainPoseBlendingBehavior.influence = 0f;
                 _incongruentMainPoseBlendingBehavior.influence = 0f;
@@ -212,15 +212,15 @@ public class AttachmentSystem : MonoBehaviour
                 {
                     _incongruentHandlePoseBlendingBehaviourDown.influence = 1f;
                     _incongruentEffectorPoseBlendingBehaviourDown.value = 0f;
-                    _incongruentHandlePoseBlendingBehaviourDown.value = Mathf.Clamp01(1f-ratio);
-                    _incongruentMainPoseBlendingBehaviorDown.value = Mathf.Clamp01(ratio);
+                    _incongruentHandlePoseBlendingBehaviourDown.value =1f-ratio;
+                    _incongruentMainPoseBlendingBehaviorDown.value = ratio;
                 }
                 else
                 {
                     _incongruentEffectorPoseBlendingBehaviourDown.influence = 1f;
                     _incongruentHandlePoseBlendingBehaviourDown.value = 0f;
-                    _incongruentEffectorPoseBlendingBehaviourDown.value = Mathf.Clamp01(ratio); 
-                    _incongruentMainPoseBlendingBehaviorDown.value = Mathf.Clamp01(1f-ratio);
+                    _incongruentEffectorPoseBlendingBehaviourDown.value = ratio; 
+                    _incongruentMainPoseBlendingBehaviorDown.value = 1f-ratio;
                 } 
             
                 _incongruent.SetColor(_congruent.IsHandCloserToHandle() ? Color.red : Color.blue);

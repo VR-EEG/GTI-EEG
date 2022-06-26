@@ -298,11 +298,11 @@ public class NewExperimentManager : MonoBehaviour
         
         tools[toolId].transform.rotation = Quaternion.Euler(0,90,0);
         if (direction == 1)
-            tools[toolId].transform.rotation *= Quaternion.Euler(0,0,180);
-        else
+            tools[toolId].transform.rotation = Quaternion.Euler(0,-90,0);
+        /*else
         {
             tools[toolId].transform.rotation *= Quaternion.Euler(0,-180,0);
-        }
+        }*/
         
         
         tools[toolId].transform.position = toolSpawnPoint.transform.position;

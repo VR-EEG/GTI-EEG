@@ -139,9 +139,9 @@ public class AttachmentSystem : MonoBehaviour
                 else
                 { 
                     _congruentEffectorPoseBlendingBehaviour.value = ratio; 
-                    _congruentMainPoseBlendingBehavior.value = (1f-  ratio); 
+                    _congruentMainPoseBlendingBehavior.value = 1f-  ratio; 
                     _congruentEffectorPoseBlendingBehaviour.influence = ratio; 
-                    _congruentMainPoseBlendingBehavior.influence= (1f-  ratio);
+                    _congruentMainPoseBlendingBehavior.influence= 1f-  ratio;
                 } 
             
                 _congruent.SetColor(_congruent.IsHandCloserToHandle() ? Color.red : Color.blue); 
@@ -185,15 +185,15 @@ public class AttachmentSystem : MonoBehaviour
                 {
                     _congruentHandlePoseBlendingBehaviourDown.influence = 1f;
                     _congruentEffectorPoseBlendingBehaviourDown.value = 0f;
-                    _congruentHandlePoseBlendingBehaviourDown.value = (1f-ratio);
-                    _congruentMainPoseBlendingBehaviorDown.value = (ratio);
+                    _congruentHandlePoseBlendingBehaviourDown.value = 1f-ratio;
+                    _congruentMainPoseBlendingBehaviorDown.value = ratio;
                 }
                 else
                 {
                     _congruentEffectorPoseBlendingBehaviourDown.influence = 1f;
                     _congruentHandlePoseBlendingBehaviourDown.value = 0f;
-                    _congruentEffectorPoseBlendingBehaviourDown.value = (ratio); 
-                    _congruentMainPoseBlendingBehaviorDown.value = (1f-ratio);
+                    _congruentEffectorPoseBlendingBehaviourDown.value = ratio; 
+                    _congruentMainPoseBlendingBehaviorDown.value = 1f-ratio;
                 } 
             
                 _congruent.SetColor(_congruent.IsHandCloserToHandle() ? Color.red : Color.blue); 

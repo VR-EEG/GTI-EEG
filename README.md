@@ -24,7 +24,7 @@ In order to run the experiment either from the [ViveSR runtime](https://develope
 
 Lab stream layer need to be installed in order to record data from the experiment.
 
-SteamVR needs to be installed from Steam Store.
+SteamVR needs to be installed from [Steam Store]https://store.steampowered.com/app/250820/SteamVR/.
 
 The Unity Project requires Unity Version 2019.2.14.f1. For running the application this is not required.
 

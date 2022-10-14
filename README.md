@@ -20,10 +20,25 @@ The experiment  can be set to the custom needs of new experiments. Tools or bloc
 
 ## Prerequisites 
 
-In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). Lab stream layer need to be installed in order to record data from it. 
+In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). 
+
+Lab stream layer need to be installed in order to record data from the experiment.
+
+SteamVR needs to be installed from Steam Store.
+
+The Unity Project requires Unity Version XXXX. For running the application this is not required.
+
+
 
 ## Running the build 
+
+The build can be obtained by looking inside repositories from the build folder.
+
+
 A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
+
+
+
 
 
 ### Running from source 
@@ -37,18 +52,6 @@ The source Unity project can be found in the `Source` folder. For maximum compat
     - TextMesh Pro, version 2.0.1 (can be installed from the Unity Package Manager)
     - [ViveSR plugin from the Vive Eye Tracking SDK (SRanipal)](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/), version 1.1.0.1 
 
-
-
-
-
-### Configuration 
-
-Inside the `Configuration` folder, there are multiple files that control the experiment setup. Default files are provided. 
-- **ExperimentUtcons.csv** holds the trial progression during the experiment. 'Utcon' is an acronym for 'unique tool cue orientation number' and thus precisely describes a trial's configuration. Custom trial progressions can be generated from within the experiment, specifying a seed and the number of trial blocks. The default ExperimentUtcons.csv is generated from seed 4 with 3 blocks. 
-- **PracticeUtcons.csv** holds the trial progression during the practice section at the beginning of the experiment.
-- **OrientationCueNamesIds.csv** holds a mapping from the positions of the tools' handles and the presented cues to unique numbers that are used in Utcons. 
-- **ToolNamesIds.csv** holds a mapping from the tools' names to unique number that are also used in Utcons. 
-- **ToolLeapConfig.ini** is the main configuration file of the experiment and holds diverse settings. 
 
 
 ### Starting a measurement 

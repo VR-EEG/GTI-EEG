@@ -44,6 +44,8 @@ Upon start of the application, sranipal will require access, please allow this f
 
 ### starting Lab stream layer (LSL) measurement
 
+once the application is started, it is recommend to access the LSL streams from the application and "register" to them via the LSL system. If the application needs to be stopped, it is recommend to also finish the recording, and restart, to access again the the streams of the application.
+
 ### application use procedure
 
 

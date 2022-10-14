@@ -2,7 +2,7 @@ A virtual reality experiment to investigate the influence of tool knowledge on a
 
 The Experiment application is used for the Gaze tool interaction Project of the Insitute of Cognitive Science 
 
-Feature Highlights:
+### Feature Highlights:
 
 LSL data recording: The experiment uses LSL data recording, an external recording tool that do not pose additional pressure on the VR system for data recording and allows for adding additional data streams , like those of EEG.
 

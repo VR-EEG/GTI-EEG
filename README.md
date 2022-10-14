@@ -35,25 +35,42 @@ The Unity Project requires Unity Version 2019.2.14.f1. For running the applicati
 The build can be obtained by looking inside repositories from the build folder.
 
 
-A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
+A build of the experiment is available in the `Build` folder. 
+
+Before starting the application, please make sure you did a Standing only calibration in Steam VR.
+
+Upon start of the application, sranipal will require access, please allow this for proper functional eye tracking.
+
 
 ### starting Lab stream layer (LSL) measurement
 
-
 ### application use procedure
 
+
 #### table calibration
+Once in menu, please head over to the Table Calibration, which allows to move the participant. Move the participant adjusting the offset vector in the menu. This can be done by changing the values manually. 1 unit refers to 1 meter in reality. Change the values accordingly. The application will save the setting for the next startup of the application.
 
-#### eye tracking calibration
-
-#### overall procedure
-
+After table calibration the real experiment can start. head back to the main menu, and start the experiment.
 
 
+The "Start Experiment" will automatically start a tutorial session, that repeats the spawning of a tool until the participant is ready. Only the experimenter can continue the experiment by pressing "continue".
 
 
+### eye tracking calibration
+After that, the experiment is set in the Inbetween block (or in the before-the-actual-experiment phase). Here The user can calibrate the eyetracking. The eyetracking will start the standard Sranipal eyetracking, and afterwards a custom validation. The results of the validation indicate the error offset in degree. everything below 1° is acceptable for proper eyetracking recording. The eyetracking also offers a baseline check for synchronizing later data streams with EEG that can be performed. It initialize a 3 second period with a time stamp begin and time stamp of it's end.
+
+
+
+In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
 
 ### Starting a measurement 
+
+After setting up the eye tracking, it is possible to run the actual experiment. randomized, all tools will be displayed in all orientations and with all tasks combinations. For each tool, the participant has to follow the experiment instructions according the experiment paragadime. Whenever the participant interacts with the button the former trial is finished and a new begins. In the standard setting the block consists of 48 trials. The procedure of the blocks is repeated for 6 blocks in total in it's standard setting. After all trials have been completed, the experimenter input is blocked completely. 
+
+
+With Alt+F4 the experiment can be closed.
+
+
 
 ## Working with the Project
 

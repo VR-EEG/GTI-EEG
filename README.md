@@ -18,11 +18,11 @@ The experiment  can be set to the custom needs of new experiments. Tools or bloc
 
 
 
-### Prerequisites 
+## Prerequisites 
 
 In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). Lab stream layer need to be installed in order to record data from it. 
 
-### Running the build 
+## Running the build 
 A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
 
 

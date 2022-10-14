@@ -22,7 +22,7 @@ The experiment  can be set to the custom needs of new experiments. Tools or bloc
 
 In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). 
 
-Lab stream layer need to be installed in order to record data from the experiment.
+Lab stream layer need to be installed in order to record data from the experiment [Lab stream layer](https://labstreaminglayer.readthedocs.io/info/intro.html).
 
 SteamVR needs to be installed from [Steam Store](https://store.steampowered.com/app/250820/SteamVR/).
 

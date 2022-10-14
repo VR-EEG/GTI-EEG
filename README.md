@@ -1,25 +1,22 @@
-<p align="center">
-<img src="./imgs/ToolleapLogoBlackFontTransparent.png" alt="drawing" width="200" align="right"/>
-</p>
+A virtual reality experiment to investigate the influence of tool knowledge on anticipatory eye fixations featuring eye tracking and EEG support. 
 
-&nbsp;
+The Experiment application is used for the Gaze tool interaction Project of the Insitute of Cognitive Science 
 
+Feature Highlights:
 
-A virtual reality experiment to investigate the influence of tool knowledge on anticipatory eye fixations featuring eye tracking, LeapMotion hand tracking and SteamVR controller support. 
+LSL data recording: The experiment uses LSL data recording, an external recording tool that do not pose additional pressure on the VR system for data recording and allows for adding additional data streams , like those of EEG.
 
+Realistic Interaction: The standard SteamVR Grasping system has been extended for the tools in question, and allow for a more realistic grasp positioning.
 
+Reworked Tools: Some tools of the previous iteration of the experiment have been replaced with custom made 3D models by Tino Sauerland(https://www.artstation.com/ragnar_hrodgarson) 
 
-SteamVR controllers        |  LeapMotion hand tracking
-:-------------------------:|:-------------------------:
-![](./imgs/InExperimentController.PNG)  |  ![](./imgs/InExperimentLeap.PNG)
+Customizability and easy extension: The experiment  can be set to the custom needs of new experiments. Tools or block amount can be adjusted via the Unity editor. New Tools can be added by reusing the given structures for the already given tools. New experiment functions or process steps can be added by extending the NewExperiment logic.    
 
-
-&nbsp;
 
 
 ### Prerequisites 
 
-In order to run the experiment either from the build or from source the [LeapMotion SDK](https://developer.leapmotion.com/sdk-leap-motion-controller/) as well as the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/) need to be installed. They enable communication between the eyetracker/ LeapMotion hardware and the experiment. The code and build are tested with LeapMotion SDK version 4.0.0 and ViveSR runtime version 1.1.2.0. Additionally, [SteamVR](https://store.steampowered.com/app/250820/) needs to be installed. 
+In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). Lab stream layer need to be installed in order to record data from it. 
 
 ### Running the build 
 A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
@@ -31,7 +28,6 @@ The source Unity project can be found in the `Source` folder. For maximum compat
 - The project is realized with Unity version 2019.2.14f1 
 - Additional APIs  
   - Present in this repository
-    - [LeapMotion Unity modules](https://github.com/leapmotion/UnityModules), version 4.4.0 
     - [SteamVR plugin](https://github.com/ValveSoftware/steamvr_unity_plugin), version 2.5
   - Need to be installed manually (the target locations are marked in the `Assets` folder)
     - TextMesh Pro, version 2.0.1 (can be installed from the Unity Package Manager)
@@ -73,6 +69,11 @@ Some of the used 3D models were obtained from online ressources. They are all li
 - [Screw Driver](https://sketchfab.com/3d-models/phillips-head-screw-driver-78c516b16ecc4b12bb2e6d90d031596e) by [KleenStudio](https://sketchfab.com/brandonh111121)
 - [Tableware](https://sketchfab.com/3d-models/low-poly-tableware-7e3aeb6622ce4672968d8cabbb63cbd3) by [Anthony Yanez](https://sketchfab.com/paulyanez)
 
+- [Spoke Wrench] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Paintbrush] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Daisy Grubber] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Flower cutter] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+
 #### Texture 
 
 - The texture [Planks Brown 10](https://texturehaven.com/tex/?c=wood&t=planks_brown_10) by Rob Tuytel is licensed under the [CC0](https://creativecommons.org/publicdomain/zero/1.0/) license.
@@ -89,6 +90,7 @@ Distribution of the plugins in object code form is permitted via the SDK license
 
 ### API Licenses
 
-Use of [Leap Motion's UnityModules](https://github.com/leapmotion/UnityModules) is subject to the [Apache V2 License Agreement](http://www.apache.org/licenses/LICENSE-2.0).
 The [SteamVR Unity plugin](https://github.com/ValveSoftware/steamvr_unity_plugin) is licensed under the [BSD 3-Clause "New" or "Revised" License](https://github.com/ValveSoftware/steamvr_unity_plugin/blob/master/LICENSE).
+
+
 

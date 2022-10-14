@@ -64,7 +64,7 @@ The project should already allow to add or remove  tools, or tasks just from the
 
 If bigger changes are required, script manipulation utlizing C# is required. It is advisable to create additional scripts, that are then  merged in the execution order inside the `NewExperimentManager`.
 
-Code that orignates from the project and is not part of  3rd Party assets or plugins, can be used in other projects. An notice about the origin of the code is favorable but not required.
+Code that orignates from the project and is not part of  3rd Party assets or plugins(please notice the Third-Party asset notice below), can be used in other projects. An notice about the origin of the code is favorable but not required.
 
 ## Third-party asset credits 
 

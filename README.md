@@ -2,18 +2,18 @@ A virtual reality experiment to investigate the influence of tool knowledge on a
 
 The Experiment application is used for the Gaze tool interaction Project of the Insitute of Cognitive Science 
 
-### Feature Highlights:
+## Feature Highlights:
 
-## LSL data recording: 
+### LSL data recording: 
 The experiment uses LSL data recording, an external recording tool that do not pose additional pressure on the VR system for data recording and allows for adding additional data streams , like those of EEG.
 
-## Realistic Interaction: 
+### Realistic Interaction: 
 The standard SteamVR Grasping system has been extended for the tools in question, and allow for a more realistic grasp positioning.
 
-## Reworked Tools: 
+### Reworked Tools: 
 Some tools of the previous iteration of the experiment have been replaced with custom made 3D models by Tino Sauerland(https://www.artstation.com/ragnar_hrodgarson) 
 
-##Customizability and easy extension: 
+### Customizability and easy extension: 
 The experiment  can be set to the custom needs of new experiments. Tools or block amount can be adjusted via the Unity editor. New Tools can be added by reusing the given structures for the already given tools. New experiment functions or process steps can be added by extending the NewExperiment logic.    
 
 

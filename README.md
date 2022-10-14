@@ -59,11 +59,12 @@ A build of the experiment is available in the `Build` folder. In addition to the
 
 The project can be added inside the Unity Hub and from there directly launched
 
-If only minor changes are required, please look for the ExperimentManager in the Scene Objects, and see if required changes can already be done there.
+If only minor changes are required, please look for the ExperimentManager(or the script `NewExperimentManager`) in the Scene Objects, and see if required changes can already be done in the inspector.
 The project should already allow to add or remove  tools, or tasks just from the inspector
 
-If bigger changes are required it is advisable to create additional scripts, that are then somehow merged in the execution inside the `NewExperimentManager`.
+If bigger changes are required, script manipulation utlizing C# is required. It is advisable to create additional scripts, that are then  merged in the execution order inside the `NewExperimentManager`.
 
+Code that orignates from the project and is not part of  3rd Party assets or plugins, can be used in other projects if this is required. An notice about the origin of the code is favorable but not required.
 
 ## Third-party asset credits 
 

@@ -37,8 +37,10 @@ The build can be obtained by looking inside repositories from the build folder.
 
 A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
 
+### starting Lab stream layer (LSL) measurement
 
-### application procedure
+
+### application use procedure
 
 #### table calibration
 
@@ -48,28 +50,22 @@ A build of the experiment is available in the `Build` folder. In addition to the
 
 
 
-## starting Lab stream layer (LSL) measurement
 
-
-
-
-
-
-
-### Running from source 
-The source Unity project can be found in the `Source` folder. For maximum compatibility, the same software revisions should be used, that were also used during development.  
 
 
 ### Starting a measurement 
 
-In order to start a measurement, first, the room and the table the participant will sit at need to be calibrated in virtual space. The calibration can be started via the `Calibrate Floor & Table` option in the main menu of the experiment. The calibration files will be stored in the `Calibration` folder that is located in the root of the experiment's file hierarchy and can be reloaded at a later time. Second, the participant's information needs to be provided using the `Set Subject Data` option in the main menu. 
-The measurement can then be started using `Start Experiment` from the main menu. 
+## Working with the Project
+
+The project can be added inside the Unity Hub and from there directly launched
+
+If only minor changes are required, please look for the ExperimentManager in the Scene Objects, and see if required changes can already be done there.
+The project should already allow to add or remove  tools, or tasks just from the inspector
+
+If bigger changes are required it is advisable to create additional scripts, that are then somehow merged in the execution inside the `NewExperimentManager`.
 
 
-
-
-
-### Third-party asset credits 
+## Third-party asset credits 
 
 #### 3D models
 Some of the used 3D models were obtained from online ressources. They are all licenced under a [creative commons attribution 4.0](https://creativecommons.org/licenses/by/4.0/).

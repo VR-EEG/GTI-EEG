@@ -26,7 +26,7 @@ Lab stream layer need to be installed in order to record data from the experimen
 
 SteamVR needs to be installed from Steam Store.
 
-The Unity Project requires Unity Version XXXX. For running the application this is not required.
+The Unity Project requires Unity Version 2019.2.14.f1. For running the application this is not required.
 
 
 
@@ -57,7 +57,7 @@ A build of the experiment is available in the `Build` folder. In addition to the
 
 ## Working with the Project
 
-The project can be added inside the Unity Hub and from there directly launched
+The project can be added inside the Unity Hub and from there directly launched. It requires unity Version 2019.2.14f1.
 
 If only minor changes are required, please look for the ExperimentManager(or the script `NewExperimentManager`) in the Scene Objects, and see if required changes can already be done in the inspector.
 The project should already allow to add or remove  tools, or tasks just from the inspector

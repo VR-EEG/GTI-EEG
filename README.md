@@ -38,20 +38,26 @@ The build can be obtained by looking inside repositories from the build folder.
 A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
 
 
+### application procedure
+
+#### table calibration
+
+#### eye tracking calibration
+
+#### overall procedure
+
+
+
+## starting Lab stream layer (LSL) measurement
+
+
+
+
 
 
 
 ### Running from source 
 The source Unity project can be found in the `Source` folder. For maximum compatibility, the same software revisions should be used, that were also used during development.  
-
-- The project is realized with Unity version 2019.2.14f1 
-- Additional APIs  
-  - Present in this repository
-    - [SteamVR plugin](https://github.com/ValveSoftware/steamvr_unity_plugin), version 2.5
-  - Need to be installed manually (the target locations are marked in the `Assets` folder)
-    - TextMesh Pro, version 2.0.1 (can be installed from the Unity Package Manager)
-    - [ViveSR plugin from the Vive Eye Tracking SDK (SRanipal)](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/), version 1.1.0.1 
-
 
 
 ### Starting a measurement 

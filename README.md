@@ -1,66 +1,91 @@
-<p align="center">
-<img src="./imgs/ToolleapLogoBlackFontTransparent.png" alt="drawing" width="200" align="right"/>
-</p>
+A virtual reality experiment to investigate the influence of tool knowledge on anticipatory eye fixations featuring eye tracking and EEG support. 
 
-&nbsp;
+The Experiment application is used for the Gaze tool interaction Project of the Insitute of Cognitive Science 
 
+## Feature Highlights:
 
-A virtual reality experiment to investigate the influence of tool knowledge on anticipatory eye fixations featuring eye tracking, LeapMotion hand tracking and SteamVR controller support. 
+### LSL data recording: 
+The experiment uses LSL data recording, an external recording tool that do not pose additional pressure on the VR system for data recording and allows for adding additional data streams , like those of EEG.
 
+### Realistic Interaction: 
+The standard SteamVR Grasping system has been extended for the tools in question, and allow for a more realistic grasp positioning.
 
+### Reworked Tools: 
+Some tools of the previous iteration of the experiment have been replaced with custom made 3D models by Tino Sauerland(https://www.artstation.com/ragnar_hrodgarson) 
 
-SteamVR controllers        |  LeapMotion hand tracking
-:-------------------------:|:-------------------------:
-![](./imgs/InExperimentController.PNG)  |  ![](./imgs/InExperimentLeap.PNG)
-
-
-&nbsp;
-
-
-### Prerequisites 
-
-In order to run the experiment either from the build or from source the [LeapMotion SDK](https://developer.leapmotion.com/sdk-leap-motion-controller/) as well as the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/) need to be installed. They enable communication between the eyetracker/ LeapMotion hardware and the experiment. The code and build are tested with LeapMotion SDK version 4.0.0 and ViveSR runtime version 1.1.2.0. Additionally, [SteamVR](https://store.steampowered.com/app/250820/) needs to be installed. 
-
-### Running the build 
-A build of the experiment is available in the `Build` folder. In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
-
-
-### Running from source 
-The source Unity project can be found in the `Source` folder. For maximum compatibility, the same software revisions should be used, that were also used during development.  
-
-- The project is realized with Unity version 2019.2.14f1 
-- Additional APIs  
-  - Present in this repository
-    - [LeapMotion Unity modules](https://github.com/leapmotion/UnityModules), version 4.4.0 
-    - [SteamVR plugin](https://github.com/ValveSoftware/steamvr_unity_plugin), version 2.5
-  - Need to be installed manually (the target locations are marked in the `Assets` folder)
-    - TextMesh Pro, version 2.0.1 (can be installed from the Unity Package Manager)
-    - [ViveSR plugin from the Vive Eye Tracking SDK (SRanipal)](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/), version 1.1.0.1 
+### Customizability and easy extension: 
+The experiment  can be set to the custom needs of new experiments. Tools or block amount can be adjusted via the Unity editor. New Tools can be added by reusing the given structures for the already given tools. New experiment functions or process steps can be added by extending the NewExperiment logic.    
 
 
 
+## Prerequisites 
+
+In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). 
+
+Lab stream layer need to be installed in order to record data from the experiment [Lab stream layer](https://labstreaminglayer.readthedocs.io/info/intro.html).
+
+SteamVR needs to be installed from [Steam Store](https://store.steampowered.com/app/250820/SteamVR/).
+
+The Unity Project requires Unity Version 2019.2.14.f1. For running the application this is not required.
 
 
-### Configuration 
 
-Inside the `Configuration` folder, there are multiple files that control the experiment setup. Default files are provided. 
-- **ExperimentUtcons.csv** holds the trial progression during the experiment. 'Utcon' is an acronym for 'unique tool cue orientation number' and thus precisely describes a trial's configuration. Custom trial progressions can be generated from within the experiment, specifying a seed and the number of trial blocks. The default ExperimentUtcons.csv is generated from seed 4 with 3 blocks. 
-- **PracticeUtcons.csv** holds the trial progression during the practice section at the beginning of the experiment.
-- **OrientationCueNamesIds.csv** holds a mapping from the positions of the tools' handles and the presented cues to unique numbers that are used in Utcons. 
-- **ToolNamesIds.csv** holds a mapping from the tools' names to unique number that are also used in Utcons. 
-- **ToolLeapConfig.ini** is the main configuration file of the experiment and holds diverse settings. 
+## Running the build 
 
+The build can be obtained by looking inside repositories from the build folder.
+
+
+A build of the experiment is available in the `Build` folder. 
+
+Before starting the application, please make sure you did a Standing only calibration in Steam VR.
+
+Upon start of the application, sranipal will require access, please allow this for proper functional eye tracking.
+
+
+### starting Lab stream layer (LSL) measurement
+
+once the application is started, it is recommend to access the LSL streams from the application and "register" to them via the LSL system. If the application needs to be stopped, it is recommend to also finish the recording, and restart, to access again the the streams of the application.
+
+### application use procedure
+
+
+#### table calibration
+Once in menu, please head over to the Table Calibration, which allows to move the participant. Move the participant adjusting the offset vector in the menu. This can be done by changing the values manually. 1 unit refers to 1 meter in reality. Change the values accordingly. The application will save the setting for the next startup of the application.
+
+After table calibration the real experiment can start. head back to the main menu, and start the experiment.
+
+
+The "Start Experiment" will automatically start a tutorial session, that repeats the spawning of a tool until the participant is ready. Only the experimenter can continue the experiment by pressing "continue".
+
+
+### eye tracking calibration
+After that, the experiment is set in the Inbetween block (or in the before-the-actual-experiment phase). Here The user can calibrate the eyetracking. The eyetracking will start the standard Sranipal eyetracking, and afterwards a custom validation. The results of the validation indicate the error offset in degree. everything below 1° is acceptable for proper eyetracking recording. The eyetracking also offers a baseline check for synchronizing later data streams with EEG that can be performed. It initialize a 3 second period with a time stamp begin and time stamp of it's end.
+
+
+
+In addition to the LeapMotion SDK and the ViveSR runtime, proper configuration files need to be present inside the `Configuration` folder in order to run the experiment. Default configuration files are provided. 
 
 ### Starting a measurement 
 
-In order to start a measurement, first, the room and the table the participant will sit at need to be calibrated in virtual space. The calibration can be started via the `Calibrate Floor & Table` option in the main menu of the experiment. The calibration files will be stored in the `Calibration` folder that is located in the root of the experiment's file hierarchy and can be reloaded at a later time. Second, the participant's information needs to be provided using the `Set Subject Data` option in the main menu. 
-The measurement can then be started using `Start Experiment` from the main menu. 
+After setting up the eye tracking, it is possible to run the actual experiment. randomized, all tools will be displayed in all orientations and with all tasks combinations. For each tool, the participant has to follow the experiment instructions according the experiment paragadime. Whenever the participant interacts with the button the former trial is finished and a new begins. In the standard setting the block consists of 48 trials. The procedure of the blocks is repeated for 6 blocks in total in it's standard setting. After all trials have been completed, the experimenter input is blocked completely. 
+
+
+With Alt+F4 the experiment can be closed.
 
 
 
+## Working with the Project
 
+The project can be added inside the Unity Hub and from there directly launched. It requires unity Version 2019.2.14f1.
 
-### Third-party asset credits 
+If only minor changes are required, please look for the ExperimentManager(or the script `NewExperimentManager`) in the Scene Objects, and see if required changes can already be done in the inspector.
+The project should already allow to add or remove  tools, or tasks just from the inspector
+
+If bigger changes are required, script manipulation utlizing C# is required. It is advisable to create additional scripts, that are then  merged in the execution order inside the `NewExperimentManager`.
+
+Code that orignates from the project and is not part of  3rd Party assets or plugins(please notice the Third-Party asset notice below), can be used in other projects. An notice about the origin of the code is favorable but not required.
+
+## Third-party asset credits 
 
 #### 3D models
 Some of the used 3D models were obtained from online ressources. They are all licenced under a [creative commons attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
@@ -72,6 +97,11 @@ Some of the used 3D models were obtained from online ressources. They are all li
 - [Old Work Bench](https://sketchfab.com/3d-models/old-work-bench-9fbc30ba31a546fe9370e6de2dcc0707) by [Oliver Triplett](https://sketchfab.com/OliverTriplett)
 - [Screw Driver](https://sketchfab.com/3d-models/phillips-head-screw-driver-78c516b16ecc4b12bb2e6d90d031596e) by [KleenStudio](https://sketchfab.com/brandonh111121)
 - [Tableware](https://sketchfab.com/3d-models/low-poly-tableware-7e3aeb6622ce4672968d8cabbb63cbd3) by [Anthony Yanez](https://sketchfab.com/paulyanez)
+
+- [Spoke Wrench] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Paintbrush] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Daisy Grubber] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Flower cutter] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
 
 #### Texture 
 
@@ -89,6 +119,7 @@ Distribution of the plugins in object code form is permitted via the SDK license
 
 ### API Licenses
 
-Use of [Leap Motion's UnityModules](https://github.com/leapmotion/UnityModules) is subject to the [Apache V2 License Agreement](http://www.apache.org/licenses/LICENSE-2.0).
 The [SteamVR Unity plugin](https://github.com/ValveSoftware/steamvr_unity_plugin) is licensed under the [BSD 3-Clause "New" or "Revised" License](https://github.com/ValveSoftware/steamvr_unity_plugin/blob/master/LICENSE).
+
+
 

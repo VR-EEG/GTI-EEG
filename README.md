@@ -17,7 +17,6 @@ Some tools of the previous iteration of the experiment have been replaced with c
 The experiment  can be set to the custom needs of new experiments. Tools or block amount can be adjusted via the Unity editor. New Tools can be added by reusing the given structures for the already given tools. New experiment functions or process steps can be added by extending the NewExperiment logic.    
 
 
-
 ## Prerequisites 
 
 In order to run the experiment either from the [ViveSR runtime](https://developer.vive.com/resources/vive-sense/sdk/vive-eye-tracking-sdk-sranipal/). 
@@ -86,7 +85,7 @@ Code that orignates from the project and is not part of  3rd Party assets or plu
 ## Third-party asset credits 
 
 #### 3D models
-Some of the used 3D models were obtained from online ressources. They are all licenced under a [creative commons attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
+Some of the used 3D models were obtained from online ressources. The following are licenced under a [creative commons attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 - [Adjustable Spannerwrench](https://sketchfab.com/3d-models/adjustable-spannerwrench-e13f98a9d7364510a65042d4c42e7a9c) by [CGWorker](https://sketchfab.com/CGWorker)
 - [Emergency Stop Button](https://sketchfab.com/3d-models/emergency-stop-button-012e4809a41445ca9de17286f677fabb) by [Miljan Bojovic](https://sketchfab.com/phoenix-storms)
@@ -96,10 +95,10 @@ Some of the used 3D models were obtained from online ressources. They are all li
 - [Screw Driver](https://sketchfab.com/3d-models/phillips-head-screw-driver-78c516b16ecc4b12bb2e6d90d031596e) by [KleenStudio](https://sketchfab.com/brandonh111121)
 - [Tableware](https://sketchfab.com/3d-models/low-poly-tableware-7e3aeb6622ce4672968d8cabbb63cbd3) by [Anthony Yanez](https://sketchfab.com/paulyanez)
 
-- [Spoke Wrench] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
-- [Paintbrush] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
-- [Daisy Grubber] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
-- [Flower cutter] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson) provided under CCO agreement
+- [Spoke Wrench] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
+- [Paintbrush] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
+- [Daisy Grubber] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
+- [Flower cutter] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 
 #### Texture 
 

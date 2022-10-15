@@ -4,7 +4,7 @@ The Experiment application is used for the Gaze tool interaction Project of the 
 
 ## Feature Highlights:
 
-### LSL data recording: 
+### Lab stream layer (LSL) data recording: 
 The experiment uses LSL data recording, an external recording tool that do not pose additional pressure on the VR system for data recording and allows for adding additional data streams , like those of EEG.
 
 ### Realistic Interaction: 
@@ -42,7 +42,7 @@ Before starting the application, please make sure you did a Standing only calibr
 Upon start of the application, sranipal will require access, please allow this for proper functional eye tracking.
 
 
-### starting Lab stream layer (LSL) measurement
+### starting LSL measurement
 
 once the application is started, it is recommend to access the LSL streams from the application and "register" to them via the LSL system. If the application needs to be stopped, it is recommend to also finish the recording, and restart, to access again the the streams of the application.
 

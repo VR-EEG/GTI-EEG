@@ -35,8 +35,6 @@ The Unity Project requires Unity Version 2019.2.14.f1. For running the applicati
 The build can be obtained by looking inside repositories from the build folder.
 
 
-A build of the experiment is available in the `Build` folder. 
-
 Before starting the application, please make sure you did a Standing only calibration in Steam VR.
 
 Upon start of the application, sranipal will require access, please allow this for proper functional eye tracking.

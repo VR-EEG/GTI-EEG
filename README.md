@@ -31,7 +31,7 @@ The Unity Project requires Unity Version 2019.2.14.f1. For running the applicati
 
 ## Running the build 
 
-The build can be obtained by looking inside repositories from the build folder.
+The build can be obtained by looking inside repositories from the build folder or downloading the "gti_index.zip" from the available [download files](https://github.com/VR-EEG/GTI-EEG/releases/tag/1.0)
 
 
 Before starting the application, please make sure you did a Standing only calibration in Steam VR.

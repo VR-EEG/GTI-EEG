@@ -106,7 +106,8 @@ Some of the used 3D models were obtained from online ressources. The following a
 created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Paintbrush](https://user-images.githubusercontent.com/43908801/200017493-00d8fb31-2dcf-400f-894c-292d6b75a5a5.png)
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
-- [Daisy Grubber](https://user-images.githubusercontent.com/43908801/199972943-9cd9a4ec-3b46-4a7f-ab63-8a3acb9a0a4d.png)
+- [Daisy Grubber](https://user-images.githubusercontent.com/43908801/200017838-df0ff441-ff1c-4910-9d24-e88061143be5.png)
+
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Flower cutter](https://user-images.githubusercontent.com/43908801/200002770-ca342a5e-e9bd-497c-a646-48ec87cf7e19.png)
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)

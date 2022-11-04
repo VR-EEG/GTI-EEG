@@ -104,7 +104,7 @@ Some of the used 3D models were obtained from online ressources. The following a
 
 - [Spoke Wrench] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Paintbrush] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
-- Daisy Grubber ![Daisy Grubber](https://user-images.githubusercontent.com/43908801/199972943-9cd9a4ec-3b46-4a7f-ab63-8a3acb9a0a4d.png)
+- [Daisy Grubber](https://user-images.githubusercontent.com/43908801/199972943-9cd9a4ec-3b46-4a7f-ab63-8a3acb9a0a4d.png)
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Flower cutter] created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 

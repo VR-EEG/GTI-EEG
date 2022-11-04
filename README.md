@@ -104,7 +104,8 @@ Some of the used 3D models were obtained from online ressources. The following a
 
 - [Spoke Wrench](https://user-images.githubusercontent.com/43908801/200017645-69acaa73-e9fa-4d84-a2a4-a6996cbe340d.PNG)
 created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
-- [Paintbrush](https://user-images.githubusercontent.com/43908801/200017493-00d8fb31-2dcf-400f-894c-292d6b75a5a5.png)
+- [Paintbrush](https://user-images.githubusercontent.com/43908801/200018254-1c015eec-ba81-4a9f-81d3-8c1979130d6e.png)
+
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Daisy Grubber](https://user-images.githubusercontent.com/43908801/200017838-df0ff441-ff1c-4910-9d24-e88061143be5.png)
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)

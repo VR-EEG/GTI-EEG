@@ -101,11 +101,9 @@ Some of the used 3D models were obtained from online ressources. The following a
 - [Old Work Bench](https://sketchfab.com/3d-models/old-work-bench-9fbc30ba31a546fe9370e6de2dcc0707) by [Oliver Triplett](https://sketchfab.com/OliverTriplett)
 - [Screw Driver](https://sketchfab.com/3d-models/phillips-head-screw-driver-78c516b16ecc4b12bb2e6d90d031596e) by [KleenStudio](https://sketchfab.com/brandonh111121)
 - [Tableware](https://sketchfab.com/3d-models/low-poly-tableware-7e3aeb6622ce4672968d8cabbb63cbd3) by [Anthony Yanez](https://sketchfab.com/paulyanez)
-
 - [Spoke Wrench](https://user-images.githubusercontent.com/43908801/200017645-69acaa73-e9fa-4d84-a2a4-a6996cbe340d.PNG)
 created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Paintbrush](https://user-images.githubusercontent.com/43908801/200018254-1c015eec-ba81-4a9f-81d3-8c1979130d6e.png)
-
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
 - [Daisy Grubber](https://user-images.githubusercontent.com/43908801/200017838-df0ff441-ff1c-4910-9d24-e88061143be5.png)
  created by Tino Sauerland (https://www.artstation.com/ragnar_hrodgarson)
